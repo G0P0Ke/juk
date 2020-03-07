@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .models import Profile
 from .forms import LoginForm, SignUpForm
+from .models import Feedback
+from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
 
 
 def _get_base_context(title, sign_in_button=True):
@@ -71,3 +74,19 @@ def signup_view(request):
 def logout_view(request):
     logout(request)
     return redirect('/')
+
+def feedback(request):
+    context = {
+        'feedbacks' : Feedback.objects.all()
+    }
+
+    if request.method == "POST":
+        user = User.objects.get(id=)
+
+        post = Feedback()
+        post.author =
+        post.text = request.POST.get("text")
+        post.save()
+        return HttpResponseRedirect("/")
+
+    return render(request, 'feedback.html', context)
