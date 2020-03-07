@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 import common.views as common_views
+import manager.views as manager_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +25,5 @@ urlpatterns = [
     path('accounts/login/', common_views.login_view, name='login'),
     path('accounts/logout/', common_views.logout_view, name='logout'),
     path('accounts/signup/', common_views.signup_view, name='signup'),
+    path('news/', manager_views.news_page, name='news'),
 ]
