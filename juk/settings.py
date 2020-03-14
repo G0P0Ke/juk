@@ -128,3 +128,9 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_REDIRECT_URL = '/'
+
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = "kirill_ivanchik@mail.ru"
+EMAIL_HOST_PASSWORD = "123"
+EMAIL_USE_TLS = True

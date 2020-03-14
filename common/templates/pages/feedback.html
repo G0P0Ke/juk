@@ -25,15 +25,21 @@
 {% block header %}
 {% include 'header.html' %}
 {% endblock %}
+feedback.html', context)
 
-
+<br> <br>
     <form method="POST">
         {% csrf_token %}
         <p>
-            <label>Напишите жалобу</label><br>
-            <input type="text" name = "text" />
+            <label>Отправка отзыва:</label><br>
+            <label>Тема: </label>
+            <input type="text" name = "subject" /><br>
+            <label>Содержание: </label>
+            <input type="text" name = "message" /><br>
+            <label>Ваша почта: </label>
+            <input type="text" name = "user_mail" />
         </p>
-        <input type="submit" value="Сохранить" >
+        <input type="submit" value="Отправить" >
     </form>
 
 

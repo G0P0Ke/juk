@@ -5,6 +5,7 @@ from .forms import LoginForm, SignUpForm
 from .models import Feedback
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 
 
 def _get_base_context(title, sign_in_button=True):
@@ -76,17 +77,15 @@ def logout_view(request):
     return redirect('/')
 
 def feedback(request):
-    context = {
-        'feedbacks' : Feedback.objects.all()
-    }
 
     if request.method == "POST":
-        user = User.objects.get(id=)
 
-        post = Feedback()
-        #post.author =
-        post.text = request.POST.get("text")
-        post.save()
-        return HttpResponseRedirect("/")
+        subject = request.POST.get("subject")
+        message = request.POST.get("message")
+        user_mail = request.POST.get("user_mail")
+        mail = 'kirill_ivanchik@mail.ru'
 
-    return render(request, 'feedback.html', context)
+        send_mail(subject, message, user_mail,
+              [mail], fail_silently=False)
+
+    return render(request, 'pages/feedback.html')
