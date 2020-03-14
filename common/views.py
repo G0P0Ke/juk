@@ -84,7 +84,7 @@ def feedback(request):
         user = User.objects.get(id=)
 
         post = Feedback()
-        post.author =
+        #post.author =
         post.text = request.POST.get("text")
         post.save()
         return HttpResponseRedirect("/")
