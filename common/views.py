@@ -79,6 +79,7 @@ def feedback(request):
 
     if request.method == "POST":
 
+
         subject = request.POST.get("subject")
         message = request.POST.get("message")
         user_mail = request.POST.get("user_mail")
@@ -88,5 +89,11 @@ def feedback(request):
 
         send_mail(subject, message, mail,
               [mail], fail_silently=False)
+
+        subject_back = 'Отзывы о JUK'
+        message_back = 'Ваш отзыв успешно отправлен'
+
+        send_mail(subject_back, message_back, mail,
+                  [user_mail], fail_silently=False)
 
     return render(request, 'pages/feedback.html')
