@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .models import Profile
 from .forms import LoginForm, SignUpForm
-from .models import Feedback
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
@@ -83,9 +82,11 @@ def feedback(request):
         subject = request.POST.get("subject")
         message = request.POST.get("message")
         user_mail = request.POST.get("user_mail")
-        mail = 'kirill_ivanchik@mail.ru'
+        mail = 'juk_feedback_mail@mail.ru'
 
-        send_mail(subject, message, user_mail,
+        message = 'Отправитель: ' +  user_mail + '\n' + '\n' + message
+
+        send_mail(subject, message, mail,
               [mail], fail_silently=False)
 
     return render(request, 'pages/feedback.html')
