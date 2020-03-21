@@ -18,6 +18,7 @@ from django.urls import path
 
 import common.views as common_views
 import manager.views as manager_views
+import tenant.views as tenant_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,4 +27,5 @@ urlpatterns = [
     path('accounts/logout/', common_views.logout_view, name='logout'),
     path('accounts/signup/', common_views.signup_view, name='signup'),
     path('news/', manager_views.news_page, name='news'),
+    path('profile/', tenant_views.profile_view, name='profile'),
 ]

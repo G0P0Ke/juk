@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru-en" class="h-100">
+{% load static %}
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--    <link rel="shortcut icon" type="image/png" href="{% static 'images/logo.png' %}"/>-->
+    <title>JUK</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.2/examples/sticky-footer-navbar/sticky-footer-navbar.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }} static/css/btn.css">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body class="d-flex flex-column h-100 bg-light">
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+<!-- Begin page content -->
+<main role="main" class="mt-3 flex-shrink-0">
+    {% include 'messages.html' %}
+
+        {% block content %}
+        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=9d32ec24-ae67-45da-9cb2-a1d51686e32b" type="text/javascript"></script>
+        <script src="{% static 'map.js' %}"></script>
+	    <style>
+        #map {
+            margin: 10px auto;
+            width: 800px;
+            height: 500px;
+        }
+        </style>
+        <h1 style="margin: 50px auto;">Профиль жильца</h1>
+        <a>когда появится регистрация можно будет вставить сюда инфрмацию о жильце</a>
+        <hr>
+        <input type="text" name="address-name" id="address-id" placeholder="адрес" value="Москва" required>Место жительства</input>
+        <p onclick="refind()">передать информацию</p>
+        <div id="map"></div>
+            {% endblock %}
+        </div>
+</main>
+
+</body>
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}
+</html>
