@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 
 import common.views as common_views
+import manager.views as manager_views
+import tenant.views as tenant_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),

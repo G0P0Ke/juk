@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from .models import Profile
 from .forms import LoginForm, SignUpForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
@@ -61,12 +60,11 @@ def signup_view(request):
         else:
             context.update({
                 'form': SignUpForm(request),
-                'error': 'form is not valid',
+                'error': 'Форма не валидна',
             })
     else:
         context.update({
             'form': SignUpForm(),
-            'error': 'invalid request method',
         })
     return render(request, 'accounts/signup/signup_page.html', context)
 
