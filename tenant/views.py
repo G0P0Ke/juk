@@ -14,8 +14,6 @@ def profile(request):
         editprof = EditProfileForm(request.POST, instance=request.user)
         if editprof.is_valid():
             editprof.save()
-            u = request.user
-            u.save()
             context.update({
                 'editprof': editprof,
             })
@@ -28,22 +26,3 @@ def profile(request):
     })
 
     return render(request, 'user_profile/profile.html', context)
-
-
-@login_required
-def edit_profile(request):
-    context = {}
-
-    if request.method == 'POST':
-        editprof = EditProfileForm(request.POST, instance=request.user)
-        if editprof.is_valid():
-            editprof.save()
-        return redirect('profile')
-    else:
-        editprof = EditProfileForm(instance=request.user)
-
-    context.update({
-        'editprof' : editprof,
-    })
-
-    return render(request, '', context)

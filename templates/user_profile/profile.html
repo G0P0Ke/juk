@@ -32,7 +32,7 @@
                         <div class="col-md-6">
                             <h6>Имя</h6>
                             <p>
-                                {{ user.first_name }} {{ user.last_name }}
+                                {{ user.username }}
                             </p>
                             <h6>Email</h6>
                             <p>
@@ -41,24 +41,15 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="tab-pane" id="secret">
+                    <form action="" method="POST">{% csrf_token %}
+                    {{ editprof.as_p }}
+                </div>
                 <div class="tab-pane" id="edit">
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Login</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" name="username" value="{{ user.login }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label" for="id_first_name">Имя</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" name = "first_name" id="id_first_name" value="{{ user.first_name }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Фамилия</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" name = "last_name" value="{{ user.last_name }}">
+                                <input class="form-control" type="text" name="username" value="{{ user.username }}">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -74,6 +65,7 @@
                                  <input id="id_userpic" name="userpic" type="file" />
                             </div>
                         </div>
+
                         <br>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label"></label>

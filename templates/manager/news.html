@@ -1,78 +1,23 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+{% include 'header.html' %}
+{% block content %}
+<br>
 <br>
 <div style="padding-left:30">
   <div class="row row-cols-1 row-cols-md-2">
+    {% for item in record %}
     <div class="col mb-4">
       <div class="card" style="width: 36rem;">
-        <h3 class=" card-header card-title">Заголовок</h3>
+        <h3 class=" card-header card-title">{{ item.publicationTitle }}</h3>
         <div class="card-body">
-          <h6 class="card-subtitle mb-2 text-info">Управдом</h6>
-            <h6 class="card-subtitle mb-2 text-muted">12:54 06.06.2020</h6>
-          <p class="card-text">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
+          <h6 class="card-subtitle mb-2 text-info">{{ item.companyName }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">{{ item.publicationDate | date:"d.m.Y H-i"}}</h6>
+          <p class="card-text">{{ item.publicationText }} </p>
           <a href="http://127.0.0.1:8000/" class="card-link">Перейти к новости</a>
         </div>
       </div>
     </div>
-
-    <div class="col mb-4">
-      <div class="card" style="width: 36rem;">
-        <h3 class=" card-header card-title">Заголовок</h3>
-        <div class="card-body">
-          <h6 class="card-subtitle mb-2 text-info">Управдом</h6>
-            <h6 class="card-subtitle mb-2 text-muted">12:54 06.06.2020</h6>
-          <p class="card-text">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
-          <a href="http://127.0.0.1:8000/" class="card-link">Перейти к новости</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col mb-4">
-      <div class="card" style="width: 36rem;">
-        <h3 class=" card-header card-title">Заголовок</h3>
-        <div class="card-body">
-          <h6 class="card-subtitle mb-2 text-info">Управдом</h6>
-            <h6 class="card-subtitle mb-2 text-muted">12:54 06.06.2020</h6>
-          <p class="card-text">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
-          <a href="http://127.0.0.1:8000/" class="card-link">Перейти к новости</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col mb-4">
-      <div class="card" style="width: 36rem;">
-        <h3 class=" card-header card-title">Заголовок</h3>
-        <div class="card-body">
-          <h6 class="card-subtitle mb-2 text-info">Управдом</h6>
-            <h6 class="card-subtitle mb-2 text-muted">12:54 06.06.2020</h6>
-          <p class="card-text">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
-          <a href="http://127.0.0.1:8000/" class="card-link">Перейти к новости</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col mb-4">
-      <div class="card" style="width: 36rem;">
-        <h3 class=" card-header card-title">Заголовок</h3>
-        <div class="card-body">
-          <h6 class="card-subtitle mb-2 text-info">Управдом</h6>
-            <h6 class="card-subtitle mb-2 text-muted">12:54 06.06.2020</h6>
-          <p class="card-text">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
-          <a href="http://127.0.0.1:8000/" class="card-link">Перейти к новости</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col mb-4">
-      <div class="card" style="width: 36rem;">
-        <h3 class=" card-header card-title">Заголовок</h3>
-        <div class="card-body">
-          <h6 class="card-subtitle mb-2 text-info">Управдом</h6>
-            <h6 class="card-subtitle mb-2 text-muted">12:54 06.06.2020</h6>
-          <p class="card-text">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
-          <a href="http://127.0.0.1:8000/" class="card-link">Перейти к новости</a>
-        </div>
-      </div>
-    </div>
-  </div>  
+    {% endfor %}
+  </div>
 </div>
+{% endblock %}
