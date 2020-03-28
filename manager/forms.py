@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import News
 
 
 class EditProfileForm(forms.ModelForm):
@@ -10,3 +11,9 @@ class EditProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = UserCreationForm.Meta.fields + ('email',)
+
+
+class CreateNewsForm(forms.ModelForm):
+    class Meta:
+        model = News
+        fields = ['publicationTitle', 'publicationText']
