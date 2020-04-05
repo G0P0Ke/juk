@@ -44,8 +44,6 @@ INSTALLED_APPS = [
     'manager',
     'django.contrib.sites',  # Required for determining domain url for use in emails,
     'django.contrib.humanize',  # Required for elapsed time formatting
-    'markdown_deux',  # Required for Knowledgebase item formatting
-    'bootstrapform', # Required for nicer formatting of forms with the default templates
 ]
 
 MIDDLEWARE = [

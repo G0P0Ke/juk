@@ -16,22 +16,22 @@ class Tenant(models.Model):
     house = models.ForeignKey(House, on_delete=models.CASCADE)
 
 
+class Forum(models.Model):
+    house = models.ForeignKey(to=House, on_delete=models.CASCADE)  # Дом форума
+    company = models.ForeignKey(to=Company, on_delete=models.CASCADE)
+
+
 class Discussion(models.Model):
-    theme = models.TextField() # Тема обсуждения
-    category = models.TextField() # Категория обсуждения
-    description = models.TextField() # Содержание обсуждения
-    forum = models.ForeignKey(to=User, on_delete=models.CASCADE) # Родитель
-    author = models.ForeignKey(to=User, on_delete=models.CASCADE) # Автор
-    cr_date = models.DateTimeField() # Время создания обсуждения
+    theme = models.TextField()  # Тема обсуждения
+    category = models.TextField()  # Категория обсуждения
+    description = models.TextField()  # Содержание обсуждения
+    forum = models.ForeignKey(to=Forum, on_delete=models.CASCADE)  # Родитель
+    author = models.ForeignKey(to=User, on_delete=models.CASCADE)  # Автор
+    cr_date = models.DateTimeField()  # Время создания обсуждения
 
 
 class Comment(models.Model):
-    comment = models.TextField() # Текст комментария
+    comment = models.TextField()  # Текст комментария
     discussion = models.ForeignKey(to=Discussion, on_delete=models.CASCADE)
-    author = models.ForeignKey(to=User, on_delete=models.CASCADE) # Автор
-    cr_date = models.DateTimeField() # Время создания комментария
-
-
-class Forum(models.Model):
-    house = models.ForeignKey(to=House, on_delete=models.CASCADE) # Дом форума
-    company = models.ForeignKey(to=Company, on_delete=models.CASCADE)
+    author = models.ForeignKey(to=User, on_delete=models.CASCADE)  # Автор
+    cr_date = models.DateTimeField()  # Время создания комментария
