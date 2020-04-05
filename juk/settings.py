@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'common',
     'tenant',
     'manager',
-    'helpdesk',
     'django.contrib.sites',  # Required for determining domain url for use in emails,
     'django.contrib.humanize',  # Required for elapsed time formatting
     'markdown_deux',  # Required for Knowledgebase item formatting
@@ -126,7 +125,6 @@ USE_L10N = True
 USE_TZ = True
 
 SITE_ID = 1
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
