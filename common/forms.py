@@ -14,3 +14,13 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2',)
+
+
+class FeedbackForm(forms.Form):
+    subject = forms.CharField(label='Тема', max_length=30)
+    message = forms.CharField(label='Содержание', max_length=300)
+    user_mail = forms.CharField(label='Ваша почта', max_length=30)
+    mail = 'juk_feedback_mail@mail.ru'
+    subject_back = 'Отзывы о JUK'
+    message_back = 'Ваш отзыв успешно отправлен'
+

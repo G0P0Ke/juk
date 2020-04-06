@@ -5,6 +5,7 @@ from .forms import LoginForm, SignUpForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
+from .forms import FeedbackForm
 
 
 def _get_base_context(title, sign_in_button=True):
@@ -78,22 +79,33 @@ def logout_view(request):
 def feedback(request):
 
     if request.method == "POST":
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            context = {
+                'subject': form.subject,
+                'message': form.message,
+                'user_mail': form.user_mail,
 
+            }
+            pass
+    else:
+        form = FeedbackForm()
 
-        subject = request.POST.get("subject")
-        message = request.POST.get("message")
-        user_mail = request.POST.get("user_mail")
-        mail = 'juk_feedback_mail@mail.ru'
+        #subject = request.POST.get("subject")
+        #message = request.POST.get("message")
+        #user_mail = request.POST.get("user_mail")
+        #mail = 'juk_feedback_mail@mail.ru'
 
-        message = 'Отправитель: ' +  user_mail + '\n' + '\n' + message
+        message = 'Отправитель: ' +  form.user_mail + '\n'\
+                  + '\n' + form.message
 
-        send_mail(subject, message, mail,
-              [mail], fail_silently=False)
+        send_mail(form.subject, message, form.mail,
+              [form.mail], fail_silently=False)
 
-        subject_back = 'Отзывы о JUK'
-        message_back = 'Ваш отзыв успешно отправлен'
+        #subject_back = 'Отзывы о JUK'
+        #message_back = 'Ваш отзыв успешно отправлен'
 
-        send_mail(subject_back, message_back, mail,
-                  [user_mail], fail_silently=False)
+        send_mail(form.subject_back, form.message_back, form.mail,
+                  [form.user_mail], fail_silently=False)
 
     return render(request, 'pages/feedback.html')
