@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+
+
+
+
+
+{% if house_forum %}
+    <h1>Этот форум принадлежит дому с адресом {{ house.address }}</h1>
+    <hr>
+{% elif company_forum %}
+    <h1>этот форум принадлежит компании с инн {{ company.inn }}</h1>
+    <hr>
+{% endif %}
+{% for category in categories %}
+<h4 style="color:rgb(234, 178, 203)">Категория: {{ category.name }}</h4>
+
+{% for discussion in category.list_of_discussions %}
+     <a href="{% url 'discussion' id=discussion.id%}"><button style="color:rgb(0, 178, 203)">{{ discussion.theme }}</button></a>
+    <p href="{% url 'discussion' id=discussion.id%}"><button>{{ discussion.description }}</button></p>
+{% endfor %}
+
+
+<hr>
+{% endfor %}
+
+
+
+
+
+
+
+
+{% endblock %}
