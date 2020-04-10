@@ -80,32 +80,32 @@ def feedback(request):
 
     if request.method == "POST":
         form = FeedbackForm(request.POST)
+
         if form.is_valid():
+            subject = str(form.data['subject'])
+            message = str(form.data['message'])
+            user_mail = str(form.data['user_mail'])
+            mail = 'juk_feedback_mail@mail.ru'
+            subject_back = 'Отзывы о JUK'
+            message_back = 'Ваш отзыв успешно отправлен'
+
             context = {
-                'subject': form.subject,
-                'message': form.message,
-                'user_mail': form.user_mail,
+                'subject': subject,
+                'message': message,
+                'user_mail': user_mail,
 
             }
+
+            message = 'Отправитель: ' + user_mail + '\n'\
+                      + '\n' + message
+
+            send_mail(subject, message, mail,
+                  [mail], fail_silently=False)
+
+            send_mail(subject_back, message_back, mail,
+                      [user_mail], fail_silently=False)
+
+        else:
             pass
-    else:
-        form = FeedbackForm()
-
-        #subject = request.POST.get("subject")
-        #message = request.POST.get("message")
-        #user_mail = request.POST.get("user_mail")
-        #mail = 'juk_feedback_mail@mail.ru'
-
-        message = 'Отправитель: ' +  form.user_mail + '\n'\
-                  + '\n' + form.message
-
-        send_mail(form.subject, message, form.mail,
-              [form.mail], fail_silently=False)
-
-        #subject_back = 'Отзывы о JUK'
-        #message_back = 'Ваш отзыв успешно отправлен'
-
-        send_mail(form.subject_back, form.message_back, form.mail,
-                  [form.user_mail], fail_silently=False)
 
     return render(request, 'pages/feedback.html')
