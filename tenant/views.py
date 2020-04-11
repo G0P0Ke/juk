@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from .models import Discussion
 
 
 def profile_view(request):
@@ -13,8 +14,7 @@ def forum(request, id):
 
 
 def discussion(request):
-    context = {"user": request.user, }
-    return render(request, 'discussion.html', context)
+    return render(request, 'discussion.html')
 
 
 @login_required
