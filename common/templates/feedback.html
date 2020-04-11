@@ -1,24 +1,23 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>feedback</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
+
     <form method="POST">
+        <!-- TODO: Сверстать при помощи bootstrap-форм -->
         {% csrf_token %}
         <p>
-            <input type="text" name = "subject" />
-            <input type="text" name = "message" />
-            <input type="text" name = "user_mail" />
+            <input type="text" name="subject">
+            <input type="text" name="message">
+            <input type="text" name="user_mail">
         </p>
-        <input type="submit" value="Сохранить" >
+        <input type="submit" value="Сохранить">
     </form>
     {% for post in feedbacks %}
         <h3>{{ post.author }}</h3>
         <p>{{ post.text }}</p>
         <hr>
     {% endfor %}
-</body>
-</html>
+
+
+{% endblock %}
+
