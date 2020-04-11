@@ -76,8 +76,8 @@ def logout_view(request):
     logout(request)
     return redirect('/')
 
-def feedback(request):
 
+def feedback(request):
     if request.method == "POST":
         form = FeedbackForm(request.POST)
 
@@ -99,8 +99,14 @@ def feedback(request):
             message = 'Отправитель: ' + user_mail + '\n'\
                       + '\n' + message
 
+            # TODO: оформление при помощи django forms
+            # TODO: валидация входных параметров
+
+            message = 'Отправитель: ' + user_mail + '\n' + '\n' + message
+
+            # TODO: вынести отправку письма в отдельный субпроцесс (при помощи celery)
             send_mail(subject, message, mail,
-                  [mail], fail_silently=False)
+                      [mail], fail_silently=False)
 
             send_mail(subject_back, message_back, mail,
                       [user_mail], fail_silently=False)
