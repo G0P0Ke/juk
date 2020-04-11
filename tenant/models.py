@@ -29,7 +29,7 @@ class Discussion(models.Model):
     forum = models.ForeignKey(to=Forum, on_delete=models.CASCADE)  # Родитель
     author = models.ForeignKey(to=User, null=True, on_delete=models.CASCADE)  # Автор
     cr_date = models.DateTimeField()  # Время создания обсуждения
-    anon_allowed = models.BooleanField(default=False)  # можно ли анонимно комментировать
+    anon_allowed = models.TextField(default=0)  # можно ли анонимно комментировать
 
 
 class Comment(models.Model):

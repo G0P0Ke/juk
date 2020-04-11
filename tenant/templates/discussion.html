@@ -2,9 +2,20 @@
 
 {% block content %}
 
-<a>Голосование номер {{ discussion.id }}</a>
-<br>
-<a href="{% url 'forum' id=discussion.forum.id%}"><button>Вернуться на форум</button></a>
+<a href="{% url 'forum' id=discussion.forum.id%}"><button>Вернуться на форум</button></a><br><br>
+<p>Обсуждение №{{ discussion.id }}</p>
+<p>Автор обсуждения: {{ discussion.author }}</p>
+<p>Дата создания обсуждения: {{ discussion.cr_date }}</p>
+<p>Тема обсуждения: {{ discussion.theme }}</p>
+<p>Описание обсуждения: {{ discussion.description }}</p>
 
-
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="comment" id="comment-id" placeholder="Комменарий" style="width: 600px; margin-left: 0px; border-radius: 4px;"><br><br>
+    <button type="submit">Отправить</button>
+    {% for com in comments %}
+    <hr>
+    <p>{{ com.author.first_name }} {{ com.author.last_name }}:  {{ com.message }}</p>
+    {% endfor %}
+</form>
 {% endblock %}

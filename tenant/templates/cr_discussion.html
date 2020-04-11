@@ -3,12 +3,6 @@
 {% block content %}
 
 
-
-
-
-
-
-
 {% if form.errors %}
 Найдкны ошибки:
 <ul>
@@ -20,12 +14,19 @@
 
 <form method="POST">
 {% csrf_token %}
-    {{ form.theme.label }}: {{ form.theme }}<br>
-    {{ form.category.label }}: {{ form.category }}<br>
-    {{ form.description.label }}: {{ form.description }}<br>
-    {{ form.anonymous.label }}: {{ form.anonymous }}<br>
-
-    <input type="submit" value="Создать">
+    <fieldset style="padding: 10px; border: 2px black solid;">
+        <input type="text" name="theme" maxlength="20" placeholder="Тема" required><br><br>
+        <label for="category">Категория</label>
+        <select id="category" name="category">
+            {% for category in categories %}
+                <option value="Вода">{{ category }}</option>
+            {% endfor %}
+        </select><br><br>
+        <input type="text" name="description" maxlength="100" placeholder="Описание" required><br><br>
+        <label for="anonymous">Анонимность</label>
+        <input type="checkbox" name="anonymous" id="anonymous"><br><br>
+        <input type="submit" value="Создать">
+    </fieldset>
 </form>
 
 
