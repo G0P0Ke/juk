@@ -1,25 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% if done %}
-    Обсуждение создано!
-{% elif error %}
-Исправьте ошибку!
-<form method="POST">
-{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Создать">
-</form>
-{% else %}
-<form method="POST">
-{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Создать">
-</form>
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+
+
+
+
+{% if form.errors %}
+Найдкны ошибки:
+<ul>
+    {% for key.value in form.errors.items %}
+    <li>Поле: {{ key|escape }}: {{ value|escape }}</li>
+    {% endfor %}
+</ul>
 {% endif %}
-</body>
-</html>
+
+<form method="POST">
+{% csrf_token %}
+    {{ form.theme.label }}: {{ form.theme }}<br>
+    {{ form.category.label }}: {{ form.category }}<br>
+    {{ form.description.label }}: {{ form.description }}<br>
+    {{ form.anonymous.label }}: {{ form.anonymous }}<br>
+
+    <input type="submit" value="Создать">
+</form>
+
+
+
+
+
+
+{% endblock %}

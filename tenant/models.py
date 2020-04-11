@@ -17,8 +17,9 @@ class Tenant(models.Model):
 
 
 class Forum(models.Model):
-    house = models.ForeignKey(to=House, on_delete=models.CASCADE)  # Дом форума
-    company = models.ForeignKey(to=Company, on_delete=models.CASCADE)
+    house = models.OneToOneField(to=House, null=True, on_delete=models.CASCADE)  # Дом форума
+    company = models.OneToOneField(to=Company, null=True, on_delete=models.CASCADE)
+    categories = models.CharField(max_length=100, default="Вода|Электричество|Другое")
 
 
 class Discussion(models.Model):
@@ -26,12 +27,13 @@ class Discussion(models.Model):
     category = models.TextField()  # Категория обсуждения
     description = models.TextField()  # Содержание обсуждения
     forum = models.ForeignKey(to=Forum, on_delete=models.CASCADE)  # Родитель
-    author = models.ForeignKey(to=User, on_delete=models.CASCADE)  # Автор
+    author = models.ForeignKey(to=User, null=True, on_delete=models.CASCADE)  # Автор
     cr_date = models.DateTimeField()  # Время создания обсуждения
+    anon_allowed = models.BooleanField(default=False)  # можно ли анонимно комментировать
 
 
 class Comment(models.Model):
-    comment = models.TextField()  # Текст комментария
+    text = models.TextField()  # Текст комментария
     discussion = models.ForeignKey(to=Discussion, on_delete=models.CASCADE)
     author = models.ForeignKey(to=User, on_delete=models.CASCADE)  # Автор
     cr_date = models.DateTimeField()  # Время создания комментария

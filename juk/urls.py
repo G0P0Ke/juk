@@ -28,7 +28,7 @@ urlpatterns = [
     path('accounts/signup/', common_views.signup_view, name='signup'),
     path('news/', manager_views.news_page, name='news'),
     path('profile/', tenant_views.profile_view, name='profile'),
-    path('forum/<int:id>', tenant_views.forum, name="forum"),
-    path('forum/discussion/<int:id>', tenant_views.discussion, name="discussion"),
-    path('cr_discussion/<int:id>', tenant_views.cr_discussion, name="cr_discussion"),
+    path('forum/<int:id>', tenant_views.forum_view, name="forum"),
+    path('forum/discussion/<int:id>', tenant_views.discussion_view, name="discussion"),
+    path('forum/cr_discussion/<int:id>', tenant_views.cr_discussion_view, name="cr_discussion"),
 ]
