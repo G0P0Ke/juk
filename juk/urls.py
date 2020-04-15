@@ -27,7 +27,10 @@ urlpatterns = [
     path('accounts/logout/', common_views.logout_view, name='logout'),
     path('accounts/signup/', common_views.signup_view, name='signup'),
     path('news/', manager_views.news_page, name='news'),
+
     path('profile/', tenant_views.profile_view, name='profile'),
+    path('profile/redact_profile', tenant_views.redact_profile_view, name='redact_profile'),
+
     path('forum/<int:id>', tenant_views.forum_view, name="forum"),
     path('forum/discussion/<int:id>', tenant_views.discussion_view, name="discussion"),
     path('forum/cr_discussion/<int:id>', tenant_views.cr_discussion_view, name="cr_discussion"),
