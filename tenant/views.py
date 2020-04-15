@@ -77,5 +77,6 @@ def cr_discussion_view(request, id):
     categories = list(forum.categories.split('|'))
     context.update({
         "categories": categories,
+        "forum": forum,
     })
     return render(request, 'cr_discussion.html', context)
