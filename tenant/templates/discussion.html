@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'base.html' %}
 
 {% block content %}
@@ -19,3 +20,103 @@
     {% endfor %}
 </form>
 {% endblock %}
+=======
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <style>
+   @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+   body {
+    font-family: "Roboto", sans-serif;
+    margin: 0; /* Отступы на странице */
+    background: #FFFFFF;
+   }
+   .item {
+    margin: auto 10% 20px 10%; /* Значения отступов */
+    padding: 10px; /* Поля вокруг текста */
+    background: #F5F5F5;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 5px;
+    overflow:auto
+   }
+
+   .im, .txt {
+   background: #FFFFFF;
+   overflow:auto
+   }
+   .txt{
+   margin: 10px auto 10px auto;
+   border: 2px solid #DCDCDC;
+   }
+   .im {
+   margin: 0px auto 0px 0px;
+   background: #FFFFFF;
+   float: left;
+   border-right: 2px solid #DCDCDC;
+   width: 200px; /* Ширина блока */
+   overflow:auto;
+   height:100%;
+   left:0;
+   right:0;
+   top:0;
+   bottom:0;
+   }
+
+    data {
+    font-family: font-family: "Roboto", sans-serif;
+    font-size: 11pt;
+    color: #696969;
+   }
+   .ava{
+   margin: auto;
+   height: 100px; /* Высота блока */
+   width: 85px; /* Ширина блока */
+   background: #696969;
+   }
+   p{
+   font-family: font-family: "Roboto", sans-serif;
+    text-indent: 40px;
+    font-size:14pt;
+   }
+
+   .cope_text {
+	overflow: hidden;
+	line-height: 24px;
+}
+.cope_text p {
+	margin: 15px;
+}
+.line-clamp {
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+}
+  </style>
+
+
+ </head>
+ <body>
+  <div class="item">
+      <div>
+           <div class="txt">
+          <div class="im">
+              <h2  align="center"><b><b>Username</b></b></h2>
+              <div class="ava"></div>
+              <h5 align="center">Сотрудник УК или житель</h5>
+              <h5 align="center">Район: блабла</h5>
+          </div>
+
+               <div class="cope_text line-camp">
+                   <data align="left">опубликовано:01.01.2020</data>
+                   <p>тут должен быть вопроc
+                   </p></div>
+
+
+      </div>
+      </div>
+ </div>
+
+ </body>
+</html>
+>>>>>>> d9e832ab1e0edcc60941fec6743cf35d386c4572
