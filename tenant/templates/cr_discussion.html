@@ -3,14 +3,7 @@
 {% block content %}
 
 
-{% if form.errors %}
-Найдкны ошибки:
-<ul>
-    {% for key.value in form.errors.items %}
-    <li>Поле: {{ key|escape }}: {{ value|escape }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+
 <fieldset style="padding: 10px; border: 2px black solid;">
     <form method="POST">
     {% csrf_token %}
@@ -18,7 +11,7 @@
             <label for="category">Категория</label>
             <select id="category" name="category">
                 {% for category in categories %}
-                    <option value="Вода">{{ category }}</option>
+                    <option value={{category}}>{{ category }}</option>
                 {% endfor %}
             </select><br><br>
             <input type="text" name="description" maxlength="100" placeholder="Описание" required><br><br>
