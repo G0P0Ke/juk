@@ -6,6 +6,14 @@ from datetime import datetime
 
 
 def profile_view(request):
+    """
+    Получение профиля
+
+    :param request: объект с деталями запроса.
+    :type request:
+    :type request: :class:`django.http.HttpRequest`
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     context = {"user": request.user, }
     c = Company.objects.create(inn=1) #tmp
     h = House.objects.create(address="улица Пушкина дом Колотушкина", company=c)#tmp
@@ -27,6 +35,14 @@ class Category:
 
 
 def forum_view(request, id):
+    """
+    Отображение форума с конкретным id
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :param id: primary key в БД
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     context = {}
     forum = Forum.objects.get(pk=id)
     owner = ("house" if Forum.objects.get(pk=id).house else "company")
@@ -49,6 +65,14 @@ def forum_view(request, id):
 
 
 def discussion_view(request, id):
+    """
+    Отображение обсуждения
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :param id: primary key в БД
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     context = {
         "user": request.user,
         "discussion": Discussion.objects.get(pk=id)
@@ -58,6 +82,15 @@ def discussion_view(request, id):
 
 @login_required
 def cr_discussion_view(request, id):
+    """
+    Создание обсуждения
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :param id: primary key в БД
+    :return: объект ответа сервера с HTML-кодом внутри в случае, если идёт GET-запрос на страницу
+    :return: перенаправление на главную страницу в случае POST-запроса
+    """
     context = {}
     if request.method == 'POST':
         theme = request.POST.get('theme')
