@@ -8,6 +8,13 @@ from django.contrib.auth.models import User
 
 @login_required
 def profile_view(request):
+    """
+    Профиль пользователя
+
+    :param request: объект с деталями запроса.
+    :type request: :class:`django.http.HttpRequest`
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     context = {
         "user": request.user,
     }
@@ -58,6 +65,14 @@ class Category:
 
 
 def forum_view(request, id):
+    """
+    Отображение форума с конкретным id
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :param id: primary key форума в БД
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     context = {}
     forum = Forum.objects.get(pk=id)
     owner = ("house" if Forum.objects.get(pk=id).house else "company")
@@ -80,28 +95,57 @@ def forum_view(request, id):
 
 
 def discussion_view(request, id):
-    context = {
+    """
+    Отображение обсуждения в форуме
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :param id: primary key обсуждеиния в БД
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
+    context = {}
+    discussion = Discussion.objects.get(pk=id)
+    if request.method == 'POST':
+        if request.user.id is AnonymousUser:
+            return redirect('/login')
+        text = request.POST.get('comment')
+        comment = Comment.objects.create(text=text, discussion=discussion,
+                                         author=request.user, cr_date=datetime.now())
+        comment.save()
+        return redirect('/forum/discussion/' + str(discussion.id))
+    comments = discussion.comment_set.all()
+    comments = list(comments)
+    comments.reverse()
+    context.update({
         "user": request.user,
-        "discussion": Discussion.objects.get(pk=id)
-    }
+        "discussion": discussion,
+        "comments": comments
+    })
     return render(request, 'discussion.html', context)
 
 
 @login_required
 def cr_discussion_view(request, id):
+    """
+    Создание обсуждения
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :param id: primary key форума в БД
+    :return: объект ответа сервера с HTML-кодом внутри в случае, если идёт GET-запрос на страницу
+    :return: перенаправление на главную страницу в случае POST-запроса
+    """
     context = {}
     if request.method == 'POST':
         theme = request.POST.get('theme')
         category = request.POST.get('category')
-        description = request.POST.get('description')
         anonymous = request.POST.get('anonymous')
         if anonymous is None:
             anonymous = 0
         else:
             anonymous = 1
-        discussion = Discussion(theme=theme, category=category, description=description,
-                                forum=Forum.objects.get(pk=id), author=request.user,
-                                cr_date=datetime.now(), anon_allowed=anonymous)
+        discussion = Discussion(theme=theme, category=category, forum=Forum.objects.get(pk=id),
+                                author=request.user, cr_date=datetime.now(), anon_allowed=anonymous)
         discussion.save()
         return redirect('/forum/discussion/' + str(discussion.id))
     forum = Forum.objects.get(pk=id)

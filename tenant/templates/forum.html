@@ -19,10 +19,7 @@
 <h4 style="color: violet;">Категория: {{ category.name }}</h4>
 
 {% for discussion in category.list_of_discussions %}
-     <a href="{% url 'discussion' id=discussion.id%}"><button style="color:rgb(0, 178, 203)">{{ discussion.theme }}</button></a>
-<br>
-    <a href="{% url 'discussion' id=discussion.id%}"><button>{{ discussion.description }}</button></a>
-<br>
+     <a href="{% url 'discussion' id=discussion.id%}"><button style="color:rgb(0, 178, 203)">{{ discussion.theme }}</button></a><br>
 <br>
 {% endfor %}
 
