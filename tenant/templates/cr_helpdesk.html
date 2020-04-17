@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<fieldset style="padding: 10px; border: 2px black solid;">
+    <form method="POST">
+    {% csrf_token %}
+            <input type="text" name="theme" maxlength="20" placeholder="Тема" required><br><br>
+            <label for="inn">Инн компании</label>
+            <select id="inn" name="inn">
+                {% for company in companies %}
+                    <option value={{company.inn}}>{{ company.inn }}</option>
+                {% endfor %}
+            </select><br><br>
+            <input type="submit" value="Создать">
+    </form>
+    <a href="{% url 'profile'%}"><input value="Вернуться" type="button"></a>
+</fieldset>
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<a href="{% url 'profile'%}"><button>Вернуться в профиль</button></a><br>
+<a>Сей диалог происходит между пользователем {{ user.username }} и компанией с инн {{ helpdesk.company.inn }}</a><br>
+<br><br>
+<a>Тема сего обсуждения: {{ helpdesk.theme }}</a><br>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="message" placeholder="Сообщение" style="width: 600px; margin-left: 0px; border-radius: 4px;"><br><br>
+    <button type="submit">Отправить</button>
+
+    {% for message in messages %}
+    <hr>
+    <p>{{ message.creator }}:  {{ message.text }}</p>
+    {% endfor %}
+</form>
+
+
+
+
+
+
+{% endblock %}

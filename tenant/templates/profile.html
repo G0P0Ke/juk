@@ -5,6 +5,9 @@
 
         <h1 style="margin: 50px auto;">Профиль жильца</h1>
         <hr>
+        <a href="{% url 'forum' id=user.tenant.house.forum.id%}"><button>Форум вашего дома</button></a>
+        <a href="{% url 'forum' id=user.tenant.house.company.forum.id%}"><button>Форум управляющей компании вашего дома</button></a>
+        <hr>
         <a>Имя: {{ user.username }}</a>
         <br>
         <a>Адрес: {{ user.tenant.house.address }}</a>

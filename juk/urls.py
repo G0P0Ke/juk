@@ -34,4 +34,7 @@ urlpatterns = [
     path('forum/<int:id>', tenant_views.forum_view, name="forum"),
     path('forum/discussion/<int:id>', tenant_views.discussion_view, name="discussion"),
     path('forum/cr_discussion/<int:id>', tenant_views.cr_discussion_view, name="cr_discussion"),
+
+    path('helpdesk/<int:id>', tenant_views.helpdesk_view, name="helpdesk"),
+    path('helpdesk/cr_helpdesk', tenant_views.cr_helpdesk_view, name="cr_helpdesk"),
 ]

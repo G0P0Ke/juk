@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
-from .models import Company, House, Forum, Discussion, Comment, Tenant
+from .models import Company, House, Forum, Discussion, Comment, Tenant, HelpDesk, Message
 from datetime import datetime
 from django.contrib.auth.models import User
 
@@ -18,10 +18,11 @@ def profile_view(request):
     context = {
         "user": request.user,
     }
-    #t = Tenant.objects.create(house=House.objects.get(pk=1), user=request.user)
-    #c = Company.objects.create(inn=1) #tmp
-    #h = House.objects.create(address="улица Пушкина дом Колотушкина", company=c)#tmp
+    #c = Company.objects.create(inn=666) #tmp
+    #h = House.objects.create(address="Улица Крылатские Холмы 15к2", company=c)#tmp
     #f = Forum.objects.create(house=h, categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое")#tmp
+    #f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
+    #request.user.tenant.house = h
     return render(request, 'profile.html', context)
 
 
@@ -76,7 +77,6 @@ def forum_view(request, id):
     context = {}
     forum = Forum.objects.get(pk=id)
     owner = ("house" if Forum.objects.get(pk=id).house else "company")
-    # request.user.id is not AnonymousUser:
     if owner == "house":
         context.update({"house": forum.house, })
     elif owner == "company":
@@ -112,7 +112,6 @@ def discussion_view(request, id):
         comment = Comment.objects.create(text=text, discussion=discussion,
                                          author=request.user, cr_date=datetime.now())
         comment.save()
-        return redirect('/forum/discussion/' + str(discussion.id))
     comments = discussion.comment_set.all()
     comments = list(comments)
     comments.reverse()
@@ -140,10 +139,7 @@ def cr_discussion_view(request, id):
         theme = request.POST.get('theme')
         category = request.POST.get('category')
         anonymous = request.POST.get('anonymous')
-        if anonymous is None:
-            anonymous = 0
-        else:
-            anonymous = 1
+        anonymous = True if anonymous else False
         discussion = Discussion(theme=theme, category=category, forum=Forum.objects.get(pk=id),
                                 author=request.user, cr_date=datetime.now(), anon_allowed=anonymous)
         discussion.save()
@@ -155,3 +151,47 @@ def cr_discussion_view(request, id):
         "forum": forum,
     })
     return render(request, 'cr_discussion.html', context)
+
+
+@login_required
+def helpdesk_view(request, id):
+    context = {}
+    helpdesk = HelpDesk.objects.get(pk=id)
+    if request.method == 'POST':
+        text = request.POST.get('message')
+        # проверка на жителя
+        message = Message.objects.create(text=text, helpdesk=helpdesk,
+                                         creator="user", cr_date=datetime.now())
+        # проверка на УК
+        # message = Message.objects.create(text=text, helpdesk=helpdesk,
+        #                                          creator="company", cr_date=datetime.now())
+        message.save()
+    messages = helpdesk.message_set.all()
+    messages = list(messages)
+    messages.reverse()
+    context.update({
+        "user": request.user,
+        "helpdesk": helpdesk,
+        "messages": messages,
+    })
+    return render(request, 'helpdesk.html', context)
+
+
+def cr_helpdesk_view(request):
+    context = {}
+    if request.method == 'POST':
+        theme = request.POST.get('theme')
+        inn = int(request.POST.get("inn"))
+        company = Company.objects.filter(inn=inn)[0]
+        if request.user.tenant:
+            helpdesk = HelpDesk(theme=theme, company=company,
+                                user=request.user, cr_date=datetime.now())
+            helpdesk.save()
+        # if проверка на то что это представитель компании
+        return redirect('/helpdesk/' + str(helpdesk.id))
+    context.update({
+        "user": request.user,
+        "companies": Company.objects.all(),
+        "is_tenant": True if request.user.tenant else False #-----------проверка на то является ли жителем------
+    })
+    return render(request, 'cr_helpdesk.html', context)
