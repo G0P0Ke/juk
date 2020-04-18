@@ -89,7 +89,7 @@ class HelpDesk(models.Model):
     cr_date = models.DateTimeField()  # Время создания обращения
 
 
-class Message(models.Model):
+class HelpDeskSmartMessage(models.Model):
     text = models.TextField()
     helpdesk = models.ForeignKey(to=HelpDesk, on_delete=models.CASCADE)
     creator = models.TextField(default="tenant")  # company или tenant

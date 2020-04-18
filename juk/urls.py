@@ -32,7 +32,7 @@ urlpatterns = [
     path('profile/redact_profile', tenant_views.redact_profile_view, name='redact_profile'),
 
     path('forum/<int:id>', tenant_views.forum_view, name="forum"),
-    path('forum/discussion/<int:id>', tenant_views.discussion, name="discussion"),
+    path('forum/discussion/<int:id>', tenant_views.discussion_view, name="discussion"),
     path('forum/discussion/<int:id>/thread/<int:thread_id>', tenant_views.thread, name="thread"),
     path('forum/cr_discussion/<int:id>', tenant_views.cr_discussion_view, name="cr_discussion"),
 

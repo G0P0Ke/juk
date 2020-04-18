@@ -14,7 +14,7 @@
     <input type="text" name="message" placeholder="Сообщение" style="width: 600px; margin-left: 0px; border-radius: 4px;"><br><br>
     <button type="submit">Отправить</button>
 
-    {% for message in messages %}
+    {% for message in smartmessages %}
     <hr>
     <p>{{ message.creator }}:  {{ message.text }}</p>
     {% endfor %}

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
-from .models import Company, House, Forum, Discussion, Comment, Tenant, HelpDesk, Message
+from .models import Company, House, Forum, Discussion, Comment, Tenant, HelpDesk, HelpDeskSmartMessage
 from datetime import datetime
 from django.contrib.auth.models import User
 
@@ -20,6 +20,7 @@ def profile_view(request):
     }
     #c = Company.objects.create(inn=666) #tmp
     #h = House.objects.create(address="Улица Крылатские Холмы 15к2", company=c)#tmp
+    #t = Tenant.objects.create(user=request.user, house=h)  # tmp
     #f = Forum.objects.create(house=h, categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое")#tmp
     #f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
     #request.user.tenant.house = h
@@ -109,9 +110,13 @@ def discussion_view(request, id):
     if request.method == 'POST':
         if request.user.id is AnonymousUser:
             return redirect('/login')
-        text = request.POST.get('comment')
-        comment = Comment.objects.create(text=text, discussion=discussion,
-                                         author=request.user, cr_date=datetime.now())
+        text = request.POST.get('text')
+        comment = Comment.objects.create(
+            text=text,
+            discussion=discussion,
+            author=request.user,
+            cr_date=datetime.now(),
+        )
         comment.save()
     comments = discussion.comment_set.all()
     comments = list(comments)
@@ -119,7 +124,7 @@ def discussion_view(request, id):
     context.update({
         "user": request.user,
         "discussion": discussion,
-        "comments": comments
+        "comments": comments,
     })
     return render(request, 'discussion.html', context)
 
@@ -153,3 +158,73 @@ def cr_discussion_view(request, id):
         "forum": forum,
     })
     return render(request, 'cr_discussion.html', context)
+
+
+def thread(request, id, thread_id):
+    thread = Comment.objects.get(id=thread_id)
+    discussion = Discussion.objects.get(id=id)
+    comments = Comment.objects.filter(thread=thread)
+    context = {
+        "user":request.user,
+        "comments":comments,
+        "thread":thread,
+        "discussion":discussion
+    }
+    if request.POST:
+        text = request.POST.get("text")
+        r_com = Comment(
+            text=text,
+            cr_date=datetime.datetime.now(),
+            author=request.user,
+            discussion = discussion,
+            thread = thread
+        )
+        r_com.save()
+        id = r_com.id
+        return redirect('thread', discussion.id, thread.id)
+    return render(request, 'thread.html', context)
+
+
+@login_required
+def helpdesk_view(request, id):
+    context = {}
+    helpdesk = HelpDesk.objects.get(pk=id)
+    if request.method == 'POST':
+        text = request.POST.get('message')
+        # проверка на жителя
+        message = HelpDeskSmartMessage.objects.create(text=text, helpdesk=helpdesk,
+                                         creator="user", cr_date=datetime.now())
+        # проверка на УК
+        # message = Message.objects.create(text=text, helpdesk=helpdesk,
+        #                                          creator="company", cr_date=datetime.now())
+        message.save()
+    messages = helpdesk.helpdesksmartmessage_set.all()
+    messages = list(messages)
+    messages.reverse()
+    context.update({
+        "user": request.user,
+        "helpdesk": helpdesk,
+        "smartmessages": messages,
+    })
+    return render(request, 'helpdesk.html', context)
+
+
+def cr_helpdesk_view(request):
+    context = {}
+    if request.method == 'POST':
+        theme = request.POST.get('theme')
+        inn = int(request.POST.get("inn"))
+        company = Company.objects.filter(inn=inn)[0]
+        if request.user.tenant:
+            helpdesk = HelpDesk(theme=theme, company=company,
+                                user=request.user, cr_date=datetime.now())
+            helpdesk.save()
+        # if проверка на то что это представитель компании
+        return redirect('/helpdesk/' + str(helpdesk.id))
+    context.update({
+        "user": request.user,
+        "companies": Company.objects.all(),
+        "is_tenant": True if request.user.tenant else False #-----------проверка на то является ли жителем------
+    })
+    return render(request, 'cr_helpdesk.html', context)
+
