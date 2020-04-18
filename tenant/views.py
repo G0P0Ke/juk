@@ -138,9 +138,10 @@ def cr_discussion_view(request, id):
     if request.method == 'POST':
         theme = request.POST.get('theme')
         category = request.POST.get('category')
+        description = request.POST.get('description')
         anonymous = request.POST.get('anonymous')
         anonymous = True if anonymous else False
-        discussion = Discussion(theme=theme, category=category, forum=Forum.objects.get(pk=id),
+        discussion = Discussion(theme=theme, category=category, forum=Forum.objects.get(pk=id), description=description,
                                 author=request.user, cr_date=datetime.now(), anon_allowed=anonymous)
         discussion.save()
         return redirect('/forum/discussion/' + str(discussion.id))

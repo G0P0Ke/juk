@@ -7,6 +7,8 @@
 <p>Автор обсуждения: {{ discussion.author }}</p>
 <p>Дата создания обсуждения: {{ discussion.cr_date }}</p>
 <p>Тема обсуждения: {{ discussion.theme }}</p>
+<p>Описание обсуждения: {{ discussion.description }}</p>
+
 
 <form method="POST">
     {% csrf_token %}

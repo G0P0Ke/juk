@@ -51,6 +51,7 @@ class Discussion(models.Model):
 
     :param theme: Тема обсуждения
     :param category: Категория обсуждения
+    :param discription: Описание обсуждения
     :param forum: Форум, которому принадлежит обсуждение
     :param author: Автор обсуждения
     :param cr_date: Дата создания обсуждения
@@ -58,6 +59,7 @@ class Discussion(models.Model):
     """
     theme = models.TextField()  # Тема обсуждения
     category = models.TextField()  # Категория обсуждения
+    description = models.TextField()  # Описание обсуждения
     forum = models.ForeignKey(to=Forum, on_delete=models.CASCADE)  # Родитель
     author = models.ForeignKey(to=User, null=True, on_delete=models.CASCADE)  # Автор
     cr_date = models.DateTimeField()  # Время создания обсуждения
