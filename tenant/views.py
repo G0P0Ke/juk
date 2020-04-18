@@ -77,6 +77,7 @@ def forum_view(request, id):
     context = {}
     forum = Forum.objects.get(pk=id)
     owner = ("house" if Forum.objects.get(pk=id).house else "company")
+    # request.user.id is not AnonymousUser:
     if owner == "house":
         context.update({"house": forum.house, })
     elif owner == "company":
@@ -152,47 +153,3 @@ def cr_discussion_view(request, id):
         "forum": forum,
     })
     return render(request, 'cr_discussion.html', context)
-
-
-@login_required
-def helpdesk_view(request, id):
-    context = {}
-    helpdesk = HelpDesk.objects.get(pk=id)
-    if request.method == 'POST':
-        text = request.POST.get('message')
-        # проверка на жителя
-        message = Message.objects.create(text=text, helpdesk=helpdesk,
-                                         creator="user", cr_date=datetime.now())
-        # проверка на УК
-        # message = Message.objects.create(text=text, helpdesk=helpdesk,
-        #                                          creator="company", cr_date=datetime.now())
-        message.save()
-    messages = helpdesk.message_set.all()
-    messages = list(messages)
-    messages.reverse()
-    context.update({
-        "user": request.user,
-        "helpdesk": helpdesk,
-        "messages": messages,
-    })
-    return render(request, 'helpdesk.html', context)
-
-
-def cr_helpdesk_view(request):
-    context = {}
-    if request.method == 'POST':
-        theme = request.POST.get('theme')
-        inn = int(request.POST.get("inn"))
-        company = Company.objects.filter(inn=inn)[0]
-        if request.user.tenant:
-            helpdesk = HelpDesk(theme=theme, company=company,
-                                user=request.user, cr_date=datetime.now())
-            helpdesk.save()
-        # if проверка на то что это представитель компании
-        return redirect('/helpdesk/' + str(helpdesk.id))
-    context.update({
-        "user": request.user,
-        "companies": Company.objects.all(),
-        "is_tenant": True if request.user.tenant else False #-----------проверка на то является ли жителем------
-    })
-    return render(request, 'cr_helpdesk.html', context)

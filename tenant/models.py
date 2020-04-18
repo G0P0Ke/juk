@@ -79,6 +79,7 @@ class Comment(models.Model):
     discussion = models.ForeignKey(to=Discussion, on_delete=models.CASCADE)
     author = models.ForeignKey(to=User, on_delete=models.CASCADE)  # Автор
     cr_date = models.DateTimeField()  # Время создания комментария
+    thread = models.ForeignKey(to='Comment', on_delete=models.CASCADE, default=None, null=True)
 
 
 class HelpDesk(models.Model):
