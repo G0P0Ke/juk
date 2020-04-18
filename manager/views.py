@@ -11,7 +11,7 @@ def news_page(request):
         'user': request.user,
         'record': record,
     }
-    return render(request, 'manager/news.html', context)
+    return render(request, 'pages/manager/news/news.html', context)
 
 
 @login_required
@@ -37,4 +37,4 @@ def create_news_page(request):
             }
         )
 
-    return render(request, 'manager/create_news.html', context)
+    return render(request, 'pages/manager/news/create_news.html', context)
