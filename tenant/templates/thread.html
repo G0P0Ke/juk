@@ -4,16 +4,27 @@
 
  <form action='' id="comment" method="post">
             {% csrf_token %}
+                <div class="form-group row">
+                    <div class="col-1.5">
+                    <div class="alert alert-info" role="alert">
+                    <div align = "center"> {{thread.author}} </div>
+                    <div class="media">
+                    <img src="http://file.mobilmusic.ru/0e/98/84/1467407-128.jpg"  align = "left" alt="...">
+                    </div>
+                    <div align = "center"> Роль </div>
+                    </div>
+                    </div>
                 <div class="col">
                 <div class="alert alert-primary" role="alert">
-                <h1>{{discussion.theme}}</h1>
+                <a href="http://127.0.0.1:8000/forum/discussion/{{ discussion.id }}" class="text-dark"> <h1>{{discussion.theme}}</h1></a>
                 </div>
-                </div>
-                <div class="col-1">
-                </div>
+
+
                 <div class="col 7">
                 <div class="alert alert-secondary" role="alert">
-                    <h3>{{discussion.description}}</h3>
+                    <h3>{{thread.text}}</h3>
+                </div>
+                </div>
                 </div>
                 </div>
                 <br>
@@ -35,7 +46,6 @@
                 <div class="alert alert-secondary" role="alert">
                 {{item.text}}
                 </div>
-                    <div align = "left"> <a href="http://127.0.0.1:8000/forum/discussion/{{ discussion.id }}/thread/{{ item.id }} "> Ответить </a></div>
                     <div align = "right"> {{item.cr_date}} </div>
                 </div>
 

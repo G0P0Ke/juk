@@ -29,6 +29,7 @@ urlpatterns = [
     path('news/', manager_views.news_page, name='news'),
     path('profile/', tenant_views.profile_view, name='profile'),
     path('forum/<int:id>', tenant_views.forum_view, name="forum"),
-    path('forum/discussion/<int:id>', tenant_views.discussion_view, name="discussion"),
+    path('forum/discussion/<int:id>', tenant_views.discussion, name="discussion"),
+    path('forum/discussion/<int:id>/thread/<int:thread_id>', tenant_views.thread, name="thread"),
     path('forum/cr_discussion/<int:id>', tenant_views.cr_discussion_view, name="cr_discussion"),
 ]

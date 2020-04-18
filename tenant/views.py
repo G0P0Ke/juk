@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
-from .models import Company, House, Forum, Discussion, Comment
-from datetime import datetime
+import datetime
+from .models import *
 
 
 def profile_view(request):
@@ -48,13 +48,50 @@ def forum_view(request, id):
     return render(request, 'forum.html', context)
 
 
-def discussion_view(request, id):
+def discussion(request,id):
+    discussion = Discussion.objects.get(id=id)
+    comments = Comment.objects.filter(discussion = discussion,thread = None)
     context = {
         "user": request.user,
-        "discussion": Discussion.objects.get(pk=id)
+        "comments":comments,
+        "discussion":discussion,
     }
+    if request.POST:
+        text = request.POST.get("text")
+        r_com = Comment(
+            text=text,
+            cr_date=datetime.datetime.now(),
+            author=request.user,
+            discussion = discussion
+        )
+        r_com.save()
+        id = r_com.id
+        return redirect('discussion', discussion.id)
     return render(request, 'discussion.html', context)
 
+def thread(request,id,thread_id):
+    thread = Comment.objects.get(id=thread_id)
+    discussion = Discussion.objects.get(id=id)
+    comments = Comment.objects.filter(thread=thread)
+    context = {
+        "user":request.user,
+        "comments":comments,
+        "thread":thread,
+        "discussion":discussion
+    }
+    if request.POST:
+        text = request.POST.get("text")
+        r_com = Comment(
+            text=text,
+            cr_date=datetime.datetime.now(),
+            author=request.user,
+            discussion = discussion,
+            thread = thread
+        )
+        r_com.save()
+        id = r_com.id
+        return redirect('thread', discussion.id, thread.id)
+    return render(request, 'thread.html', context)
 
 @login_required
 def cr_discussion_view(request, id):

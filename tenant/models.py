@@ -31,9 +31,10 @@ class Discussion(models.Model):
     cr_date = models.DateTimeField()  # Время создания обсуждения
     anon_allowed = models.TextField(default=0)  # можно ли анонимно комментировать
 
-
 class Comment(models.Model):
     text = models.TextField()  # Текст комментария
     discussion = models.ForeignKey(to=Discussion, on_delete=models.CASCADE)
     author = models.ForeignKey(to=User, on_delete=models.CASCADE)  # Автор
     cr_date = models.DateTimeField()  # Время создания комментария
+    thread = models.ForeignKey(to='Comment', on_delete=models.CASCADE, default=None, null=True)
+
