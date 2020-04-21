@@ -21,6 +21,9 @@
                     <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Редактировать</a>
                 </li>
                 <li class="nav-item">
+                    <a href="" data-target="#houses" data-toggle="tab" class="nav-link">Учёт домов</a>
+                </li>
+                <li class="nav-item">
                     <a href="" data-target="#secret" data-toggle="tab" class="nav-link disabled"></a>
                 </li>
             </ul>
@@ -37,6 +40,11 @@
                             <h6>Email</h6>
                             <p>
                                 {{ user.email }}
+                            </p>
+                            <p>
+                                <span class="badge badge-primary"><i class="fa fa-user"></i> 15 Домов</span>
+                                <span class="badge badge-success"><i class="fa fa-cog"></i> 239 Жильцов</span>
+                                <span class="badge badge-danger"><i class="fa fa-eye"></i> 5 Жалоб</span>
                             </p>
                         </div>
                     </div>
@@ -75,6 +83,9 @@
                             </div>
                         </div>
                     </form>
+                </div>
+                <div class="tab-pane" id="houses">
+                    Я карта
                 </div>
 
             </div>

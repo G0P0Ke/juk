@@ -15,7 +15,7 @@ def profile(request):
             context.update({
                 'editprof': editprof,
             })
-        return redirect('profile')
+        return redirect('/main/profile')
     else:
         editprof = EditProfileForm(instance=request.user)
 
