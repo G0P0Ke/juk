@@ -2,8 +2,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from tenant.forms import EditProfileForm
 
-# Create your views here.
-
 
 @login_required
 def profile(request):
@@ -25,4 +23,4 @@ def profile(request):
         'editprof': editprof,
     })
 
-    return render(request, 'user_profile/profile.html', context)
+    return render(request, 'pages/tenant/profile.html', context)
