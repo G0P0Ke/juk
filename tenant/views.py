@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
-from .models import Company, House, Forum, Discussion, Comment, Tenant, HelpDesk, HelpDeskSmartMessage
+from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage
 import datetime
 from django.contrib.auth.models import User
 
@@ -23,7 +23,7 @@ def profile_view(request):
     #t = Tenant.objects.create(user=request.user, house=h)  # tmp
     #f = Forum.objects.create(house=h, categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое")#tmp
     #f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
-    #request.user.tenant.house = h
+    request.user.tenant.house = h
     return render(request, 'profile.html', context)
 
 
@@ -165,10 +165,10 @@ def thread(request, id, thread_id):
     discussion = Discussion.objects.get(id=id)
     comments = Comment.objects.filter(thread=thread)
     context = {
-        "user":request.user,
-        "comments":comments,
-        "thread":thread,
-        "discussion":discussion
+        "user": request.user,
+        "comments": comments,
+        "thread": thread,
+        "discussion": discussion
     }
     if request.POST:
         text = request.POST.get("text")
@@ -176,8 +176,8 @@ def thread(request, id, thread_id):
             text=text,
             cr_date=datetime.datetime.now(),
             author=request.user,
-            discussion = discussion,
-            thread = thread
+            discussion=discussion,
+            thread=thread
         )
         r_com.save()
         id = r_com.id
@@ -186,45 +186,50 @@ def thread(request, id, thread_id):
 
 
 @login_required
-def helpdesk_view(request, id):
+def appeal_view(request, id):
     context = {}
-    helpdesk = HelpDesk.objects.get(pk=id)
+    appeal = Appeal.objects.get(pk=id)
     if request.method == 'POST':
         text = request.POST.get('message')
         # проверка на жителя
-        message = HelpDeskSmartMessage.objects.create(text=text, helpdesk=helpdesk,
-                                         creator="user", cr_date=datetime.now())
-        # проверка на УК
-        # message = Message.objects.create(text=text, helpdesk=helpdesk,
-        #                                          creator="company", cr_date=datetime.now())
+        message = AppealMessage.objects.create(
+            text=text,
+            appeal=appeal,
+            creator="user",
+            cr_date=datetime.now()
+        )
         message.save()
-    messages = helpdesk.helpdesksmartmessage_set.all()
+    messages = appeal.appealmessage_set.all()
     messages = list(messages)
     messages.reverse()
     context.update({
         "user": request.user,
-        "helpdesk": helpdesk,
-        "smartmessages": messages,
+        "helpdesk": appeal,
+        "appeal_messages": messages,
     })
-    return render(request, 'helpdesk.html', context)
+    return render(request, 'appeal.html', context)
 
 
-def cr_helpdesk_view(request):
+def cr_appeal_view(request):
     context = {}
     if request.method == 'POST':
         theme = request.POST.get('theme')
         inn = int(request.POST.get("inn"))
         company = Company.objects.filter(inn=inn)[0]
         if request.user.tenant:
-            helpdesk = HelpDesk(theme=theme, company=company,
-                                user=request.user, cr_date=datetime.now())
-            helpdesk.save()
+            appeal = Appeal(
+                theme=theme,
+                company=company,
+                user=request.user,
+                cr_date=datetime.now()
+            )
+            appeal.save()
         # if проверка на то что это представитель компании
-        return redirect('/helpdesk/' + str(helpdesk.id))
+        return redirect('/appeal/' + str(appeal.id))
     context.update({
         "user": request.user,
         "companies": Company.objects.all(),
         "is_tenant": True if request.user.tenant else False #-----------проверка на то является ли жителем------
     })
-    return render(request, 'cr_helpdesk.html', context)
+    return render(request, 'cr_appeal.html', context)
 
