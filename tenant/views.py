@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
 from .models import Company, House, Forum, Discussion, Comment, Tenant, HelpDesk, HelpDeskSmartMessage
-from datetime import datetime
+import datetime
 from django.contrib.auth.models import User
 
 
@@ -115,7 +115,7 @@ def discussion_view(request, id):
             text=text,
             discussion=discussion,
             author=request.user,
-            cr_date=datetime.now(),
+            cr_date=datetime.datetime.now(),
         )
         comment.save()
     comments = discussion.comment_set.all()
