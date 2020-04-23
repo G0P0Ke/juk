@@ -4,20 +4,21 @@
 
 
 
-<a href="{% url 'profile'%}"><button>Вернуться в профиль</button></a><br>
-<a>Сей диалог происходит между пользователем {{ user.username }} и компанией с инн {{ helpdesk.company.inn }}</a><br>
+<a href="{% url 'my_appeals'%}"><button>Вернуться ко всем обсуждениям</button></a><br>
+<a>Сей диалог происходит между пользователем {{ user.username }} и компанией с инн {{ appeal.company.inn }}</a><br>
 <br><br>
-<a>Тема сего обсуждения: {{ helpdesk.theme }}</a><br>
+<h3>Тема сего обсуждения: {{ appeal.theme }}</h3><br>
 
 <form method="POST">
     {% csrf_token %}
-    <input type="text" name="message" placeholder="Сообщение" style="width: 600px; margin-left: 0px; border-radius: 4px;"><br><br>
-    <button type="submit">Отправить</button>
 
-    {% for message in smartmessages %}
+    {% for message in appeal_messages %}
     <hr>
-    <p>{{ message.creator }}:  {{ message.text }}</p>
+    <h5>{{ message.creator }}:  {{ message.text }}</h5>
     {% endfor %}
+    <br><br>
+    <input type="text" name="message" placeholder="Сообщение" style="width: 600px; margin-left: 0px; border-radius: 4px;">
+    <button type="submit">Отправить</button>
 </form>
 
 

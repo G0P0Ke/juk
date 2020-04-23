@@ -36,6 +36,7 @@ urlpatterns = [
     #path('forum/discussion/<int:id>/thread/<int:thread_id>', tenant_views.thread, name="thread"),
     path('forum/<int:id>/cr_discussion', tenant_views.cr_discussion_view, name="cr_discussion"),
 
+    path('my_appeals', tenant_views.my_appeals_view, name="my_appeals"),
     path('appeal/<int:id>', tenant_views.appeal_view, name="appeal"),
     path('cr_appeal', tenant_views.cr_appeal_view, name="cr_appeal"),
 ]

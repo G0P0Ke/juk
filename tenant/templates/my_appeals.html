@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<a href="{% url 'profile'%}"><button>Вернуться в профиль</button></a>
+<a href="{% url 'cr_appeal' %}"><button>Создать обращение</button></a>
+<br><br>
+<hr>
+{% for appeal in user_appeals %}
+<a href="{% url 'appeal' id=appeal.id%}"><button>{{ appeal.theme }}</button></a>
+<hr>
+{% endfor %}
+
+
+
+
+
+{% endblock %}

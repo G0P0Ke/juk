@@ -23,7 +23,7 @@ def profile_view(request):
     #t = Tenant.objects.create(user=request.user, house=h)  # tmp
     #f = Forum.objects.create(house=h, categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое")#tmp
     #f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
-    request.user.tenant.house = h
+    #request.user.tenant.house = h
     return render(request, 'profile.html', context)
 
 
@@ -186,6 +186,17 @@ def thread(request, id, thread_id):
 
 
 @login_required
+def my_appeals_view(request):
+    context = {}
+    user_appeals = request.user.appeal_set.all()
+    context.update({
+        "user_appeals": user_appeals,
+
+    })
+    return render(request, 'my_appeals.html', context)
+
+
+@login_required
 def appeal_view(request, id):
     context = {}
     appeal = Appeal.objects.get(pk=id)
@@ -195,8 +206,8 @@ def appeal_view(request, id):
         message = AppealMessage.objects.create(
             text=text,
             appeal=appeal,
-            creator="user",
-            cr_date=datetime.now()
+            creator="tenant",
+            cr_date=datetime.datetime.now()
         )
         message.save()
     messages = appeal.appealmessage_set.all()
@@ -204,7 +215,7 @@ def appeal_view(request, id):
     messages.reverse()
     context.update({
         "user": request.user,
-        "helpdesk": appeal,
+        "appeal": appeal,
         "appeal_messages": messages,
     })
     return render(request, 'appeal.html', context)
@@ -214,17 +225,26 @@ def cr_appeal_view(request):
     context = {}
     if request.method == 'POST':
         theme = request.POST.get('theme')
-        inn = int(request.POST.get("inn"))
-        company = Company.objects.filter(inn=inn)[0]
         if request.user.tenant:
+            company = request.user.tenant.house.company
             appeal = Appeal(
                 theme=theme,
                 company=company,
                 user=request.user,
-                cr_date=datetime.now()
+                cr_date=datetime.datetime.now(),
             )
             appeal.save()
+            message = request.POST.get('first_appeal_message')
+            first_message = AppealMessage(
+                appeal=appeal,
+                text=message,
+                cr_date=datetime.datetime.now(),
+                creator="tenant"
+            )
+            first_message.save()
         # if проверка на то что это представитель компании
+        #
+        #
         return redirect('/appeal/' + str(appeal.id))
     context.update({
         "user": request.user,

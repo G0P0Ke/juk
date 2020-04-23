@@ -7,6 +7,10 @@
         <hr>
         <a href="{% url 'forum' id=user.tenant.house.forum.id%}"><button>Форум вашего дома</button></a>
         <a href="{% url 'forum' id=user.tenant.house.company.forum.id%}"><button>Форум управляющей компании вашего дома</button></a>
+
+<br><br><br>
+        <a href="{% url 'my_appeals' %}"><button>Мои обращения</button></a>
+<br><br>
         <hr>
         <a>Имя: {{ user.username }}</a>
         <br>
