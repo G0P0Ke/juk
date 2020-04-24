@@ -19,7 +19,7 @@ class House(models.Model):
     :param company: УК, которой принадлежит дом
     """
     address = models.CharField(
-        max_length=50
+        max_length=100
     )
     company = models.ForeignKey(
         Company,
