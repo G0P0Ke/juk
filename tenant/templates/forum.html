@@ -2,36 +2,94 @@
 
 {% block content %}
 
+<style>
+    a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+
+    .themes{
+    width:100%;
+    border: 1px solid #FFFFF;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 40px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+    }
 
 
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-error: #b00020;
+    }
+
+    .category {
+    width: 70%;
+    height: 60px;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    border: 0;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 20pt;
+    margin: 10px 15%;
+}
+</style>
 
 
 {% if house_forum %}
-    <h1>Этот форум принадлежит дому с адресом {{ house.address }}</h1>
-    <hr>
+
+
+    <p style="font-size: 20pt; text-align: center;">Это форум дома с адресом <br> {{ house.address }}</p>
 {% elif company_forum %}
-    <h1>этот форум принадлежит компании с инн {{ company.inn }}</h1>
-    <hr>
+    <h1>этот форум принадлежит компании с инн <br>{{ company.inn }}</h1>
+
+
 {% endif %}
-<a href="{% url 'cr_discussion' id=forum.id%}"><button>Создать обсуждение</button></a>
-<hr>
+
+
+<!--<button class="mdc-button mdc-button--raised">
+  <div class="mdc-elevation-overlay"></div>
+  <div class="mdc-button__ripple"></div>
+  <i class="material-icons mdc-button__icon" aria-hidden="true">favorite</i>
+  <span class="mdc-button__label">Font Icon</span>
+</button>-->
+
+
+<div class="themes">
+    <div>
+<p style="font-size: 25pt; margin-left: 15px; text-align:center">Обсуждения по темам:</p>
 {% for category in categories %}
-<h4 style="color: violet;">Категория: {{ category.name }}</h4>
-
-{% for discussion in category.list_of_discussions %}
-     <a href="{% url 'discussion' id=discussion.id%}"><button style="color:rgb(0, 178, 203)">{{ discussion.theme }}</button>    автор: {{discussion.author }}; дата создания: {{ discussion.cr_date }}</a><br>
+        <a href="{% url 'category' id=forum.id%}"> <button class="category ms-motion-slideUpIn $ms-motion-duration-4">
+    <p>{{ category.name }}</p>
+  </button>
+        </a>
+<!-- {% for discussion in category.list_of_discussions %}
+     <a href="{% url 'discussion' id=discussion.id%}"><button style="color:rgb(0, 178, 203)">{{ discussion.theme }}</button></a>
 <br>
+    <a href="{% url 'discussion' id=discussion.id%}"><button>{{ discussion.description }}</button></a>
+<br>
+<br>
+{% endfor %} -->
+
 {% endfor %}
 
-
-<hr>
-{% endfor %}
+</div>
 
 
+<div style="margin-top:50px; margin-left:30%;">
+<p style="font-size:15pt; color:#F25CA2;">Не нашли ответ на интересующий Вас вопрос?</p></div>
+<a href="{% url 'cr_discussion' id=forum.id%}">
+    <button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:30%; margin-left:35%">  <span class="mdc-button__ripple"></span>Создать обсуждение</button>
+</a>
 
-
-
-
-
+</div>
 
 {% endblock %}

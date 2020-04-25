@@ -16,6 +16,8 @@
         <h1 style="margin: 50px auto;">Редактирование профиля жильца</h1>
         <hr>
 
+        <a href="{% url 'profile'%}">Вернуться в профиль</a>
+
         <form method="POST">
                 {% csrf_token %}
                 <label for="username-id">Ваше имя:</label>

@@ -1,30 +1,182 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 {% extends 'base.html' %}
-
 {% block content %}
+
+<style>
+
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-surface: #0B9ED9;
+    --mdc-theme-error: #b00020;
+    }
+
+.forminput {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 80%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+}
+    .form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 70%;
+  max-height: 700px;
+  margin: 100px auto 100px;
+  box-sizing: border-box;
+  padding: 30px 0 70px 0;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.form textarea {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 80%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+  height: 120px;
+  resize: none;
+  overflow: auto;
+}
+
+.formtextarea {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 15px 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+  height: 120px;
+  resize: none;
+  overflow: auto;
+}
+
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14pt;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  margin: 20% 0 0 0;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+.demo-width-class {
+  width: 400px;
+}
+
+.shadow{
+border: 1px solid #FFFFF;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1)
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+    .comment {
+    max-height: 100px;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    border: 0;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 14pt;
+     white-space: normal;
+    overflow: hidden;
+    word-break: break-word;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+    .theme{
+    width:100%;
+    border: 1px solid #FFFFF;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    margin: 0 0 40px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+    }
+
+</style>
+
 
  <form action='' id="comment" method="post">
             {% csrf_token %}
+     <div class="theme">
                 <div class="col">
-                <div class="alert alert-primary" role="alert">
+                <div style="margin: 10px 20px;">
                 <h1>{{discussion.theme}}</h1>
                 </div>
                 </div>
                 <div class="col-1">
                 </div>
                 <div class="col 7">
-                <div class="alert alert-secondary" role="alert">
+                <div class="alert" role="alert">
                     <h3>{{discussion.description}}</h3>
                 </div>
                 </div>
-                <br>
-        <a href="{% url 'forum' id=discussion.forum.id%}"><button type="button" class="btn btn-primary btn-block">Вернуться на форум</button></a><br><br>
+     </div>
+
+     <div class="form-group row">
+                <div class="col-1">
+                </div>
+            <div class="col-11">
+                 <textarea name = "text" class="formtextarea" maxlength="200" id="text" placeholder="Напишите комментарий..."></textarea>
+            </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-1">
+                </div>
+                <div class="col-2">
+                    <input type="submit" class="mdc-button mdc-button--raised" type="submit" value="Отправить">
+                </div>
+                <a href="{% url 'forum' id=discussion.forum.id%}"><input class="mdc-button mdc-button--outlined" value="Вернуться на форум" type="button" style="float:right;"></a>
+     </div>
+
 {% for item in comments %}
 <div class="form-group row">
                  <div class="col-1">
                  </div>
                 <div class="col-1.5">
-                <div class="alert alert-info" role="alert">
+                <div class="alert shadow" style="background-color: #FFFFFF; color:#F25CA2;" role="alert">
                    <div align = "center"> {{item.author}} </div>
                 <div class="media">
                     <img src="http://file.mobilmusic.ru/0e/98/84/1467407-128.jpg"  align = "left" alt="...">
@@ -33,31 +185,17 @@
                 </div>
                 </div>
                 <div class="col-9">
-                <div class="alert alert-secondary" role="alert">
+                <div class="alert comment shadow" role="alert">
                 {{item.text}}
                 </div>
-                    <div align = "left"> <a href="http://127.0.0.1:8000/forum/discussion/{{ discussion.id }}/thread/{{ item.id }} "> Ответить </a></div>
-                    <div align = "right"> {{item.cr_date}} </div>
+                    <div style="float: left"> <a href="http://127.0.0.1:8000/forum/discussion/{{ discussion.id }}/thread/{{ item.id }} ">
+                        <input class="mdc-button" value="Ответить" type="button"> </a></div>
+                    <div style="float: right; color: #808080;"> {{item.cr_date}} </div>
                 </div>
 
     <div class="col-1">
                  </div>
 </div>
 {% endfor %}
-
-            <div class="form-group row">
-                <div class="col-1">
-                </div>
-            <div class="col-11">
-                 <input type="text"  name = "text" class="form-control form-control-lg" id="text" placeholder="Напишите комментарий..." required>
-            </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-1">
-                </div>
-                <div class="col-2">
-                    <input type="submit" class="btn btn-primary btn-block" value="Отправить">
-                </div>
-            </div>
         </form>
 {% endblock %}

@@ -147,8 +147,15 @@ def cr_discussion_view(request, id):
         description = request.POST.get('description')
         anonymous = request.POST.get('anonymous')
         anonymous = True if anonymous else False
-        discussion = Discussion(theme=theme, category=category, forum=Forum.objects.get(pk=id), description=description,
-                                author=request.user, cr_date=datetime.now(), anon_allowed=anonymous)
+        discussion = Discussion(
+            theme=theme,
+            category=category,
+            forum=Forum.objects.get(pk=id),
+            description=description,
+            author=request.user,
+            cr_date=datetime.datetime.now(),
+            anon_allowed=anonymous,
+        )
         discussion.save()
         return redirect('/forum/discussion/' + str(discussion.id))
     forum = Forum.objects.get(pk=id)
@@ -183,6 +190,21 @@ def thread(request, id, thread_id):
         id = r_com.id
         return redirect('thread', discussion.id, thread.id)
     return render(request, 'thread.html', context)
+
+
+def category_view(request, id):
+    context = {}
+    forum = Forum.objects.get(pk=id)
+    # request.user.id is not AnonymousUser:
+    categories = []
+    for c in forum.categories.split('|'):
+        categories.append(Category(c, Discussion.objects.filter(category=c, forum=forum)))
+    context.update({
+        "user": request.user,
+        "forum": forum,
+        "categories": categories,
+    })
+    return render(request, 'category.html', context)
 
 
 @login_required
