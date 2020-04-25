@@ -13,11 +13,11 @@ class Company(models.Model):
 
 class House(models.Model):
     """
-    Модель дома
+        Модель дома
 
-    :param address: Адрес дома
-    :param company: УК, которой принадлежит дом
-    """
+        :param address: Адрес дома
+        :param company: УК, которой принадлежит дом
+        """
     address = models.CharField(
         max_length=100
     )
@@ -29,11 +29,11 @@ class House(models.Model):
 
 class Tenant(models.Model):
     """
-    Модель жильца
+        Модель жильца
 
-    :param user: Пользователь
-    :param house: дом проживания пользователя
-    """
+        :param user: Пользователь
+        :param house: дом проживания пользователя
+        """
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE
@@ -46,12 +46,12 @@ class Tenant(models.Model):
 
 class Forum(models.Model):
     """
-    Модель форума
+        Модель форума
 
-    :param house: Дом, которому принадлежит форум (или)
-    :param company: Компания, которой принадлежит форум (или)
-    :param categories: Категории в форуме
-    """
+        :param house: Дом, которому принадлежит форум (или)
+        :param company: Компания, которой принадлежит форум (или)
+        :param categories: Категории в форуме
+        """
     house = models.OneToOneField(
         to=House,
         null=True,
@@ -72,16 +72,16 @@ class Forum(models.Model):
 
 class Discussion(models.Model):
     """
-    Модель обсуждения
+        Модель обсуждения
 
-    :param theme: Тема обсуждения
-    :param category: Категория обсуждения
-    :param discription: Описание обсуждения
-    :param forum: Форум, которому принадлежит обсуждение
-    :param author: Автор обсуждения
-    :param cr_date: Дата создания обсуждения
-    :param anon_allowed: Аноимное ли обсуждение
-    """
+        :param theme: Тема обсуждения
+        :param category: Категория обсуждения
+        :param discription: Описание обсуждения
+        :param forum: Форум, которому принадлежит обсуждение
+        :param author: Автор обсуждения
+        :param cr_date: Дата создания обсуждения
+        :param anon_allowed: Аноимное ли обсуждение
+        """
     theme = models.TextField()
     category = models.TextField()
     description = models.TextField()
@@ -100,13 +100,13 @@ class Discussion(models.Model):
 
 class Comment(models.Model):
     """
-    Модель комментария
+        Модель комментария
 
-    :param text: Текст комментария
-    :param discussion: Обсуждение, которому принадлежит комментарий
-    :param author: Автор комментария
-    :param cr_date: Дата создания комментария
-    """
+        :param text: Текст комментария
+        :param discussion: Обсуждение, которому принадлежит комментарий
+        :param author: Автор комментария
+        :param cr_date: Дата создания комментария
+        """
     text = models.TextField()
     discussion = models.ForeignKey(
         to=Discussion,
@@ -125,6 +125,14 @@ class Comment(models.Model):
 
 
 class Appeal(models.Model):
+    """
+        Модель обращения
+
+        :param theme: Тема обращения
+        :param user: житель обращения
+        :param company: Компания обращения
+        :param cr_date: Дата создания обращения
+        """
     theme = models.TextField()
     user = models.ForeignKey(
         to=User,
@@ -140,6 +148,14 @@ class Appeal(models.Model):
 
 
 class AppealMessage(models.Model):
+    """
+        Модель обращения
+
+        :param text: Текст сообщения
+        :param appeal: обращение сообщения
+        :param creator: Создатель ("company" или "tenant")
+        :param cr_date: Дата создания сообщения
+        """
     text = models.TextField()
     appeal = models.ForeignKey(
         to=Appeal,
