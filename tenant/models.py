@@ -165,3 +165,22 @@ class AppealMessage(models.Model):
         default="tenant"
     )
     cr_date = models.DateTimeField()
+
+
+class Task(models.Model):
+    """
+    Модель задания для волонтёра
+
+    :param description: Описание задания
+    :param task: Сам текст задания
+    :param author: Автор задания
+    :param cr_date: Дата создания задания
+    :param status: Статус выполнения задания
+    :param address: Корпус, этаж и номер квартиры дающего задание
+    """
+    description = models.TextField(max_length=20)
+    task = models.TextField(max_length=100)
+    author = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    cr_date = models.DateTimeField(auto_now=True)
+    status = models.TextField(max_length=20)
+    address = models.TextField(max_length=20)

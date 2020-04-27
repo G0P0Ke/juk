@@ -41,4 +41,6 @@ urlpatterns = [
     path('cr_appeal', tenant_views.cr_appeal_view, name="cr_appeal"),   
 
     path('forum/<int:id>/category', tenant_views.category_view, name="category"),
+
+    path('vol/help/cr_task', tenant_views.cr_task_view, name="cr_task"),
 ]

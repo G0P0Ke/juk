@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
-from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage
+from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task
 import datetime
 from django.contrib.auth.models import User
 
@@ -18,12 +18,12 @@ def profile_view(request):
     context = {
         "user": request.user,
     }
-    #c = Company.objects.create(inn=666) #tmp
-    #h = House.objects.create(address="Улица Крылатские Холмы 15к2", company=c)#tmp
-    #t = Tenant.objects.create(user=request.user, house=h)  # tmp
-    #f = Forum.objects.create(house=h, categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое")#tmp
-    #f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
-    #request.user.tenant.house = h
+    # c = Company.objects.create(inn=666) #tmp
+    # h = House.objects.create(address="Улица Крылатские Холмы 15к2", company=c)#tmp
+    # t = Tenant.objects.create(user=request.user, house=h)  # tmp
+    # f = Forum.objects.create(house=h, categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое")#tmp
+    # f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
+    # request.user.tenant.house = h
     return render(request, 'profile.html', context)
 
 
@@ -57,6 +57,7 @@ class Category:
     """
     Служебный класс для передачи данных в context
     """
+
     def __init__(self, name, list_of_discussions):
         """
         :param name: название категории
@@ -271,7 +272,36 @@ def cr_appeal_view(request):
     context.update({
         "user": request.user,
         "companies": Company.objects.all(),
-        "is_tenant": True if request.user.tenant else False #-----------проверка на то является ли жителем------
+        "is_tenant": True if request.user.tenant else False  # -----------проверка на то является ли жителем------
     })
     return render(request, 'cr_appeal.html', context)
 
+
+@login_required
+def cr_task_view(request):
+    """
+    Создание задания для волонтёра
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
+    context = {
+        "ready": False,
+    }
+    if request.method == 'POST':
+        description = request.POST.get('description')
+        task = request.POST.get('task')
+        address = request.POST.get('address')
+        task = Task(
+            task=task,
+            description=description,
+            author=request.user,
+            address=address,
+            status='opened',
+        )
+        context.update({
+            "ready": True,
+        })
+        task.save()
+    return render(request, 'cr_task.html', context)
