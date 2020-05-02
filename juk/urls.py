@@ -41,7 +41,7 @@ urlpatterns = [
     path('appeal/<int:id>', tenant_views.appeal_view, name="appeal"),
     path('cr_appeal', tenant_views.cr_appeal_view, name="cr_appeal"),
 
-    path('vol/test', tenant_views.test_view, name="test"),
+    #path('vol/test', tenant_views.test_view, name="test"),
     path('vol/volunteer', tenant_views.volunteer_view, name="volunteer"),
     path('vol/help', tenant_views.help_view, name="help"),
     path('vol/help/cr_task', tenant_views.cr_task_view, name="cr_task"),

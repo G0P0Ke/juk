@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from tenant.models import Company
 
 
 class News(models.Model):
