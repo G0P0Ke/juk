@@ -4,9 +4,9 @@
         {% load static %}
 
         <h1 style="margin: 50px auto;">Профиль жильца</h1>
-        <hr>
+<hr>
         <a>Имя: {{ user.username }}</a>
-        <br>
+<br>
         {% if homeless %}
 <br>
         <a>Вы не подключены к дому, для дальнеешего пользование сервисом, пожалуйста, выберите свой дом в редактировании профиля</a>
@@ -14,14 +14,15 @@
         {% else %}
         <a href="{% url 'forum' id=user.tenant.house.forum.id%}"><button>Форум вашего дома</button></a>
         <a href="{% url 'forum' id=user.tenant.house.company.forum.id%}"><button>Форум управляющей компании вашего дома</button></a>
-        <a href="{% url 'volunteer' %}"><button>Страница для волонтерствования</button></a>
+       <br> <a href="{% url 'volunteer' %}"><button>Страница для волонтерствования</button></a>
+        <a href="{% url 'help' %}"><button>Не для волонтеров</button></a>
 
 <br><br><br>
         <a href="{% url 'my_appeals' %}"><button>Мои обращения</button></a>
 <br><br>
         <hr>
         <a>Адрес: {{ user.tenant.house.address }}</a>
-        <br>
+<br>
         {% endif %}
         <a href="{% url 'redact_profile'%}"><button>Редактирование профиля</button></a>
 
