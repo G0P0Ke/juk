@@ -13,7 +13,7 @@
         <br>
         <input type="submit" value="Создать">
     </form>
-    <a href="{% url 'profile'%}"><input value="Вернуться" type="button"></a>
+    <a href="{% url 'profile' username=user.username%}"><input value="Вернуться" type="button"></a>
 </fieldset>
 
 

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<h1>Задания для выполнения (компания с инн {{ company.inn }})</h1>
+{% for task in tasks %}
+
+    <a href="{% url 'task' id=task.id %}"> <button>{{ task.description }}</button></a><br><br>
+
+{% endfor %}
+
+
+{% endblock %}

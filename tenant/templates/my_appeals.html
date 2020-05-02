@@ -4,7 +4,7 @@
 
 
 
-<a href="{% url 'profile'%}"><button>Вернуться в профиль</button></a>
+<a href="{% url 'profile' username=user.username %}"><button>Вернуться в профиль</button></a>
 <a href="{% url 'cr_appeal' %}"><button>Создать обращение</button></a>
 <br><br>
 <hr>

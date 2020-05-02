@@ -28,19 +28,22 @@ urlpatterns = [
     path('accounts/signup/', common_views.signup_view, name='signup'),
     path('news/', manager_views.news_page, name='news'),
 
-    path('profile/', tenant_views.profile_view, name='profile'),
-    path('profile/redact_profile', tenant_views.redact_profile_view, name='redact_profile'),
+    path('profile/<str:username>', tenant_views.profile_view, name='profile'),
+    path('redact_profile', tenant_views.redact_profile_view, name='redact_profile'),
 
     path('forum/<int:id>', tenant_views.forum_view, name="forum"),
     path('forum/discussion/<int:id>', tenant_views.discussion_view, name="discussion"),
     path('forum/discussion/<int:id>/thread/<int:thread_id>', tenant_views.thread, name="thread"),
     path('forum/<int:id>/cr_discussion', tenant_views.cr_discussion_view, name="cr_discussion"),
+    path('forum/<int:id>/category/<str:name>', tenant_views.category_view, name="category"),
 
     path('my_appeals', tenant_views.my_appeals_view, name="my_appeals"),
     path('appeal/<int:id>', tenant_views.appeal_view, name="appeal"),
-    path('cr_appeal', tenant_views.cr_appeal_view, name="cr_appeal"),   
+    path('cr_appeal', tenant_views.cr_appeal_view, name="cr_appeal"),
 
-    path('forum/<int:id>/category', tenant_views.category_view, name="category"),
-
+    path('vol/test', tenant_views.test_view, name="test"),
+    path('vol/volunteer', tenant_views.volunteer_view, name="volunteer"),
+    path('vol/help', tenant_views.help_view, name="help"),
     path('vol/help/cr_task', tenant_views.cr_task_view, name="cr_task"),
+    path('vol/task/<int:id>', tenant_views.task_view, name="task"),
 ]

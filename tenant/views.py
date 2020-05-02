@@ -5,26 +5,33 @@ from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, 
 import datetime
 from django.contrib.auth.models import User
 
+from django.http import Http404
 
-@login_required
-def profile_view(request):
+
+def profile_view(request, username):
     """
     Профиль пользователя
 
     :param request: объект с деталями запроса.
-    :type request: :class:`django.http.HttpRequest`
+    :param username: имя пользователя.
     :return: объект ответа сервера с HTML-кодом внутри
     """
-    context = {
-        "user": request.user,
-    }
-    # c = Company.objects.create(inn=666) #tmp
-    # h = House.objects.create(address="Улица Крылатские Холмы 15к2", company=c)#tmp
-    # t = Tenant.objects.create(user=request.user, house=h)  # tmp
-    # f = Forum.objects.create(house=h, categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое")#tmp
-    # f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
-    # request.user.tenant.house = h
-    return render(request, 'profile.html', context)
+    try:
+        user = User.objects.get(username=username)
+        context = {
+            "user": user,
+            "homeless": request.user.tenant.house is None,
+        }
+        print(context.get("homeless"))
+        # c = Company.objects.create(inn=666) #tmp
+        # h = House.objects.create(address="Улица Крылатские Холмы 15к2", company=c)#tmp
+        # t = Tenant.objects.create(user=request.user, house=h)  # tmp
+        # f = Forum.objects.create(house=h, categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое")#tmp
+        # f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
+        # request.user.tenant.house = h
+        return render(request, 'profile.html', context)
+    except User.DoesNotExist:
+        raise Http404
 
 
 @login_required
@@ -37,16 +44,16 @@ def redact_profile_view(request):
         address = request.POST.get('address')
         request.user.username = username
         if House.objects.filter(address=address).exists():
-            request.user.tenant.house = House.objects.filter(address=address)[0]
+            request.user.tenant.house = House.objects.get(address=address)
         else:
             context.update({
                 "house_doesnt_exist": True,
                 "user": request.user,
             })
             return render(request, 'redact_profile.html', context)
-
-        request.user.save()
-        return redirect('/profile')
+        print(request.user.username)
+        request.user.tenant.save()
+        return redirect('profile/' + str(request.user.username))
     context.update({
         "user": request.user,
     })
@@ -57,14 +64,14 @@ class Category:
     """
     Служебный класс для передачи данных в context
     """
-
-    def __init__(self, name, list_of_discussions):
+    def __init__(self, name, list_of_discussions, more):
         """
         :param name: название категории
         :param list_of_discussions: список обсуждений, относящийся к нему
         """
         self.name = name
         self.list_of_discussions = list_of_discussions
+        self.more = more
 
 
 def forum_view(request, id):
@@ -78,7 +85,7 @@ def forum_view(request, id):
     """
     context = {}
     forum = Forum.objects.get(pk=id)
-    owner = ("house" if Forum.objects.get(pk=id).house else "company")
+    owner = ("house" if forum.house else "company")
     # request.user.id is not AnonymousUser:
     if owner == "house":
         context.update({"house": forum.house, })
@@ -86,7 +93,10 @@ def forum_view(request, id):
         context.update({"company": forum.company, })
     categories = []
     for c in forum.categories.split('|'):
-        categories.append(Category(c, Discussion.objects.filter(category=c, forum=forum)))
+        discussions = list(Discussion.objects.filter(category=c, forum=forum))
+        discussions.reverse()
+        category = Category(c, discussions[:2], len(discussions) > 2)
+        categories.append(category)
     context.update({
         "user": request.user,
         "forum": forum,
@@ -95,6 +105,19 @@ def forum_view(request, id):
         "company_forum": (True if owner == "company" else False),
     })
     return render(request, 'forum.html', context)
+
+
+def category_view(request, id, name):
+    context = {}
+    forum = Forum.objects.get(pk=id)
+    discussions = list(Discussion.objects.filter(category=name, forum=forum))
+    discussions.reverse()
+    context.update({
+        "user": request.user,
+        "forum": forum,
+        "discussions": discussions,
+    })
+    return render(request, 'category.html', context)
 
 
 def discussion_view(request, id):
@@ -193,21 +216,6 @@ def thread(request, id, thread_id):
     return render(request, 'thread.html', context)
 
 
-def category_view(request, id):
-    context = {}
-    forum = Forum.objects.get(pk=id)
-    # request.user.id is not AnonymousUser:
-    categories = []
-    for c in forum.categories.split('|'):
-        categories.append(Category(c, Discussion.objects.filter(category=c, forum=forum)))
-    context.update({
-        "user": request.user,
-        "forum": forum,
-        "categories": categories,
-    })
-    return render(request, 'category.html', context)
-
-
 @login_required
 def my_appeals_view(request):
     context = {}
@@ -244,6 +252,7 @@ def appeal_view(request, id):
     return render(request, 'appeal.html', context)
 
 
+@login_required
 def cr_appeal_view(request):
     context = {}
     if request.method == 'POST':
@@ -286,9 +295,7 @@ def cr_task_view(request):
     :type request: :class:`django.http.HttpRequest`
     :return: объект ответа сервера с HTML-кодом внутри
     """
-    context = {
-        "ready": False,
-    }
+    context = {}
     if request.method == 'POST':
         description = request.POST.get('description')
         task = request.POST.get('task')
@@ -296,12 +303,61 @@ def cr_task_view(request):
         task = Task(
             task=task,
             description=description,
-            author=request.user,
+            author=request.user.tenant,
             address=address,
             status='opened',
+            cr_date=datetime.datetime.now(),
         )
-        context.update({
-            "ready": True,
-        })
         task.save()
+        return redirect('/vol/task/' + str(task.id))
+
+    context.update({
+        "user": request.user,
+    })
     return render(request, 'cr_task.html', context)
+
+
+@login_required
+def volunteer_view(request):
+    tasks = []
+    company = request.user.tenant.house.company
+    # request.user.manager.company
+    for task in Task.objects.all():
+        if task.author.house.company == company and task.status == "opened":
+            tasks.append(task)
+    context = {
+        "tasks": tasks,
+        "company": company,
+    }
+    return render(request, 'volunteer.html', context)
+
+
+@login_required
+def help_view(request):
+    """
+    Задания, созданные жителем
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
+    tasks = Task.objects.filter(author=request.user.tenant)
+    context = {
+        "tasks": tasks,
+    }
+    return render(request, 'help.html', context)
+
+
+def task_view(request, id):
+    task = Task.objects.get(pk=id)
+    my_task = (True if request.user.tenant == task.author else False)
+    if request.method == 'POST':
+        status = request.POST.get('status')
+        task.status = status
+        task.save()
+    context = {
+        "user": request.user,
+        "task": Task.objects.get(pk=id),
+        "my_task": my_task
+    }
+    return render(request, 'task.html', context)

@@ -33,14 +33,25 @@ class Tenant(models.Model):
 
         :param user: Пользователь
         :param house: дом проживания пользователя
+        :param is_vol: является ли житель волонтёром
+        :param test_date: Время последнего прохождения (None eсли попыток не было)
         """
     user = models.OneToOneField(
         User,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
     )
     house = models.ForeignKey(
         House,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+    is_vol = models.BooleanField(
+        default=False,
+    )
+    test_date = models.DateTimeField(
+        null=True,
+        default=None,
     )
 
 
@@ -120,7 +131,8 @@ class Comment(models.Model):
     thread = models.ForeignKey(
         to='Comment',
         on_delete=models.CASCADE,
-        default=None, null=True
+        default=None,
+        null=True,
     )
 
 
@@ -173,14 +185,35 @@ class Task(models.Model):
 
     :param description: Описание задания
     :param task: Сам текст задания
-    :param author: Автор задания
+    :param author: Автор задания (Житель)
+    :param volunteer: Исполнитель задания (Пользователь)
     :param cr_date: Дата создания задания
-    :param status: Статус выполнения задания
+    :param status: Статус выполнения задания ('opened' или 'taken' или 'done')
     :param address: Корпус, этаж и номер квартиры дающего задание
     """
-    description = models.TextField(max_length=20)
-    task = models.TextField(max_length=100)
-    author = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    cr_date = models.DateTimeField(auto_now=True)
-    status = models.TextField(max_length=20)
-    address = models.TextField(max_length=20)
+    description = models.TextField(
+        max_length=20,
+    )
+    task = models.TextField(
+        max_length=100,
+    )
+    author = models.ForeignKey(
+        to=Tenant,
+        on_delete=models.CASCADE,
+    )
+    volunteer = models.ForeignKey(
+        to=User,
+        null=True,
+        blank=True,
+        default=None,
+        on_delete=models.CASCADE,
+    )
+    cr_date = models.DateTimeField(
+        auto_now=True
+    )
+    status = models.TextField(
+        max_length=10
+    )
+    address = models.TextField(
+        max_length=100
+    )

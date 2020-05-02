@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+    <a>Описание задания: {{ task.description }}</a><br><br>
+
+    <a>Содержание задания: {{ task.task }}</a><br><br>
+
+    <a>Точный адрес задания: {{ task.address }}</a><br><br>
+
+    <a>Статус задания: {{ task.status }}</a><br><br>
+
+    <a>Автор: {{ task.author.user.username }}</a><br><br>
+
+<form method="POST">
+    {% csrf_token %}
+{% if my_task %}
+    <input type="hidden" value="done" name="status" style="float:left; margin: 0 0 0 10%; width: 39%;">
+    <input type="submit" value="Закрыть задание" style="float:left; margin: 0 0 0 10%; width: 39%;">
+{% else %}
+    <input type="hidden" value="taken" name="status" style="float:left; margin: 0 0 0 10%; width: 39%;">
+    <input type="submit" value="Взяться за задание" style="float:left; margin: 0 0 0 10%; width: 39%;">
+{% endif %}
+</form>
+
+    <a href="{% url 'volunteer' %}"><input  value="Вернуться" type="button"></a>
+
+
+{% endblock %}

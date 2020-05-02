@@ -44,7 +44,7 @@
 <div>
     <a href="{% url 'forum' id=forum.id%}"><input class="mdc-button" value="Вернуться" type="button" style="margin: 0 30%; width: 40%;"></a>
 
-    {% for discussion in category.list_of_discussions %}
+    {% for discussion in discussions %}
     <a href="{% url 'discussion' id=discussion.id%}"><button class="category ms-motion-slideUpIn $ms-motion-duration-4"><span style="float:left">{{ discussion.theme }}</span><br>
         <span style="float:left; font-size:13pt">{{ discussion.description }}</span>
     </button></a>

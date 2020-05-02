@@ -14,15 +14,15 @@
                     </div>
                     <li class="nav-item active"><a class="nav-link" href="{% url 'logout' %}">Выйти</a></li>
                 </ul>
+                <ul class="navbar-nav mr-right">
+                    <li class="nav-item active"><a class="nav-link" href="{% url 'profile' username=request.user.username %}">Профиль</a></li>
+                </ul>
                 {% else %}
                 <ul class="navbar-nav mr-right">
                     <li class="nav-item active"><a class="nav-link" href="{% url 'login' %}">Войти</a></li>
                 </ul>
                 {% endif %}
                 {% endif %}
-                <ul class="navbar-nav mr-right">
-                    <li class="nav-item active"><a class="nav-link" href="{% url 'profile' %}">Профиль</a></li>
-                </ul>
             </div>
         </nav>
         {% endblock %}

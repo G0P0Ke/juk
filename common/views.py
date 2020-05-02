@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, SignUpForm
 
+from tenant.models import Tenant, Company, House
+from manager.models import Manager
+
 
 def _get_base_context(title, sign_in_button=True):
     context = {
@@ -53,6 +56,15 @@ def signup_view(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
+
+            role = request.POST.get('role')
+            if role == "tenant":
+                tenant = Tenant.objects.create(user=user)
+                tenant.save()
+            elif role == "manager":
+                manager = Manager.objects.create(user=user)
+                manager.save()
+
             return redirect('/')
         else:
             context.update({
