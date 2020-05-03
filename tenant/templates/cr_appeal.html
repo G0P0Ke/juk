@@ -2,20 +2,74 @@
 
 {% block content %}
 
+<style>
+
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    }
+
+.forminput {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 80%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+}
+    .form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 70%;
+  max-height: 700px;
+  margin: 100px auto 100px;
+  box-sizing: border-box;
+  padding: 30px 0 70px 0;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.form textarea {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 80%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+  height: 120px;
+  resize: none;
+  overflow: auto;
+}
+
+.demo-width-class {
+  width: 400px;
+}
 
 
-<fieldset style="padding: 10px; border: 2px black solid;">
+
+
+
+
+</style>
+<div class="form ms-motion-slideUpIn $ms-motion-duration-4">
     <form method="POST">
     {% csrf_token %}
-        <input type="text" name="theme" maxlength="20" placeholder="Тема" required><br><br>
-        <br>
-        <input type="text" name="first_appeal_message" placeholder="Сообщение" required><br><br>
-        <br>
-        <input type="submit" value="Создать">
+        <input class="forminput" type="text" name="theme" maxlength="30" placeholder="Тема" required><br><br>
+        <textarea name="first_appeal_message" maxlength="100" placeholder="Сообщение" required></textarea><br><br>
+        <input class="mdc-button mdc-button--raised" type="submit" value="Создать" style="float:left; margin: 0 0 0 10%; width: 39%;">
     </form>
-    <a href="{% url 'profile' username=user.username%}"><input value="Вернуться" type="button"></a>
-</fieldset>
-
+        <a href="{% url 'profile'%}"><input class="mdc-button mdc-button--outlined" value="Вернуться" type="button" style="float:right; margin: 0 10% 0 0; width: 39%;"></a>
+</div>
 
 
 

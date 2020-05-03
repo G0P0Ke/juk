@@ -241,6 +241,7 @@ def appeal_view(request, id):
             cr_date=datetime.datetime.now()
         )
         message.save()
+        return redirect('/appeal/' + str(appeal.id))
     messages = appeal.appealmessage_set.all()
     messages = list(messages)
     messages.reverse()
