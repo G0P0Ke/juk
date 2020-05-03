@@ -62,7 +62,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            'templates',
+            'common/templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -133,3 +133,9 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_REDIRECT_URL = '/'
+
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = 'juk_feedback_mail@mail.ru'
+EMAIL_HOST_PASSWORD = 'feedback_mail_pass'
+EMAIL_USE_TLS = True

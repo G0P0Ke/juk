@@ -22,13 +22,20 @@ import tenant.views as tenant_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('', common_views.index_view, name='index'),
+
     path('accounts/login/', common_views.login_view, name='login'),
     path('accounts/logout/', common_views.logout_view, name='logout'),
     path('accounts/signup/', common_views.signup_view, name='signup'),
-    path('news/', manager_views.news_page, name='news'),
+    
+    path('common/feedback/', common_views.feedback, name='feedback'),
+
+    path('manager/news/', manager_views.news_page, name='news'),
+    path('manager/news/create/', manager_views.create_news_page, name='create_news'),
 
     path('profile/<str:username>', tenant_views.profile_view, name='profile'),
+    #path('tenant/profile/', tenant_views.profile, name='profile'),
     path('redact_profile', tenant_views.redact_profile_view, name='redact_profile'),
 
     path('forum/<int:id>', tenant_views.forum_view, name="forum"),

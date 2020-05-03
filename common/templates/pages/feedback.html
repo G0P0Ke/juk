@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container col-sm-4"
+     style="background-color: #e8e9e9; border-radius: 10px; padding: 20px 5px 30px 5px; margin 20px 20px 20px 20px">
+    <div class="row h-100 justify-content-center align-items-center">
+        <form method="post" class="col-sm-9 login">
+
+            {% csrf_token %}
+            {% if not error == None %}
+            <div style="color: red;">{{ error }}</div>
+            {% endif %}
+
+            <h2>Отправьте отзыв:</h2>
+            <div class="form-group">
+                <input type="text" class="form-control" name="subject" placeholder="Тема"/>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" name="message" placeholder="Содержание"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" name="user_mail" placeholder="Ваш e-mail"/>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-dark">Отправить</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

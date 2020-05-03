@@ -8,6 +8,32 @@ from django.contrib.auth.models import User
 from django.http import Http404
 
 
+# from tenant.forms import EditProfileForm
+
+# ЭТО ПРОФИЛЬ ОТ COMMON
+# @login_required
+# def profile(request):
+#    context = {
+#        'user': request.user,
+#    }
+#    if request.method == 'POST':
+#        editprof = EditProfileForm(request.POST, instance=request.user)
+#        if editprof.is_valid():
+#            editprof.save()
+#            context.update({
+#                'editprof': editprof,
+#             })
+#         return redirect('/main/profile')
+#     else:
+#         editprof = EditProfileForm(instance=request.user)
+#
+#     context.update({
+#         'editprof': editprof,
+#     })
+#
+#     return render(request, 'pages/tenant/profile.html', context)
+
+
 def profile_view(request, username):
     """
     Профиль пользователя

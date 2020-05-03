@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, SignUpForm
+from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from .forms import FeedbackForm
 
 from tenant.models import Tenant, Company, House
 from manager.models import Manager
@@ -81,3 +85,43 @@ def signup_view(request):
 def logout_view(request):
     logout(request)
     return redirect('/')
+
+
+def feedback(request):
+    if request.method == "POST":
+        form = FeedbackForm(request.POST)
+
+        if form.is_valid():
+            subject = str(form.data['subject'])
+            message = str(form.data['message'])
+            user_mail = str(form.data['user_mail'])
+            mail = 'juk_feedback_mail@mail.ru'
+            subject_back = 'Отзывы о JUK'
+            message_back = 'Ваш отзыв успешно отправлен'
+
+            context = {
+                'subject': subject,
+                'message': message,
+                'user_mail': user_mail,
+
+            }
+
+            message = 'Отправитель: ' + user_mail + '\n'\
+                      + '\n' + message
+
+            # TODO: оформление при помощи django forms
+            # TODO: валидация входных параметров
+
+            message = 'Отправитель: ' + user_mail + '\n' + '\n' + message
+
+            # TODO: вынести отправку письма в отдельный субпроцесс (при помощи celery)
+            send_mail(subject, message, mail,
+                      [mail], fail_silently=False)
+
+            send_mail(subject_back, message_back, mail,
+                      [user_mail], fail_silently=False)
+
+        else:
+            pass
+
+    return render(request, 'pages/feedback.html')
