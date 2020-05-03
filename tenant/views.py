@@ -49,13 +49,13 @@ def profile_view(request, username):
             "homeless": request.user.tenant.house is None,
         }
         print(context.get("homeless"))
-        # c = Company.objects.create(inn=666) #tmp
+        # c = Company.objects.create(inn=666) #tmp    common/templates/pages/tenant/
         # h = House.objects.create(address="Улица Крылатские Холмы 15к2", company=c)#tmp
         # t = Tenant.objects.create(user=request.user, house=h)  # tmp
         # f = Forum.objects.create(house=h, categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое")#tmp
         # f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
         # request.user.tenant.house = h
-        return render(request, 'profile.html', context)
+        return render(request, 'pages/tenant/profile.html', context)
     except User.DoesNotExist:
         raise Http404
 
@@ -83,7 +83,7 @@ def redact_profile_view(request):
     context.update({
         "user": request.user,
     })
-    return render(request, 'redact_profile.html', context)
+    return render(request, 'pages/tenant/redact_profile.html', context)
 
 
 class Category:
@@ -130,7 +130,7 @@ def forum_view(request, id):
         "house_forum": (True if owner == "house" else False),
         "company_forum": (True if owner == "company" else False),
     })
-    return render(request, 'forum.html', context)
+    return render(request, 'pages/tenant/forum.html', context)
 
 
 def category_view(request, id, name):
@@ -143,7 +143,7 @@ def category_view(request, id, name):
         "forum": forum,
         "discussions": discussions,
     })
-    return render(request, 'category.html', context)
+    return render(request, 'pages/tenant/category.html', context)
 
 
 def discussion_view(request, id):
@@ -176,7 +176,7 @@ def discussion_view(request, id):
         "discussion": discussion,
         "comments": comments,
     })
-    return render(request, 'discussion.html', context)
+    return render(request, 'pages/tenant/discussion.html', context)
 
 
 @login_required
@@ -214,7 +214,7 @@ def cr_discussion_view(request, id):
         "categories": categories,
         "forum": forum,
     })
-    return render(request, 'cr_discussion.html', context)
+    return render(request, 'pages/tenant/cr_discussion.html', context)
 
 
 def thread(request, id, thread_id):
@@ -239,7 +239,7 @@ def thread(request, id, thread_id):
         r_com.save()
         id = r_com.id
         return redirect('thread', discussion.id, thread.id)
-    return render(request, 'thread.html', context)
+    return render(request, 'pages/tenant/thread.html', context)
 
 
 @login_required
@@ -250,7 +250,7 @@ def my_appeals_view(request):
         "user_appeals": user_appeals,
 
     })
-    return render(request, 'my_appeals.html', context)
+    return render(request, 'pages/tenant/my_appeals.html', context)
 
 
 @login_required
@@ -276,7 +276,7 @@ def appeal_view(request, id):
         "appeal": appeal,
         "appeal_messages": messages,
     })
-    return render(request, 'appeal.html', context)
+    return render(request, 'pages/tenant/appeal.html', context)
 
 
 @login_required
@@ -310,7 +310,7 @@ def cr_appeal_view(request):
         "companies": Company.objects.all(),
         "is_tenant": True if request.user.tenant else False  # -----------проверка на то является ли жителем------
     })
-    return render(request, 'cr_appeal.html', context)
+    return render(request, 'pages/tenant/cr_appeal.html', context)
 
 
 @login_required
@@ -341,7 +341,7 @@ def cr_task_view(request):
     context.update({
         "user": request.user,
     })
-    return render(request, 'cr_task.html', context)
+    return render(request, 'pages/tenant/cr_task.html', context)
 
 
 @login_required
@@ -364,7 +364,7 @@ def volunteer_view(request):
         "closed_tasks": closed_tasks,
         "company": company,
     }
-    return render(request, 'volunteer.html', context)
+    return render(request, 'pages/tenant/volunteer.html', context)
 
 
 @login_required
@@ -380,7 +380,7 @@ def help_view(request):
     context = {
         "tasks": tasks,
     }
-    return render(request, 'help.html', context)
+    return render(request, 'pages/tenant/help.html', context)
 
 
 def task_view(request, id):
@@ -397,4 +397,4 @@ def task_view(request, id):
         "task": task,
         "my_task": my_task
     }
-    return render(request, 'task.html', context)
+    return render(request, 'pages/tenant/task.html', context)
