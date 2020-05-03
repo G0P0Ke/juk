@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    }
+
+.forminput {
+  font-family: "Roboto", sans-serif;
+  outline: 1px;
+  min-width: 30%;
+  border: 1px;
+  border-color: #000000;
+  margin: 5px 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  width: fit-content;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+}
+    .form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 70%;
+  max-height: 700px;
+  margin: 100px auto 100px;
+  box-sizing: border-box;
+  padding: 30px 0 70px 0;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.formtextarea {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 5px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+  height: 120px;
+  resize: none;
+  overflow: auto;
+}
+
+.demo-width-class {
+  width: 400px;
+}
+
+
+  a {
+    text-decoration: none;
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+
+
+
+</style>
+<a href="{% url 'my_appeals'%}"><button class="mdc-button mdc-button--outlined" style="float:right"><span class="mdc-button__ripple"></span>Вернуться ко всем обсуждениям</button></a>
+
+<h3>Тема обсуждения: {{ appeal.theme }}</h3>
+<p>Этот диалог происходит между пользователем {{ user.username }} и компанией с инн {{ appeal.company.inn }}</p>
+<form method="POST">
+    {% csrf_token %}
+
+
+    <br><br>
+    <div style="margin: 0 0 10px;">
+    <textarea class="formtextarea" name="message" minlength="1" placeholder="Сообщение"></textarea>
+    <button class="mdc-button" type="submit" style=" width:100%;"><span class="mdc-button__ripple"></span>Отправить</button>
+    </div>
+<br><br>
+<div>
+    {% for message in appeal_messages %}
+    {% if message.creator == "tenant" %}
+    <div class="forminput" style="background:#FFFFFF">
+        <span style="color:var(--mdc-theme-secondary);">{{ message.creator }}</span>
+        <span style="color:#808080; text-transform:lowercase; float:right; font-size:12pt">{{message.cr_date}}</span>
+        <br>
+        <span>{{ message.text }}</span>
+    </div>
+    {% else %}
+
+         <div class="forminput" style="background:#EEEEEE">
+             <span style="color:var(--mdc-theme-secondary);">{{ message.creator }}</span>
+             <span style="color:#808080; text-transform:lowercase; float:right; font-size:12pt">{{message.cr_date}}</span>
+             <br>
+             <span>{{ message.text }}</span>
+         </div>
+    {% endif %}
+    {% endfor %}
+</div>
+</form>
+
+
+
+
+
+
+{% endblock %}

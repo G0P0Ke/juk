@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<h1>Открытые задания для выполнения (компания с инн {{ company.inn }})</h1>
+{% for task in opened_tasks %}
+<hr>
+    <a href="{% url 'task' id=task.id %}"> <button>{{ task.description }}</button></a><br><br>
+{% endfor %}
+<hr>
+
+<h1>Задания за которые вы взялись</h1>
+{% for task in taken_tasks %}
+<hr>
+    <a href="{% url 'task' id=task.id %}"> <button>{{ task.description }}</button></a><br><br>
+{% endfor %}
+<hr>
+
+<h1>Задания, которые вы выполнили</h1>
+{% for task in closed_tasks %}
+<hr>
+    <a href="{% url 'task' id=task.id %}"> <button>{{ task.description }}</button></a><br><br>
+{% endfor %}
+<hr>
+
+
+{% endblock %}
