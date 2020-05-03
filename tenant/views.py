@@ -320,14 +320,22 @@ def cr_task_view(request):
 
 @login_required
 def volunteer_view(request):
-    tasks = []
+    opened_tasks = []
+    taken_tasks = []
+    closed_tasks = []
     company = request.user.tenant.house.company
     # request.user.manager.company
     for task in Task.objects.all():
         if task.author.house.company == company and task.status == "opened":
-            tasks.append(task)
+            opened_tasks.append(task)
+        if task.volunteer == request.user and task.status == "taken":
+            taken_tasks.append(task)
+        if task.volunteer == request.user and task.status == "closed":
+            closed_tasks.append(task)
     context = {
-        "tasks": tasks,
+        "opened_tasks": opened_tasks,
+        "taken_tasks": taken_tasks,
+        "closed_tasks": closed_tasks,
         "company": company,
     }
     return render(request, 'volunteer.html', context)
@@ -355,10 +363,12 @@ def task_view(request, id):
     if request.method == 'POST':
         status = request.POST.get('status')
         task.status = status
+        if status == "taken":
+            task.volunteer = request.user
         task.save()
     context = {
         "user": request.user,
-        "task": Task.objects.get(pk=id),
+        "task": task,
         "my_task": my_task
     }
     return render(request, 'task.html', context)

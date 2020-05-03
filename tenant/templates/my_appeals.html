@@ -84,7 +84,7 @@
 </style>
 
 <a href="{% url 'cr_appeal' %}"><button class="mdc-button mdc-button--raised" style="width:25%;"><span class="mdc-button__ripple"></span>Создать обращение</button></a>
-<a href="{% url 'profile'%}"><button class="mdc-button" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться в профиль</button></a>
+<a href="{% url 'profile' username=user.username%}"><button class="mdc-button" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться в профиль</button></a>
 
 <br><br>
 <hr>

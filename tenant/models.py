@@ -188,7 +188,7 @@ class Task(models.Model):
     :param author: Автор задания (Житель)
     :param volunteer: Исполнитель задания (Пользователь)
     :param cr_date: Дата создания задания
-    :param status: Статус выполнения задания ('opened' или 'taken' или 'done')
+    :param status: Статус выполнения задания ('opened' или 'taken' или 'closed')
     :param address: Корпус, этаж и номер квартиры дающего задание
     """
     description = models.TextField(
