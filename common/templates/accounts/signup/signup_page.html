@@ -12,18 +12,40 @@
             <div style="color: red;">{{ error }}</div>
             {% endif %}
             <div class="form-group">
-                <input type="text" class="form-control" id="username" name="username" placeholder="Логин">
+                <input type="text" class="form-control" required id="id_username" name="username" placeholder="Логин"
+                       maxlength="150">
             </div>
             <div class="form-group">
-                <input type="email" class="form-control" id="email" name="email" placeholder="E-mail">
+                <input type="email" class="form-control" id="id_email" name="email" placeholder="E-mail"
+                       maxlength="254">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" id="password1" name="password1" placeholder="Пароль">
+                <input type="password" class="form-control" id="password1" name="password1"
+                       placeholder="Пароль">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" id="password2" name="password2"
+                <input type="password" class="form-control" id="id_password2"
+                       name="password2"
                        placeholder="Пароль ещё раз">
             </div>
+            <div class="form-group">
+                <h6>Выберите роль:</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="role" required id="id_tenant"
+                           value="role1" checked>
+                    <label class="form-check-label" for="id_tenant">
+                        Житель
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="role" required id="id_manager"
+                           value="role2">
+                    <label class="form-check-label" for="id_manager">
+                        Управляющая компания
+                    </label>
+                </div>
+            </div>
+<!--            {{ form }}-->
             <div class="form-group">
                 <button type="submit" class="btn btn-dark">Зарегистрироваться</button>
             </div>
