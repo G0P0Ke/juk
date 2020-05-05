@@ -54,7 +54,6 @@ def profile_view(request, username):
         # t = Tenant.objects.create(user=request.user, house=h)  # tmp
         # f = Forum.objects.create(house=h, categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое")#tmp
         # f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
-        # request.user.tenant.house = h
         return render(request, 'pages/tenant/profile.html', context)
     except User.DoesNotExist:
         raise Http404
