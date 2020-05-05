@@ -49,7 +49,7 @@ def profile_view(request, username):
             "homeless": request.user.tenant.house is None,
         }
         print(context.get("homeless"))
-        # c = Company.objects.create(inn=666) #tmp    common/templates/pages/tenant/
+        # c = Company.objects.create(inn=666) #tmp
         # h = House.objects.create(address="Улица Крылатские Холмы 15к2", company=c)#tmp
         # t = Tenant.objects.create(user=request.user, house=h)  # tmp
         # f = Forum.objects.create(house=h, categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое")#tmp
