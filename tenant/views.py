@@ -216,9 +216,9 @@ def cr_discussion_view(request, id):
     return render(request, 'pages/tenant/cr_discussion.html', context)
 
 
-def thread(request, id, thread_id):
+def thread(request, discussion_id, thread_id):
     thread = Comment.objects.get(id=thread_id)
-    discussion = Discussion.objects.get(id=id)
+    discussion = Discussion.objects.get(id=discussion_id)
     comments = Comment.objects.filter(thread=thread)
     context = {
         "user": request.user,
@@ -226,7 +226,7 @@ def thread(request, id, thread_id):
         "thread": thread,
         "discussion": discussion
     }
-    if request.POST:
+    if request.method == "POST":
         text = request.POST.get("text")
         r_com = Comment(
             text=text,

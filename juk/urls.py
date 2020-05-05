@@ -40,7 +40,7 @@ urlpatterns = [
 
     path('forum/<int:id>', tenant_views.forum_view, name="forum"),
     path('forum/discussion/<int:id>', tenant_views.discussion_view, name="discussion"),
-    path('forum/discussion/<int:id>/thread/<int:thread_id>', tenant_views.thread, name="thread"),
+    path('forum/discussion/<int:discussion_id>/thread/<int:thread_id>', tenant_views.thread, name="thread"),
     path('forum/<int:id>/cr_discussion', tenant_views.cr_discussion_view, name="cr_discussion"),
     path('forum/<int:id>/category/<str:name>', tenant_views.category_view, name="category"),
 
