@@ -72,6 +72,11 @@ def redact_profile_view(request):
             photo = form.cleaned_data.get('photo')
             user.tenant.photo = photo
             user.tenant.save(update_fields=['photo'])
+            context.update({
+                "user": request.user,
+                'form': form
+            })
+            return render(request, 'pages/tenant/redact_profile.html', context)
     else:
         form = PhotoUpload()
     if request.method == 'POST':
@@ -85,7 +90,7 @@ def redact_profile_view(request):
                 "house_doesnt_exist": True,
                 "user": request.user,
             })
-            return render(request, 'redact_profile.html', context)
+
         print(request.user.username)
         request.user.tenant.save()
         return redirect('profile/' + str(request.user.username))
