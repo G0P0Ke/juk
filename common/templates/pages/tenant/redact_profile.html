@@ -17,10 +17,9 @@
         <hr>
 
         <a href="{% url 'profile' username=user.username %}">Вернуться в профиль</a>
-{#    Отображение фотографии. Нужна статическая постановка фото в бд при регистрации #}
-{#        <div>#}
-{#            <img src="{{ user.tenant.photo.url }}" width="230" height="250">#}
-{#        </div>#}
+        <div>
+            <img src="{{ user.tenant.photo.url }}" width="260" height="250">
+        </div>
         <form action="" method="post" class="" enctype="multipart/form-data">
             <div class="form-group">
                 {% csrf_token %}

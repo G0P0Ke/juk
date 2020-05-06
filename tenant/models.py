@@ -41,7 +41,7 @@ class Tenant(models.Model):
         User,
         on_delete=models.CASCADE,
     )
-    photo = models.ImageField(upload_to='photo', blank=True)
+    photo = models.ImageField(upload_to='photo', blank=True, default='static/default.jpg')
     house = models.ForeignKey(
         House,
         on_delete=models.CASCADE,
