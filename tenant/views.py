@@ -4,7 +4,7 @@ from django.contrib.auth.models import AnonymousUser
 from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task
 import datetime
 from django.contrib.auth.models import User
-
+from .forms import PhotoUpload
 from django.http import Http404
 
 
@@ -62,9 +62,18 @@ def profile_view(request, username):
 
 @login_required
 def redact_profile_view(request):
+    user = request.user
     context = {
         "house_doesnt_exist": False,
     }
+    if request.method == 'POST':
+        form = PhotoUpload(request.POST, request.FILES)
+        if form.is_valid():
+            photo = form.cleaned_data.get('photo')
+            user.tenant.photo = photo
+            user.tenant.save(update_fields=['photo'])
+    else:
+        form = PhotoUpload()
     if request.method == 'POST':
         username = request.POST.get('username')
         address = request.POST.get('address')
@@ -82,8 +91,12 @@ def redact_profile_view(request):
         return redirect('profile/' + str(request.user.username))
     context.update({
         "user": request.user,
+        'form': form
     })
     return render(request, 'pages/tenant/redact_profile.html', context)
+
+
+
 
 
 class Category:

@@ -17,7 +17,18 @@
         <hr>
 
         <a href="{% url 'profile' username=user.username %}">Вернуться в профиль</a>
-
+        <div>
+            <img src="{{ user.tenant.photo.url }}" width="230" height="250">
+        </div>
+        <form action="" method="post" class="" enctype="multipart/form-data">
+            <div class="form-group">
+                {% csrf_token %}
+                {{ form.photo.errors }}
+                <label for="{{ form.photo.id_for_label }}"> Моя фотография:</label>
+                {{ form.photo }}
+            </div>
+            <input type="submit" value="Обновить фото" class="button">
+        </form>
         <form method="POST">
                 {% csrf_token %}
                 <label for="username-id">Ваше имя:</label>

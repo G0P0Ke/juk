@@ -36,10 +36,12 @@ class Tenant(models.Model):
         :param is_vol: является ли житель волонтёром
         :param test_date: Время последнего прохождения (None eсли попыток не было)
         """
+
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
     )
+    photo = models.ImageField(upload_to='photo', blank=True)
     house = models.ForeignKey(
         House,
         on_delete=models.CASCADE,
