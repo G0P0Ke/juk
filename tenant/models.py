@@ -32,6 +32,7 @@ class Tenant(models.Model):
         Модель жильца
 
         :param user: Пользователь
+        :param photo: фото жителя
         :param house: дом проживания пользователя
         :param is_vol: является ли житель волонтёром
         :param test_date: Время последнего прохождения (None eсли попыток не было)
@@ -41,7 +42,11 @@ class Tenant(models.Model):
         User,
         on_delete=models.CASCADE,
     )
-    photo = models.ImageField(upload_to='photo', blank=True, default='static/default.jpg')
+    photo = models.ImageField(
+        upload_to='photo',
+        blank=True,
+        default='static/default.jpg',
+    )
     house = models.ForeignKey(
         House,
         on_delete=models.CASCADE,

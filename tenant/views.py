@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth.models import User
+
 from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task
 import datetime
-from django.contrib.auth.models import User
+
 
 from .forms import PhotoUpload
 
@@ -46,11 +48,20 @@ def profile_view(request, username):
     """
     try:
         user = User.objects.get(username=username)
-        context = {
-            "user": user,
-            "homeless": request.user.tenant.house is None,
-        }
-        print(context.get("homeless"))
+        if user.tenant:
+            context = {
+                "is_tenant": True,
+                "user": user,
+                "homeless": request.user.tenant.house is None,
+            }
+            print("------------------------------------------------->TENANT")
+        if user.manager is not None:
+            context = {
+                "is_manager": True,
+                "user": user,
+                "companyless": request.user.manager.company is None,
+            }
+            print("------------------------------------------------->MANAGER")
         # c = Company.objects.create(inn=666) #tmp
         # h = House.objects.create(address="Улица Крылатские Холмы 15к2", company=c)#tmp
         # t = Tenant.objects.create(user=request.user, house=h)  # tmp
