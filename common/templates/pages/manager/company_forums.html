@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<h1>Форумы всех домов вашей компании:</h1>
+<hr>
+<a href="{% url 'my_cabinet' %}">Вернуться в профиль</a>
+<hr>
+{% for house in houses %}
+<a href="{% url 'forum' id=house.forum.id %}"><button>Форум дома с адресом {{ house.address }}</button></a>
+<hr>
+{% endfor %}
+
+
+
+
+
+{% endblock %}

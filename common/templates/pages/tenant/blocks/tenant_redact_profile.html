@@ -1,0 +1,43 @@
+{% load static %}
+        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=9d32ec24-ae67-45da-9cb2-a1d51686e32b" type="text/javascript"></script>
+        <script src="{% static 'map.js' %}"></script>
+	    <style>
+        #map {
+            margin: 10px auto;
+            width: 800px;
+            height: 500px;
+        }
+        </style>
+        <h1 style="margin: 50px auto;">Редактирование профиля жильца</h1>
+        <hr>
+
+        <a href="{% url 'my_cabinet' %}">Вернуться в профиль</a>
+        <div>
+            <img src="{{ user.tenant.photo.url }}" width="260" height="250">
+        </div>
+        <form action="" method="post" class="" enctype="multipart/form-data">
+            <div class="form-group">
+                {% csrf_token %}
+                {{ form.photo.errors }}
+                <label> Моя фотография:</label>
+                {{ form.photo }}
+            </div>
+            <input type="submit" value="Обновить фото" class="button">
+        </form>
+        <form method="POST">
+                {% csrf_token %}
+                <label for="username-id">Ваше имя:</label>
+                <input type="text" name="username" id="username-id" value={{user.username}}><br>
+
+                <label for="address-id">Ваш адрес:</label>
+                <input style="width:600px" type="text" name="address" id="address-id" value="{{user.tenant.house.address}}"><br>
+
+                {% if house_doesnt_exist %}
+                <a>Ваш плохой дом не подключен к нашей хорошей сети</a><br>
+                {% endif %}
+
+                <input type="submit" value="Сохранить изменения">
+        </form>
+        <button onclick="from_form_to_map()">Проверить адрес на карте</button>
+        <button onclick="from_map_to_form()">с карты в строку</button>
+                <div id="map"></div>

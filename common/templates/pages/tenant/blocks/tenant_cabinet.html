@@ -1,9 +1,6 @@
-{% extends 'base.html' %}
-
-{% block content %}
         {% load static %}
 
-        <h1 style="margin: 50px auto;">Профиль жильца</h1>
+        <h1 style="margin: 50px auto;">Личный кабинет жильца</h1>
 <hr>
 
         <a>Имя: {{ user.username }}</a>
@@ -35,5 +32,3 @@
 <br>
         {% endif %}
         <a href="{% url 'redact_profile'%}"><button>Редактирование профиля</button></a>
-
-{% endblock %}

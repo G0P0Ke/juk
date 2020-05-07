@@ -38,3 +38,15 @@ def create_news_page(request):
         )
 
     return render(request, 'pages/manager/news/create_news.html', context)
+
+
+@login_required
+def company_forums_view(request):
+    user = request.user
+    if not hasattr(user, 'manager'):
+        redirect('/')
+    context = {
+        'user': user,
+        "houses": user.manager.company.house_set.all(),
+    }
+    return render(request, 'pages/manager/company_forums.html', context)

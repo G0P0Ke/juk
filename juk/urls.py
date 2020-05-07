@@ -35,8 +35,9 @@ urlpatterns = [
 
     path('manager/news/', manager_views.news_page, name='news'),
     path('manager/news/create/', manager_views.create_news_page, name='create_news'),
+    path('manager/company_forums/', manager_views.company_forums_view, name='company_forums'),
 
-    path('profile/<str:username>', tenant_views.profile_view, name='profile'),
+    path('my_cabinet', tenant_views.my_cabinet_view, name='my_cabinet'),
     #path('tenant/profile/', tenant_views.profile, name='profile'),
     path('redact_profile', tenant_views.redact_profile_view, name='redact_profile'),
 

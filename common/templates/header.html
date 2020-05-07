@@ -15,7 +15,7 @@
                     <li class="nav-item active"><a class="nav-link" href="{% url 'logout' %}">Выйти</a></li>
                 </ul>
                 <ul class="navbar-nav mr-right">
-                    <li class="nav-item active"><a class="nav-link" href="{% url 'profile' username=request.user.username %}">Профиль</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="{% url 'my_cabinet' %}">Личный кабинет</a></li>
                 </ul>
                 {% else %}
                 <ul class="navbar-nav mr-right">

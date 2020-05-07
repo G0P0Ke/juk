@@ -38,38 +38,32 @@ from django.http import Http404
 #     return render(request, 'pages/tenant/profile.html', context)
 
 
-def profile_view(request, username):
+@login_required
+def my_cabinet_view(request):
     """
-    Профиль пользователя
+    Личный кабинет пользователя
 
     :param request: объект с деталями запроса.
-    :param username: имя пользователя.
     :return: объект ответа сервера с HTML-кодом внутри
     """
-    try:
-        user = User.objects.get(username=username)
-        if user.tenant:
-            context = {
-                "is_tenant": True,
-                "user": user,
-                "homeless": request.user.tenant.house is None,
-            }
-            print("------------------------------------------------->TENANT")
-        if user.manager is not None:
-            context = {
-                "is_manager": True,
-                "user": user,
-                "companyless": request.user.manager.company is None,
-            }
-            print("------------------------------------------------->MANAGER")
+    if hasattr(request.user, 'tenant'):
+        context = {
+            "is_tenant": True,
+            "user": request.user,
+            "homeless": request.user.tenant.house is None,
+        }
+    if hasattr(request.user, 'manager'):
+        context = {
+            "is_manager": True,
+            "user": request.user,
+            "companyless": request.user.manager.company is None,
+        }
         # c = Company.objects.create(inn=666) #tmp
         # h = House.objects.create(address="Улица Крылатские Холмы 15к2", company=c)#tmp
         # t = Tenant.objects.create(user=request.user, house=h)  # tmp
         # f = Forum.objects.create(house=h, categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое")#tmp
         # f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
-        return render(request, 'pages/tenant/profile.html', context)
-    except User.DoesNotExist:
-        raise Http404
+    return render(request, 'pages/tenant/my_cabinet.html', context)
 
 
 @login_required
@@ -77,21 +71,27 @@ def redact_profile_view(request):
     user = request.user
     context = {
         "house_doesnt_exist": False,
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
     }
     if request.method == 'POST':
         form = PhotoUpload(request.POST, request.FILES)
         if form.is_valid():
             photo = form.cleaned_data.get('photo')
-            user.tenant.photo = photo
-            user.tenant.save(update_fields=['photo'])
+            if hasattr(request.user, 'tenant'):
+                user.tenant.photo = photo
+                user.tenant.save(update_fields=['photo'])
+            if hasattr(request.user, 'manager'):
+                user.manager.photo = photo
+                user.manager.save(update_fields=['photo'])
             context.update({
                 "user": request.user,
-                'form': form
+                "form": form,
             })
             return render(request, 'pages/tenant/redact_profile.html', context)
     else:
         form = PhotoUpload()
-    if request.method == 'POST':
+    if request.method == 'POST' and hasattr(request.user, 'tenant'):
         username = request.POST.get('username')
         address = request.POST.get('address')
         user.username = username
@@ -100,16 +100,26 @@ def redact_profile_view(request):
         else:
             context.update({
                 "house_doesnt_exist": True,
+                'form': form,
                 "user": user,
             })
             return render(request, 'pages/tenant/redact_profile.html', context)
-        print(user.username)
         user.tenant.save()
         user.save()
-        return redirect('profile/' + str(user.username))
+        return redirect('/my_cabinet')
+    if request.method == 'POST' and hasattr(request.user, 'manager'):
+        username = request.POST.get('username')
+        company_inn = request.POST.get('company_inn')
+        user.username = username
+        user.manager.company = Company.objects.filter(inn=company_inn)[0]
+        user.manager.save()
+        user.save()
+        return redirect('/my_cabinet')
+
     context.update({
         "user": user,
-        'form': form
+        'form': form,
+        "companies": Company.objects.all(),
     })
     return render(request, 'pages/tenant/redact_profile.html', context)
 
@@ -354,12 +364,10 @@ def cr_task_view(request):
     if request.method == 'POST':
         description = request.POST.get('description')
         task = request.POST.get('task')
-        address = request.POST.get('address')
         task = Task(
             task=task,
             description=description,
-            author=request.user.tenant,
-            address=address,
+            author=request.user,
             status='opened',
             cr_date=datetime.datetime.now(),
         )
@@ -377,8 +385,10 @@ def volunteer_view(request):
     opened_tasks = []
     taken_tasks = []
     closed_tasks = []
-    company = request.user.tenant.house.company
-    # request.user.manager.company
+    if hasattr(request.user, 'tenant'):
+        company = request.user.tenant.house.company
+    if hasattr(request.user, 'manager'):
+        company = request.user.manager.company
     for task in Task.objects.all():
         if task.author.house.company == company and task.status == "opened":
             opened_tasks.append(task)
@@ -404,7 +414,14 @@ def help_view(request):
     :type request: :class:`django.http.HttpRequest`
     :return: объект ответа сервера с HTML-кодом внутри
     """
-    tasks = Task.objects.filter(author=request.user.tenant)
+    user = request.user
+    if hasattr(user, 'tenant'):
+        tasks = Task.objects.filter(author=request.user)
+    if hasattr(user, 'manager'):
+        tasks = []
+        for task in Task.objects.all():
+            if task.author.tenant.house.company == user.manager.company:
+                tasks.append(task)
     context = {
         "tasks": tasks,
     }
@@ -413,16 +430,26 @@ def help_view(request):
 
 def task_view(request, id):
     task = Task.objects.get(pk=id)
-    my_task = (True if request.user.tenant == task.author else False)
-    if request.method == 'POST':
+    if hasattr(request.user, 'tenant'):
+        my_task = (True if request.user.tenant == task.author else False)
+    if hasattr(request.user, 'manager'):
+        my_task = True
+    if request.method == 'POST' and hasattr(request.user, 'tenant'):
         status = request.POST.get('status')
         task.status = status
         if status == "taken":
-            task.volunteer = request.user
+            task.volunteer = request.user.tenant
+        task.save()
+    if request.method == 'POST' and hasattr(request.user, 'manager'):
+        status = request.POST.get('status')
+        task.status = status  # только closed
         task.save()
     context = {
         "user": request.user,
         "task": task,
-        "my_task": my_task
+        "my_task": my_task,
+        "is_opened": True if task.status == "opened" else False,
+        "is_taken": True if task.status == "taken" else False,
+        "is_closed": True if task.status == "closed" else False,
     }
     return render(request, 'pages/tenant/task.html', context)

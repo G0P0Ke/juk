@@ -205,11 +205,11 @@ class Task(models.Model):
         max_length=100,
     )
     author = models.ForeignKey(
-        to=Tenant,
+        to=User,
         on_delete=models.CASCADE,
     )
     volunteer = models.ForeignKey(
-        to=User,
+        to=Tenant,
         null=True,
         blank=True,
         default=None,
@@ -220,7 +220,4 @@ class Task(models.Model):
     )
     status = models.TextField(
         max_length=10
-    )
-    address = models.TextField(
-        max_length=100
     )

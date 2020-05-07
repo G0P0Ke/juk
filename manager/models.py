@@ -21,3 +21,8 @@ class Manager(models.Model):
         null=True,
         blank=True,
     )
+    photo = models.ImageField(
+        upload_to='photo',
+        blank=True,
+        default='static/default.jpg',
+    )
