@@ -24,7 +24,7 @@
             <div class="form-group">
                 {% csrf_token %}
                 {{ form.photo.errors }}
-                <label for="{{ form.photo.id_for_label }}"> Моя фотография:</label>
+                <label> Моя фотография:</label>
                 {{ form.photo }}
             </div>
             <input type="submit" value="Обновить фото" class="button">
