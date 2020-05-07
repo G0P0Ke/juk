@@ -10,3 +10,7 @@ class EditProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = UserCreationForm.Meta.fields + ('email',)
+
+
+class PhotoUpload(forms.Form):
+    photo = forms.ImageField()

@@ -5,6 +5,8 @@ from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, 
 import datetime
 from django.contrib.auth.models import User
 
+from .forms import PhotoUpload
+
 from django.http import Http404
 
 
@@ -61,26 +63,42 @@ def profile_view(request, username):
 
 @login_required
 def redact_profile_view(request):
+    user = request.user
     context = {
         "house_doesnt_exist": False,
     }
     if request.method == 'POST':
+        form = PhotoUpload(request.POST, request.FILES)
+        if form.is_valid():
+            photo = form.cleaned_data.get('photo')
+            user.tenant.photo = photo
+            user.tenant.save(update_fields=['photo'])
+            context.update({
+                "user": request.user,
+                'form': form
+            })
+            return render(request, 'pages/tenant/redact_profile.html', context)
+    else:
+        form = PhotoUpload()
+    if request.method == 'POST':
         username = request.POST.get('username')
         address = request.POST.get('address')
-        request.user.username = username
+        user.username = username
         if House.objects.filter(address=address).exists():
-            request.user.tenant.house = House.objects.get(address=address)
+            user.tenant.house = House.objects.filter(address=address)[0]
         else:
             context.update({
                 "house_doesnt_exist": True,
-                "user": request.user,
+                "user": user,
             })
-            return render(request, 'redact_profile.html', context)
-        print(request.user.username)
-        request.user.tenant.save()
-        return redirect('profile/' + str(request.user.username))
+            return render(request, 'pages/tenant/redact_profile.html', context)
+        print(user.username)
+        user.tenant.save()
+        user.save()
+        return redirect('profile/' + str(user.username))
     context.update({
-        "user": request.user,
+        "user": user,
+        'form': form
     })
     return render(request, 'pages/tenant/redact_profile.html', context)
 
@@ -216,9 +234,9 @@ def cr_discussion_view(request, id):
     return render(request, 'pages/tenant/cr_discussion.html', context)
 
 
-def thread(request, discussion_id, thread_id):
+def thread(request, id, thread_id):
     thread = Comment.objects.get(id=thread_id)
-    discussion = Discussion.objects.get(id=discussion_id)
+    discussion = Discussion.objects.get(id=id)
     comments = Comment.objects.filter(thread=thread)
     context = {
         "user": request.user,
@@ -226,7 +244,7 @@ def thread(request, discussion_id, thread_id):
         "thread": thread,
         "discussion": discussion
     }
-    if request.method == "POST":
+    if request.POST:
         text = request.POST.get("text")
         r_com = Comment(
             text=text,

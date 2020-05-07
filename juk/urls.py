@@ -19,6 +19,8 @@ from django.urls import path, include
 import common.views as common_views
 import manager.views as manager_views
 import tenant.views as tenant_views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -53,4 +55,4 @@ urlpatterns = [
     path('vol/help', tenant_views.help_view, name="help"),
     path('vol/help/cr_task', tenant_views.cr_task_view, name="cr_task"),
     path('vol/task/<int:id>', tenant_views.task_view, name="task"),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

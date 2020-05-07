@@ -65,6 +65,7 @@ def signup_view(request):
             if role == "tenant":
                 tenant = Tenant.objects.create(user=user)
                 tenant.save()
+
             elif role == "manager":
                 manager = Manager.objects.create(user=user)
                 manager.save()
