@@ -1,27 +1,35 @@
-        {% load static %}
+{% load static %}
 
-        <h1 style="margin: 50px auto;">Личный кабинет менеджера</h1>
-<hr>
-        <a>Имя: {{ user.username }}</a>
+<h1 style="margin: 50px auto;">Личный кабинет менеджера</h1>
 <hr>
 
-        {% if companyless %}
-        <a>Вы не подключены к компании, для дальнеешего пользование сервисом, пожалуйста, выберите свою компанию в редактировании профиля</a>
-<hr>
-        {% else %}
+<a>Имя: {{ user.username }}</a><br>
+<a>Инн вашей компании: {{ user.manager.company.inn }}</a>
 
-        <a href="{% url 'company_forums' %}"><button>Форумы домов вашей компании</button></a>
-        <a href="{% url 'forum' id=user.manager.company.forum.id %}"><button>Форум вашей управляющей компании</button></a>
 <hr>
 
-        <a href="{% url 'help' %}"><button>Запросы волонтёрам моей компании</button></a>
+{% if companyless %}
+<a>Вы не подключены к компании, для дальнеешего пользование сервисом, пожалуйста, выберите свою компанию в редактировании профиля</a>
+<hr>
+{% else %}
+
+<a href="{% url 'company_forums' %}"><button>Форумы домов вашей компании</button></a>
+<a href="{% url 'forum' id=user.manager.company.forum.id %}"><button>Форум вашей управляющей компании</button></a>
 <hr>
 
-        <a href="{% url 'my_appeals' %}"><button>Мои обращения</button></a>
-        <a href="{% url 'company_appeals' %}"><button>Открытые обращения моей компании</button></a>
+<a href="{% url 'help' %}"><button>Запросы волонтёрам моей компании</button></a>
+
 <hr>
 
-        <a>Инн вашей компании: {{ user.manager.company.inn }}</a>
+<a href="{% url 'my_appeals' %}"><button>Мои обращения</button></a>
+<a href="{% url 'company_appeals' %}"><button>Открытые обращения моей компании</button></a>
+
 <hr>
-        {% endif %}
-        <a href="{% url 'redact_profile'%}"><button>Редактирование профиля</button></a>
+
+<a href="{% url 'add_house' %}"><button>Добавить дом к вашей компании</button></a>
+
+<hr>
+
+{% endif %}
+
+<a href="{% url 'redact_profile'%}"><button>Редактирование профиля</button></a>

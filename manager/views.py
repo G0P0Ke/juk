@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 import datetime
 from .forms import CreateNewsForm
 from .models import News
-from tenant.models import Appeal
+from tenant.models import Appeal, House, Forum
 
 
 def news_page(request):
@@ -71,5 +71,20 @@ def company_appeals_view(request):
 
 @login_required
 def add_house_view(request):
-    context = {}
+    context = {
+        "user": request.user,
+    }
+    if request.method == 'POST':
+        address = request.POST.get('address')
+        house = House.objects.create(
+            address=address,
+            company=request.user.manager.company,
+        )
+        forum = Forum.objects.create(
+            house=house,
+            categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое",
+        )
+        house.save()
+        forum.save()
+        return redirect('/')
     return render(request, 'pages/manager/add_house.html', context)
