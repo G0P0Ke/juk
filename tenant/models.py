@@ -62,6 +62,24 @@ class Tenant(models.Model):
     )
 
 
+class Manager(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+    )
+    company = models.ForeignKey(
+        Company,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+    photo = models.ImageField(
+        upload_to='photo',
+        blank=True,
+        default='static/default.jpg',
+    )
+
+
 class Forum(models.Model):
     """
         Модель форума
@@ -148,20 +166,22 @@ class Appeal(models.Model):
         Модель обращения
 
         :param theme: Тема обращения
-        :param user: житель обращения
-        :param company: Компания обращения
+        :param tenant: житель обращения
+        :param manager: менеджер компании обращения
         :param cr_date: Дата создания обращения
         """
     theme = models.TextField()
-    user = models.ForeignKey(
-        to=User,
+    tenant = models.ForeignKey(
+        to=Tenant,
+        on_delete=models.CASCADE,
         null=True,
-        on_delete=models.CASCADE
+        blank=True,
     )
-    company = models.ForeignKey(
-        to=Company,
+    manager = models.ForeignKey(
+        to=Manager,
         null=True,
-        on_delete=models.CASCADE
+        blank=True,
+        on_delete=models.CASCADE,
     )
     cr_date = models.DateTimeField()
 
@@ -172,16 +192,17 @@ class AppealMessage(models.Model):
 
         :param text: Текст сообщения
         :param appeal: обращение сообщения
-        :param creator: Создатель ("company" или "tenant")
+        :param creator: Создатель
         :param cr_date: Дата создания сообщения
         """
     text = models.TextField()
     appeal = models.ForeignKey(
         to=Appeal,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
     )
-    creator = models.TextField(
-        default="tenant"
+    creator = models.ForeignKey(
+        to=User,
+        on_delete=models.CASCADE,
     )
     cr_date = models.DateTimeField()
 

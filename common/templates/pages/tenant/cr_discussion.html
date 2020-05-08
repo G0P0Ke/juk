@@ -137,13 +137,14 @@ border: none;
         <textarea name="description" maxlength="100" placeholder="Описание" required></textarea><br><br>
 
 
-            <label for="category" style="float:left; margin: 5px 0 0 10%; font-size:14pt">Тема</label>
+        <label for="category" style="float:left; margin: 5px 0 0 10%; font-size:14pt">Тема</label>
         <div class="select">
             <select id="category" name="category">
                 {% for category in categories %}
                     <option class="op" value={{category}}>{{ category }}</option>
                 {% endfor %}
-            </select></div>
+            </select>
+        </div>
 
 
         <div style="margin-left:60%">

@@ -1,0 +1,17 @@
+<div class="form ms-motion-slideUpIn $ms-motion-duration-4">
+    <form method="POST">
+        {% csrf_token %}
+        <label for="username" style="float:left; margin: 5px 0 0 10%; font-size:14pt">Житель, к которому вы обращаетесь</label>
+        <div class="select">
+            <select id="username" name="username">
+                {% for tenant in tenants %}
+                    <option class="op" value={{tenant.user.username}}>{{ tenant.user.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <input class="forminput" type="text" name="theme" maxlength="30" placeholder="Тема" required><br><br>
+        <textarea name="first_appeal_message" maxlength="100" placeholder="Сообщение" required></textarea><br><br>
+        <input class="mdc-button mdc-button--raised" type="submit" value="Создать" style="float:left; margin: 0 0 0 10%; width: 39%;">
+    </form>
+        <a href="{% url 'my_cabinet'%}"><input class="mdc-button mdc-button--outlined" value="Вернуться" type="button" style="float:right; margin: 0 10% 0 0; width: 39%;"></a>
+</div>

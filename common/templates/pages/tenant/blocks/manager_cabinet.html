@@ -17,10 +17,11 @@
         <a href="{% url 'help' %}"><button>Запросы волонтёрам моей компании</button></a>
 <hr>
 
-        <a href="{% url 'my_appeals' %}"><button>Мои обращения к компании</button></a>
+        <a href="{% url 'my_appeals' %}"><button>Мои обращения</button></a>
+        <a href="{% url 'company_appeals' %}"><button>Открытые обращения моей компании</button></a>
 <hr>
 
-        <a>Адрес: {{ user.tenant.house.address }}</a>
-<br>
+        <a>Инн вашей компании: {{ user.manager.company.inn }}</a>
+<hr>
         {% endif %}
         <a href="{% url 'redact_profile'%}"><button>Редактирование профиля</button></a>

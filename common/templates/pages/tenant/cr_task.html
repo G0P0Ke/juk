@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
-
+<br>
 {% if form.errors %}
 Найдены ошибки:
 <ul>
@@ -21,5 +20,4 @@
 </form>
     <a href="{% url 'index' %}"><input  value="Вернуться" type="button"></a>
 
-{% endif %}
 {% endblock %}

@@ -5,9 +5,11 @@
 
 
 <a href="{% url 'cr_task' %}">
-<button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:30%; margin-left:35%"><span class="mdc-button__ripple"></span>Создать задание</button>
+<button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:30%; margin-left:35%; margin-up:10%"><span class="mdc-button__ripple"></span>Создать задание</button>
 </a>
-{% for task in tasks %}
+
+<h2>Открытые задания</h2>
+{% for task in opened_tasks %}
 <a href="{% url 'task' id=task.id%}"><ul>
 <li>{{ task.description }}</li>
 <li>{{ task.task }}</li>
@@ -17,7 +19,26 @@
 <hr>
 {% endfor %}
 
+<h2>Взятые задания</h2>
+{% for task in taken_tasks %}
+<a href="{% url 'task' id=task.id%}"><ul>
+<li>{{ task.description }}</li>
+<li>{{ task.task }}</li>
+<li>{{ task.cr_date }}</li>
+<li>{{ task.status }}</li>
+</ul></a>
+<hr>
+{% endfor %}
 
-
+<h2>Закрытые задания</h2>
+{% for task in closed_tasks %}
+<a href="{% url 'task' id=task.id%}"><ul>
+<li>{{ task.description }}</li>
+<li>{{ task.task }}</li>
+<li>{{ task.cr_date }}</li>
+<li>{{ task.status }}</li>
+</ul></a>
+<hr>
+{% endfor %}
 
 {% endblock %}

@@ -10,19 +10,3 @@ class News(models.Model):
     publicationText = models.TextField(max_length=5000)
 
 
-class Manager(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-    )
-    company = models.ForeignKey(
-        Company,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-    )
-    photo = models.ImageField(
-        upload_to='photo',
-        blank=True,
-        default='static/default.jpg',
-    )

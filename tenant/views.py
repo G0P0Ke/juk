@@ -58,11 +58,14 @@ def my_cabinet_view(request):
             "user": request.user,
             "companyless": request.user.manager.company is None,
         }
-        # c = Company.objects.create(inn=666) #tmp
-        # h = House.objects.create(address="Улица Крылатские Холмы 15к2", company=c)#tmp
-        # t = Tenant.objects.create(user=request.user, house=h)  # tmp
-        # f = Forum.objects.create(house=h, categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое")#tmp
-        # f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
+    # c = Company.objects.create(inn=666) #tmp
+    # h = House.objects.create(address="Россия, Москва, улица Крылатские Холмы, 15к2", company=c)#tmp
+    # f = Forum.objects.create(house=h, categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое")#tmp
+    # f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
+    # c.save()
+    # h.save()
+    # f.save()
+    # f2.save()
     return render(request, 'pages/tenant/my_cabinet.html', context)
 
 
@@ -165,8 +168,8 @@ def forum_view(request, id):
         "user": request.user,
         "forum": forum,
         "categories": categories,
-        "house_forum": (True if owner == "house" else False),
-        "company_forum": (True if owner == "company" else False),
+        "house_forum": owner == "house",
+        "company_forum": owner == "company",
     })
     return render(request, 'pages/tenant/forum.html', context)
 
@@ -281,14 +284,42 @@ def thread(request, id, thread_id):
 
 
 @login_required
-def my_appeals_view(request):
+def company_appeals_view(request):
     context = {}
-    user_appeals = request.user.appeal_set.all()
+    if hasattr(request.user, 'tenant'):
+        my_appeals = request.user.tenant.appeal_set.all()
+    if hasattr(request.user, 'manager'):
+        my_appeals = request.user.manager.appeal_set.all()
     context.update({
-        "user_appeals": user_appeals,
-
+        "my_appeals": my_appeals,
     })
     return render(request, 'pages/tenant/my_appeals.html', context)
+
+
+@login_required
+def my_appeals_view(request):
+    context = {}
+    if hasattr(request.user, 'tenant'):
+        my_appeals = request.user.tenant.appeal_set.all()
+    if hasattr(request.user, 'manager'):
+        my_appeals = request.user.manager.appeal_set.all()
+    context.update({
+        "my_appeals": my_appeals,
+    })
+    return render(request, 'pages/tenant/my_appeals.html', context)
+
+
+class Message:
+    """
+    Служебный класс для передачи данных в context
+    """
+    def __init__(self, appealmessage, my_message):
+        """
+        :param appealmessage: сообщение
+        :param my_message: моё или нет
+        """
+        self.appealmessage = appealmessage
+        self.my_message = my_message
 
 
 @login_required
@@ -297,22 +328,28 @@ def appeal_view(request, id):
     appeal = Appeal.objects.get(pk=id)
     if request.method == 'POST':
         text = request.POST.get('message')
-        # проверка на жителя
         message = AppealMessage.objects.create(
             text=text,
             appeal=appeal,
-            creator="tenant",
-            cr_date=datetime.datetime.now()
+            creator=request.user,
+            cr_date=datetime.datetime.now(),
         )
         message.save()
-        return redirect('/appeal/' + str(appeal.id))
-    messages = appeal.appealmessage_set.all()
-    messages = list(messages)
+        if hasattr(request.user, 'manager') and appeal.manager is None:
+            appeal.manager = request.user.manager
+            appeal.save()
+
+    messages = []
+    for appealmessage in appeal.appealmessage_set.all():
+        messages.append(Message(appealmessage, appealmessage.creator == request.user))
     messages.reverse()
     context.update({
-        "user": request.user,
         "appeal": appeal,
         "appeal_messages": messages,
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+        "is_taken": appeal.manager is not None,
+        "user": request.user,
     })
     return render(request, 'pages/tenant/appeal.html', context)
 
@@ -322,12 +359,10 @@ def cr_appeal_view(request):
     context = {}
     if request.method == 'POST':
         theme = request.POST.get('theme')
-        if request.user.tenant:
-            company = request.user.tenant.house.company
+        if hasattr(request.user, 'tenant'):
             appeal = Appeal(
                 theme=theme,
-                company=company,
-                user=request.user,
+                tenant=request.user.tenant,
                 cr_date=datetime.datetime.now(),
             )
             appeal.save()
@@ -336,17 +371,39 @@ def cr_appeal_view(request):
                 appeal=appeal,
                 text=message,
                 cr_date=datetime.datetime.now(),
-                creator="tenant"
+                creator=request.user,
             )
             first_message.save()
-        # if проверка на то что это представитель компании
-        #
-        #
+        if hasattr(request.user, 'manager'):
+            username = request.POST.get('username')
+            appeal = Appeal(
+                theme=theme,
+                manager=request.user.manager,
+                tenant=User.objects.get(username=username).tenant,
+                cr_date=datetime.datetime.now(),
+            )
+            appeal.save()
+            message = request.POST.get('first_appeal_message')
+            first_message = AppealMessage(
+                appeal=appeal,
+                text=message,
+                cr_date=datetime.datetime.now(),
+                creator=request.user,
+            )
+            first_message.save()
         return redirect('/appeal/' + str(appeal.id))
+
+    if hasattr(request.user, 'manager'):
+        tenants = []
+        for tenant in Tenant.objects.all():
+            if tenant.house.company == request.user.manager.company:
+                tenants.append(tenant)
+        context.update({"tenants": tenants})
     context.update({
         "user": request.user,
         "companies": Company.objects.all(),
-        "is_tenant": True if request.user.tenant else False  # -----------проверка на то является ли жителем------
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
     })
     return render(request, 'pages/tenant/cr_appeal.html', context)
 
@@ -385,16 +442,16 @@ def volunteer_view(request):
     opened_tasks = []
     taken_tasks = []
     closed_tasks = []
-    if hasattr(request.user, 'tenant'):
-        company = request.user.tenant.house.company
-    if hasattr(request.user, 'manager'):
-        company = request.user.manager.company
+    if not hasattr(request.user, 'tenant'):
+        return redirect('/')
+    company = request.user.tenant.house.company
     for task in Task.objects.all():
-        if task.author.house.company == company and task.status == "opened":
+        if (hasattr(task.author, 'manager') and task.author.manager.company == company or
+                hasattr(task.author, 'tenant') and task.author.tenant.house.company == company) and task.status == "opened":
             opened_tasks.append(task)
-        if task.volunteer == request.user and task.status == "taken":
+        if task.volunteer == request.user.tenant and task.status == "taken":
             taken_tasks.append(task)
-        if task.volunteer == request.user and task.status == "closed":
+        if task.volunteer == request.user.tenant and task.status == "closed":
             closed_tasks.append(task)
     context = {
         "opened_tasks": opened_tasks,
@@ -416,24 +473,36 @@ def help_view(request):
     """
     user = request.user
     if hasattr(user, 'tenant'):
-        tasks = Task.objects.filter(author=request.user)
+        opened_tasks = Task.objects.filter(author=request.user, status="opened",)
+        taken_tasks = Task.objects.filter(author=request.user, status="taken", )
+        closed_tasks = Task.objects.filter(author=request.user, status="closed", )
     if hasattr(user, 'manager'):
-        tasks = []
+        opened_tasks = []
+        taken_tasks = []
+        closed_tasks = []
         for task in Task.objects.all():
-            if task.author.tenant.house.company == user.manager.company:
-                tasks.append(task)
+            if hasattr(task.author, 'manager') and task.author.manager.company == user.manager.company:
+                if task.status == "opened":
+                    opened_tasks.append(task)
+                if task.status == "taken":
+                    taken_tasks.append(task)
+                if task.status == "closed":
+                    closed_tasks.append(task)
     context = {
-        "tasks": tasks,
+        "opened_tasks": opened_tasks,
+        "taken_tasks": taken_tasks,
+        "closed_tasks": closed_tasks,
     }
     return render(request, 'pages/tenant/help.html', context)
 
 
+@login_required
 def task_view(request, id):
     task = Task.objects.get(pk=id)
     if hasattr(request.user, 'tenant'):
-        my_task = (True if request.user.tenant == task.author else False)
+        my_task = request.user == task.author
     if hasattr(request.user, 'manager'):
-        my_task = True
+        my_task = hasattr(task.author, 'manager') and request.user.manager.company == task.author.manager.company
     if request.method == 'POST' and hasattr(request.user, 'tenant'):
         status = request.POST.get('status')
         task.status = status
@@ -448,8 +517,19 @@ def task_view(request, id):
         "user": request.user,
         "task": task,
         "my_task": my_task,
-        "is_opened": True if task.status == "opened" else False,
-        "is_taken": True if task.status == "taken" else False,
-        "is_closed": True if task.status == "closed" else False,
+        "is_opened": task.status == "opened",
+        "is_taken": task.status == "taken",
+        "is_closed": task.status == "closed",
     }
     return render(request, 'pages/tenant/task.html', context)
+
+
+@login_required
+def test_view(request):
+    context = {
+        "user": request.user,
+    }
+    if request.method == 'POST':
+        request.user.tenant.is_vol = True
+        request.user.tenant.save()
+    return render(request, 'pages/tenant/test.html', context)

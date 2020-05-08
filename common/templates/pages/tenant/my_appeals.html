@@ -79,16 +79,16 @@
     font-size: 20pt;
     margin: 10px 15%;
 }
-
-
 </style>
 
+
+
 <a href="{% url 'cr_appeal' %}"><button class="mdc-button mdc-button--raised" style="width:25%;"><span class="mdc-button__ripple"></span>Создать обращение</button></a>
-<a href="{% url 'profile' username=user.username%}"><button class="mdc-button" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться в профиль</button></a>
+<a href="{% url 'my_cabinet' %}"><button class="mdc-button" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться в личный кабинет</button></a>
 
 <br><br>
 <hr>
-{% for appeal in user_appeals %}
+{% for appeal in my_appeals %}
 <a href="{% url 'appeal' id=appeal.id%}"><button class="category">{{ appeal.theme }}</button></a>
 <hr>
 {% endfor %}

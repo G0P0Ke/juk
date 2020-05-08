@@ -36,6 +36,8 @@ urlpatterns = [
     path('manager/news/', manager_views.news_page, name='news'),
     path('manager/news/create/', manager_views.create_news_page, name='create_news'),
     path('manager/company_forums/', manager_views.company_forums_view, name='company_forums'),
+    path('manager/company_appeals/', manager_views.company_appeals_view, name='company_appeals'),
+    path('manager/add_house/', manager_views.add_house_view, name='add_house'),
 
     path('my_cabinet', tenant_views.my_cabinet_view, name='my_cabinet'),
     #path('tenant/profile/', tenant_views.profile, name='profile'),
@@ -51,7 +53,7 @@ urlpatterns = [
     path('appeal/<int:id>', tenant_views.appeal_view, name="appeal"),
     path('cr_appeal', tenant_views.cr_appeal_view, name="cr_appeal"),
 
-    #path('vol/test', tenant_views.test_view, name="test"),
+    path('vol/test', tenant_views.test_view, name="test"),
     path('vol/volunteer', tenant_views.volunteer_view, name="volunteer"),
     path('vol/help', tenant_views.help_view, name="help"),
     path('vol/help/cr_task', tenant_views.cr_task_view, name="cr_task"),

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+
+
+<br>
+<a href="{% url 'index' %}"><input  value="Вернуться на главную страницу" type="button"></a>
+
+
+
+<hr>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="hidden" value="done" name="result">
+    <input type="submit" value="Пройти тест">
+</form>
+
+
+
+{% endblock %}

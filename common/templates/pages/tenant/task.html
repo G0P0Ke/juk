@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<br><br>
+
+{% if user.tenant.is_vol %}
+    <a href="{% url 'volunteer' %}"><input  value="Вернуться к заданиям для волонтеров" type="button"></a>
+{% endif %}
+<a href="{% url 'help' %}"><input  value="Вернуться к моим запросам помощи" type="button"></a>
 
 
-    <a>Описание задания: {{ task.description }}</a><br><br>
 
-    <a>Содержание задания: {{ task.task }}</a><br><br>
-
-    <a>Автор: {{ task.author.username }}</a><br><br>
+<hr>
+    <p>Описание задания: {{ task.description }}</p><br>
+    <p>Содержание задания: {{ task.task }}</p><br>
+    <p>Автор: {{ task.author.username }}</p><br>
 
 {% if is_taken %}
-    <a>Автор: {{ task.author.username }}</a><br><br>
+    <a>За это задание взятся: {{ task.volunteer.user.username }}</a><br><br>
 {% endif %}
 
 <form method="POST">
@@ -18,23 +24,17 @@
     {% if my_task and is_taken %}
     <input type="hidden" value="closed" name="status">
     <input type="submit" value="Закрыть задание">
-    {% elseif my_task and is_opened %}
+    {% elif my_task and is_opened %}
     <input type="hidden" value="closed" name="status">
     <input type="submit" value="Закрыть задание">
-    {% elseif is_opened %}
+    {% elif is_opened %}
     <input type="hidden" value="taken" name="status">
     <input type="submit" value="Взяться за задание">
-    {% elseif is_taken %}
+    {% elif is_taken %}
     <p>Вы взялись выполнять это задание</p>
     {% endif %}
 </form>
 
-<hr>
 
-{% if user.tenant.is_vol %}
-    <a href="{% url 'volunteer' %}"><input  value="Вернуться к заданиям для волонтеров" type="button"></a>
-{% endif %}
-
-<a href="{% url 'help' %}"><input  value="Вернуться к моим запросам помощи" type="button"></a>
 
 {% endblock %}

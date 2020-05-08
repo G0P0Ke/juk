@@ -20,12 +20,12 @@
        <br> <a href="{% url 'volunteer' %}"><button>Страница для волонтерствования</button></a>
         {% else %}
         <p>Вы не волонтёр!!!!!!</p>
-        <!--- здесь должна быть ссылка на тест --->
+        <a href="{% url 'test' %}"><button>Пройти тест</button></a>
         {% endif %}
         <a href="{% url 'help' %}"><button>Мои запросы о помощи</button></a>
 <hr>
 
-        <a href="{% url 'my_appeals' %}"><button>Мои обращения к компании</button></a>
+        <a href="{% url 'my_appeals' %}"><button>Обращения компании</button></a>
 <hr>
 
         <a>Адрес: {{ user.tenant.house.address }}</a>
