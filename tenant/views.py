@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task
 import datetime
-
+import pytz
 
 from .forms import PhotoUpload
 
@@ -58,14 +58,10 @@ def my_cabinet_view(request):
             "user": request.user,
             "companyless": request.user.manager.company is None,
         }
-    # c = Company.objects.create(inn=666) #tmp
-    # h = House.objects.create(address="Россия, Москва, улица Крылатские Холмы, 15к2", company=c)#tmp
-    # f = Forum.objects.create(house=h, categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое")#tmp
-    # f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
-    # c.save()
-    # h.save()
-    # f.save()
-    # f2.save()
+    #c = Company.objects.create(inn=666) #tmp
+    #f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
+    #c.save()
+    #f2.save()
     return render(request, 'pages/tenant/my_cabinet.html', context)
 
 
@@ -206,7 +202,7 @@ def discussion_view(request, id):
             text=text,
             discussion=discussion,
             author=request.user,
-            cr_date=datetime.datetime.now(),
+            cr_date=datetime.datetime.now(pytz.timezone("Europe/Moscow")),
         )
         comment.save()
     comments = discussion.comment_set.all()
