@@ -205,9 +205,10 @@ def discussion_view(request, id):
             cr_date=datetime.datetime.now(pytz.timezone("Europe/Moscow")),
         )
         comment.save()
+        return redirect('/forum/discussion/' + str(discussion.id))
     comments = discussion.comment_set.all()
     comments = list(comments)
-    comments.reverse()
+    #comments.reverse()
     context.update({
         "user": request.user,
         "discussion": discussion,
@@ -254,9 +255,9 @@ def cr_discussion_view(request, id):
     return render(request, 'pages/tenant/cr_discussion.html', context)
 
 
-def thread(request, id, thread_id):
+def thread(request, discussion_id, thread_id):
     thread = Comment.objects.get(id=thread_id)
-    discussion = Discussion.objects.get(id=id)
+    discussion = Discussion.objects.get(id=discussion_id)
     comments = Comment.objects.filter(thread=thread)
     context = {
         "user": request.user,
@@ -275,7 +276,7 @@ def thread(request, id, thread_id):
         )
         r_com.save()
         id = r_com.id
-        return redirect('thread', discussion.id, thread.id)
+        return redirect('/forum/discussion/' + str(discussion.id) + '/thread/' + str(thread.id))
     return render(request, 'pages/tenant/thread.html', context)
 
 
@@ -334,6 +335,7 @@ def appeal_view(request, id):
         if hasattr(request.user, 'manager') and appeal.manager is None:
             appeal.manager = request.user.manager
             appeal.save()
+        return redirect('/appeal/' + str(appeal.id))
 
     messages = []
     for appealmessage in appeal.appealmessage_set.all():

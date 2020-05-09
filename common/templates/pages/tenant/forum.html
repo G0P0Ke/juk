@@ -49,7 +49,7 @@
 
     <p style="font-size: 20pt; text-align: center;">Это форум дома с адресом <br> {{ house.address }}</p>
 {% elif company_forum %}
-    <h1>этот форум принадлежит компании с инн <br>{{ company.inn }}</h1>
+<p style="font-size: 20pt; text-align: center;">Это форум компании с инн <br> {{ company.inn }}</p>
 
 
 {% endif %}
@@ -70,17 +70,6 @@
         <a href="{% url 'category' id=forum.id name=category.name%}"> <button class="category ms-motion-slideUpIn $ms-motion-duration-4">
     <p>{{ category.name }}</p></button></a>
 
-{% for discussion in category.list_of_discussions %}
-     <a href="{% url 'discussion' id=discussion.id%}"><button style="color:rgb(0, 178, 203)">{{ discussion.theme }}</button></a>
-<br>
-    <a href="{% url 'discussion' id=discussion.id%}"><button>{{ discussion.description }}</button></a>
-<br>
-<br>
-{% endfor %}
-
-{% if category.more %}
-        <a href="{% url 'category' id=forum.id name=category.name%}">увидеть больше</a>
-{% endif %}
 
 {% endfor %}
 
