@@ -1,11 +1,21 @@
+"""
+Используемые модули
+"""
+import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-import datetime
 from .forms import CreateNewsForm
 from .models import News
 
 
 def news_page(request):
+    """
+    Функция для отображения страницы новостей
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :return: отображение страницы новостей
+    """
     record = News.objects.all()
     context = {
         'user': request.user,
@@ -16,6 +26,14 @@ def news_page(request):
 
 @login_required
 def create_news_page(request):
+    """
+    Функция для отображения страницы создания новостей
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :return: Перенаправление настраницу новостей
+    :return: Отображение страницы создания новостей
+    """
     context = {
         'user': request.user,
     }
