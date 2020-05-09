@@ -15,18 +15,3 @@ class News(models.Model):
     publicationTitle = models.CharField(max_length=50)
     publicationText = models.TextField(max_length=5000)
 
-
-class Manager(models.Model):
-    """
-    Модель БД для представителя УК
-    """
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-    )
-    company = models.ForeignKey(
-        Company,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-    )

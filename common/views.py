@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 from .forms import FeedbackForm
 
 from tenant.models import Tenant
-from manager.models import Manager
+from tenant.models import Manager
 
 
 def _get_base_context(title, sign_in_button=True):
