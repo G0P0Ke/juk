@@ -16,6 +16,7 @@ def rel(*x):
     return os.path.join(os.path.abspath(os.path.dirname(__file__)), *x)
 
 sys.path.insert(0, rel('..'))
+
 os.environ['DJANGO_SETTINGS_MODULE'] = 'juk.settings'
 django.setup()
 # -- Project information -----------------------------------------------------

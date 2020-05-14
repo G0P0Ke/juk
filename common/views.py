@@ -170,3 +170,5 @@ def feedback(request):
             pass
 
     return render(request, 'pages/feedback.html')
+
+
