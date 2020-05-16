@@ -7,13 +7,10 @@ from django.contrib.auth.models import User
 from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task
 import datetime
 import pytz
-<<<<<<< HEAD
 import requests
 import urllib
 
-=======
 from django.utils import timezone
->>>>>>> 700e6c1af8d6d3ad071a6103030de418592dfa39
 from .forms import PhotoUpload
 
 from django.http import Http404
