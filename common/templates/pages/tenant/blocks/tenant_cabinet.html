@@ -71,43 +71,47 @@ margin:10px auto 0;
 }
 </style>
         <p style="margin: 50px auto;font-size: 22pt; text-align: center;">Личный кабинет</p>
-        <div class="form"><div class="grid">
-        <div class="left">
+        <div class="form">
+            <div class="grid">
+                <div class="left">
 
-            <p style="font-size: 20pt; text-align: center; color:var(--mdc-theme-secondary);">{{ user.username }}</p>
-            <img src="{{ user.tenant.photo.url }}" width="260" height="250">
-        </div>
-
-
-        <div class="right">
-
-        {% if homeless %}
-            <div class="category">
-        <a>Вы не подключены к дому, для дальнеешего пользование сервисом, пожалуйста, выберите свой дом в редактировании профиля</a>
-</div>
-
-        {% else %}
-            <div class="category">
-             <p style="font-size: 18pt; text-align: center;">Ваш адрес: {{ user.tenant.house.address }}</p>
-            </div>
-        {% if user.tenant.is_vol %}
-            <div class="category">
-                <p style="font-size: 18pt; text-align: center;">Вы волонтёр!!!!!!</p>
-       <a href="{% url 'volunteer' %}"><button class="mdc-button">Страница для волонтерствования</button></a>
+                    <p style="font-size: 20pt; text-align: center; color:var(--mdc-theme-secondary);">{{ user.username }}</p>
+                    <img src="{{ user.tenant.photo.url }}" width="260" height="250">
                 </div>
-        {% else %}
-            <div class="category">
-        <p>Вы не волонтёр!!!!!!</p>
-        <a href="{% url 'test' %}"><button class="mdc-button">Пройти тест</button></a>
+                <div class="right">
+
+                    {% if homeless %}
+                    <div class="category">
+                        <p style="font-size: 18pt; text-align: center;">Вы не подключены к дому, для дальнеешего пользование сервисом, пожалуйста, выберите свой дом в редактировании профиля</p>
+                    </div>
+
+                    {% elif not house_confirmed %}
+                    <div class="category">
+                        <p style="font-size: 18pt; text-align: center;">Введенные Вами данные проходят проверку</p>
+                    </div>
+                    {% else %}
+
+                    <div class="category">
+                        <p style="font-size: 18pt; text-align: center;">Ваш адрес: {{ user.tenant.house.address }}</p>
+                    </div>
+
+                    {% if user.tenant.is_vol %}
+                    <div class="category">
+                        <p style="font-size: 18pt; text-align: center;">Вы волонтёр!!!!!!</p>
+                        <a href="{% url 'volunteer' %}"><button class="mdc-button">Страница для волонтерствования</button></a>
+                    </div>
+                    {% else %}
+                    <div class="category">
+                        <p>Вы не волонтёр!!!!!!</p>
+                        <a href="{% url 'test' %}"><button class="mdc-button">Пройти тест</button></a>
+                    </div>
+                    {% endif %}
+
+                    {% endif %}
                 </div>
-        {% endif %}
-
-        {% endif %}
-
-        </div>
-            <div class="bottom">
-
+                <div class="bottom">
                     <a href="{% url 'redact_profile'%}"><button class="mdc-button mdc-button--raised">
                         <span class="mdc-button__ripple"></span>Редактирование профиля</button></a>
+                </div>
+            </div>
         </div>
-        </div></div>

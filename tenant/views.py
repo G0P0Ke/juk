@@ -1,3 +1,4 @@
+"""Required modules"""
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
@@ -51,6 +52,7 @@ def my_cabinet_view(request):
             "is_tenant": True,
             "user": request.user,
             "homeless": request.user.tenant.house is None,
+            "house_confirmed": request.user.tenant.house_confirmed,
         }
     if hasattr(request.user, 'manager'):
         context = {
@@ -67,6 +69,12 @@ def my_cabinet_view(request):
 
 @login_required
 def redact_profile_view(request):
+    """
+    Изменение профиля
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     user = request.user
     context = {
         "house_doesnt_exist": False,
@@ -94,15 +102,18 @@ def redact_profile_view(request):
         username = request.POST.get('username')
         address = request.POST.get('address')
         user.username = username
-        if House.objects.filter(address=address).exists():
-            user.tenant.house = House.objects.filter(address=address)[0]
-        else:
-            context.update({
-                "house_doesnt_exist": True,
-                'form': form,
-                "user": user,
-            })
-            return render(request, 'pages/tenant/redact_profile.html', context)
+        if request.user.tenant.house is None or address != request.user.tenant.house.address:
+            user.tenant.house_confirmed = False
+            if House.objects.filter(address=address).exists():
+                user.tenant.house = House.objects.filter(address=address)[0]
+            else:
+                context.update({
+                    "house_doesnt_exist": True,
+                    'form': form,
+                    "user": user,
+                })
+                return render(request, 'pages/tenant/redact_profile.html', context)
+        user.tenant.flat = request.POST.get('flat')
         user.tenant.save()
         user.save()
         return redirect('/my_cabinet')
@@ -127,6 +138,7 @@ class Category:
     """
     Служебный класс для передачи данных в context
     """
+
     def __init__(self, name, list_of_discussions, more):
         """
         :param name: название категории
@@ -136,18 +148,32 @@ class Category:
         self.list_of_discussions = list_of_discussions
         self.more = more
 
+    def name_pylint(self):
+        """
+        Функция, возвращающая имя. Нужна для pylint
+        :return name: Имя
+        """
+        return self.name
 
-def forum_view(request, id):
+    def list_of_discussions_pylint(self):
+        """
+            Функция, возвращающая список. Нужна для pylint
+            :return name: список
+        """
+        return self.list_of_discussions()
+
+
+def forum_view(request, forum_id):
     """
     Отображение форума с конкретным id
 
     :param request: объект c деталями запроса
     :type request: :class:`django.http.HttpRequest`
-    :param id: primary key форума в БД
+    :param forum_id: primary key форума в БД
     :return: объект ответа сервера с HTML-кодом внутри
     """
     context = {}
-    forum = Forum.objects.get(pk=id)
+    forum = Forum.objects.get(pk=forum_id)
     owner = ("house" if forum.house else "company")
     # request.user.id is not AnonymousUser:
     if owner == "house":
@@ -155,10 +181,10 @@ def forum_view(request, id):
     elif owner == "company":
         context.update({"company": forum.company, })
     categories = []
-    for c in forum.categories.split('|'):
-        discussions = list(Discussion.objects.filter(category=c, forum=forum))
+    for category in forum.categories.split('|'):
+        discussions = list(Discussion.objects.filter(category=category, forum=forum))
         discussions.reverse()
-        category = Category(c, discussions[:2], len(discussions) > 2)
+        category = Category(category, discussions[:2], len(discussions) > 2)
         categories.append(category)
     context.update({
         "user": request.user,
@@ -170,10 +196,19 @@ def forum_view(request, id):
     return render(request, 'pages/tenant/forum.html', context)
 
 
-def category_view(request, id, name):
+def category_view(request, forum_id, category_name):
+    """
+    Отображение категорий, принадлежащих форуму с конкретным id
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :param forum_id: primary key форума в БД
+    :param category_name: название категории
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     context = {}
-    forum = Forum.objects.get(pk=id)
-    discussions = list(Discussion.objects.filter(category=name, forum=forum))
+    forum = Forum.objects.get(pk=forum_id)
+    discussions = list(Discussion.objects.filter(category=category_name, forum=forum))
     discussions.reverse()
     context.update({
         "user": request.user,
@@ -183,17 +218,17 @@ def category_view(request, id, name):
     return render(request, 'pages/tenant/category.html', context)
 
 
-def discussion_view(request, id):
+def discussion_view(request, discussion_id):
     """
     Отображение обсуждения в форуме
 
     :param request: объект c деталями запроса
     :type request: :class:`django.http.HttpRequest`
-    :param id: primary key обсуждеиния в БД
+    :param discussion_id: primary key обсуждеиния в БД
     :return: объект ответа сервера с HTML-кодом внутри
     """
     context = {}
-    discussion = Discussion.objects.get(pk=id)
+    discussion = Discussion.objects.get(pk=discussion_id)
     if request.method == 'POST':
         if request.user.id is AnonymousUser:
             return redirect('/login')
@@ -208,7 +243,7 @@ def discussion_view(request, id):
         return redirect('/forum/discussion/' + str(discussion.id))
     comments = discussion.comment_set.all()
     comments = list(comments)
-    #comments.reverse()
+    comments.reverse()
     context.update({
         "user": request.user,
         "discussion": discussion,
@@ -218,13 +253,13 @@ def discussion_view(request, id):
 
 
 @login_required
-def cr_discussion_view(request, id):
+def cr_discussion_view(request, forum_id):
     """
     Создание обсуждения
 
     :param request: объект c деталями запроса
     :type request: :class:`django.http.HttpRequest`
-    :param id: primary key форума в БД
+    :param forum_id: primary key форума в БД
     :return: объект ответа сервера с HTML-кодом внутри в случае, если идёт GET-запрос на страницу
     :return: перенаправление на главную страницу в случае POST-запроса
     """
@@ -234,19 +269,19 @@ def cr_discussion_view(request, id):
         category = request.POST.get('category')
         description = request.POST.get('description')
         anonymous = request.POST.get('anonymous')
-        anonymous = True if anonymous else False
+        anonymous = bool(anonymous)
         discussion = Discussion(
             theme=theme,
             category=category,
-            forum=Forum.objects.get(pk=id),
+            forum=Forum.objects.get(pk=forum_id),
             description=description,
             author=request.user,
             cr_date=datetime.datetime.now(),
             anon_allowed=anonymous,
         )
         discussion.save()
-        return redirect('/forum/discussion/' + str(discussion.id))
-    forum = Forum.objects.get(pk=id)
+        return redirect('/forum/discussion/' + str(discussion.forum_id))
+    forum = Forum.objects.get(pk=forum_id)
     categories = list(forum.categories.split('|'))
     context.update({
         "categories": categories,
@@ -256,7 +291,17 @@ def cr_discussion_view(request, id):
 
 
 def thread(request, discussion_id, thread_id):
-    thread = Comment.objects.get(id=thread_id)
+    """
+    Отображение треда
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :param discussion_id: primary key дискуссии в БД
+    :param thread_id: primary key треда в БД
+    :return: перенаправление на страницу треда
+    :return: рендер страницы треда
+    """
+    current_thread = Comment.objects.get(id=thread_id)
     discussion = Discussion.objects.get(id=discussion_id)
     comments = Comment.objects.filter(thread=thread)
     context = {
@@ -272,11 +317,11 @@ def thread(request, discussion_id, thread_id):
             cr_date=datetime.datetime.now(),
             author=request.user,
             discussion=discussion,
-            thread=thread
+            thread=current_thread
         )
         r_com.save()
         id = r_com.id
-        return redirect('/forum/discussion/' + str(discussion.id) + '/thread/' + str(thread.id))
+        return redirect('thread', discussion.id, thread.id)
     return render(request, 'pages/tenant/thread.html', context)
 
 
@@ -295,6 +340,13 @@ def company_appeals_view(request):
 
 @login_required
 def my_appeals_view(request):
+    """
+    Отображение моих обращений
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :return: отображзение страницы
+    """
     context = {}
     if hasattr(request.user, 'tenant'):
         my_appeals = request.user.tenant.appeal_set.all()
@@ -320,9 +372,17 @@ class Message:
 
 
 @login_required
-def appeal_view(request, id):
+def appeal_view(request, appeal_id):
+    """
+    Отображение обращения
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :param appeal_id: id обращения
+    :return: отображзение страницы
+    """
     context = {}
-    appeal = Appeal.objects.get(pk=id)
+    appeal = Appeal.objects.get(pk=appeal_id)
     if request.method == 'POST':
         text = request.POST.get('message')
         message = AppealMessage.objects.create(

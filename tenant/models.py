@@ -1,3 +1,6 @@
+"""
+Модули, используемые в моделях
+"""
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -53,12 +56,16 @@ class Tenant(models.Model):
         null=True,
         blank=True,
     )
+    flat = models.TextField()
     is_vol = models.BooleanField(
         default=False,
     )
     test_date = models.DateTimeField(
         null=True,
         default=None,
+    )
+    house_confirmed = models.BooleanField(
+        default=False,
     )
 
 

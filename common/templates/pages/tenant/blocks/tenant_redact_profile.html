@@ -52,11 +52,11 @@
   z-index: 1;
   background: #FFFFFF;
   max-width: 100%;
-  max-height: 700px;
+  max-height: 800px;
   min-height: 400px;
   margin: 50px auto;
   box-sizing: border-box;
-  padding: 30px 0 30px 0;
+  padding: 30px 0 10px 0;
   text-align: center;
   border-radius: 4px;
 }
@@ -92,15 +92,20 @@ margin:10px auto 0;
 background-color: var(--mdc-theme-primary);
 color: #ffffff;
 }
+button{
+background-color: var(--mdc-theme-primary);
+color: #ffffff;
+}
 
         </style>
-<p style="margin: 50px auto;font-size: 22pt; text-align: center;">Редактирование профиля жильца</p>
+<p style="margin: 20px auto;font-size: 22pt; text-align: center;">Редактирование профиля жильца</p>
+       <a class="mdc-button" style="float:right" href="{% url 'my_cabinet' %}">Вернуться в профиль</a>
 <div class="form">
     <div class="grid">
 
         <hr>
 <div class="left">
-        <a class="mdc-button" href="{% url 'my_cabinet' %}">Вернуться в профиль</a>
+
         <div>
             <label style="font-size: 15pt; text-align: center;"> Моя фотография:</label><br>
             <img src="{{ user.tenant.photo.url }}" width="260" height="250">
@@ -116,23 +121,25 @@ color: #ffffff;
 </div>
         <div class="right">
         <form method="POST">
+
                 {% csrf_token %}
                 <label style="font-size: 15pt; text-align: left;" for="username-id">Ваше имя:</label>
-                <input class="forminput" type="text" name="username" id="username-id" value={{user.username}}><br>
+                <input class="forminput" type="text" name="username" id="username-id" value="{{user.username}}" required><br>
 
             <label style="font-size: 15pt; text-align: left;" for="address-id">Ваш адрес:</label>
-                <input class="forminput" type="text" name="address" id="address-id" value="{{user.tenant.house.address}}"><br>
+                <input class="forminput" type="text" name="address" id="address-id" value="{{user.tenant.house.address}}" required><br>
+                  <label style="font-size: 15pt; text-align: left;" for="flat-id">Ваша квартира:</label>
+            <input class="forminput" style="width:30%" type="text" name="flat" id="flat-id" value="{{user.tenant.flat}}" required><br>
 
                 {% if house_doesnt_exist %}
                 <p style="font-size: 15pt;">Ваш плохой дом не подключен к нашей хорошей сети</p><br>
                 {% endif %}
-             <button class="mdc-button" style="float:left; margin:auto auto auto 10%;" onclick="from_form_to_map()">Проверить адрес на карте</button>
-        <button class="mdc-button" style="margin:auto 0 auto 10%;" onclick="from_map_to_form()">с карты в строку</button>
-                <div id="map"></div>
-
-                <input class="mdc-button mdc-button--raised" style="margin: 30px 0 0;" type="submit" value="Сохранить изменения">
+                <input class="mdc-button mdc-button--raised" type="submit" value="Сохранить изменения">
         </form>
-
+            <br><br>
+   <button class="mdc-button" style="float:left; margin:auto auto auto 10%;" onclick="from_form_to_map()">Проверить адрес на карте</button>
+             <button class="mdc-button" style="margin:auto 0 auto 10%;" onclick="from_map_to_form()">с карты в строку</button>
+                <div id="map"></div>
     </div>
     </div>
 </div>
