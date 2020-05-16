@@ -4,6 +4,14 @@
 
 <style>
 
+        a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+
     body{
     --mdc-theme-primary: #F25CA2;
     --mdc-theme-secondary: #0433BF;
@@ -140,33 +148,13 @@ border: 1px solid #FFFFF;
 
  <form action='' id="comment" method="post">
             {% csrf_token %}
-     <div class="theme">
          <div class="col">
-             <div style="margin: 10px 20px;">
-                 <h1>{{discussion.theme}}</h1>
-             </div>
+                 <p style="font-size: 25pt; text-align:center">{{discussion.theme}}</p>
          </div>
          <div class="col-1"></div>
-         <div class="col 7">
-             <div class="alert" role="alert">
-                 <h3>{{discussion.description}}</h3>
-             </div>
-         </div>
-     </div>
+                 <p style="font-size: 20pt; text-align: center;">{{discussion.description}}</p>
 
-     <div class="form-group row">
-         <div class="col-1"></div>
-         <div class="col-11">
-             <textarea name = "text" class="formtextarea" maxlength="200" id="text" placeholder="Напишите комментарий..."></textarea>
-         </div>
-     </div>
-     <div class="form-group row">
-         <div class="col-1"></div>
-         <div class="col-2">
-             <input type="submit" class="mdc-button mdc-button--raised" type="submit" value="Отправить">
-         </div>
-         <a href="{% url 'forum' id=discussion.forum.id %}"><input class="mdc-button mdc-button--outlined" value="Вернуться на форум" type="button" style="float:right;"></a>
-     </div>
+
 
 {% for item in comments %}
 
@@ -195,5 +183,18 @@ border: 1px solid #FFFFF;
 </div>
 
 {% endfor %}
+     <div class="form-group row">
+         <div class="col-1"></div>
+         <div class="col-11">
+             <textarea name = "text" class="formtextarea" maxlength="200" id="text" placeholder="Напишите комментарий..."></textarea>
+         </div>
+     </div>
+     <div class="form-group row">
+         <div class="col-1"></div>
+         <div class="col-2">
+             <input type="submit" class="mdc-button mdc-button--raised" type="submit" value="Отправить">
+         </div>
+         <a href="{% url 'forum' id=discussion.forum.id %}"><input class="mdc-button mdc-button--outlined" value="Вернуться на форум" type="button" style="float:right;"></a>
+     </div>
         </form>
 {% endblock %}

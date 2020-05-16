@@ -75,11 +75,11 @@
 
 <a href="{% url 'my_appeals'%}"><button class="mdc-button mdc-button--outlined" style="float:right"><span class="mdc-button__ripple"></span>Вернуться ко всем обсуждениям</button></a>
 
-<h3>Тема обсуждения: {{ appeal.theme }}</h3>
+<h3>Тема обращения: {{ appeal.theme }}</h3>
 
 {% if is_tenant %}
     {% if is_taken %}
-        <p>Сей диалог происходит между вами и менеджером компанией с инн {{ appeal.company.inn }}, {{ appeal.manager.username }}</p>
+        <p>Диалог между Вами и менеджером компанией с инн {{ appeal.company.inn }}, {{ appeal.manager.username }}</p>
     {% else %}
         <p>Ваше обращение к компании с инн {{ appeal.tenant.house.company.inn }} скоро будет рассмотрено</p>
     {% endif %}
@@ -87,9 +87,9 @@
 
 {% if is_manager %}
     {% if is_taken %}
-        <p>Сей диалог ведется между вами и жителем {{ appeal.tenant.user.username }}</p>
+        <p>Диалог между Вами и жителем {{ appeal.tenant.user.username }}</p>
     {% else %}
-        <p>Сие обращение исходит из жителя {{ appeal.tenant.user.username }}, он очень ждет вашего ответа</p>
+        <p>Это обращение от жителя {{ appeal.tenant.user.username }}, он очень ждет Вашего ответа</p>
     {% endif %}
 {% endif %}
 <form method="POST">
@@ -111,6 +111,8 @@
         <br>
         <span>{{ message.appealmessage.text }}</span>
     </div>
+
+<div></div>
     {% else %}
          <div class="forminput" style="background:#AACCFF;">
              <span style="color:var(--mdc-theme-secondary);">{{ message.appealmessage.creator }}</span>
@@ -118,6 +120,7 @@
              <br>
              <span >{{ message.appealmessage.text }}</span>
          </div>
+    <div></div>
     {% endif %}
     {% endfor %}
 </div>

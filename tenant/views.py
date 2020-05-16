@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import User
+
 from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task
 import datetime
 import pytz
@@ -239,6 +240,7 @@ def discussion_view(request, discussion_id):
             cr_date=datetime.datetime.now(pytz.timezone("Europe/Moscow")),
         )
         comment.save()
+        return redirect('/forum/discussion/' + str(discussion.id))
     comments = discussion.comment_set.all()
     comments = list(comments)
     comments.reverse()
@@ -393,6 +395,7 @@ def appeal_view(request, appeal_id):
         if hasattr(request.user, 'manager') and appeal.manager is None:
             appeal.manager = request.user.manager
             appeal.save()
+        return redirect('/appeal/' + str(appeal.id))
 
     messages = []
     for appealmessage in appeal.appealmessage_set.all():
