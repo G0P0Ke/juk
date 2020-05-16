@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task
 import datetime
 import pytz
-
+from django.utils import timezone
 from .forms import PhotoUpload
 
 from django.http import Http404
@@ -591,3 +591,90 @@ def test_view(request):
         request.user.tenant.is_vol = True
         request.user.tenant.save()
     return render(request, 'pages/tenant/test.html', context)
+
+
+@login_required
+def my_pass_view(request):
+    context = {
+        'user': request.user,
+        'my_pass': Pass.objects.filter(author=request.user, status='active'),
+    }
+    return render(request, 'pages/tenant/my_pass.html', context)
+
+
+@login_required
+def cr_pass_view(request):
+    context = {
+        "user": request.user,
+    }
+    if request.method == 'POST':
+        if request.POST.get('target') == 'person':
+            pas = Pass(
+                author=request.user,
+                cr_date=timezone.now(),
+                status='active',
+                target=request.POST.get('target'),
+                name=request.POST.get('name'),
+                surname=request.POST.get('surname'),
+                patronymic=request.POST.get('patronymic'),
+                aim=request.POST.get('aim'),
+            )
+            pas.save()
+            return redirect('/tenant/pass/' + str(pas.id))
+        else:
+            pas = Pass(
+                author=request.user,
+                cr_date=timezone.now(),
+                status='active',
+                target=request.POST.get('target'),
+                model=request.POST.get('model'),
+                color=request.POST.get('color'),
+                number=request.POST.get('number'),
+                aim=request.POST.get('aim'),
+            )
+            pas.save()
+            return redirect('/tenant/pass/' + str(pas.id))
+    return render(request, 'pages/tenant/cr_pass.html', context)
+
+
+@login_required
+def pass_view(request, pass_id):
+    pas = Pass.objects.get(id=pass_id)
+    tenant = 1
+    if hasattr(request.user, 'manager'):
+        tenant = 0
+    link = "https://api.qrserver.com/v1/create-qr-code/?data=http://127.0.0.1:8000/tenant/pass/"\
+           + str(pass_id) + "&size=400x400"
+    hours = int((datetime.timedelta(days=3) - (timezone.now() - pas.cr_date)).seconds // 3600)
+    if 10 <= hours <= 20:
+        hours = str(hours)+' часов'
+    elif hours % 10 == 1:
+        hours = str(hours) + ' час'
+    elif hours % 10 == 2 or hours % 10 == 3 or hours % 10 == 4:
+        hours = str(hours) + ' часа'
+    else:
+        hours = str(hours) + ' часов'
+    minutes = ((datetime.timedelta(days=3) - (timezone.now() - pas.cr_date)).seconds % 3600) // 60
+    if 10 <= minutes <= 20:
+        minutes = str(minutes) + ' минут'
+    elif minutes % 10 == 1:
+        minutes = str(minutes) + ' минут'
+    elif minutes % 10 == 2 or minutes % 10 == 3 or minutes % 10 == 4:
+        minutes = str(minutes) + ' минуты'
+    else:
+        minutes = str(minutes) + ' минут'
+    context = {
+        'user': request.user,
+        'pass': pas,
+        'tenant': tenant,
+        'link': link,
+        'days': (datetime.timedelta(days=3)-(timezone.now()-pas.cr_date)).days,
+        'hours': hours,
+        'minutes': minutes,
+    }
+    if request.method == 'POST':
+        pas.status = 'complete'
+        pas.save()
+        return redirect('/')
+    return render(request, 'pages/tenant/pass.html', context)
+
