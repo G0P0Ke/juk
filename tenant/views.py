@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import User
 
-from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task
+from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task, Pass
 import datetime
 import pytz
 from django.utils import timezone
@@ -218,6 +218,7 @@ def category_view(request, forum_id, category_name):
     return render(request, 'pages/tenant/category.html', context)
 
 
+@login_required()
 def discussion_view(request, discussion_id):
     """
     Отображение обсуждения в форуме
@@ -233,21 +234,29 @@ def discussion_view(request, discussion_id):
         if request.user.id is AnonymousUser:
             return redirect('/login')
         text = request.POST.get('text')
+        anon = bool(request.POST.get('anonymous'))
         comment = Comment.objects.create(
             text=text,
             discussion=discussion,
             author=request.user,
             cr_date=datetime.datetime.now(pytz.timezone("Europe/Moscow")),
+            anon=anon,
         )
         comment.save()
         return redirect('/forum/discussion/' + str(discussion.id))
+    if hasattr(request.user, 'tenant'):
+        photo_url = request.user.tenant.photo.url
+        print(photo_url)
+    if hasattr(request.user, 'manager'):
+        photo_url = request.user.manager.photo.url
     comments = discussion.comment_set.all()
     comments = list(comments)
-    comments.reverse()
+    #comments.reverse()
     context.update({
         "user": request.user,
         "discussion": discussion,
         "comments": comments,
+        "photo_url": photo_url,
     })
     return render(request, 'pages/tenant/discussion.html', context)
 
@@ -280,7 +289,7 @@ def cr_discussion_view(request, forum_id):
             anon_allowed=anonymous,
         )
         discussion.save()
-        return redirect('/forum/discussion/' + str(discussion.forum_id))
+        return redirect('/forum/discussion/' + str(discussion.id))
     forum = Forum.objects.get(pk=forum_id)
     categories = list(forum.categories.split('|'))
     context.update({

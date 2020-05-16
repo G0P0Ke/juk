@@ -67,7 +67,7 @@
     <div>
 <p style="font-size: 25pt; margin-left: 15px; text-align:center">Обсуждения по темам:</p>
 {% for category in categories %}
-        <a href="{% url 'category' id=forum.id name=category.name%}"> <button class="category ms-motion-slideUpIn $ms-motion-duration-4">
+        <a href="{% url 'category' forum_id=forum.id category_name=category.name%}"> <button class="category ms-motion-slideUpIn $ms-motion-duration-4">
     <p>{{ category.name }}</p></button></a>
 
 
@@ -78,7 +78,7 @@
 
 <div style="margin-top:50px; margin-left:30%;">
 <p style="font-size:15pt;">Не нашли ответ на интересующий Вас вопрос?</p></div>
-<a href="{% url 'cr_discussion' id=forum.id%}">
+<a href="{% url 'cr_discussion' forum_id=forum.id%}">
     <button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:30%; margin-left:35%">  <span class="mdc-button__ripple"></span>Создать обсуждение</button>
 </a>
 

@@ -166,6 +166,9 @@ class Comment(models.Model):
         default=None,
         null=True,
     )
+    anon = models.BooleanField(
+        default=False
+    )
 
 
 class Appeal(models.Model):
