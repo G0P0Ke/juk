@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import User
 
-from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task
+from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task, Pass
 import datetime
 import pytz
 import requests
@@ -620,6 +620,7 @@ def main_page(request):
     }
     return render(request, 'main.html', context)
 
+
 def my_pass_view(request):
     context = {
         'user': request.user,
@@ -671,7 +672,8 @@ def pass_view(request, pass_id):
         tenant = 0
     link = "https://api.qrserver.com/v1/create-qr-code/?data=http://127.0.0.1:8000/tenant/pass/"\
            + str(pass_id) + "&size=400x400"
-    hours = int((datetime.timedelta(days=3) - (timezone.now() - pas.cr_date)).seconds // 3600)
+    ti_del = datetime.timedelta(days=3) - (timezone.now() - pas.cr_date)
+    hours = int(ti_del.seconds // 3600)
     if 10 <= hours <= 20:
         hours = str(hours)+' часов'
     elif hours % 10 == 1:
@@ -680,7 +682,7 @@ def pass_view(request, pass_id):
         hours = str(hours) + ' часа'
     else:
         hours = str(hours) + ' часов'
-    minutes = ((datetime.timedelta(days=3) - (timezone.now() - pas.cr_date)).seconds % 3600) // 60
+    minutes = (ti_del.seconds % 3600) // 60
     if 10 <= minutes <= 20:
         minutes = str(minutes) + ' минут'
     elif minutes % 10 == 1:
@@ -694,11 +696,11 @@ def pass_view(request, pass_id):
         'pass': pas,
         'tenant': tenant,
         'link': link,
-        'days': (datetime.timedelta(days=3)-(timezone.now()-pas.cr_date)).days,
+        'days': ti_del.days,
         'hours': hours,
         'minutes': minutes,
     }
-    if request.method == 'POST':
+    if request.method == 'POST' or ti_del < datetime.timedelta(days=0):
         pas.status = 'complete'
         pas.save()
         return redirect('/')

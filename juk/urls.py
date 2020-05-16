@@ -43,7 +43,7 @@ urlpatterns = [
     path('tenant/my_cabinet', tenant_views.my_cabinet_view, name='my_cabinet'),
     #path('tenant/profile/', tenant_views.profile, name='profile'),
     path('tenant/redact_profile', tenant_views.redact_profile_view, name='redact_profile'),
-    path('tenant/main', tenant_views.main_page, name='main_page'),
+    path('tenant', tenant_views.main_page, name='main_page'),
 
     path('forum/<int:id>', tenant_views.forum_view, name="forum"),
     path('forum/discussion/<int:id>', tenant_views.discussion_view, name="discussion"),
@@ -63,6 +63,6 @@ urlpatterns = [
     path('tenant/pass', tenant_views.my_pass_view, name="my_pass"),
     path('tenant/pass/<int:pass_id>', tenant_views.pass_view, name="pass"),
     path('tenant/pass/cr_pass', tenant_views.cr_pass_view, name="cr_pass"),
-    #path('manager/pass', manager_views.pass_view, name="manager_pass"),
-    #path('manager/pass/<int:house_id>', manager_views.pass_list_view, name="pass_list"),
+    path('manager/pass', manager_views.pass_view, name="manager_pass"),
+    path('manager/pass/<int:house_id>', manager_views.pass_list_view, name="pass_list"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
