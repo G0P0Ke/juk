@@ -3,12 +3,17 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import User
+
 from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task
 import datetime
 import pytz
+<<<<<<< HEAD
 import requests
 import urllib
 
+=======
+from django.utils import timezone
+>>>>>>> 700e6c1af8d6d3ad071a6103030de418592dfa39
 from .forms import PhotoUpload
 
 from django.http import Http404
@@ -53,6 +58,7 @@ def my_cabinet_view(request):
             "is_tenant": True,
             "user": request.user,
             "homeless": request.user.tenant.house is None,
+            "house_confirmed": request.user.tenant.house_confirmed,
         }
     if hasattr(request.user, 'manager'):
         context = {
@@ -102,15 +108,18 @@ def redact_profile_view(request):
         username = request.POST.get('username')
         address = request.POST.get('address')
         user.username = username
-        if House.objects.filter(address=address).exists():
-            user.tenant.house = House.objects.filter(address=address)[0]
-        else:
-            context.update({
-                "house_doesnt_exist": True,
-                'form': form,
-                "user": user,
-            })
-            return render(request, 'pages/tenant/redact_profile.html', context)
+        if request.user.tenant.house is None or address != request.user.tenant.house.address:
+            user.tenant.house_confirmed = False
+            if House.objects.filter(address=address).exists():
+                user.tenant.house = House.objects.filter(address=address)[0]
+            else:
+                context.update({
+                    "house_doesnt_exist": True,
+                    'form': form,
+                    "user": user,
+                })
+                return render(request, 'pages/tenant/redact_profile.html', context)
+        user.tenant.flat = request.POST.get('flat')
         user.tenant.save()
         user.save()
         return redirect('/my_cabinet')
@@ -237,6 +246,7 @@ def discussion_view(request, discussion_id):
             cr_date=datetime.datetime.now(pytz.timezone("Europe/Moscow")),
         )
         comment.save()
+        return redirect('/forum/discussion/' + str(discussion.id))
     comments = discussion.comment_set.all()
     comments = list(comments)
     comments.reverse()
@@ -333,6 +343,7 @@ def company_appeals_view(request):
     })
     return render(request, 'pages/tenant/my_appeals.html', context)
 
+
 @login_required
 def my_appeals_view(request):
     """
@@ -351,6 +362,7 @@ def my_appeals_view(request):
         "my_appeals": my_appeals,
     })
     return render(request, 'pages/tenant/my_appeals.html', context)
+
 
 class Message:
     """
@@ -389,6 +401,7 @@ def appeal_view(request, appeal_id):
         if hasattr(request.user, 'manager') and appeal.manager is None:
             appeal.manager = request.user.manager
             appeal.save()
+        return redirect('/appeal/' + str(appeal.id))
 
     messages = []
     for appealmessage in appeal.appealmessage_set.all():
@@ -609,3 +622,88 @@ def main_page(request):
         "user": request.user,
     }
     return render(request, 'main.html', context)
+
+def my_pass_view(request):
+    context = {
+        'user': request.user,
+        'my_pass': Pass.objects.filter(author=request.user, status='active'),
+    }
+    return render(request, 'pages/tenant/my_pass.html', context)
+
+
+@login_required
+def cr_pass_view(request):
+    context = {
+        "user": request.user,
+    }
+    if request.method == 'POST':
+        if request.POST.get('target') == 'person':
+            pas = Pass(
+                author=request.user,
+                cr_date=timezone.now(),
+                status='active',
+                target=request.POST.get('target'),
+                name=request.POST.get('name'),
+                surname=request.POST.get('surname'),
+                patronymic=request.POST.get('patronymic'),
+                aim=request.POST.get('aim'),
+            )
+            pas.save()
+            return redirect('/tenant/pass/' + str(pas.id))
+        else:
+            pas = Pass(
+                author=request.user,
+                cr_date=timezone.now(),
+                status='active',
+                target=request.POST.get('target'),
+                model=request.POST.get('model'),
+                color=request.POST.get('color'),
+                number=request.POST.get('number'),
+                aim=request.POST.get('aim'),
+            )
+            pas.save()
+            return redirect('/tenant/pass/' + str(pas.id))
+    return render(request, 'pages/tenant/cr_pass.html', context)
+
+
+@login_required
+def pass_view(request, pass_id):
+    pas = Pass.objects.get(id=pass_id)
+    tenant = 1
+    if hasattr(request.user, 'manager'):
+        tenant = 0
+    link = "https://api.qrserver.com/v1/create-qr-code/?data=http://127.0.0.1:8000/tenant/pass/"\
+           + str(pass_id) + "&size=400x400"
+    hours = int((datetime.timedelta(days=3) - (timezone.now() - pas.cr_date)).seconds // 3600)
+    if 10 <= hours <= 20:
+        hours = str(hours)+' часов'
+    elif hours % 10 == 1:
+        hours = str(hours) + ' час'
+    elif hours % 10 == 2 or hours % 10 == 3 or hours % 10 == 4:
+        hours = str(hours) + ' часа'
+    else:
+        hours = str(hours) + ' часов'
+    minutes = ((datetime.timedelta(days=3) - (timezone.now() - pas.cr_date)).seconds % 3600) // 60
+    if 10 <= minutes <= 20:
+        minutes = str(minutes) + ' минут'
+    elif minutes % 10 == 1:
+        minutes = str(minutes) + ' минут'
+    elif minutes % 10 == 2 or minutes % 10 == 3 or minutes % 10 == 4:
+        minutes = str(minutes) + ' минуты'
+    else:
+        minutes = str(minutes) + ' минут'
+    context = {
+        'user': request.user,
+        'pass': pas,
+        'tenant': tenant,
+        'link': link,
+        'days': (datetime.timedelta(days=3)-(timezone.now()-pas.cr_date)).days,
+        'hours': hours,
+        'minutes': minutes,
+    }
+    if request.method == 'POST':
+        pas.status = 'complete'
+        pas.save()
+        return redirect('/')
+    return render(request, 'pages/tenant/pass.html', context)
+

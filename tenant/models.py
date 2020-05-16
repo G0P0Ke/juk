@@ -56,12 +56,16 @@ class Tenant(models.Model):
         null=True,
         blank=True,
     )
+    flat = models.TextField()
     is_vol = models.BooleanField(
         default=False,
     )
     test_date = models.DateTimeField(
         null=True,
         default=None,
+    )
+    house_confirmed = models.BooleanField(
+        default=False,
     )
 
 
@@ -245,3 +249,18 @@ class Task(models.Model):
     status = models.TextField(
         max_length=10
     )
+
+
+class Pass(models.Model):
+    author = models.ForeignKey(to=User, on_delete=models.CASCADE)  # Автор
+    cr_date = models.DateTimeField()  # Дата создания
+    status = models.TextField()  # 'active' или 'complete'
+    target = models.TextField()  # 'person' или 'car'
+    name = models.TextField(null=True, blank=True)  # Имя посетителя
+    surname = models.TextField(null=True, blank=True)  # Фамилия посетителя
+    patronymic = models.TextField(null=True, blank=True)  # Отчество посетителя
+    model = models.TextField(null=True, blank=True)  # Марка и модель машины
+    color = models.TextField(null=True, blank=True)  # Цвет машины
+    number = models.TextField(null=True, blank=True)  # Номер машины
+    aim = models.TextField()  # Цель визита
+

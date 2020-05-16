@@ -38,6 +38,7 @@ urlpatterns = [
     path('manager/company_forums/', manager_views.company_forums_view, name='company_forums'),
     path('manager/company_appeals/', manager_views.company_appeals_view, name='company_appeals'),
     path('manager/add_house/', manager_views.add_house_view, name='add_house'),
+    path('manager/tenant_confirming/', manager_views.tenant_confirming_view, name='tenant_confirming'),
 
     path('tenant/my_cabinet', tenant_views.my_cabinet_view, name='my_cabinet'),
     #path('tenant/profile/', tenant_views.profile, name='profile'),
@@ -59,4 +60,9 @@ urlpatterns = [
     path('vol/help', tenant_views.help_view, name="help"),
     path('vol/help/cr_task', tenant_views.cr_task_view, name="cr_task"),
     path('vol/task/<int:id>', tenant_views.task_view, name="task"),
+    path('tenant/pass', tenant_views.my_pass_view, name="my_pass"),
+    path('tenant/pass/<int:pass_id>', tenant_views.pass_view, name="pass"),
+    path('tenant/pass/cr_pass', tenant_views.cr_pass_view, name="cr_pass"),
+    #path('manager/pass', manager_views.pass_view, name="manager_pass"),
+    #path('manager/pass/<int:house_id>', manager_views.pass_list_view, name="pass_list"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
