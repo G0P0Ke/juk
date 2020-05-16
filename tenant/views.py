@@ -51,6 +51,7 @@ def my_cabinet_view(request):
             "is_tenant": True,
             "user": request.user,
             "homeless": request.user.tenant.house is None,
+            "house_confirmed": request.user.tenant.house_confirmed,
         }
     if hasattr(request.user, 'manager'):
         context = {
@@ -100,15 +101,18 @@ def redact_profile_view(request):
         username = request.POST.get('username')
         address = request.POST.get('address')
         user.username = username
-        if House.objects.filter(address=address).exists():
-            user.tenant.house = House.objects.filter(address=address)[0]
-        else:
-            context.update({
-                "house_doesnt_exist": True,
-                'form': form,
-                "user": user,
-            })
-            return render(request, 'pages/tenant/redact_profile.html', context)
+        if request.user.tenant.house is None or address != request.user.tenant.house.address:
+            user.tenant.house_confirmed = False
+            if House.objects.filter(address=address).exists():
+                user.tenant.house = House.objects.filter(address=address)[0]
+            else:
+                context.update({
+                    "house_doesnt_exist": True,
+                    'form': form,
+                    "user": user,
+                })
+                return render(request, 'pages/tenant/redact_profile.html', context)
+        user.tenant.flat = request.POST.get('flat')
         user.tenant.save()
         user.save()
         return redirect('/my_cabinet')
@@ -331,6 +335,7 @@ def company_appeals_view(request):
     })
     return render(request, 'pages/tenant/my_appeals.html', context)
 
+
 @login_required
 def my_appeals_view(request):
     """
@@ -349,6 +354,7 @@ def my_appeals_view(request):
         "my_appeals": my_appeals,
     })
     return render(request, 'pages/tenant/my_appeals.html', context)
+
 
 class Message:
     """

@@ -38,6 +38,7 @@ urlpatterns = [
     path('manager/company_forums/', manager_views.company_forums_view, name='company_forums'),
     path('manager/company_appeals/', manager_views.company_appeals_view, name='company_appeals'),
     path('manager/add_house/', manager_views.add_house_view, name='add_house'),
+    path('manager/tenant_confirming/', manager_views.tenant_confirming_view, name='tenant_confirming'),
 
     path('my_cabinet', tenant_views.my_cabinet_view, name='my_cabinet'),
     #path('tenant/profile/', tenant_views.profile, name='profile'),

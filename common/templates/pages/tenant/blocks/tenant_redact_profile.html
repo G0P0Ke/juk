@@ -25,18 +25,21 @@
             <input type="submit" value="Обновить фото" class="button">
         </form>
         <form method="POST">
-                {% csrf_token %}
-                <label for="username-id">Ваше имя:</label>
-                <input type="text" name="username" id="username-id" value={{user.username}}><br>
+            {% csrf_token %}
+            <label for="username-id">Ваше имя:</label>
+            <input type="text" name="username" id="username-id" value={{user.username}} required><br>
 
-                <label for="address-id">Ваш адрес:</label>
-                <input style="width:600px" type="text" name="address" id="address-id" value="{{user.tenant.house.address}}"><br>
+            <label for="flat-id">Ваша квартира:</label>
+            <input type="text" name="flat" id="flat-id" value={{user.tenant.flat}} required><br>
 
-                {% if house_doesnt_exist %}
-                <a>Ваш плохой дом не подключен к нашей хорошей сети</a><br>
-                {% endif %}
+            <label for="address-id">Ваш адрес:</label>
+            <input style="width:600px" type="text" name="address" id="address-id" value="{{user.tenant.house.address}}" required><br>
 
-                <input type="submit" value="Сохранить изменения">
+            {% if house_doesnt_exist %}
+            <a>Ваш плохой дом не подключен к нашей хорошей сети</a><br>
+            {% endif %}
+
+            <input type="submit" value="Сохранить изменения">
         </form>
         <button onclick="from_form_to_map()">Проверить адрес на карте</button>
         <button onclick="from_map_to_form()">с карты в строку</button>

@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import CreateNewsForm
 from .models import News
-from tenant.models import Appeal, House, Forum
+from tenant.models import Appeal, House, Forum, Tenant
 
 
 def news_page(request):
@@ -106,3 +106,31 @@ def add_house_view(request):
         forum.save()
         return redirect('/')
     return render(request, 'pages/manager/add_house.html', context)
+
+
+class HouseContext:
+    def __init__(self, house, unconfirmed_tenants):
+        self.house = house
+        self.unconfirmed_tenants = unconfirmed_tenants
+
+
+@login_required
+def tenant_confirming_view(request):
+    if request.method == 'POST':
+        tenant_id = request.POST.get('confirming')
+        tenant = Tenant.objects.get(pk=tenant_id)
+        tenant.house_confirmed = True
+        tenant.save()
+    houses = []
+    for house in House.objects.all():
+        tenants = []
+        for tenant in house.tenant_set.all():
+            if not tenant.house_confirmed:
+                tenants.append(tenant)
+        if tenants != []:
+            houses.append(HouseContext(house, tenants))
+    context = {
+        "user": request.user,
+        "houses": houses,
+    }
+    return render(request, 'pages/manager/tenant_confirming.html', context)
