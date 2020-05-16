@@ -82,12 +82,12 @@ margin:10px auto 0;
 
                     {% if homeless %}
                     <div class="category">
-                        <a>Вы не подключены к дому, для дальнеешего пользование сервисом, пожалуйста, выберите свой дом в редактировании профиля</a>
+                        <p style="font-size: 18pt; text-align: center;">Вы не подключены к дому, для дальнеешего пользование сервисом, пожалуйста, выберите свой дом в редактировании профиля</p>
                     </div>
 
                     {% elif not house_confirmed %}
                     <div class="category">
-                        <h3>Введенные вами данные проходят проверку</h3>
+                        <p style="font-size: 18pt; text-align: center;">Введенные Вами данные проходят проверку</p>
                     </div>
                     {% else %}
 
@@ -106,7 +106,10 @@ margin:10px auto 0;
                         <a href="{% url 'test' %}"><button class="mdc-button">Пройти тест</button></a>
                     </div>
                     {% endif %}
-
+                    <div class="category">
+                        <a href="{% url 'help' %}"><button class="mdc-button">Запросы помощи</button></a>
+                    </div>
+                    
                     {% endif %}
                 </div>
                 <div class="bottom">

@@ -45,11 +45,11 @@ urlpatterns = [
     path('tenant/redact_profile', tenant_views.redact_profile_view, name='redact_profile'),
     path('tenant', tenant_views.main_page, name='main_page'),
 
-    path('forum/<int:id>', tenant_views.forum_view, name="forum"),
-    path('forum/discussion/<int:id>', tenant_views.discussion_view, name="discussion"),
+    path('forum/<int:forum_id>', tenant_views.forum_view, name="forum"),
+    path('forum/discussion/<int:discussion_id>', tenant_views.discussion_view, name="discussion"),
     path('forum/discussion/<int:discussion_id>/thread/<int:thread_id>', tenant_views.thread, name="thread"),
-    path('forum/<int:id>/cr_discussion', tenant_views.cr_discussion_view, name="cr_discussion"),
-    path('forum/<int:id>/category/<str:name>', tenant_views.category_view, name="category"),
+    path('forum/<int:forum_id>/cr_discussion', tenant_views.cr_discussion_view, name="cr_discussion"),
+    path('forum/<int:forum_id>/category/<str:category_name>', tenant_views.category_view, name="category"),
 
     path('my_appeals', tenant_views.my_appeals_view, name="my_appeals"),
     path('appeal/<int:id>', tenant_views.appeal_view, name="appeal"),

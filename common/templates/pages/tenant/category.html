@@ -42,24 +42,24 @@
 </style>
 
 <div>
-    <a href="{% url 'forum' id=forum.id%}"><input class="mdc-button" value="Вернуться" type="button" style="margin: 0 30%; width: 40%;"></a>
+    <a href="{% url 'forum' forum_id=forum.id%}"><input class="mdc-button" value="Вернуться" type="button" style="margin: 0 30%; width: 40%;"></a>
 
     {% for discussion in discussions %}
-    <a href="{% url 'discussion' id=discussion.id%}"><button class="category ms-motion-slideUpIn $ms-motion-duration-4"><span style="float:left">{{ discussion.theme }}</span><br>
+    <a href="{% url 'discussion' discussion_id=discussion.id %}"><button class="category ms-motion-slideUpIn $ms-motion-duration-4"><span style="float:left">{{ discussion.theme }}</span><br>
         <span style="float:left; font-size:13pt">{{ discussion.description }}</span>
     </button></a>
 <br>
 {% endfor %}
 
     {% for category in categories %}
-        <a href="{% url 'category' id=forum.id%}"> <button class="category ms-motion-slideUpIn $ms-motion-duration-4">
+        <a href="{% url 'category' forum_id=forum.id %}"> <button class="category ms-motion-slideUpIn $ms-motion-duration-4">
     <p>{{ category.name }}</p>
   </button>
         </a>
  {% for discussion in category.list_of_discussions %}
-     <a href="{% url 'discussion' id=discussion.id%}"><button style="color:rgb(0, 178, 203)">{{ discussion.theme }}</button></a>
+     <a href="{% url 'discussion' discussion_id=discussion.id %}"><button style="color:rgb(0, 178, 203)">{{ discussion.theme }}</button></a>
 <br>
-    <a href="{% url 'discussion' id=discussion.id%}"><button>{{ discussion.description }}</button></a>
+    <a href="{% url 'discussion' discussion_id=discussion.id %}"><button>{{ discussion.description }}</button></a>
 <br>
 <br>
 {% endfor %}
