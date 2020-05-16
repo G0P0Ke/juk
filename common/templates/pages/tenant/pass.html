@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<a href="{% url 'my_pass' %}">
+<button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:25%; margin-left:75%; margin-up:10%"><span class="mdc-button__ripple"></span>Вернуться</button>
+</a>
+{% if pass.status == 'active' %}
+{% if pass.target == 'person' %}
+<h1>Пропуск на человека</h1>
+<p>ФИО: {{ pass.surname }} {{ pass.name }} {{ pass.patronymic }}</p>
+<p>Цель визита: {{ pass.aim }}</p>
+<p>Осталось: {{ days }} {% if days == 1 %}день{% else %}дня{% endif %}, {{ hours }}, {{ minutes }}</p>
+<time datetime="{{days}}d {{hours}}h {{minutes}}m">LOL</time>
+{% endif %}
+{% if pass.target == 'car' %}
+<h1>Пропуск на машину</h1>
+<p>Машина: {{ pass.color }} {{ pass.model }} {{ pass.number }}</p>
+<p>Цель визита: {{ pass.aim }}</p>
+<p>Осталось: {{ days }} {% if days == 1 %}день{% else %}дня{% endif %}, {{ hours }}, {{ minutes }}</p>
+{% endif %}
+{% if tenant %}
+<p>Передайте данный QR-код посетителю и попросите предъявить этот QR-код на посту охраны</p>
+<img src={{link}} alt="Что-то полшло не так...">
+{% else %}
+<form method="POST">
+  {% csrf_token %}
+    <button type="submit">Завершить пропуск</button>
+  </div>
+</form>
+{% endif %}
+{% else %}
+<p>Этот пропуск был использован. Спасибо, что используете JUK!</p>
+{% endif %}
+{% endblock %}

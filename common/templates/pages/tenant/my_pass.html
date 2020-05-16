@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<a href="{% url 'cr_pass' %}">
+<button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:25%; margin-left:15%; margin-up:10%"><span class="mdc-button__ripple"></span>Заказать пропуск</button>
+</a>
+<a href="{% url 'my_cabinet' %}">
+<button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:25%; margin-left:15%; margin-up:10%"><span class="mdc-button__ripple"></span>Вернуться</button>
+</a>
+<h1>Мои пропуска</h1>
+{% for pass in my_pass %}
+    {% if pass.target == 'person' %}
+    <a href="{% url 'pass' pass_id=pass.id %}">
+        <button class="category">
+            <p>ФИО: {{ pass.surname }} {{ pass.name }} {{ pass.patronymic }}</p>
+            <p>Цель визита: {{ pass.aim }}</p>
+        </button>
+    </a>
+    <hr>
+    {% endif %}
+    {% if pass.target == 'car' %}
+    <a href="{% url '/tenant/pass' pass_id=pass.id%}">
+        <button class="category">
+            <p>Машина: {{ pass.color }} {{ pass.model }} {{ pass.number }}</p>
+            <p>Цель визита: {{ pass.aim }}</p>
+        </button>
+    </a>
+    <hr>
+    {% endif %}
+{% endfor %}
+{% endblock %}
