@@ -39,9 +39,10 @@ urlpatterns = [
     path('manager/company_appeals/', manager_views.company_appeals_view, name='company_appeals'),
     path('manager/add_house/', manager_views.add_house_view, name='add_house'),
 
-    path('my_cabinet', tenant_views.my_cabinet_view, name='my_cabinet'),
+    path('tenant/my_cabinet', tenant_views.my_cabinet_view, name='my_cabinet'),
     #path('tenant/profile/', tenant_views.profile, name='profile'),
-    path('redact_profile', tenant_views.redact_profile_view, name='redact_profile'),
+    path('tenant/redact_profile', tenant_views.redact_profile_view, name='redact_profile'),
+    path('tenant/main', tenant_views.main_page, name='main_page'),
 
     path('forum/<int:id>', tenant_views.forum_view, name="forum"),
     path('forum/discussion/<int:id>', tenant_views.discussion_view, name="discussion"),

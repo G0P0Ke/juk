@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task
 import datetime
 import pytz
+import requests
+import urllib
 
 from .forms import PhotoUpload
 
@@ -582,3 +584,28 @@ def test_view(request):
         request.user.tenant.is_vol = True
         request.user.tenant.save()
     return render(request, 'pages/tenant/test.html', context)
+
+
+@login_required
+def main_page(request):
+    weather_api_key = "9894f93c-6bb8-45a2-95e2-6eee7ea9ab53"
+    geocode_api_key = "443a74a8-0a3e-48db-aa8d-9ca2a3cfc5d7"
+
+    #будет для каждого индивидуально после подключения домов
+    geo_url = urllib.parse.urlencode({ 'apikey' : geocode_api_key,
+                                       'address' : 'Москва, Тверская улица, дом 7',
+                                       'format' : 'json',
+                                       })
+
+
+    geo_url = "https://geocode-maps.yandex.ru/1.x/?"+geo_url
+    print(geo_url)
+    geo_recv = requests.get(url=geo_url)
+    print(geo_recv.text)
+
+
+    r = requests.get(url="https://api.weather.yandex.ru/v1/forecast?")
+    context = {
+        "user": request.user,
+    }
+    return render(request, 'main.html', context)
