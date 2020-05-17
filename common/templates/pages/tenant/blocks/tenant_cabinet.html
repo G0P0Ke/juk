@@ -98,18 +98,17 @@ margin:10px auto 0;
                     {% if user.tenant.is_vol %}
                     <div class="category">
                         <p style="font-size: 18pt; text-align: center;">Вы волонтёр!!!!!!</p>
-                        <a href="{% url 'volunteer' %}"><button class="mdc-button">Страница для волонтерствования</button></a>
+                        <a href="{% url 'volunteer' %}"><button class="mdc-button">Страница для волонтерствования</button></a><br>
+                        <a href="{% url 'help' %}"><button class="mdc-button">Запросы помощи</button></a>
                     </div>
                     {% else %}
                     <div class="category">
                         <p>Вы не волонтёр!!!!!!</p>
                         <a href="{% url 'test' %}"><button class="mdc-button">Пройти тест</button></a>
-                    </div>
-                    {% endif %}
-                    <div class="category">
                         <a href="{% url 'help' %}"><button class="mdc-button">Запросы помощи</button></a>
                     </div>
-                    
+                    {% endif %}
+
                     {% endif %}
                 </div>
                 <div class="bottom">
