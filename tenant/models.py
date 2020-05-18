@@ -166,6 +166,9 @@ class Comment(models.Model):
         default=None,
         null=True,
     )
+    anon = models.BooleanField(
+        default=False
+    )
 
 
 class Appeal(models.Model):
@@ -252,6 +255,9 @@ class Task(models.Model):
 
 
 class Pass(models.Model):
+    """
+    Модель БД для пропусков
+    """
     author = models.ForeignKey(to=User, on_delete=models.CASCADE)  # Автор
     cr_date = models.DateTimeField()  # Дата создания
     status = models.TextField()  # 'active' или 'complete'

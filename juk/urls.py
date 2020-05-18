@@ -43,13 +43,13 @@ urlpatterns = [
     path('tenant/my_cabinet', tenant_views.my_cabinet_view, name='my_cabinet'),
     #path('tenant/profile/', tenant_views.profile, name='profile'),
     path('tenant/redact_profile', tenant_views.redact_profile_view, name='redact_profile'),
-    path('tenant/main', tenant_views.main_page, name='main_page'),
+    path('tenant', tenant_views.main_page, name='main_page'),
 
-    path('forum/<int:id>', tenant_views.forum_view, name="forum"),
-    path('forum/discussion/<int:id>', tenant_views.discussion_view, name="discussion"),
+    path('forum/<int:forum_id>', tenant_views.forum_view, name="forum"),
+    path('forum/discussion/<int:discussion_id>', tenant_views.discussion_view, name="discussion"),
     path('forum/discussion/<int:discussion_id>/thread/<int:thread_id>', tenant_views.thread, name="thread"),
-    path('forum/<int:id>/cr_discussion', tenant_views.cr_discussion_view, name="cr_discussion"),
-    path('forum/<int:id>/category/<str:name>', tenant_views.category_view, name="category"),
+    path('forum/<int:forum_id>/cr_discussion', tenant_views.cr_discussion_view, name="cr_discussion"),
+    path('forum/<int:forum_id>/category/<str:category_name>', tenant_views.category_view, name="category"),
 
     path('my_appeals', tenant_views.my_appeals_view, name="my_appeals"),
     path('appeal/<int:id>', tenant_views.appeal_view, name="appeal"),
@@ -63,6 +63,6 @@ urlpatterns = [
     path('tenant/pass', tenant_views.my_pass_view, name="my_pass"),
     path('tenant/pass/<int:pass_id>', tenant_views.pass_view, name="pass"),
     path('tenant/pass/cr_pass', tenant_views.cr_pass_view, name="cr_pass"),
-    #path('manager/pass', manager_views.pass_view, name="manager_pass"),
-    #path('manager/pass/<int:house_id>', manager_views.pass_list_view, name="pass_list"),
+    path('manager/pass', manager_views.pass_view, name="manager_pass"),
+    path('manager/pass/<int:house_id>', manager_views.pass_list_view, name="pass_list"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

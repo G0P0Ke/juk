@@ -162,11 +162,19 @@ border: 1px solid #FFFFF;
     <div class="col-1"></div>
     <div class="col-1.5">
         <div class="alert shadow" style="background-color: #FFFFFF; color:#F25CA2;" role="alert">
-            <div align = "center"> {{item.author}} </div>
+            {% if item.anon %}
+            <div align = "center"> Аноним </div>
             <div class="media">
-                <img src="{{ user.manager.photo.url }}"  width="140" height="140"  align = "left" alt="...">
+                <img src="/media/static/default.jpg"  width="140" height="140"  align = "left" alt="...">
             </div>
             <div align = "center"> Роль </div>
+            {% else %}
+            <div align = "center"> {{item.author}} </div>
+            <div class="media">
+                <img src="{{ photo_url }}"  width="140" height="140"  align = "left" alt="...">
+            </div>
+            <div align = "center"> Роль </div>
+            {% endif %}
         </div>
     </div>
     <div class="col-9">
@@ -191,10 +199,20 @@ border: 1px solid #FFFFF;
      </div>
      <div class="form-group row">
          <div class="col-1"></div>
-         <div class="col-2">
+
+
+         <div class="col-4">
              <input type="submit" class="mdc-button mdc-button--raised" type="submit" value="Отправить">
          </div>
-         <a href="{% url 'forum' id=discussion.forum.id %}"><input class="mdc-button mdc-button--outlined" value="Вернуться на форум" type="button" style="float:right;"></a>
+
+         {% if discussion.anon_allowed %}
+        <label for="anonymous" style="float:left; font-size:14pt; margin: 5px -30% 0 0;">Анонимность</label>
+         <div class="col-4">
+             <input type="checkbox" name="anonymous" id="anonymous">
+         </div>
+         {% endif %}
+
+         <a href="{% url 'forum' forum_id=discussion.forum.id %}"><input class="mdc-button mdc-button--outlined" value="Вернуться на форум" type="button" style="float:right;"></a>
      </div>
-        </form>
+ </form>
 {% endblock %}
