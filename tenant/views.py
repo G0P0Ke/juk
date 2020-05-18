@@ -9,6 +9,7 @@ import datetime
 import pytz
 import requests
 import urllib
+import json
 
 from django.utils import timezone
 from .forms import PhotoUpload
@@ -598,23 +599,46 @@ def test_view(request):
 
 @login_required
 def main_page(request):
-    weather_api_key = "9894f93c-6bb8-45a2-95e2-6eee7ea9ab53"
-    geocode_api_key = "443a74a8-0a3e-48db-aa8d-9ca2a3cfc5d7"
+    #weather_api_key = "9894f93c-6bb8-45a2-95e2-6eee7ea9ab53"
+    #Fedor key na zapas =)
+    geocode_api_key = "ec60fb43-78d5-4e2e-af7c-da42c1300dbf"
+    weather_api_key = "232ad7f1-a856-4ecd-92ad-30ea041f1b1e" #my key
+
+    geocode = "Москва, Тверская улица, дом 7'"
 
     #будет для каждого индивидуально после подключения домов
     geo_url = urllib.parse.urlencode({ 'apikey' : geocode_api_key,
-                                       'address' : 'Москва, Тверская улица, дом 7',
+                                       'geocode' : geocode,
                                        'format' : 'json',
+                                       'kind' : 'house',
+                                       'results' : '1',
                                        })
 
 
     geo_url = "https://geocode-maps.yandex.ru/1.x/?"+geo_url
-    print(geo_url)
     geo_recv = requests.get(url=geo_url)
-    print(geo_recv.text)
+    first_json= json.loads(geo_recv.text)["response"]["GeoObjectCollection"]["featureMember"]
+    point = first_json[0]["GeoObject"]["Point"]["pos"]
+    point = point.split()
+    
+    lat = point[1]
+    lon = point[0]
 
+    forecast_url = urllib.parse.urlencode({ 'lat' : lat,
+                                            'lon' : lon,
+                                            'limit' : "1",
+                                            'hours' : 'false',
+                                            })
 
-    r = requests.get(url="https://api.weather.yandex.ru/v1/forecast?")
+    forecast_url = "https://api.weather.yandex.ru/v1/forecast?" + forecast_url
+
+    r = requests.get(url=forecast_url, headers={"X-Yandex-API-Key" : weather_api_key})
+    forecasts = json.loads(r.text)["forecasts"][0]
+    fore_night = forecasts["night"]
+    fore_morning = forecasts["morning"]
+    fore_day = forecasts["day"]
+    fore_evening = forecasts["evening"]
+    print(forecasts)
     context = {
         "user": request.user,
     }
