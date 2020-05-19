@@ -643,13 +643,20 @@ def main_page(request):
 
     r = requests.get(url=forecast_url, headers={"X-Yandex-API-Key" : weather_api_key})
     forecasts = json.loads(r.text)["forecasts"][0]
-    fore_night = forecasts["night"]
-    fore_morning = forecasts["morning"]
-    fore_day = forecasts["day"]
-    fore_evening = forecasts["evening"]
-    print(forecasts)
+    fore_night = forecasts["parts"]["night"]
+    fore_morning = forecasts["parts"]["morning"]
+    fore_day = forecasts["parts"]["day"]
+    fore_evening = forecasts["parts"]["evening"]
     context = {
         "user": request.user,
+        "night": fore_night["temp_avg"],
+        "morning": fore_morning["temp_avg"],
+        "day": fore_day["temp_avg"],
+        "evening": fore_evening["temp_avg"],
+        "night_icon": fore_night["icon"],
+        "morning_icon": fore_morning["icon"],
+        "day_icon": fore_day["icon"],
+        "evening_icon": fore_evening["icon"],
     }
     return render(request, 'main.html', context)
 

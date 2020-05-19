@@ -32,9 +32,8 @@ body{
 
 .wrapper > div{
   background:#eee;
-  padding:2em;
-  opacity: 1;
-  border-radius: 7px;
+  padding:0;
+  opacity:1;
 }
 
 .square{
@@ -61,18 +60,43 @@ body{
     background:#ddd;
 }
 
+
 .wrapper > div > img{
-    object-fit: cover;
-    width: 100%;
-    max-height: 100%;
-    padding-top: 10px;
-}
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 15%;
+    padding-left: 10%;
+    height: 70%;
+    width: 80%; 
+    position: center;
+    object-fit: fill;  
+  }
 
 .wrapper > div > .title{
-    margin-top: -15px;
-    margin-left: -15px;
+    margin-top: 16px;
+    margin-left: 16px;
+    margin-bottom: -15%;
     font-size: 18px;
     position: center;
+}
+
+.weather > p{
+    padding-top: 10%;
+    margin-top: 15%;
+    margin-left: 10%;
+    font-size: 18px;
+    
+}
+
+.weather > p > img{
+    width: 30%;
+    height: 10%;
+    vertical-align: middle;
+}
+
+
+.wrapper > .rectangle-big > img{
+  height: 80%;
 }
 
 
