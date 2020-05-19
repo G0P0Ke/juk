@@ -13,42 +13,69 @@
 
     <div class="rectangle-big">
         <div class="title">Новости</div>
-        <img src="rectangle.png">
+        
+        
     </div>
 
     <div class="rectangle-horizontal " onclick="window.location.href='forum'">
         <div class="title">Форум</div>
-        <img src="rectangle.png">
+        
+        
     </div>
 
     <div class="rectangle-vertical" onclick="window.location.href='https://yandex.ru/pogoda/moscow'">
-        <div class="title">Погода</div>
-        <img src="vrectangle.png">
+        <div class="title">Погода у вас дома</div>
+        <div class="weather">
+            <p>
+            Ночью: {{night}}°C
+            <img src="https://yastatic.net/weather/i/icons/blueye/color/svg/{{night_icon}}.svg"></img>
+             </p>
+        </div>
+         <div class="weather">
+            <p>
+            Утром: {{morning}}°C
+            <img src="https://yastatic.net/weather/i/icons/blueye/color/svg/{{morning_icon}}.svg"></img>
+             </p>
+        </div>
+        <div class="weather">
+            <p>
+            Днём: {{day}}°C
+            <img src="https://yastatic.net/weather/i/icons/blueye/color/svg/{{day_icon}}.svg"></img>
+             </p>
+        </div>
+         <div class="weather">
+            <p>
+            Вечером: {{evening}}°C
+            <img src="https://yastatic.net/weather/i/icons/blueye/color/svg/{{evening_icon}}.svg"></img>
+             </p>
+        </div>
+        
+        
     </div>
 
-    <div class="square" onclick="window.location.href='my_cabinet'">
+    <div class="square" onclick="window.location.href='/tenant/my_cabinet'">
         <div class="title">Личный кабинет</div>
-        <img src="settings.png">
+        <img src={{user.tenant.photo.url}}>
     </div>
 
      <div class="square" onclick="window.location.href='news'">
         <div class="title">Мои задания</div>
-        <img src="settings.png">
+        
     </div>
 
     <div class="square" onclick="window.location.href='vol/test'">
         <div class="title">Волонтерство</div>
-        <img src="settings.png">
+        
     </div>
 
     <div class="rectangle-horizontal" onclick="window.location.href='news'">
         <div class="title">Обращения</div>
-        <img src="rectangle.png">
+        
     </div>
 
     <div class="rectangle-horizontal" onclick="window.location.href='passes'">
         <div class="title">Пропуски</div>
-        <img src="rectangle.png">
+        
     </div>
 
   </div>

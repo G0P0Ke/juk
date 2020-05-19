@@ -64,8 +64,9 @@ body{
 .wrapper > div > img{
     object-fit: cover;
     width: 100%;
+    border-radius: 4px;
     max-height: 100%;
-    padding-top: 10px;
+    padding-top: 30px;
 }
 
 .wrapper > div > .title{

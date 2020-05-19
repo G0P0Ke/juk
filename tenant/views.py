@@ -9,6 +9,7 @@ import datetime
 import pytz
 import requests
 import urllib
+import json
 
 from django.utils import timezone
 from .forms import PhotoUpload
@@ -607,27 +608,58 @@ def test_view(request):
 
 @login_required
 def main_page(request):
-    weather_api_key = "9894f93c-6bb8-45a2-95e2-6eee7ea9ab53"
-    geocode_api_key = "443a74a8-0a3e-48db-aa8d-9ca2a3cfc5d7"
+    #weather_api_key = "9894f93c-6bb8-45a2-95e2-6eee7ea9ab53"
+    #Fedor key na zapas =)
+    geocode_api_key = "ec60fb43-78d5-4e2e-af7c-da42c1300dbf"
+    weather_api_key = "232ad7f1-a856-4ecd-92ad-30ea041f1b1e" #my key
+
+    geocode = "Москва, Тверская улица, дом 7'"
 
     #будет для каждого индивидуально после подключения домов
     geo_url = urllib.parse.urlencode({ 'apikey' : geocode_api_key,
-                                       'address' : 'Москва, Тверская улица, дом 7',
+                                       'geocode' : geocode,
                                        'format' : 'json',
+                                       'kind' : 'house',
+                                       'results' : '1',
                                        })
 
 
     geo_url = "https://geocode-maps.yandex.ru/1.x/?"+geo_url
-    print(geo_url)
     geo_recv = requests.get(url=geo_url)
-    print(geo_recv.text)
+    first_json= json.loads(geo_recv.text)["response"]["GeoObjectCollection"]["featureMember"]
+    point = first_json[0]["GeoObject"]["Point"]["pos"]
+    point = point.split()
+    
+    lat = point[1]
+    lon = point[0]
 
+    forecast_url = urllib.parse.urlencode({ 'lat' : lat,
+                                            'lon' : lon,
+                                            'limit' : "1",
+                                            'hours' : 'false',
+                                            })
 
-    r = requests.get(url="https://api.weather.yandex.ru/v1/forecast?")
+    forecast_url = "https://api.weather.yandex.ru/v1/forecast?" + forecast_url
+
+    r = requests.get(url=forecast_url, headers={"X-Yandex-API-Key" : weather_api_key})
+    forecasts = json.loads(r.text)["forecasts"][0]
+    fore_night = forecasts["parts"]["night"]
+    fore_morning = forecasts["parts"]["morning"]
+    fore_day = forecasts["parts"]["day"]
+    fore_evening = forecasts["parts"]["evening"]
     context = {
         "user": request.user,
+        "night": fore_night["temp_avg"],
+        "morning": fore_morning["temp_avg"],
+        "day": fore_day["temp_avg"],
+        "evening": fore_evening["temp_avg"],
+        "night_icon": fore_night["icon"],
+        "morning_icon": fore_morning["icon"],
+        "day_icon": fore_day["icon"],
+        "evening_icon": fore_evening["icon"],
     }
     return render(request, 'main.html', context)
+
 
 def my_pass_view(request):
     context = {
@@ -680,7 +712,8 @@ def pass_view(request, pass_id):
         tenant = 0
     link = "https://api.qrserver.com/v1/create-qr-code/?data=http://127.0.0.1:8000/tenant/pass/"\
            + str(pass_id) + "&size=400x400"
-    hours = int((datetime.timedelta(days=3) - (timezone.now() - pas.cr_date)).seconds // 3600)
+    ti_del = datetime.timedelta(days=3) - (timezone.now() - pas.cr_date)
+    hours = int(ti_del.seconds // 3600)
     if 10 <= hours <= 20:
         hours = str(hours)+' часов'
     elif hours % 10 == 1:
@@ -689,7 +722,7 @@ def pass_view(request, pass_id):
         hours = str(hours) + ' часа'
     else:
         hours = str(hours) + ' часов'
-    minutes = ((datetime.timedelta(days=3) - (timezone.now() - pas.cr_date)).seconds % 3600) // 60
+    minutes = (ti_del.seconds % 3600) // 60
     if 10 <= minutes <= 20:
         minutes = str(minutes) + ' минут'
     elif minutes % 10 == 1:
@@ -703,11 +736,11 @@ def pass_view(request, pass_id):
         'pass': pas,
         'tenant': tenant,
         'link': link,
-        'days': (datetime.timedelta(days=3)-(timezone.now()-pas.cr_date)).days,
+        'days': ti_del.days,
         'hours': hours,
         'minutes': minutes,
     }
-    if request.method == 'POST':
+    if request.method == 'POST' or ti_del < datetime.timedelta(days=0):
         pas.status = 'complete'
         pas.save()
         return redirect('/')

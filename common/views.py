@@ -57,8 +57,8 @@ def login_view(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    #userу надо добавить поле роль, чтобы редактировать от этого страницу
-                    return redirect('tenant/main')
+                    #  user'у надо добавить поле роль, чтобы редактировать от этого страницу
+                    return redirect('/tenant')
                 else:
                     context.update({
                         'error': 'Аккаунт отключён',

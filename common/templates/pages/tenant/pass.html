@@ -10,7 +10,6 @@
 <p>ФИО: {{ pass.surname }} {{ pass.name }} {{ pass.patronymic }}</p>
 <p>Цель визита: {{ pass.aim }}</p>
 <p>Осталось: {{ days }} {% if days == 1 %}день{% else %}дня{% endif %}, {{ hours }}, {{ minutes }}</p>
-<time datetime="{{days}}d {{hours}}h {{minutes}}m">LOL</time>
 {% endif %}
 {% if pass.target == 'car' %}
 <h1>Пропуск на машину</h1>
@@ -22,10 +21,10 @@
 <p>Передайте данный QR-код посетителю и попросите предъявить этот QR-код на посту охраны</p>
 <img src={{link}} alt="Что-то полшло не так...">
 {% else %}
+<p>Пропуск заказан из квартиры №{{ author.tenant.flat }}</p>
 <form method="POST">
   {% csrf_token %}
     <button type="submit">Завершить пропуск</button>
-  </div>
 </form>
 {% endif %}
 {% else %}
