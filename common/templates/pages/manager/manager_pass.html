@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<a href="{% url 'manager_main'%}"><button class="mdc-button mdc-button--outlined" style="float:right"><span class="mdc-button__ripple"></span>Вернуться на главную</button></a>
+
+<h3>Список домов компании {{ company_inn }}</h3>
+
+{% for house in house_list %}
+    <a href="{% url 'pass_list' house_id=house.id %}"><button class="mdc-button mdc-button--outlined" style="float:right"><span class="mdc-button__ripple"></span>Пропуска дома с адресом {{ house.address }}</button></a>
+    <br><br>
+{% endfor %}
+
+{% endblock %}
+

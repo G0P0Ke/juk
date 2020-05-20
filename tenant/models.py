@@ -1,3 +1,6 @@
+"""
+Модули, используемые в моделях
+"""
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -32,13 +35,20 @@ class Tenant(models.Model):
         Модель жильца
 
         :param user: Пользователь
+        :param photo: фото жителя
         :param house: дом проживания пользователя
         :param is_vol: является ли житель волонтёром
         :param test_date: Время последнего прохождения (None eсли попыток не было)
         """
+
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
+    )
+    photo = models.ImageField(
+        upload_to='photo',
+        blank=True,
+        default='static/default.jpg',
     )
     house = models.ForeignKey(
         House,
@@ -46,12 +56,34 @@ class Tenant(models.Model):
         null=True,
         blank=True,
     )
+    flat = models.TextField()
     is_vol = models.BooleanField(
         default=False,
     )
     test_date = models.DateTimeField(
         null=True,
         default=None,
+    )
+    house_confirmed = models.BooleanField(
+        default=False,
+    )
+
+
+class Manager(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+    )
+    company = models.ForeignKey(
+        Company,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+    photo = models.ImageField(
+        upload_to='photo',
+        blank=True,
+        default='static/default.jpg',
     )
 
 
@@ -128,11 +160,14 @@ class Comment(models.Model):
         on_delete=models.CASCADE
     )
     cr_date = models.DateTimeField()
-    thread = models.ForeignKey(
-        to='Comment',
-        on_delete=models.CASCADE,
-        default=None,
-        null=True,
+    #thread = models.ForeignKey(
+    #    to='Comment',
+    #    on_delete=models.CASCADE,
+    #    default=None,
+    #    null=True,
+    #)
+    anon = models.BooleanField(
+        default=False
     )
 
 
@@ -141,20 +176,22 @@ class Appeal(models.Model):
         Модель обращения
 
         :param theme: Тема обращения
-        :param user: житель обращения
-        :param company: Компания обращения
+        :param tenant: житель обращения
+        :param manager: менеджер компании обращения
         :param cr_date: Дата создания обращения
         """
     theme = models.TextField()
-    user = models.ForeignKey(
-        to=User,
+    tenant = models.ForeignKey(
+        to=Tenant,
+        on_delete=models.CASCADE,
         null=True,
-        on_delete=models.CASCADE
+        blank=True,
     )
-    company = models.ForeignKey(
-        to=Company,
+    manager = models.ForeignKey(
+        to=Manager,
         null=True,
-        on_delete=models.CASCADE
+        blank=True,
+        on_delete=models.CASCADE,
     )
     cr_date = models.DateTimeField()
 
@@ -165,16 +202,17 @@ class AppealMessage(models.Model):
 
         :param text: Текст сообщения
         :param appeal: обращение сообщения
-        :param creator: Создатель ("company" или "tenant")
+        :param creator: Создатель
         :param cr_date: Дата создания сообщения
         """
     text = models.TextField()
     appeal = models.ForeignKey(
         to=Appeal,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
     )
-    creator = models.TextField(
-        default="tenant"
+    creator = models.ForeignKey(
+        to=User,
+        on_delete=models.CASCADE,
     )
     cr_date = models.DateTimeField()
 
@@ -198,11 +236,11 @@ class Task(models.Model):
         max_length=100,
     )
     author = models.ForeignKey(
-        to=Tenant,
+        to=User,
         on_delete=models.CASCADE,
     )
     volunteer = models.ForeignKey(
-        to=User,
+        to=Tenant,
         null=True,
         blank=True,
         default=None,
@@ -214,6 +252,42 @@ class Task(models.Model):
     status = models.TextField(
         max_length=10
     )
-    address = models.TextField(
-        max_length=100
+
+
+class Pass(models.Model):
+    """
+    Модель БД для пропусков
+    """
+    author = models.ForeignKey(
+        to=User,
+        on_delete=models.CASCADE
     )
+    cr_date = models.DateTimeField()
+    status = models.TextField()  # 'active' или 'complete'
+    target = models.TextField()  # 'person' или 'car'
+    name = models.TextField(
+        null=True,
+        blank=True,
+    )  # Имя посетителя
+    surname = models.TextField(
+        null=True,
+        blank=True,
+    )  # Фамилия посетителя
+    patronymic = models.TextField(
+        null=True,
+        blank=True,
+    )  # Отчество посетителя
+    model = models.TextField(
+        null=True,
+        blank=True,
+    )  # Марка и модель машины
+    color = models.TextField(
+        null=True,
+        blank=True,
+    )  # Цвет машины
+    number = models.TextField(
+        null=True,
+        blank=True,
+    )  # Номер машины
+    aim = models.TextField()  # Цель визита
+

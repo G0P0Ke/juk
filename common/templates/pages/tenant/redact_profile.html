@@ -3,38 +3,15 @@
 {% block content %}
 
 
-        {% load static %}
-        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=9d32ec24-ae67-45da-9cb2-a1d51686e32b" type="text/javascript"></script>
-        <script src="{% static 'map.js' %}"></script>
-	    <style>
-        #map {
-            margin: 10px auto;
-            width: 800px;
-            height: 500px;
-        }
-        </style>
-        <h1 style="margin: 50px auto;">Редактирование профиля жильца</h1>
-        <hr>
 
-        <a href="{% url 'profile' username=user.username %}">Вернуться в профиль</a>
 
-        <form method="POST">
-                {% csrf_token %}
-                <label for="username-id">Ваше имя:</label>
-                <input type="text" name="username" id="username-id" value={{user.username}}><br>
+{% if is_tenant %}
+    {% include "pages/tenant/blocks/tenant_redact_profile.html" %}
+{% endif %}
 
-                <label for="address-id">Ваш адрес:</label>
-                <input type="text" name="address" id="address-id" value={{user.tenant.house.address} style="width:600px" }><br>
-
-                {% if house_doesnt_exist %}
-                <a>Ваш плохой дом не подключен к нашей хорошей сети</a><br>
-                {% endif %}
-
-                <input type="submit" value="Сохранить изменения">
-        </form>
-        <button onclick="from_form_to_map()">Проверить адрес на карте</button>
-        <button onclick="from_map_to_form()">с карты в строку</button>
-                <div id="map"></div>
+{% if is_manager %}
+    {% include "pages/tenant/blocks/manager_redact_profile.html" %}
+{% endif %}
 
 
 

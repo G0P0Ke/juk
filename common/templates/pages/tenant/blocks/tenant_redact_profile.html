@@ -1,0 +1,145 @@
+{% load static %}
+
+        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=9d32ec24-ae67-45da-9cb2-a1d51686e32b" type="text/javascript"></script>
+        <script src="{% static 'map.js' %}"></script>
+	    <style>
+        #map {
+            margin: 10px 0 auto 10%;
+            width: 90%px;
+            height: 400px;
+        }
+         a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+
+    .themes{
+    width:100%;
+    border: 1px solid #FFFFF;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 40px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+    }
+
+
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-error: #b00020;
+    }
+
+    .category {
+    width: 90%;
+    min-height: 60px;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #fafafa;
+    border: 0;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 20pt;
+    margin: 15px 5%;
+}
+
+    .form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 100%;
+  max-height: 800px;
+  min-height: 400px;
+  margin: 50px auto;
+  box-sizing: border-box;
+  padding: 30px 0 10px 0;
+  text-align: center;
+  border-radius: 4px;
+}
+.left{
+  grid-area: left;
+}
+.right{
+  grid-area: right;
+}
+.bottom{
+margin:10px auto 0;
+  grid-area: bottom;
+}
+.grid {
+  display: grid;
+  grid-template: "left right right" auto
+                 "left right right" auto;
+ grid-gap: 5px;
+}
+.forminput {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 80%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+}
+.form1 input{
+background-color: var(--mdc-theme-primary);
+color: #ffffff;
+}
+button{
+background-color: var(--mdc-theme-primary);
+color: #ffffff;
+}
+
+        </style>
+<p style="margin: 20px auto;font-size: 22pt; text-align: center;">Редактирование профиля жильца</p>
+       <a class="mdc-button" style="float:right" href="{% url 'tenant_my_cabinet' %}">Вернуться в профиль</a>
+<div class="form">
+    <div class="grid">
+
+        <hr>
+<div class="left">
+
+        <div>
+            <label style="font-size: 15pt; text-align: center;"> Моя фотография:</label><br>
+            <img src="{{ user.tenant.photo.url }}" width="260" height="250">
+        </div>
+        <form action="" method="post" class="form1" enctype="multipart/form-data">
+            <div class="form-group ">
+                {% csrf_token %}
+                {{ form.photo.errors }}
+                {{ form.photo }}
+            </div>
+            <input class="mdc-button mdc-button--outlined" type="submit" value="Обновить фото" class="button">
+        </form>
+</div>
+        <div class="right">
+        <form method="POST">
+
+                {% csrf_token %}
+                <label style="font-size: 15pt; text-align: left;" for="username-id">Ваше имя:</label>
+                <input class="forminput" type="text" name="username" id="username-id" value="{{user.username}}" required><br>
+
+            <label style="font-size: 15pt; text-align: left;" for="address-id">Ваш адрес:</label>
+                <input class="forminput" type="text" name="address" id="address-id" value="{{user.tenant.house.address}}" required><br>
+                  <label style="font-size: 15pt; text-align: left;" for="flat-id">Ваша квартира:</label>
+            <input class="forminput" style="width:30%" type="text" name="flat" id="flat-id" value="{{user.tenant.flat}}" required><br>
+
+                {% if house_doesnt_exist %}
+                <p style="font-size: 15pt;">Ваш плохой дом не подключен к нашей хорошей сети</p><br>
+                {% endif %}
+                <input class="mdc-button mdc-button--raised" type="submit" value="Сохранить изменения">
+        </form>
+            <br><br>
+   <button class="mdc-button" style="float:left; margin:auto auto auto 10%;" onclick="from_form_to_map()">Проверить адрес на карте</button>
+             <button class="mdc-button" style="margin:auto 0 auto 10%;" onclick="from_map_to_form()">с карты в строку</button>
+                <div id="map"></div>
+    </div>
+    </div>
+</div>
