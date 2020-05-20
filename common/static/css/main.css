@@ -1,0 +1,105 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body{
+   font-family: 'Open Sans',serif;
+}
+
+.wrapper{
+  padding-left:160px;
+  padding-right:160px;
+  padding-top: 80px;
+  display:grid;
+  background-color:white;
+  grid-template-columns: repeat(7,1fr);
+  grid-auto-rows:minmax(auto, 100px);
+  grid-gap:1em;
+  background: rgba(0,0,0,0);
+}
+
+@media only screen and (max-width: 1400px) {
+  .wrapper {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+}
+
+
+@media only screen and (max-width: 1000px) {
+  .wrapper {
+    grid-template-columns: repeat(5,1fr);
+  }
+}
+
+.wrapper > div{
+  background:#eee;
+  padding:0;
+  opacity:1;
+}
+
+.square{
+    grid-column:span 1;
+    grid-row:span 2;
+}
+
+.rectangle-horizontal{
+    grid-column:span 2;
+    grid-row:span 2;
+}
+
+.rectangle-vertical{
+    grid-column:span 1;
+    grid-row:span 4;
+}
+
+.rectangle-big{
+    grid-column:span 3;
+    grid-row:span 4;
+}
+
+.wrapper > div:hover{
+    background:#ddd;
+}
+
+
+.wrapper > div > img{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 15%;
+    padding-left: 10%;
+    height: 70%;
+    width: 80%; 
+    position: center;
+    object-fit: fill;  
+  }
+
+.wrapper > div > .title{
+    margin-top: 16px;
+    margin-left: 16px;
+    margin-bottom: -15%;
+    font-size: 18px;
+    position: center;
+}
+
+.weather > p{
+    padding-top: 10%;
+    margin-top: 15%;
+    margin-left: 10%;
+    font-size: 18px;
+    
+}
+
+.weather > p > img{
+    width: 30%;
+    height: 10%;
+    vertical-align: middle;
+}
+
+
+.wrapper > .rectangle-big > img{
+  height: 80%;
+}
+
+
+/*.wrapper > div:nth-child(odd){
+  background:#ddd;
+}*/

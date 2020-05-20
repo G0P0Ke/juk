@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+
+    .themes{
+    width:100%;
+    border: 1px solid #FFFFF;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 40px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+    }
+
+
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-error: #b00020;
+    }
+
+    .category {
+    width: 80%;
+    min-height: 60px;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    border: 0;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 20pt;
+    margin: 10px 10%;
+    white-space: normal;
+    overflow: hidden;
+    word-break: break-word;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+</style>
+
+<br><br>
+{% if user.tenant.is_vol %}
+<a href="{% url 'volunteer' %}"><input class="mdc-button"  value="Вернуться к заданиям для волонтеров" type="button" style="float: right"></a>
+<a href="{% url 'help' %}"><input class="mdc-button" value="Вернуться к моим запросам помощи" type="button" style="float: left"></a>
+{% else %}
+<a href="{% url 'help' %}"><input class="mdc-button" value="Вернуться к моим запросам помощи" type="button" style="float: right"></a>
+{% endif %}
+<br>
+<br>
+<div class="themes">
+<p style="font-size: 25pt; text-align: center;">{{ task.description }}</p>
+    <div class="category">
+    <p style="font-size: 20pt;">{{ task.task }}</p>
+    <p style="font-size: 15pt; text-align: center;"> Автор: {{ task.author.username }}</p>
+{% if is_taken %}
+    <p style="font-size: 15pt; text-align: center;"> Это задание выполняет: {{ task.volunteer.user.username }}</p>
+{% endif %}
+</div>
+<form method="POST">
+    {% csrf_token %}
+    {% if my_task and is_taken %}
+    <input type="hidden" value="closed" name="status">
+    <input class="mdc-button mdc-button--raised" type="submit" value="Закрыть задание" style="width:30%; margin-left: 35%;">
+    {% elif my_task and is_opened %}
+    <input type="hidden" value="closed" name="status">
+    <input class="mdc-button mdc-button--raised" type="submit" value="Закрыть задание" style="width:30%; margin-left: 35%;">
+    {% elif is_opened %}
+    <input type="hidden" value="taken" name="status">
+    <input class="mdc-button mdc-button--raised" type="submit" value="Взяться за задание" style="width:30%; margin-left: 35%;">
+    {% elif is_taken %}
+    <p style="font-size: 15pt; text-align: center; color:var(--mdc-theme-primary)">Вы откликнулись на это задание</p>
+    {% endif %}
+</form>
+</div>
+
+
+{% endblock %}

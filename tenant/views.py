@@ -1,9 +1,18 @@
+"""Required modules"""
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
-from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task
-import datetime
 from django.contrib.auth.models import User
+
+from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task, Pass
+import datetime
+import pytz
+import requests
+import urllib
+import json
+
+from django.utils import timezone
+from .forms import PhotoUpload
 
 from django.http import Http404
 
@@ -34,54 +43,90 @@ from django.http import Http404
 #     return render(request, 'pages/tenant/profile.html', context)
 
 
-def profile_view(request, username):
+@login_required
+def my_cabinet_view(request):
     """
-    Профиль пользователя
+    Личный кабинет жителя
 
     :param request: объект с деталями запроса.
-    :param username: имя пользователя.
     :return: объект ответа сервера с HTML-кодом внутри
     """
-    try:
-        user = User.objects.get(username=username)
-        context = {
-            "user": user,
-            "homeless": request.user.tenant.house is None,
-        }
-        print(context.get("homeless"))
-        # c = Company.objects.create(inn=666) #tmp    common/templates/pages/tenant/
-        # h = House.objects.create(address="Улица Крылатские Холмы 15к2", company=c)#tmp
-        # t = Tenant.objects.create(user=request.user, house=h)  # tmp
-        # f = Forum.objects.create(house=h, categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое")#tmp
-        # f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
-        # request.user.tenant.house = h
-        return render(request, 'pages/tenant/profile.html', context)
-    except User.DoesNotExist:
-        raise Http404
+    context = {
+        "is_tenant": True,
+        "user": request.user,
+        "homeless": request.user.tenant.house is None,
+        "house_confirmed": request.user.tenant.house_confirmed,
+    }
+    #c = Company.objects.create(inn=666) #tmp
+    #f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
+    #c.save()
+    #f2.save()
+    return render(request, 'pages/tenant/my_cabinet.html', context)
 
 
 @login_required
 def redact_profile_view(request):
+    """
+    Изменение профиля
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
+    user = request.user
     context = {
         "house_doesnt_exist": False,
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
     }
     if request.method == 'POST':
+        form = PhotoUpload(request.POST, request.FILES)
+        if form.is_valid():
+            photo = form.cleaned_data.get('photo')
+            if hasattr(request.user, 'tenant'):
+                user.tenant.photo = photo
+                user.tenant.save(update_fields=['photo'])
+            if hasattr(request.user, 'manager'):
+                user.manager.photo = photo
+                user.manager.save(update_fields=['photo'])
+            context.update({
+                "user": request.user,
+                "form": form,
+            })
+            return render(request, 'pages/tenant/redact_profile.html', context)
+    else:
+        form = PhotoUpload()
+    if request.method == 'POST' and hasattr(request.user, 'tenant'):
         username = request.POST.get('username')
         address = request.POST.get('address')
-        request.user.username = username
-        if House.objects.filter(address=address).exists():
-            request.user.tenant.house = House.objects.get(address=address)
-        else:
-            context.update({
-                "house_doesnt_exist": True,
-                "user": request.user,
-            })
-            return render(request, 'redact_profile.html', context)
-        print(request.user.username)
-        request.user.tenant.save()
-        return redirect('profile/' + str(request.user.username))
+        user.username = username
+        if request.user.tenant.house is None or address != request.user.tenant.house.address:
+            user.tenant.house_confirmed = False
+            if House.objects.filter(address=address).exists():
+                user.tenant.house = House.objects.filter(address=address)[0]
+            else:
+                context.update({
+                    "house_doesnt_exist": True,
+                    'form': form,
+                    "user": user,
+                })
+                return render(request, 'pages/tenant/redact_profile.html', context)
+        user.tenant.flat = request.POST.get('flat')
+        user.tenant.save()
+        user.save()
+        return redirect('/tenant/my_cabinet')
+    if request.method == 'POST' and hasattr(request.user, 'manager'):
+        username = request.POST.get('username')
+        company_inn = request.POST.get('company_inn')
+        user.username = username
+        user.manager.company = Company.objects.filter(inn=company_inn)[0]
+        user.manager.save()
+        user.save()
+        return redirect('manager/my_cabinet')
+
     context.update({
-        "user": request.user,
+        "user": user,
+        'form': form,
+        "companies": Company.objects.all(),
     })
     return render(request, 'pages/tenant/redact_profile.html', context)
 
@@ -90,6 +135,7 @@ class Category:
     """
     Служебный класс для передачи данных в context
     """
+
     def __init__(self, name, list_of_discussions, more):
         """
         :param name: название категории
@@ -99,18 +145,32 @@ class Category:
         self.list_of_discussions = list_of_discussions
         self.more = more
 
+    def name_pylint(self):
+        """
+        Функция, возвращающая имя. Нужна для pylint
+        :return name: Имя
+        """
+        return self.name
 
-def forum_view(request, id):
+    def list_of_discussions_pylint(self):
+        """
+            Функция, возвращающая список. Нужна для pylint
+            :return name: список
+        """
+        return self.list_of_discussions()
+
+
+def forum_view(request, forum_id):
     """
     Отображение форума с конкретным id
 
     :param request: объект c деталями запроса
     :type request: :class:`django.http.HttpRequest`
-    :param id: primary key форума в БД
+    :param forum_id: primary key форума в БД
     :return: объект ответа сервера с HTML-кодом внутри
     """
     context = {}
-    forum = Forum.objects.get(pk=id)
+    forum = Forum.objects.get(pk=forum_id)
     owner = ("house" if forum.house else "company")
     # request.user.id is not AnonymousUser:
     if owner == "house":
@@ -118,75 +178,93 @@ def forum_view(request, id):
     elif owner == "company":
         context.update({"company": forum.company, })
     categories = []
-    for c in forum.categories.split('|'):
-        discussions = list(Discussion.objects.filter(category=c, forum=forum))
+    for category in forum.categories.split('|'):
+        discussions = list(Discussion.objects.filter(category=category, forum=forum))
         discussions.reverse()
-        category = Category(c, discussions[:2], len(discussions) > 2)
+        category = Category(category, discussions[:2], len(discussions) > 2)
         categories.append(category)
     context.update({
         "user": request.user,
         "forum": forum,
         "categories": categories,
-        "house_forum": (True if owner == "house" else False),
-        "company_forum": (True if owner == "company" else False),
+        "house_forum": owner == "house",
+        "company_forum": owner == "company",
     })
-    return render(request, 'pages/tenant/forum.html', context)
+    if request.user is not AnonymousUser:
+        context.update({
+            "is_tenant": hasattr(request.user, 'tenant'),
+            "is_manager": hasattr(request.user, 'manager'),
+        })
+    return render(request, 'pages/tenant/forums/forum.html', context)
 
 
-def category_view(request, id, name):
+def category_view(request, forum_id, category_name):
+    """
+    Отображение категорий, принадлежащих форуму с конкретным id
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :param forum_id: primary key форума в БД
+    :param category_name: название категории
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     context = {}
-    forum = Forum.objects.get(pk=id)
-    discussions = list(Discussion.objects.filter(category=name, forum=forum))
+    forum = Forum.objects.get(pk=forum_id)
+    discussions = list(Discussion.objects.filter(category=category_name, forum=forum))
     discussions.reverse()
     context.update({
         "user": request.user,
         "forum": forum,
         "discussions": discussions,
     })
-    return render(request, 'pages/tenant/category.html', context)
+    return render(request, 'pages/tenant/forums/category.html', context)
 
 
-def discussion_view(request, id):
+@login_required
+def discussion_view(request, discussion_id):
     """
     Отображение обсуждения в форуме
 
     :param request: объект c деталями запроса
     :type request: :class:`django.http.HttpRequest`
-    :param id: primary key обсуждеиния в БД
+    :param discussion_id: primary key обсуждеиния в БД
     :return: объект ответа сервера с HTML-кодом внутри
     """
     context = {}
-    discussion = Discussion.objects.get(pk=id)
+    discussion = Discussion.objects.get(pk=discussion_id)
     if request.method == 'POST':
         if request.user.id is AnonymousUser:
             return redirect('/login')
         text = request.POST.get('text')
+        anon = bool(request.POST.get('anonymous'))
         comment = Comment.objects.create(
             text=text,
             discussion=discussion,
             author=request.user,
-            cr_date=datetime.datetime.now(),
+            cr_date=datetime.datetime.now(pytz.timezone("Europe/Moscow")),
+            anon=anon,
         )
         comment.save()
+        return redirect('/forum/discussion/'+str(discussion.id))
     comments = discussion.comment_set.all()
-    comments = list(comments)
-    comments.reverse()
+    #comments = list(comments)
+    #comments.reverse()
     context.update({
         "user": request.user,
         "discussion": discussion,
         "comments": comments,
     })
-    return render(request, 'pages/tenant/discussion.html', context)
+    return render(request, 'pages/tenant/forums/discussion.html', context)
 
 
 @login_required
-def cr_discussion_view(request, id):
+def cr_discussion_view(request, forum_id):
     """
     Создание обсуждения
 
     :param request: объект c деталями запроса
     :type request: :class:`django.http.HttpRequest`
-    :param id: primary key форума в БД
+    :param forum_id: primary key форума в БД
     :return: объект ответа сервера с HTML-кодом внутри в случае, если идёт GET-запрос на страницу
     :return: перенаправление на главную страницу в случае POST-запроса
     """
@@ -196,11 +274,11 @@ def cr_discussion_view(request, id):
         category = request.POST.get('category')
         description = request.POST.get('description')
         anonymous = request.POST.get('anonymous')
-        anonymous = True if anonymous else False
+        anonymous = bool(anonymous)
         discussion = Discussion(
             theme=theme,
             category=category,
-            forum=Forum.objects.get(pk=id),
+            forum=Forum.objects.get(pk=forum_id),
             description=description,
             author=request.user,
             cr_date=datetime.datetime.now(),
@@ -208,18 +286,28 @@ def cr_discussion_view(request, id):
         )
         discussion.save()
         return redirect('/forum/discussion/' + str(discussion.id))
-    forum = Forum.objects.get(pk=id)
+    forum = Forum.objects.get(pk=forum_id)
     categories = list(forum.categories.split('|'))
     context.update({
         "categories": categories,
         "forum": forum,
     })
-    return render(request, 'pages/tenant/cr_discussion.html', context)
+    return render(request, 'pages/tenant/forums/cr_discussion.html', context)
 
 
-def thread(request, id, thread_id):
-    thread = Comment.objects.get(id=thread_id)
-    discussion = Discussion.objects.get(id=id)
+def thread(request, discussion_id, thread_id):
+    """
+    Отображение треда
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :param discussion_id: primary key дискуссии в БД
+    :param thread_id: primary key треда в БД
+    :return: перенаправление на страницу треда
+    :return: рендер страницы треда
+    """
+    current_thread = Comment.objects.get(id=thread_id)
+    discussion = Discussion.objects.get(id=discussion_id)
     comments = Comment.objects.filter(thread=thread)
     context = {
         "user": request.user,
@@ -234,49 +322,92 @@ def thread(request, id, thread_id):
             cr_date=datetime.datetime.now(),
             author=request.user,
             discussion=discussion,
-            thread=thread
+            thread=current_thread
         )
         r_com.save()
         id = r_com.id
         return redirect('thread', discussion.id, thread.id)
-    return render(request, 'pages/tenant/thread.html', context)
+    return render(request, 'pages/tenant/forums/thread.html', context)
 
 
 @login_required
 def my_appeals_view(request):
-    context = {}
-    user_appeals = request.user.appeal_set.all()
-    context.update({
-        "user_appeals": user_appeals,
+    """
+    Отображение моих обращений
 
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :return: отображзение страницы
+    """
+    context = {}
+    if hasattr(request.user, 'tenant'):
+        my_appeals = request.user.tenant.appeal_set.all()
+        context.update({
+            "is_tenant": True,
+        })
+    if hasattr(request.user, 'manager'):
+        my_appeals = request.user.manager.appeal_set.all()
+        context.update({
+            "is_manager": True,
+        })
+    context.update({
+        "my_appeals": my_appeals,
     })
-    return render(request, 'pages/tenant/my_appeals.html', context)
+    return render(request, 'pages/tenant/appeals/my_appeals.html', context)
+
+
+class Message:
+    """
+    Служебный класс для передачи данных в context
+    """
+    def __init__(self, appealmessage, my_message):
+        """
+        :param appealmessage: сообщение
+        :param my_message: моё или нет
+        """
+        self.appealmessage = appealmessage
+        self.my_message = my_message
 
 
 @login_required
-def appeal_view(request, id):
+def appeal_view(request, appeal_id):
+    """
+    Отображение обращения
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :param appeal_id: id обращения
+    :return: отображзение страницы
+    """
     context = {}
-    appeal = Appeal.objects.get(pk=id)
+    appeal = Appeal.objects.get(pk=appeal_id)
     if request.method == 'POST':
         text = request.POST.get('message')
-        # проверка на жителя
         message = AppealMessage.objects.create(
             text=text,
             appeal=appeal,
-            creator="tenant",
-            cr_date=datetime.datetime.now()
+            creator=request.user,
+            cr_date=datetime.datetime.now(),
         )
         message.save()
+        if hasattr(request.user, 'manager') and appeal.manager is None:
+            appeal.manager = request.user.manager
+            appeal.save()
         return redirect('/appeal/' + str(appeal.id))
-    messages = appeal.appealmessage_set.all()
-    messages = list(messages)
+
+    messages = []
+    for appealmessage in appeal.appealmessage_set.all():
+        messages.append(Message(appealmessage, appealmessage.creator == request.user))
     messages.reverse()
     context.update({
-        "user": request.user,
         "appeal": appeal,
         "appeal_messages": messages,
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+        "is_taken": appeal.manager is not None,
+        "user": request.user,
     })
-    return render(request, 'pages/tenant/appeal.html', context)
+    return render(request, 'pages/tenant/appeals/appeal.html', context)
 
 
 @login_required
@@ -284,12 +415,10 @@ def cr_appeal_view(request):
     context = {}
     if request.method == 'POST':
         theme = request.POST.get('theme')
-        if request.user.tenant:
-            company = request.user.tenant.house.company
+        if hasattr(request.user, 'tenant'):
             appeal = Appeal(
                 theme=theme,
-                company=company,
-                user=request.user,
+                tenant=request.user.tenant,
                 cr_date=datetime.datetime.now(),
             )
             appeal.save()
@@ -298,19 +427,41 @@ def cr_appeal_view(request):
                 appeal=appeal,
                 text=message,
                 cr_date=datetime.datetime.now(),
-                creator="tenant"
+                creator=request.user,
             )
             first_message.save()
-        # if проверка на то что это представитель компании
-        #
-        #
+        if hasattr(request.user, 'manager'):
+            username = request.POST.get('username')
+            appeal = Appeal(
+                theme=theme,
+                manager=request.user.manager,
+                tenant=User.objects.get(username=username).tenant,
+                cr_date=datetime.datetime.now(),
+            )
+            appeal.save()
+            message = request.POST.get('first_appeal_message')
+            first_message = AppealMessage(
+                appeal=appeal,
+                text=message,
+                cr_date=datetime.datetime.now(),
+                creator=request.user,
+            )
+            first_message.save()
         return redirect('/appeal/' + str(appeal.id))
+
+    if hasattr(request.user, 'manager'):
+        tenants = []
+        for tenant in Tenant.objects.all():
+            if tenant.house.company == request.user.manager.company:
+                tenants.append(tenant)
+        context.update({"tenants": tenants})
     context.update({
         "user": request.user,
         "companies": Company.objects.all(),
-        "is_tenant": True if request.user.tenant else False  # -----------проверка на то является ли жителем------
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
     })
-    return render(request, 'pages/tenant/cr_appeal.html', context)
+    return render(request, 'pages/tenant/appeals/cr_appeal.html', context)
 
 
 @login_required
@@ -326,12 +477,10 @@ def cr_task_view(request):
     if request.method == 'POST':
         description = request.POST.get('description')
         task = request.POST.get('task')
-        address = request.POST.get('address')
         task = Task(
             task=task,
             description=description,
-            author=request.user.tenant,
-            address=address,
+            author=request.user,
             status='opened',
             cr_date=datetime.datetime.now(),
         )
@@ -341,7 +490,7 @@ def cr_task_view(request):
     context.update({
         "user": request.user,
     })
-    return render(request, 'pages/tenant/cr_task.html', context)
+    return render(request, 'pages/tenant/volunteers/cr_task.html', context)
 
 
 @login_required
@@ -349,22 +498,26 @@ def volunteer_view(request):
     opened_tasks = []
     taken_tasks = []
     closed_tasks = []
+    if not hasattr(request.user, 'tenant'):
+        return redirect('/')
     company = request.user.tenant.house.company
-    # request.user.manager.company
     for task in Task.objects.all():
-        if task.author.house.company == company and task.status == "opened":
+        if (hasattr(task.author, 'manager') and task.author.manager.company == company or
+                hasattr(task.author, 'tenant') and task.author.tenant.house.company == company) and task.status == "opened":
             opened_tasks.append(task)
-        if task.volunteer == request.user and task.status == "taken":
+        if task.volunteer == request.user.tenant and task.status == "taken":
             taken_tasks.append(task)
-        if task.volunteer == request.user and task.status == "closed":
+        if task.volunteer == request.user.tenant and task.status == "closed":
             closed_tasks.append(task)
     context = {
         "opened_tasks": opened_tasks,
         "taken_tasks": taken_tasks,
         "closed_tasks": closed_tasks,
         "company": company,
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
     }
-    return render(request, 'pages/tenant/volunteer.html', context)
+    return render(request, 'pages/tenant/volunteers/volunteer.html', context)
 
 
 @login_required
@@ -376,25 +529,257 @@ def help_view(request):
     :type request: :class:`django.http.HttpRequest`
     :return: объект ответа сервера с HTML-кодом внутри
     """
-    tasks = Task.objects.filter(author=request.user.tenant)
+    user = request.user
+    if hasattr(user, 'tenant'):
+        opened_tasks = Task.objects.filter(author=request.user, status="opened",)
+        taken_tasks = Task.objects.filter(author=request.user, status="taken", )
+        closed_tasks = Task.objects.filter(author=request.user, status="closed", )
+    if hasattr(user, 'manager'):
+        opened_tasks = []
+        taken_tasks = []
+        closed_tasks = []
+        for task in Task.objects.all():
+            if hasattr(task.author, 'manager') and task.author.manager.company == user.manager.company:
+                if task.status == "opened":
+                    opened_tasks.append(task)
+                if task.status == "taken":
+                    taken_tasks.append(task)
+                if task.status == "closed":
+                    closed_tasks.append(task)
     context = {
-        "tasks": tasks,
+        "opened_tasks": opened_tasks,
+        "taken_tasks": taken_tasks,
+        "closed_tasks": closed_tasks,
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
     }
-    return render(request, 'pages/tenant/help.html', context)
+    return render(request, 'pages/tenant/volunteers/help.html', context)
 
 
+@login_required
 def task_view(request, id):
     task = Task.objects.get(pk=id)
-    my_task = (True if request.user.tenant == task.author else False)
-    if request.method == 'POST':
+    if hasattr(request.user, 'tenant'):
+        my_task = request.user == task.author
+    if hasattr(request.user, 'manager'):
+        my_task = hasattr(task.author, 'manager') and request.user.manager.company == task.author.manager.company
+    if request.method == 'POST' and hasattr(request.user, 'tenant'):
         status = request.POST.get('status')
         task.status = status
         if status == "taken":
-            task.volunteer = request.user
+            task.volunteer = request.user.tenant
+        task.save()
+    if request.method == 'POST' and hasattr(request.user, 'manager'):
+        status = request.POST.get('status')
+        task.status = status  # только closed
         task.save()
     context = {
         "user": request.user,
         "task": task,
-        "my_task": my_task
+        "my_task": my_task,
+        "is_opened": task.status == "opened",
+        "is_taken": task.status == "taken",
+        "is_closed": task.status == "closed",
     }
-    return render(request, 'pages/tenant/task.html', context)
+    return render(request, 'pages/tenant/volunteers/task.html', context)
+
+
+@login_required
+def test_view(request):
+    context = {
+        "user": request.user,
+    }
+    if request.method == 'POST':
+        request.user.tenant.is_vol = True
+        request.user.tenant.save()
+    return render(request, 'pages/tenant/volunteers/test.html', context)
+
+
+@login_required
+def tenant_main_page(request):
+    if request.user.tenant.house is None or not request.user.tenant.house_confirmed:
+        context = {
+            "homeless": request.user.tenant.house is None,
+            "user": request.user,
+            "house_confirmed": request.user.tenant.house_confirmed,
+        }
+        return render(request, 'pages/tenant/tenant.html', context)
+
+    # погода ---------------------------------------------------------------------
+    # weather_api_key = "9894f93c-6bb8-45a2-95e2-6eee7ea9ab53"
+    # Fedor key na zapas =)
+    geocode_api_key = "ec60fb43-78d5-4e2e-af7c-da42c1300dbf"
+    weather_api_key = "232ad7f1-a856-4ecd-92ad-30ea041f1b1e"  # my key
+
+    geocode = request.user.tenant.house.address
+
+    # будет для каждого индивидуально после подключения домов
+    geo_url = urllib.parse.urlencode({
+        'apikey': geocode_api_key,
+        'geocode': geocode,
+        'format': 'json',
+        'kind': 'house',
+        'results': '1',
+    })
+
+    geo_url = "https://geocode-maps.yandex.ru/1.x/?"+geo_url
+    geo_recv = requests.get(url=geo_url)
+    first_json = json.loads(geo_recv.text)["response"]["GeoObjectCollection"]["featureMember"]
+    point = first_json[0]["GeoObject"]["Point"]["pos"]
+    point = point.split()
+    
+    lat = point[1]
+    lon = point[0]
+
+    forecast_url = urllib.parse.urlencode({
+        'lat': lat,
+        'lon': lon,
+        'limit': "1",
+        'hours': 'false',
+    })
+
+    forecast_url = "https://api.weather.yandex.ru/v1/forecast?" + forecast_url
+
+    r = requests.get(url=forecast_url, headers={"X-Yandex-API-Key" : weather_api_key})
+    forecasts = json.loads(r.text)["forecasts"][0]
+    fore_night = forecasts["parts"]["night"]
+    fore_morning = forecasts["parts"]["morning"]
+    fore_day = forecasts["parts"]["day"]
+    fore_evening = forecasts["parts"]["evening"]
+    context = {
+        "user": request.user,
+        "night": fore_night["temp_avg"],
+        "morning": fore_morning["temp_avg"],
+        "day": fore_day["temp_avg"],
+        "evening": fore_evening["temp_avg"],
+        "night_icon": fore_night["icon"],
+        "morning_icon": fore_morning["icon"],
+        "day_icon": fore_day["icon"],
+        "evening_icon": fore_evening["icon"],
+    }
+    # ----------------------------------------------------------------------------
+    opened_tasks = Task.objects.filter(author=request.user, status="opened")
+    context.update({
+        "amount_of_my_opened_tasks": len(opened_tasks),
+    })
+
+    my_company = request.user.tenant.house.company
+    amount_of_opened_tasks = 0
+    amount_of_my_taken_tasks = 0
+    for task in Task.objects.all():
+        if hasattr(task.author, 'manager') and task.author.manager.company == my_company:
+            if task.status == "opened":
+                amount_of_opened_tasks += 1
+            if task.status == "taken" and task.volunteer == request.user.tenant:
+                amount_of_my_taken_tasks += 1
+        if hasattr(task.author, 'tenant') and task.author.tenant.house.company == my_company:
+            if task.status == "opened" and task.author != request.user:
+                amount_of_opened_tasks += 1
+            if task.status == "taken" and task.volunteer == request.user.tenant:
+                amount_of_my_taken_tasks += 1
+    context.update({
+        "amount_of_opened_tasks": amount_of_opened_tasks,
+        'amount_of_my_taken_tasks': amount_of_my_taken_tasks,
+    })
+
+    context.update({
+        "house_forum_id": request.user.tenant.house.forum.id,
+        "company_forum_id": request.user.tenant.house.company.forum.id,
+    })
+
+    context.update({
+        "house_confirmed": request.user.tenant.house_confirmed,
+    })
+    return render(request, 'pages/tenant/tenant.html', context)
+
+
+def my_pass_view(request):
+    context = {
+        'user': request.user,
+        'my_pass': Pass.objects.filter(author=request.user, status='active'),
+    }
+    return render(request, 'pages/tenant/passes/my_pass.html', context)
+
+
+@login_required
+def cr_pass_view(request):
+    context = {
+        "user": request.user,
+    }
+    if request.method == 'POST':
+        if request.POST.get('target') == 'person':
+            pas = Pass(
+                author=request.user,
+                cr_date=timezone.now(),
+                status='active',
+                target=request.POST.get('target'),
+                name=request.POST.get('name'),
+                surname=request.POST.get('surname'),
+                patronymic=request.POST.get('patronymic'),
+                aim=request.POST.get('aim'),
+            )
+            pas.save()
+            return redirect('/pass/' + str(pas.id))
+        else:
+            pas = Pass(
+                author=request.user,
+                cr_date=timezone.now(),
+                status='active',
+                target=request.POST.get('target'),
+                model=request.POST.get('model'),
+                color=request.POST.get('color'),
+                number=request.POST.get('number'),
+                aim=request.POST.get('aim'),
+            )
+            pas.save()
+            return redirect('/pass/' + str(pas.id))
+    return render(request, 'pages/tenant/passes/cr_pass.html', context)
+
+
+@login_required
+def pass_view(request, pass_id):
+    pas = Pass.objects.get(id=pass_id)
+    tenant = 1
+    if hasattr(request.user, 'manager'):
+        tenant = 0
+    link = "https://api.qrserver.com/v1/create-qr-code/?data=http://127.0.0.1:8000/pass/"\
+           + str(pass_id) + "&size=400x400"
+    ti_del = datetime.timedelta(days=3) - (timezone.now() - pas.cr_date)
+    hours = int(ti_del.seconds // 3600)
+    if 10 <= hours <= 20:
+        hours = str(hours)+' часов'
+    elif hours % 10 == 1:
+        hours = str(hours) + ' час'
+    elif hours % 10 == 2 or hours % 10 == 3 or hours % 10 == 4:
+        hours = str(hours) + ' часа'
+    else:
+        hours = str(hours) + ' часов'
+    minutes = (ti_del.seconds % 3600) // 60
+    if 10 <= minutes <= 20:
+        minutes = str(minutes) + ' минут'
+    elif minutes % 10 == 1:
+        minutes = str(minutes) + ' минут'
+    elif minutes % 10 == 2 or minutes % 10 == 3 or minutes % 10 == 4:
+        minutes = str(minutes) + ' минуты'
+    else:
+        minutes = str(minutes) + ' минут'
+    context = {
+        'user': request.user,
+        'pass': pas,
+        'tenant': tenant,
+        'link': link,
+        'days': ti_del.days,
+        'hours': hours,
+        'minutes': minutes,
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    }
+    if request.method == 'POST' or ti_del < datetime.timedelta(days=0):
+        pas.status = 'complete'
+        pas.save()
+        if hasattr(request.user, 'tenant'):
+            return redirect('/tenant')
+        elif hasattr(request.user, 'manager'):
+            return redirect('/manager')
+    return render(request, 'pages/tenant/passes/pass.html', context)
+

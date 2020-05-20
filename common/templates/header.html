@@ -15,7 +15,11 @@
                     <li class="nav-item active"><a class="nav-link" href="{% url 'logout' %}">Выйти</a></li>
                 </ul>
                 <ul class="navbar-nav mr-right">
-                    <li class="nav-item active"><a class="nav-link" href="{% url 'profile' username=request.user.username %}">Профиль</a></li>
+                    {% if is_tenant %}
+                    <li class="nav-item active"><a class="nav-link" href="{% url 'tenant_main' %}">Главная страница</a></li>
+                    {% elif is_manager %}
+                    <li class="nav-item active"><a class="nav-link" href="{% url 'manager_main' %}">Главная страница</a></li>
+                    {% endif %}
                 </ul>
                 {% else %}
                 <ul class="navbar-nav mr-right">
