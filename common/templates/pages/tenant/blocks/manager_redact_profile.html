@@ -23,14 +23,13 @@
             <label for="username-id">Ваше имя:</label>
             <input type="text" name="username" id="username-id" value={{user.username}}><br>
 
-            <label for="company_inn-id">Выберете вашу компанию по ИНН</label>
-                <div class="select">
-                    <select id="company_inn-id" name="company_inn" required>
-                        {% for company in companies %}
-                            <option class="op" value={{company.inn}}>{{ company.inn }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-
                 <input type="submit" value="Сохранить изменения">
+        </form>
+
+        <form method="POST" action="">
+            <div>
+                {% csrf_token %}
+                {{ request_form }}
+                <input type="submit" name="submit" value="Запросить подключение">
+            </div>
         </form>

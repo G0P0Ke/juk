@@ -1,10 +1,12 @@
 """Required modules"""
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task, Pass
+from .models import ManagerRequest, Manager
 import datetime
 import pytz
 import requests
@@ -12,7 +14,7 @@ import urllib
 import json
 
 from django.utils import timezone
-from .forms import PhotoUpload
+from .forms import PhotoUpload, ManagerRequestForm
 
 from django.http import Http404
 
@@ -123,13 +125,22 @@ def redact_profile_view(request):
         return redirect('/my_cabinet')
     if request.method == 'POST' and hasattr(request.user, 'manager'):
         username = request.POST.get('username')
-        company_inn = request.POST.get('company_inn')
         user.username = username
-        user.manager.company = Company.objects.filter(inn=company_inn)[0]
-        user.manager.save()
-        user.save()
-        return redirect('/my_cabinet')
-
+        request_form = ManagerRequestForm(request.POST)
+        if request_form.is_valid():
+            inn = request_form.cleaned_data.get('inn_company')
+            new_manager_request = ManagerRequest(author=user, inn_company=inn)
+            new_manager_request.save()
+            messages.success(request, 'Запрос на подключение к компании отправлен')
+            context.update({
+                'request_form': request_form,
+            })
+            return redirect(redact_profile_view)
+    elif hasattr(request.user, 'manager'):
+        request_form = ManagerRequestForm()
+        context.update({
+            'request_form': request_form,
+        })
     context.update({
         "user": user,
         'form': form,
@@ -746,3 +757,37 @@ def pass_view(request, pass_id):
         return redirect('/')
     return render(request, 'pages/tenant/pass.html', context)
 
+
+@login_required(login_url="/login")
+def admin(request):
+    user = request.user
+    if hasattr(request.user, 'tenant'):
+        if not user.tenant.is_admin:
+            return HttpResponse("Nice try, bro", status=401)
+    elif hasattr(request.user, 'manager'):
+        if not user.manager.is_admin:
+            return HttpResponse("Nice try, bro", status=401)
+    manager_requests = ManagerRequest.objects.filter(status=3)
+    context = {
+        'requests': manager_requests,
+    }
+    if request.method == "POST":
+        for request_man in manager_requests:
+            if request.POST.get("agree"+str(request_man.id)):
+                manager_id = request_man.author_id
+                managers = Manager.objects.filter(user_id=manager_id)
+                for manager in managers:
+                    if manager.user_id == manager_id:
+                        company = Company.objects.filter(inn=request_man.inn_company)
+                        for comp in company:
+                            if comp.inn == request_man.inn_company:
+                                manager.company_id = comp.id
+                                print(comp.id)
+                                manager.save(update_fields=['company_id'])
+                request_man.status = 1
+                request_man.save()
+            elif request.POST.get("refused"+str(request_man.id)):
+                request_man.status = 2
+                request_man.save()
+        return redirect(admin)
+    return render(request, 'admin/manager_requests.html', context)
