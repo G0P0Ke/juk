@@ -4,10 +4,10 @@
 
 <h1>Форумы всех домов вашей компании:</h1>
 <hr>
-<a href="{% url 'my_cabinet' %}">Вернуться в профиль</a>
+<a href="{% url 'manager_main' %}">Вернуться на главную страницу</a>
 <hr>
 {% for house in houses %}
-<a href="{% url 'forum' id=house.forum.id %}"><button>Форум дома с адресом {{ house.address }}</button></a>
+<a href="{% url 'forum' forum_id=house.forum.id %}"><button>Форум дома с адресом {{ house.address }}</button></a>
 <hr>
 {% endfor %}
 

@@ -1,0 +1,107 @@
+<html>
+<head>
+
+  <title>Tenant - Main Page</title>
+
+  {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+</head>
+<body>
+  <div class="wrapper">
+    <!---НОВОСТИ --->
+    <div style="color:green" class="rectangle-big">
+        <div class="title">Новости</div>
+        
+        
+    </div>
+    <!---ФОРУМЫ --->
+    <div style="color:green" class="square" onclick="window.location.href='forum/{{ house_forum_id }}'">
+        <div class="title">Форум Вашего дома</div>
+        
+        
+    </div>
+      <div style="color:green" class="square" onclick="window.location.href='forum/{{ company_forum_id }}'">
+        <div class="title">Форум Вашей компании</div>
+
+
+    </div>
+    <!---ПОГОДА --->
+    <div class="rectangle-vertical" onclick="window.location.href='https://yandex.ru/pogoda/moscow'">
+        <div class="title">Погода у Вас дома</div>
+        <div class="weather">
+            <p>
+            Ночью: {{night}}°C
+            <img src="https://yastatic.net/weather/i/icons/blueye/color/svg/{{night_icon}}.svg"></img>
+             </p>
+        </div>
+         <div class="weather">
+            <p>
+            Утром: {{morning}}°C
+            <img src="https://yastatic.net/weather/i/icons/blueye/color/svg/{{morning_icon}}.svg"></img>
+             </p>
+        </div>
+        <div class="weather">
+            <p>
+            Днём: {{day}}°C
+            <img src="https://yastatic.net/weather/i/icons/blueye/color/svg/{{day_icon}}.svg"></img>
+             </p>
+        </div>
+         <div class="weather">
+            <p>
+            Вечером: {{evening}}°C
+            <img src="https://yastatic.net/weather/i/icons/blueye/color/svg/{{evening_icon}}.svg"></img>
+             </p>
+        </div>
+    </div>
+    <!---ЛИЧНЫЙ КАБИНЕТ --->
+      <div class="square" onclick="window.location.href='/tenant/my_cabinet'">
+        <div style="color:green" class="title">Личный кабинет, {{user.username}}</div>
+        <img src="{{ user.tenant.photo.url }}" width="40" height="40">
+      </div>
+
+      <!---МОИ ЗАДАНИЯ --->
+      <div class="square" onclick="window.location.href='vol/help'">
+         <div style="color:green" class="title">Мои задания</div>
+          <br>
+          <div  class="title">
+              <p>Ваших открытых заданий:{{ amount_of_my_opened_tasks }}</p>
+          </div>
+      </div>
+
+      <!--- ВОЛОНТЁРЫ --->
+      {% if user.tenant.is_vol %}
+      <div class="square" onclick="window.location.href='vol/volunteer'">
+          <div style="color:green" class="title">Волонтерство</div>
+          <br>
+          <div class="title">
+              <p>Вы волонтёр!!!!!!</p>
+              <p>Требуется помощь в округе:{{ amount_of_opened_tasks }}</p>
+          </div>
+      </div>
+      {% else %}
+      <div class="square" onclick="window.location.href='vol/test'">
+          <div style="color:green" class="title">Волонтёрство</div>
+          <br>
+          <div class="title">
+              <p>Вы не волонтёр! Чтобы им стать, требуется пройти тест.</p>
+          </div>
+      </div>
+      {% endif %}
+
+      <!--- ОБРАЩЕНИЯ --->
+    <div class="rectangle-horizontal" onclick="window.location.href='my_appeals'">
+        <div style="color:green" class="title">Обращения</div>
+        
+    </div>
+
+    <!--- ПРОПУСКИ --->
+    <div class="rectangle-horizontal" onclick="window.location.href='passes'">
+        <div style="color:green" class="title">Пропуски</div>
+        
+    </div>
+
+  </div>
+</body>
+</html>

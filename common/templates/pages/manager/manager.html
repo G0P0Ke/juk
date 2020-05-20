@@ -1,0 +1,84 @@
+<html>
+<head>
+
+  <title>Manager - Main Page</title>
+
+  {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+</head>
+<body>
+  <div class="wrapper">
+    <!---НОВОСТИ --->
+    <div style="color:green" class="rectangle-big">
+        <div class="title">Новости</div>
+
+    </div>
+
+    <!---ФОРУМЫ --->
+    <div style="color:green" class="square" onclick="window.location.href='manager/company_forums'">
+        <div class="title">Форумы домов вашей компании</div>
+
+
+    </div>
+      <div style="color:green" class="square" onclick="window.location.href='forum/{{ user.manager.company.forum.id }}'">
+        <div class="title">Форум моей компании</div>
+
+
+    </div>
+
+    <!---ЛИЧНЫЙ КАБИНЕТ --->
+      <div class="square" onclick="window.location.href='/manager/my_cabinet'">
+        <div style="color:green" class="title">Личный кабинет, {{user.username}}</div>
+        <img src="{{ user.manager.photo.url }}" width="40" height="40">
+      </div>
+
+      <!---МОИ ЗАДАНИЯ --->
+      <div class="square" onclick="window.location.href='vol/help'">
+         <div style="color:green" class="title">Задания моей компании</div>
+          <br>
+          <div  class="title">
+              <p>Ваших открытых заданий:{{ amount_of_my_opened_tasks }}</p>
+          </div>
+      </div>
+
+      <!---МОИ ОБРАЩЕНИЯ --->
+    <div class="rectangle-horizontal" onclick="window.location.href='my_appeals'">
+        <div style="color:green" class="title">Мои бращения</div>
+
+    </div>
+
+      <!---ОБРАЩЕНИЯ МОЕЙ КОМПАНИИ--->
+    <div class="rectangle-horizontal" onclick="window.location.href='manager/company_appeals'">
+        <div style="color:green" class="title">Открытые обращения Вашей компании</div>
+        <br><br><br>
+        <div  class="title">
+            <p>Всего открытых обращений:{{ amount_of_opened_appeals }}</p>
+        </div>
+    </div>
+
+    <!--- ПРОПУСКИ --->
+    <div class="rectangle-horizontal" onclick="window.location.href='passes'">
+        <div style="color:green" class="title">Пропуски</div>
+
+    </div>
+      <!---ПОДТВЕРЖДЕНИЕ ЖИТЕЛЕЙ --->
+      <div class="square" onclick="window.location.href='manager/tenant_confirming'">
+         <div style="color:green" class="title">Подтверждение жителей</div>
+          <br>
+          <div  class="title">
+              <p>Неподтвержденных жителей:{{ amount_of_unconfirmed_tenants }}</p>
+          </div>
+      </div>
+      <!---Добавление дома --->
+      <div class="square" onclick="window.location.href='manager/add_house'">
+         <div style="color:green" class="title">Добавление дома</div>
+          <br>
+          <div  class="title">
+              <p>Всего домов в Вашей компании:{{ amount_of_houses }}</p>
+          </div>
+      </div>
+  </div>
+</body>
+</html>

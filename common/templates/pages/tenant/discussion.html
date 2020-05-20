@@ -156,24 +156,30 @@ border: 1px solid #FFFFF;
 
 
 
-{% for item in comments %}
+{% for comment in comments %}
 
 <div class="form-group row">
     <div class="col-1"></div>
     <div class="col-1.5">
         <div class="alert shadow" style="background-color: #FFFFFF; color:#F25CA2;" role="alert">
-            {% if item.anon %}
+            {% if comment.author %}
             <div align = "center"> Аноним </div>
             <div class="media">
                 <img src="/media/static/default.jpg"  width="140" height="140"  align = "left" alt="...">
             </div>
-            <div align = "center"> Роль </div>
-            {% else %}
-            <div align = "center"> {{item.author}} </div>
+            <div align = "center"> Аноним </div>
+            {% elif comment.author. %}
+            <div align = "center"> {{comment.author.username}} </div>
             <div class="media">
-                <img src="{{ photo_url }}"  width="140" height="140"  align = "left" alt="...">
+                <img src="{{ comment.author.tenant.photo.url }}"  width="140" height="140"  align = "left" alt="...">
             </div>
-            <div align = "center"> Роль </div>
+            <div align = "center"> Житель </div>
+            {% elif comment.author %}
+            <div align = "center"> {{comment.author.username}} </div>
+            <div class="media">
+                <img src="{{ comment.author.manager.photo.url }}"  width="140" height="140"  align = "left" alt="...">
+            </div>
+            <div align = "center"> Менеджер </div>
             {% endif %}
         </div>
     </div>
@@ -191,6 +197,7 @@ border: 1px solid #FFFFF;
 </div>
 
 {% endfor %}
+
      <div class="form-group row">
          <div class="col-1"></div>
          <div class="col-11">

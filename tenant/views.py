@@ -46,24 +46,17 @@ from django.http import Http404
 @login_required
 def my_cabinet_view(request):
     """
-    Личный кабинет пользователя
+    Личный кабинет жителя
 
     :param request: объект с деталями запроса.
     :return: объект ответа сервера с HTML-кодом внутри
     """
-    if hasattr(request.user, 'tenant'):
-        context = {
-            "is_tenant": True,
-            "user": request.user,
-            "homeless": request.user.tenant.house is None,
-            "house_confirmed": request.user.tenant.house_confirmed,
-        }
-    if hasattr(request.user, 'manager'):
-        context = {
-            "is_manager": True,
-            "user": request.user,
-            "companyless": request.user.manager.company is None,
-        }
+    context = {
+        "is_tenant": True,
+        "user": request.user,
+        "homeless": request.user.tenant.house is None,
+        "house_confirmed": request.user.tenant.house_confirmed,
+    }
     #c = Company.objects.create(inn=666) #tmp
     #f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
     #c.save()
@@ -120,7 +113,7 @@ def redact_profile_view(request):
         user.tenant.flat = request.POST.get('flat')
         user.tenant.save()
         user.save()
-        return redirect('/my_cabinet')
+        return redirect('tenant/my_cabinet')
     if request.method == 'POST' and hasattr(request.user, 'manager'):
         username = request.POST.get('username')
         company_inn = request.POST.get('company_inn')
@@ -128,7 +121,7 @@ def redact_profile_view(request):
         user.manager.company = Company.objects.filter(inn=company_inn)[0]
         user.manager.save()
         user.save()
-        return redirect('/my_cabinet')
+        return redirect('manager/my_cabinet')
 
     context.update({
         "user": user,
@@ -222,7 +215,7 @@ def category_view(request, forum_id, category_name):
     return render(request, 'pages/tenant/category.html', context)
 
 
-@login_required()
+@login_required
 def discussion_view(request, discussion_id):
     """
     Отображение обсуждения в форуме
@@ -238,29 +231,23 @@ def discussion_view(request, discussion_id):
         if request.user.id is AnonymousUser:
             return redirect('/login')
         text = request.POST.get('text')
-        anon = bool(request.POST.get('anonymous'))
+        #anon = bool(request.POST.get('anonymous'))
         comment = Comment.objects.create(
             text=text,
             discussion=discussion,
             author=request.user,
             cr_date=datetime.datetime.now(pytz.timezone("Europe/Moscow")),
-            anon=anon,
+            #anon=anon,
         )
         comment.save()
-        return redirect('/forum/discussion/' + str(discussion.id))
-    if hasattr(request.user, 'tenant'):
-        photo_url = request.user.tenant.photo.url
-        print(photo_url)
-    if hasattr(request.user, 'manager'):
-        photo_url = request.user.manager.photo.url
+        return redirect('/forum/discussion/', discussion_id=discussion.id)
     comments = discussion.comment_set.all()
-    comments = list(comments)
+    #comments = list(comments)
     #comments.reverse()
     context.update({
         "user": request.user,
         "discussion": discussion,
         "comments": comments,
-        "photo_url": photo_url,
     })
     return render(request, 'pages/tenant/discussion.html', context)
 
@@ -339,19 +326,6 @@ def thread(request, discussion_id, thread_id):
 
 
 @login_required
-def company_appeals_view(request):
-    context = {}
-    if hasattr(request.user, 'tenant'):
-        my_appeals = request.user.tenant.appeal_set.all()
-    if hasattr(request.user, 'manager'):
-        my_appeals = request.user.manager.appeal_set.all()
-    context.update({
-        "my_appeals": my_appeals,
-    })
-    return render(request, 'pages/tenant/my_appeals.html', context)
-
-
-@login_required
 def my_appeals_view(request):
     """
     Отображение моих обращений
@@ -363,8 +337,14 @@ def my_appeals_view(request):
     context = {}
     if hasattr(request.user, 'tenant'):
         my_appeals = request.user.tenant.appeal_set.all()
+        context.update({
+            "is_tenant": True,
+        })
     if hasattr(request.user, 'manager'):
         my_appeals = request.user.manager.appeal_set.all()
+        context.update({
+            "is_manager": True,
+        })
     context.update({
         "my_appeals": my_appeals,
     })
@@ -607,37 +587,39 @@ def test_view(request):
 
 
 @login_required
-def main_page(request):
-    #weather_api_key = "9894f93c-6bb8-45a2-95e2-6eee7ea9ab53"
-    #Fedor key na zapas =)
+def tenant_main_page(request):
+    # погода ---------------------------------------------------------------------
+    # weather_api_key = "9894f93c-6bb8-45a2-95e2-6eee7ea9ab53"
+    # Fedor key na zapas =)
     geocode_api_key = "ec60fb43-78d5-4e2e-af7c-da42c1300dbf"
-    weather_api_key = "232ad7f1-a856-4ecd-92ad-30ea041f1b1e" #my key
+    weather_api_key = "232ad7f1-a856-4ecd-92ad-30ea041f1b1e"  # my key
 
     geocode = "Москва, Тверская улица, дом 7'"
 
     #будет для каждого индивидуально после подключения домов
-    geo_url = urllib.parse.urlencode({ 'apikey' : geocode_api_key,
-                                       'geocode' : geocode,
-                                       'format' : 'json',
-                                       'kind' : 'house',
-                                       'results' : '1',
-                                       })
-
+    geo_url = urllib.parse.urlencode({
+        'apikey': geocode_api_key,
+        'geocode': geocode,
+        'format': 'json',
+        'kind': 'house',
+        'results': '1',
+    })
 
     geo_url = "https://geocode-maps.yandex.ru/1.x/?"+geo_url
     geo_recv = requests.get(url=geo_url)
-    first_json= json.loads(geo_recv.text)["response"]["GeoObjectCollection"]["featureMember"]
+    first_json = json.loads(geo_recv.text)["response"]["GeoObjectCollection"]["featureMember"]
     point = first_json[0]["GeoObject"]["Point"]["pos"]
     point = point.split()
     
     lat = point[1]
     lon = point[0]
 
-    forecast_url = urllib.parse.urlencode({ 'lat' : lat,
-                                            'lon' : lon,
-                                            'limit' : "1",
-                                            'hours' : 'false',
-                                            })
+    forecast_url = urllib.parse.urlencode({
+        'lat': lat,
+        'lon': lon,
+        'limit': "1",
+        'hours': 'false',
+    })
 
     forecast_url = "https://api.weather.yandex.ru/v1/forecast?" + forecast_url
 
@@ -658,7 +640,29 @@ def main_page(request):
         "day_icon": fore_day["icon"],
         "evening_icon": fore_evening["icon"],
     }
-    return render(request, 'main.html', context)
+    # ----------------------------------------------------------------------------
+    opened_tasks = Task.objects.filter(author=request.user, status="opened")
+    opened_tasks = list(opened_tasks)
+    context.update({
+        "amount_of_my_opened_tasks": len(opened_tasks),
+    })
+
+    my_company = request.user.tenant.house.company
+    amount_of_opened_tasks = 0
+    for task in Task.objects.all():
+        if hasattr(task.author, 'manager') and task.author.manager.company == my_company and task.status == "opened":
+            amount_of_opened_tasks += 1
+        if hasattr(task.author, 'tenant') and task.author.tenant.house.company == my_company and task.status == "opened":
+            amount_of_opened_tasks += 1
+    context.update({
+        "amount_of_opened_tasks": amount_of_opened_tasks,
+    })
+
+    context.update({
+        "house_forum_id": request.user.tenant.house.forum.id,
+        "company_forum_id": request.user.tenant.house.company.forum.id,
+    })
+    return render(request, 'pages/tenant/tenant.html', context)
 
 
 def my_pass_view(request):

@@ -6,7 +6,58 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import CreateNewsForm
 from .models import News
-from tenant.models import Appeal, House, Forum, Tenant, Pass
+from tenant.models import Appeal, House, Forum, Tenant, Pass, Task
+
+
+@login_required
+def manager_main_page(request):
+    amount_of_my_opened_tasks = 0
+    for task in Task.objects.all():
+        if hasattr(task.author, 'manager') and task.author.manager.company == request.user.manager.company:
+            if task.status == "opened":
+                amount_of_my_opened_tasks += 1
+
+    amount_of_opened_appeals = 0
+    for appeal in Appeal.objects.all():
+        if appeal.tenant.house.company == request.user.manager.company and appeal.manager is None:
+            amount_of_opened_appeals += 1
+
+    amount_of_unconfirmed_tenants = 0
+    for house in House.objects.all():
+        for tenant in house.tenant_set.all():
+            if not tenant.house_confirmed:
+                amount_of_unconfirmed_tenants += 1
+
+    amount_of_houses = len(request.user.manager.company.house_set.all())
+
+    context = {
+        "user": request.user,
+        "amount_of_my_opened_tasks": amount_of_my_opened_tasks,
+        'amount_of_opened_appeals': amount_of_opened_appeals,
+        'amount_of_unconfirmed_tenants': amount_of_unconfirmed_tenants,
+        'amount_of_houses': amount_of_houses,
+    }
+    return render(request, 'pages/manager/manager.html', context)
+
+
+@login_required
+def my_cabinet_view(request):
+    """
+        Личный кабинет менеджера
+
+        :param request: объект с деталями запроса.
+        :return: объект ответа сервера с HTML-кодом внутри
+        """
+
+    context = {
+        "user": request.user,
+        "companyless": request.user.manager.company is None,
+    }
+    # c = Company.objects.create(inn=666) #tmp
+    # f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
+    # c.save()
+    # f2.save()
+    return render(request, 'pages/manager/my_cabinet.html', context)
 
 
 def news_page(request):

@@ -57,8 +57,10 @@ def login_view(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    #  user'у надо добавить поле роль, чтобы редактировать от этого страницу
-                    return redirect('/tenant')
+                    if hasattr(user, 'tenant'):
+                        return redirect('/tenant')
+                    if hasattr(user, 'manager'):
+                        return redirect('/manager')
                 else:
                     context.update({
                         'error': 'Аккаунт отключён',
@@ -97,11 +99,11 @@ def signup_view(request):
             if role == "tenant":
                 tenant = Tenant.objects.create(user=user)
                 tenant.save()
-                return redirect('tenant/main')
+                return redirect('/tenant')
             elif role == "manager":
                 manager = Manager.objects.create(user=user)
                 manager.save()
-                return redirect('/')
+                return redirect('/manager')
             
         else:
             context.update({

@@ -33,6 +33,8 @@ urlpatterns = [
 
     path('common/feedback/', common_views.feedback, name='feedback'),
 
+    path('manager', manager_views.manager_main_page, name='manager_main'),
+    path('manager/my_cabinet', manager_views.my_cabinet_view, name='manager_my_cabinet'),
     path('manager/news/', manager_views.news_page, name='news'),
     path('manager/news/create/', manager_views.create_news_page, name='create_news'),
     path('manager/company_forums/', manager_views.company_forums_view, name='company_forums'),
@@ -40,10 +42,10 @@ urlpatterns = [
     path('manager/add_house/', manager_views.add_house_view, name='add_house'),
     path('manager/tenant_confirming/', manager_views.tenant_confirming_view, name='tenant_confirming'),
 
-    path('tenant/my_cabinet', tenant_views.my_cabinet_view, name='my_cabinet'),
+    path('tenant', tenant_views.tenant_main_page, name='tenant_main'),
+    path('tenant/my_cabinet', tenant_views.my_cabinet_view, name='tenant_my_cabinet'),
     #path('tenant/profile/', tenant_views.profile, name='profile'),
     path('tenant/redact_profile', tenant_views.redact_profile_view, name='redact_profile'),
-    path('tenant', tenant_views.main_page, name='main_page'),
 
     path('forum/<int:forum_id>', tenant_views.forum_view, name="forum"),
     path('forum/discussion/<int:discussion_id>', tenant_views.discussion_view, name="discussion"),

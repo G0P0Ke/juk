@@ -1,19 +1,106 @@
-{% extends 'base.html' %}
+{% load static %}
+        <style>
+    a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
 
-{% block content %}
+    .themes{
+    width:100%;
+    border: 1px solid #FFFFF;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 40px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+    }
 
 
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-error: #b00020;
+    }
 
+    .category {
+    width: 90%;
+    min-height: 60px;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #fafafa;
+    border: 0;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 20pt;
+    margin: 15px 5%;
+}
 
-{% if is_tenant %}
-    {% include "pages/tenant/blocks/tenant_cabinet.html" %}
-{% endif %}
+    .form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 100%;
+  max-height: 700px;
+  min-height: 400px;
+  margin: 50px auto;
+  box-sizing: border-box;
+  padding: 30px 0 30px 0;
+  text-align: center;
+  border-radius: 4px;
+}
+.left{
+  grid-area: left;
+}
+.right{
+  grid-area: right;
+}
+.bottom{
+margin:10px auto 0;
+  grid-area: bottom;
+}
+.grid {
+  display: grid;
+  grid-template: "left right" auto
+                 "left right" auto
+                 ". bottom" auto;
+ grid-gap: 5px;
+}
+</style>
+        <p style="margin: 50px auto;font-size: 22pt; text-align: center;">Личный кабинет жителя</p>
+        <div class="form">
+            <div class="grid">
+                <div class="left">
 
-{% if is_manager %}
-    {% include "pages/tenant/blocks/manager_cabinet.html" %}
-{% endif %}
+                    <p style="font-size: 20pt; text-align: center; color:var(--mdc-theme-secondary);">{{ user.username }}</p>
+                    <img src="{{ user.tenant.photo.url }}" width="260" height="250">
+                </div>
+                <div class="right">
 
+                    {% if homeless %}
+                    <div class="category">
+                        <p style="font-size: 18pt; text-align: center;">Вы не подключены к дому, для дальнеешего пользование сервисом, пожалуйста, выберите свой дом в редактировании профиля</p>
+                    </div>
 
+                    {% elif not house_confirmed %}
+                    <div class="category">
+                        <p style="font-size: 18pt; text-align: center;">Введенные Вами данные проходят проверку</p>
+                    </div>
+                    {% else %}
 
+                    <div class="category">
+                        <p style="font-size: 18pt; text-align: center;">Ваш адрес: {{ user.tenant.house.address }}</p>
+                    </div>
 
-{% endblock %}
+                    {% endif %}
+                </div>
+                <div class="bottom">
+                    <a href="{% url 'redact_profile'%}"><button class="mdc-button mdc-button--raised">
+                        <span class="mdc-button__ripple"></span>Редактирование профиля</button></a>
+                    <a href="{% url 'tenant_main' %}"><button class="mdc-button" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться на главную страницу</button></a>
+                </div>
+            </div>
+        </div>
