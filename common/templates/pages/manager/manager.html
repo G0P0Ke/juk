@@ -11,7 +11,7 @@
 <body>
   <div class="wrapper">
     <!---НОВОСТИ --->
-    <div style="color:green" class="rectangle-big">
+    <div style="color:green" class="rectangle-big" onclick="window.location.href='manager/news'">
         <div class="title">Новости</div>
 
     </div>
@@ -45,7 +45,7 @@
 
       <!---МОИ ОБРАЩЕНИЯ --->
     <div class="rectangle-horizontal" onclick="window.location.href='my_appeals'">
-        <div style="color:green" class="title">Мои бращения</div>
+        <div style="color:green" class="title">Мои обращения</div>
 
     </div>
 
@@ -59,11 +59,11 @@
     </div>
 
     <!--- ПРОПУСКИ --->
-    <div class="rectangle-horizontal" onclick="window.location.href='passes'">
+    <div class="rectangle-horizontal" onclick="window.location.href='manager/pass/houses'">
         <div style="color:green" class="title">Пропуски</div>
 
     </div>
-      <!---ПОДТВЕРЖДЕНИЕ ЖИТЕЛЕЙ --->
+    <!---ПОДТВЕРЖДЕНИЕ ЖИТЕЛЕЙ --->
       <div class="square" onclick="window.location.href='manager/tenant_confirming'">
          <div style="color:green" class="title">Подтверждение жителей</div>
           <br>
@@ -71,7 +71,7 @@
               <p>Неподтвержденных жителей:{{ amount_of_unconfirmed_tenants }}</p>
           </div>
       </div>
-      <!---Добавление дома --->
+    <!---Добавление дома --->
       <div class="square" onclick="window.location.href='manager/add_house'">
          <div style="color:green" class="title">Добавление дома</div>
           <br>

@@ -10,7 +10,7 @@
 <a href="{% url 'manager_main' %}">Вернуться на главную</a>
 <hr>
 {% for appeal in opened_appeals %}
-<a href="{% url 'appeal' id=appeal.id %}"><button>Обращение ползователя {{ appeal.tenant.user.username }}</button></a>
+<a href="{% url 'appeal' appeal_id=appeal.id %}"><button>Обращение ползователя {{ appeal.tenant.user.username }}</button></a>
 <hr>
 {% endfor %}
 

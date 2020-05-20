@@ -9,9 +9,30 @@
 
 </head>
 <body>
+{% if homeless %}
+<!---ЛИЧНЫЙ КАБИНЕТ --->
+<h2>Вы не подключены к дому, для дальнеешего пользование сервисом, пожалуйста, выберите свой дом в редактировании профиля</h2>
+<div class="wrapper">
+    <div class="rectangle-big" onclick="window.location.href='/tenant/my_cabinet'">
+        <div style="color:green" class="title">Личный кабинет, {{user.username}}</div>
+        <img src="{{ user.tenant.photo.url }}" width="40" height="40">
+    </div>
+</div>
+{% elif not house_confirmed %}
+<!---ЛИЧНЫЙ КАБИНЕТ --->
+<h2>Введенные Вами данные проходят проверку</h2>
+<div class="wrapper">
+    <div class="rectangle-big" onclick="window.location.href='/tenant/my_cabinet'">
+        <div style="color:green" class="title">Личный кабинет, {{user.username}}</div>
+        <img src="{{ user.tenant.photo.url }}" width="40" height="40">
+    </div>
+</div>
+{% else %}
+
+
   <div class="wrapper">
     <!---НОВОСТИ --->
-    <div style="color:green" class="rectangle-big">
+    <div style="color:green" class="rectangle-big" onclick="window.location.href='manager/news'">
         <div class="title">Новости</div>
         
         
@@ -78,6 +99,7 @@
           <div class="title">
               <p>Вы волонтёр!!!!!!</p>
               <p>Требуется помощь в округе:{{ amount_of_opened_tasks }}</p>
+              <p>Вы взялись:{{ amount_of_my_taken_tasks }}</p>
           </div>
       </div>
       {% else %}
@@ -97,11 +119,12 @@
     </div>
 
     <!--- ПРОПУСКИ --->
-    <div class="rectangle-horizontal" onclick="window.location.href='passes'">
+    <div class="rectangle-horizontal" onclick="window.location.href='tenant/pass/my_passes'">
         <div style="color:green" class="title">Пропуски</div>
         
     </div>
 
   </div>
+{% endif %}
 </body>
 </html>

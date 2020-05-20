@@ -4,6 +4,8 @@
 import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import AnonymousUser
+
 from .forms import CreateNewsForm
 from .models import News
 from tenant.models import Appeal, House, Forum, Tenant, Pass, Task
@@ -68,11 +70,17 @@ def news_page(request):
     :type request: :class:`django.http.HttpRequest`
     :return: отображение страницы новостей
     """
+    context = {}
     record = News.objects.all()
-    context = {
+    if request.user is not AnonymousUser:
+        context.update({
+            "is_tenant": hasattr(request.user, 'tenant'),
+            "is_manager": hasattr(request.user, 'manager'),
+        })
+    context.update({
         'user': request.user,
         'record': record,
-    }
+    })
     return render(request, 'pages/manager/news/news.html', context)
 
 
@@ -93,7 +101,7 @@ def create_news_page(request):
         createnews = CreateNewsForm(request.POST)
         if createnews.is_valid():
             record = News(
-                companyName=request.user,
+                company=request.user.manager.company,
                 publicationTitle=createnews.data['publicationTitle'],
                 publicationText=createnews.data['publicationText'],
                 publicationDate=datetime.datetime.now(),
@@ -135,7 +143,7 @@ def company_appeals_view(request):
         'user': user,
         "opened_appeals": opened_appeals,
     }
-    return render(request, 'pages/manager/company_appeals.html', context)
+    return render(request, 'pages/manager/appeals/company_appeals.html', context)
 
 
 @login_required
@@ -168,10 +176,16 @@ class HouseContext:
 @login_required
 def tenant_confirming_view(request):
     if request.method == 'POST':
-        tenant_id = request.POST.get('confirming')
-        tenant = Tenant.objects.get(pk=tenant_id)
-        tenant.house_confirmed = True
-        tenant.save()
+        tenant_id = request.POST.get('confirmed')
+        if tenant_id:
+            tenant = Tenant.objects.get(pk=tenant_id)
+            tenant.house_confirmed = True
+            tenant.save()
+        tenant_id = request.POST.get('unconfirmed')
+        if tenant_id:
+            tenant = Tenant.objects.get(pk=tenant_id)
+            tenant.house = None
+            tenant.save()
     houses = []
     for house in House.objects.all():
         tenants = []
@@ -191,22 +205,27 @@ def tenant_confirming_view(request):
 def pass_view(request):
     context = {
         'company_name': request.user.manager.company.inn,
-        'house_list': House.objects.filter(company=request.user.company),
+        'house_list': House.objects.filter(company=request.user.manager.company),
     }
-    return render(request, 'manager_pass.html', context)
+    return render(request, 'pages/manager/manager_pass.html', context)
 
 
 @login_required
 def pass_list_view(request, house_id):
-    human_passes = Pass.objects.filter(status='active', target='person'),
-    car_passes = Pass.objects.filter(status='active', target='car'),
     house = House.objects.get(id=house_id)
+    human_passes = []
+    car_passes = []
+    for pas in Pass.objects.filter(status='active', target='person'):
+        if pas.author.tenant.house == house:
+            human_passes.append(pas)
+    for pas in Pass.objects.filter(status='active', target='car'):
+        if pas.author.tenant.house == house:
+            car_passes.append(pas)
 
     context = {
         'human_passes': human_passes,
         'car_passes': car_passes,
-        'house_id': house_id,
         'house': house,
     }
-    return render(request, 'pass_list.html', context)
+    return render(request, 'pages/manager/pass_list.html', context)
 

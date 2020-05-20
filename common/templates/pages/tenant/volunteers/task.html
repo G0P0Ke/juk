@@ -50,7 +50,8 @@
 
 <br><br>
 {% if user.tenant.is_vol %}
-    <a href="{% url 'volunteer' %}"><input class="mdc-button"  value="Вернуться к заданиям для волонтеров" type="button" style="float: right"></a>
+<a href="{% url 'volunteer' %}"><input class="mdc-button"  value="Вернуться к заданиям для волонтеров" type="button" style="float: right"></a>
+<a href="{% url 'help' %}"><input class="mdc-button" value="Вернуться к моим запросам помощи" type="button" style="float: left"></a>
 {% else %}
 <a href="{% url 'help' %}"><input class="mdc-button" value="Вернуться к моим запросам помощи" type="button" style="float: right"></a>
 {% endif %}

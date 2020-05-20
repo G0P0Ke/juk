@@ -16,8 +16,11 @@
     <p>Имя: {{tenant.user.username}}</p>
     <p>Квартира: {{tenant.flat}}</p>
 
-    <input type="hidden" value={{tenant.id}} name="confirming">
+    <input type="hidden" value={{tenant.id}} name="confirmed">
         <input type="submit" value="Подтвердить жителя">
+
+    <input type="hidden" value={{tenant.id}} name="unconfirmed">
+        <input type="submit" value="Отклонить запрос жителя">
 
     <hr>
     {% endfor %}

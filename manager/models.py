@@ -10,8 +10,17 @@ class News(models.Model):
     """
     Модель БД для новостей
     """
-    companyName = models.CharField(max_length=50)
-    publicationDate = models.DateTimeField('date published')
-    publicationTitle = models.CharField(max_length=50)
-    publicationText = models.TextField(max_length=5000)
+    company = models.ForeignKey(
+        to=Company,
+        on_delete=models.CASCADE,
+    )
+    publicationDate = models.DateTimeField(
+        'date published'
+    )
+    publicationTitle = models.CharField(
+        max_length=50
+    )
+    publicationText = models.TextField(
+        max_length=5000
+    )
 

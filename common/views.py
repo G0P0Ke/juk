@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, SignUpForm
 from django.core.mail import send_mail
 from .forms import FeedbackForm
+from django.contrib.auth.models import AnonymousUser
 
 from tenant.models import Tenant
 from tenant.models import Manager
@@ -36,6 +37,11 @@ def index_view(request):
     :return: Отображение страницы
     """
     context = _get_base_context('JUK')
+    if request.user is not AnonymousUser:
+        context.update({
+            "is_tenant": hasattr(request.user, 'tenant'),
+            "is_manager": hasattr(request.user, 'manager'),
+        })
     return render(request, 'pages/index.html', context)
 
 

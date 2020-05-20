@@ -1,29 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
 	
-<a href="{% url 'manager_pass'%}"><button class="mdc-button mdc-button--outlined" style="float:right"><span class="mdc-button__ripple"></span>Вернуться на список домов</button></a>
+<a href="{% url 'houses_passes'%}"><button class="mdc-button mdc-button--outlined" style="float:right"><span class="mdc-button__ripple"></span>Вернуться в список домов</button></a>
 	
-<h3>Список домов компании {{ company_name }}</h3>
+<h3>Список пропусков дома {{ house.address }}</h3>
+
 <h1>Список пропусков на людей</h1>
 {% for pass in human_passes %}
-	
-{% if pass.author.house = house %}
+<a href="{% url 'pass' pass_id=pass.id %}">Пропуск</a><br>
     {{ pass.name }}
     {{ pass.surname }}
 	{{ pass.patronymic }}:
     <br>
 	Цель посещения: {{ pass.aim }}
-{% endif %}
 {% endfor %}
+
 <br><br>
+
 <h1>Список пропусков на машины</h1>
 {% for pass in car_passes %}
-	{% if pass.author.house = house %}
+<a href="{% url 'pass' pass_id=pass.id %}">Пропуск</a><br>
 	{{ pass.model }}
 	{{ pass.color }}
 	{{ pass.number }}:
 	<br>
 	Цель посещения: {{ pass.aim }}
-{% endif %}
 {% endfor %}
+
 {% endblock %}

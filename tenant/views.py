@@ -113,7 +113,7 @@ def redact_profile_view(request):
         user.tenant.flat = request.POST.get('flat')
         user.tenant.save()
         user.save()
-        return redirect('tenant/my_cabinet')
+        return redirect('/tenant/my_cabinet')
     if request.method == 'POST' and hasattr(request.user, 'manager'):
         username = request.POST.get('username')
         company_inn = request.POST.get('company_inn')
@@ -190,7 +190,12 @@ def forum_view(request, forum_id):
         "house_forum": owner == "house",
         "company_forum": owner == "company",
     })
-    return render(request, 'pages/tenant/forum.html', context)
+    if request.user is not AnonymousUser:
+        context.update({
+            "is_tenant": hasattr(request.user, 'tenant'),
+            "is_manager": hasattr(request.user, 'manager'),
+        })
+    return render(request, 'pages/tenant/forums/forum.html', context)
 
 
 def category_view(request, forum_id, category_name):
@@ -212,7 +217,7 @@ def category_view(request, forum_id, category_name):
         "forum": forum,
         "discussions": discussions,
     })
-    return render(request, 'pages/tenant/category.html', context)
+    return render(request, 'pages/tenant/forums/category.html', context)
 
 
 @login_required
@@ -231,16 +236,16 @@ def discussion_view(request, discussion_id):
         if request.user.id is AnonymousUser:
             return redirect('/login')
         text = request.POST.get('text')
-        #anon = bool(request.POST.get('anonymous'))
+        anon = bool(request.POST.get('anonymous'))
         comment = Comment.objects.create(
             text=text,
             discussion=discussion,
             author=request.user,
             cr_date=datetime.datetime.now(pytz.timezone("Europe/Moscow")),
-            #anon=anon,
+            anon=anon,
         )
         comment.save()
-        return redirect('/forum/discussion/', discussion_id=discussion.id)
+        return redirect('/forum/discussion/'+str(discussion.id))
     comments = discussion.comment_set.all()
     #comments = list(comments)
     #comments.reverse()
@@ -249,7 +254,7 @@ def discussion_view(request, discussion_id):
         "discussion": discussion,
         "comments": comments,
     })
-    return render(request, 'pages/tenant/discussion.html', context)
+    return render(request, 'pages/tenant/forums/discussion.html', context)
 
 
 @login_required
@@ -287,7 +292,7 @@ def cr_discussion_view(request, forum_id):
         "categories": categories,
         "forum": forum,
     })
-    return render(request, 'pages/tenant/cr_discussion.html', context)
+    return render(request, 'pages/tenant/forums/cr_discussion.html', context)
 
 
 def thread(request, discussion_id, thread_id):
@@ -322,7 +327,7 @@ def thread(request, discussion_id, thread_id):
         r_com.save()
         id = r_com.id
         return redirect('thread', discussion.id, thread.id)
-    return render(request, 'pages/tenant/thread.html', context)
+    return render(request, 'pages/tenant/forums/thread.html', context)
 
 
 @login_required
@@ -348,7 +353,7 @@ def my_appeals_view(request):
     context.update({
         "my_appeals": my_appeals,
     })
-    return render(request, 'pages/tenant/my_appeals.html', context)
+    return render(request, 'pages/tenant/appeals/my_appeals.html', context)
 
 
 class Message:
@@ -402,7 +407,7 @@ def appeal_view(request, appeal_id):
         "is_taken": appeal.manager is not None,
         "user": request.user,
     })
-    return render(request, 'pages/tenant/appeal.html', context)
+    return render(request, 'pages/tenant/appeals/appeal.html', context)
 
 
 @login_required
@@ -456,7 +461,7 @@ def cr_appeal_view(request):
         "is_tenant": hasattr(request.user, 'tenant'),
         "is_manager": hasattr(request.user, 'manager'),
     })
-    return render(request, 'pages/tenant/cr_appeal.html', context)
+    return render(request, 'pages/tenant/appeals/cr_appeal.html', context)
 
 
 @login_required
@@ -485,7 +490,7 @@ def cr_task_view(request):
     context.update({
         "user": request.user,
     })
-    return render(request, 'pages/tenant/cr_task.html', context)
+    return render(request, 'pages/tenant/volunteers/cr_task.html', context)
 
 
 @login_required
@@ -509,8 +514,10 @@ def volunteer_view(request):
         "taken_tasks": taken_tasks,
         "closed_tasks": closed_tasks,
         "company": company,
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
     }
-    return render(request, 'pages/tenant/volunteer.html', context)
+    return render(request, 'pages/tenant/volunteers/volunteer.html', context)
 
 
 @login_required
@@ -543,8 +550,10 @@ def help_view(request):
         "opened_tasks": opened_tasks,
         "taken_tasks": taken_tasks,
         "closed_tasks": closed_tasks,
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
     }
-    return render(request, 'pages/tenant/help.html', context)
+    return render(request, 'pages/tenant/volunteers/help.html', context)
 
 
 @login_required
@@ -572,7 +581,7 @@ def task_view(request, id):
         "is_taken": task.status == "taken",
         "is_closed": task.status == "closed",
     }
-    return render(request, 'pages/tenant/task.html', context)
+    return render(request, 'pages/tenant/volunteers/task.html', context)
 
 
 @login_required
@@ -583,20 +592,28 @@ def test_view(request):
     if request.method == 'POST':
         request.user.tenant.is_vol = True
         request.user.tenant.save()
-    return render(request, 'pages/tenant/test.html', context)
+    return render(request, 'pages/tenant/volunteers/test.html', context)
 
 
 @login_required
 def tenant_main_page(request):
+    if request.user.tenant.house is None or not request.user.tenant.house_confirmed:
+        context = {
+            "homeless": request.user.tenant.house is None,
+            "user": request.user,
+            "house_confirmed": request.user.tenant.house_confirmed,
+        }
+        return render(request, 'pages/tenant/tenant.html', context)
+
     # погода ---------------------------------------------------------------------
     # weather_api_key = "9894f93c-6bb8-45a2-95e2-6eee7ea9ab53"
     # Fedor key na zapas =)
     geocode_api_key = "ec60fb43-78d5-4e2e-af7c-da42c1300dbf"
     weather_api_key = "232ad7f1-a856-4ecd-92ad-30ea041f1b1e"  # my key
 
-    geocode = "Москва, Тверская улица, дом 7'"
+    geocode = request.user.tenant.house.address
 
-    #будет для каждого индивидуально после подключения домов
+    # будет для каждого индивидуально после подключения домов
     geo_url = urllib.parse.urlencode({
         'apikey': geocode_api_key,
         'geocode': geocode,
@@ -642,25 +659,36 @@ def tenant_main_page(request):
     }
     # ----------------------------------------------------------------------------
     opened_tasks = Task.objects.filter(author=request.user, status="opened")
-    opened_tasks = list(opened_tasks)
     context.update({
         "amount_of_my_opened_tasks": len(opened_tasks),
     })
 
     my_company = request.user.tenant.house.company
     amount_of_opened_tasks = 0
+    amount_of_my_taken_tasks = 0
     for task in Task.objects.all():
-        if hasattr(task.author, 'manager') and task.author.manager.company == my_company and task.status == "opened":
-            amount_of_opened_tasks += 1
-        if hasattr(task.author, 'tenant') and task.author.tenant.house.company == my_company and task.status == "opened":
-            amount_of_opened_tasks += 1
+        if hasattr(task.author, 'manager') and task.author.manager.company == my_company:
+            if task.status == "opened":
+                amount_of_opened_tasks += 1
+            if task.status == "taken" and task.volunteer == request.user.tenant:
+                amount_of_my_taken_tasks += 1
+        if hasattr(task.author, 'tenant') and task.author.tenant.house.company == my_company:
+            if task.status == "opened" and task.author != request.user:
+                amount_of_opened_tasks += 1
+            if task.status == "taken" and task.volunteer == request.user.tenant:
+                amount_of_my_taken_tasks += 1
     context.update({
         "amount_of_opened_tasks": amount_of_opened_tasks,
+        'amount_of_my_taken_tasks': amount_of_my_taken_tasks,
     })
 
     context.update({
         "house_forum_id": request.user.tenant.house.forum.id,
         "company_forum_id": request.user.tenant.house.company.forum.id,
+    })
+
+    context.update({
+        "house_confirmed": request.user.tenant.house_confirmed,
     })
     return render(request, 'pages/tenant/tenant.html', context)
 
@@ -670,7 +698,7 @@ def my_pass_view(request):
         'user': request.user,
         'my_pass': Pass.objects.filter(author=request.user, status='active'),
     }
-    return render(request, 'pages/tenant/my_pass.html', context)
+    return render(request, 'pages/tenant/passes/my_pass.html', context)
 
 
 @login_required
@@ -691,7 +719,7 @@ def cr_pass_view(request):
                 aim=request.POST.get('aim'),
             )
             pas.save()
-            return redirect('/tenant/pass/' + str(pas.id))
+            return redirect('/pass/' + str(pas.id))
         else:
             pas = Pass(
                 author=request.user,
@@ -704,8 +732,8 @@ def cr_pass_view(request):
                 aim=request.POST.get('aim'),
             )
             pas.save()
-            return redirect('/tenant/pass/' + str(pas.id))
-    return render(request, 'pages/tenant/cr_pass.html', context)
+            return redirect('/pass/' + str(pas.id))
+    return render(request, 'pages/tenant/passes/cr_pass.html', context)
 
 
 @login_required
@@ -714,7 +742,7 @@ def pass_view(request, pass_id):
     tenant = 1
     if hasattr(request.user, 'manager'):
         tenant = 0
-    link = "https://api.qrserver.com/v1/create-qr-code/?data=http://127.0.0.1:8000/tenant/pass/"\
+    link = "https://api.qrserver.com/v1/create-qr-code/?data=http://127.0.0.1:8000/pass/"\
            + str(pass_id) + "&size=400x400"
     ti_del = datetime.timedelta(days=3) - (timezone.now() - pas.cr_date)
     hours = int(ti_del.seconds // 3600)
@@ -743,10 +771,15 @@ def pass_view(request, pass_id):
         'days': ti_del.days,
         'hours': hours,
         'minutes': minutes,
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
     }
     if request.method == 'POST' or ti_del < datetime.timedelta(days=0):
         pas.status = 'complete'
         pas.save()
-        return redirect('/')
-    return render(request, 'pages/tenant/pass.html', context)
+        if hasattr(request.user, 'tenant'):
+            return redirect('/tenant')
+        elif hasattr(request.user, 'manager'):
+            return redirect('/manager')
+    return render(request, 'pages/tenant/passes/pass.html', context)
 

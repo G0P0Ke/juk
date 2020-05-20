@@ -162,19 +162,19 @@ border: 1px solid #FFFFF;
     <div class="col-1"></div>
     <div class="col-1.5">
         <div class="alert shadow" style="background-color: #FFFFFF; color:#F25CA2;" role="alert">
-            {% if comment.author %}
+            {% if comment.anon %}
             <div align = "center"> Аноним </div>
             <div class="media">
                 <img src="/media/static/default.jpg"  width="140" height="140"  align = "left" alt="...">
             </div>
             <div align = "center"> Аноним </div>
-            {% elif comment.author. %}
+            {% elif comment.author.tenant %}
             <div align = "center"> {{comment.author.username}} </div>
             <div class="media">
                 <img src="{{ comment.author.tenant.photo.url }}"  width="140" height="140"  align = "left" alt="...">
             </div>
             <div align = "center"> Житель </div>
-            {% elif comment.author %}
+            {% elif comment.author.manager %}
             <div align = "center"> {{comment.author.username}} </div>
             <div class="media">
                 <img src="{{ comment.author.manager.photo.url }}"  width="140" height="140"  align = "left" alt="...">
@@ -185,13 +185,15 @@ border: 1px solid #FFFFF;
     </div>
     <div class="col-9">
         <div class="alert comment shadow" role="alert">
-            {{item.text}}
+            {{comment.text}}
         </div>
+        <!------
         <div style="float: left">
-            <a href="{% url 'thread' discussion_id=discussion.id thread_id=item.id %} ">
+            <a href="{% url 'thread' discussion_id=discussion.id thread_id=comment.id %} ">
                 <input class="mdc-button" value="Ответить" type="button"> </a>
         </div>
-        <div style="float: right; color: #808080;"> {{ item.cr_date }} </div>
+        ------->
+        <div style="float: right; color: #808080;"> {{ comment.cr_date }} </div>
     </div>
     <div class="col-1"></div>
 </div>

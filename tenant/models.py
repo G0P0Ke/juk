@@ -160,12 +160,12 @@ class Comment(models.Model):
         on_delete=models.CASCADE
     )
     cr_date = models.DateTimeField()
-    thread = models.ForeignKey(
-        to='Comment',
-        on_delete=models.CASCADE,
-        default=None,
-        null=True,
-    )
+    #thread = models.ForeignKey(
+    #    to='Comment',
+    #    on_delete=models.CASCADE,
+    #    default=None,
+    #    null=True,
+    #)
     anon = models.BooleanField(
         default=False
     )
@@ -258,15 +258,36 @@ class Pass(models.Model):
     """
     Модель БД для пропусков
     """
-    author = models.ForeignKey(to=User, on_delete=models.CASCADE)  # Автор
-    cr_date = models.DateTimeField()  # Дата создания
+    author = models.ForeignKey(
+        to=User,
+        on_delete=models.CASCADE
+    )
+    cr_date = models.DateTimeField()
     status = models.TextField()  # 'active' или 'complete'
     target = models.TextField()  # 'person' или 'car'
-    name = models.TextField(null=True, blank=True)  # Имя посетителя
-    surname = models.TextField(null=True, blank=True)  # Фамилия посетителя
-    patronymic = models.TextField(null=True, blank=True)  # Отчество посетителя
-    model = models.TextField(null=True, blank=True)  # Марка и модель машины
-    color = models.TextField(null=True, blank=True)  # Цвет машины
-    number = models.TextField(null=True, blank=True)  # Номер машины
+    name = models.TextField(
+        null=True,
+        blank=True,
+    )  # Имя посетителя
+    surname = models.TextField(
+        null=True,
+        blank=True,
+    )  # Фамилия посетителя
+    patronymic = models.TextField(
+        null=True,
+        blank=True,
+    )  # Отчество посетителя
+    model = models.TextField(
+        null=True,
+        blank=True,
+    )  # Марка и модель машины
+    color = models.TextField(
+        null=True,
+        blank=True,
+    )  # Цвет машины
+    number = models.TextField(
+        null=True,
+        blank=True,
+    )  # Номер машины
     aim = models.TextField()  # Цель визита
 
