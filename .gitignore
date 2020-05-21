@@ -326,3 +326,5 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/git,venv,linux,django,python,windows,virtualenv,pycharm+all
+
+staticroot/
