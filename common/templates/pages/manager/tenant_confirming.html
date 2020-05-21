@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{% load static %}
+<script src="{% static 'tenant_confirm.js' %}"></script>
 
 <h1>Неподтвержденные жители:</h1>
 <hr>
 <a href="{% url 'manager_main' %}">Вернуться на главную страницу</a>
 <hr>
 <form method="post">
+    <input type="hidden" id="confirm-id" value=0 name="confirmed">
+    <input type="hidden" id="notconfirm-id" value=0 name="unconfirmed">
     {% csrf_token %}
     {% for house in houses %}
     <h3>{{ house.house.address }}</h3>
@@ -15,18 +19,12 @@
     {% for tenant in house.unconfirmed_tenants %}
     <p>Имя: {{tenant.user.username}}</p>
     <p>Квартира: {{tenant.flat}}</p>
-
-    <input type="hidden" value={{tenant.id}} name="confirmed">
-        <input type="submit" value="Подтвердить жителя">
-
-    <input type="hidden" value={{tenant.id}} name="unconfirmed">
-        <input type="submit" value="Отклонить запрос жителя">
-
+        <input type="submit" onclick="confirm({{tenant.id}});" value="Подтвердить жителя">
+        <input type="submit" onclick="notconfirm({{tenant.id}});" value="Отклонить запрос жителя">
     <hr>
     {% endfor %}
     {% endfor %}
 </form>
-
 
 
 
