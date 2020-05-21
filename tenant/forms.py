@@ -24,3 +24,7 @@ class PhotoUpload(forms.Form):
 
 class ManagerRequestForm(forms.Form):
     inn_company = forms.IntegerField(label='Выберете вашу компанию по ИНН', )
+
+
+class AppendCompany(forms.Form):
+    inn_company = forms.IntegerField()

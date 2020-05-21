@@ -24,7 +24,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', tenant_views.admin, name='admin'),
-
+    path('admin/create/', tenant_views.admin_create , name='create_a_company'),
     path('', common_views.index_view, name='index'),
 
     path('accounts/login/', common_views.login_view, name='login'),

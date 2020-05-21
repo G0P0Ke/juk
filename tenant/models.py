@@ -80,6 +80,7 @@ class Manager(models.Model):
     company = models.ForeignKey(
         Company,
         on_delete=models.CASCADE,
+        null=True,
         blank=True,
     )
     photo = models.ImageField(

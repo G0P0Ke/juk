@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 
 from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task, Pass
 from .models import ManagerRequest, Manager
@@ -14,7 +15,7 @@ import urllib
 import json
 
 from django.utils import timezone
-from .forms import PhotoUpload, ManagerRequestForm
+from .forms import PhotoUpload, ManagerRequestForm, AppendCompany
 
 from django.http import Http404
 
@@ -127,19 +128,49 @@ def redact_profile_view(request):
         username = request.POST.get('username')
         user.username = username
         request_form = ManagerRequestForm(request.POST)
+        try:
+            manager_request = ManagerRequest.objects.get(author_id=user.manager.user_id)
+            if manager_request.status == 3:
+                flag = 3
+            elif manager_request.status == 2:
+                flag = 2
+            elif manager_request.status == 1:
+                flag = 1
+        except BaseException:
+            flag = 0
         if request_form.is_valid():
             inn = request_form.cleaned_data.get('inn_company')
-            new_manager_request = ManagerRequest(author=user, inn_company=inn)
-            new_manager_request.save()
-            messages.success(request, 'Запрос на подключение к компании отправлен')
+            try:
+                get_Company = Company.objects.get(inn=inn)
+                permission = 1
+            except BaseException:
+                permission = 0
+            if permission:
+                new_manager_request = ManagerRequest(author=user, inn_company=inn)
+                new_manager_request.save()
+                messages.success(request, 'Запрос на подключение отправлен')
+            elif not permission:
+                messages.info(request, 'Ваша УК не подключена к нашей системе')
             context.update({
                 'request_form': request_form,
+                'flag': flag,
             })
             return redirect(redact_profile_view)
     elif hasattr(request.user, 'manager'):
         request_form = ManagerRequestForm()
+        try:
+            manager_request = ManagerRequest.objects.get(author_id=user.manager.user_id)
+            if manager_request.status == 3:
+                flag = 3
+            elif manager_request.status == 2:
+                flag = 2
+            elif manager_request.status == 1:
+                flag = 1
+        except BaseException:
+            flag = 0
         context.update({
             'request_form': request_form,
+            'flag': flag,
         })
     context.update({
         "user": user,
@@ -782,7 +813,6 @@ def admin(request):
                         for comp in company:
                             if comp.inn == request_man.inn_company:
                                 manager.company_id = comp.id
-                                print(comp.id)
                                 manager.save(update_fields=['company_id'])
                 request_man.status = 1
                 request_man.save()
@@ -791,3 +821,33 @@ def admin(request):
                 request_man.save()
         return redirect(admin)
     return render(request, 'admin/manager_requests.html', context)
+
+
+def admin_create(request):
+    user = request.user
+    company = Company.objects.filter()
+    context = {
+        'company': company
+    }
+    if request.method == 'POST':
+        form = AppendCompany(request.POST)
+        if form.is_valid():
+            inn = form.cleaned_data.get('inn_company')
+            try:
+                check_company = Company.objects.get(inn=inn)
+                flag = 0
+            except BaseException:
+                flag = 1
+            if flag:
+                new_company = Company(inn=inn)
+                new_company.save()
+                messages.success(request, "УК добавлена")
+            else:
+                messages.info(request, 'УК с указанным ИНН уже существует')
+            return redirect(admin_create)
+    else:
+        form = AppendCompany()
+    context.update({
+        'form': form
+    })
+    return render(request, 'admin/create_company.html', context)

@@ -1,26 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% for request in requests %}
-
-    <div class="card ml-4 mt-2 mr-auto">
-        <div class="card-body">
-            <h5 class="card-title"> Запрос менеджера</h5>
-             <h6 class="card-subtitle mb-2 text-muted"> Name: {{ request.name }}</h6>
-             <h6 class="card-subtitle mb-2 text-muted"> Surname: {{ request.surname }}</h6>
-            <p class="card-text">ИНН Компании: {{ request.inn_company }}</p>
-            <div class="row">
-            <form action="" method="post" class="ml-3 mr-2">
-                    {% csrf_token %}
-                    <input type="submit" class="btn btn-outline-success" value="Одобрить подключение" name="agree{{ request.id }}">
-            </form>
-            <form action="" method="post">
-                    {% csrf_token %}
-                    <input type="submit" class="btn btn-outline-danger" value="Отклонить запрос" name="refused{{ request.id }}">
-            </form>
+    <div class="bx-pull-right"> <a href="{% url 'create_a_company' %}" class="link"><h5>Create a company</h5></a>  </div>
+    <div class="row">
+        <div class="col">
+            {% for request in requests %}
+            <div class="card ml-4 mt-2 mr-auto" >
+                <div class="card-body">
+                    <h5 class="card-title"> Запрос менеджера</h5>
+                     <h6 class="card-subtitle mb-2 text-muted"> Name: {{ request.name }}</h6>
+                     <h6 class="card-subtitle mb-2 text-muted"> Surname: {{ request.surname }}</h6>
+                    <p class="card-text">ИНН Компании: {{ request.inn_company }}</p>
+                    <div class="row">
+                    <form action="" method="post" class="ml-3 mr-2">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-outline-success" value="Одобрить подключение" name="agree{{ request.id }}">
+                    </form>
+                    <form action="" method="post">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-outline-danger" value="Отклонить запрос" name="refused{{ request.id }}">
+                    </form>
+                    </div>
+                </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 
-{% endfor %}
+
 {% endblock %}
