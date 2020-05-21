@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<h1>Неподтвержденные жители:</h1>
+<hr>
+<a href="{% url 'manager_main' %}">Вернуться на главную страницу</a>
+<hr>
+<form method="post">
+    {% csrf_token %}
+    {% for house in houses %}
+    <h3>{{ house.house.address }}</h3>
+    <hr>
+
+    {% for tenant in house.unconfirmed_tenants %}
+    <p>Имя: {{tenant.user.username}}</p>
+    <p>Квартира: {{tenant.flat}}</p>
+
+    <input type="hidden" value={{tenant.id}} name="confirmed">
+        <input type="submit" value="Подтвердить жителя">
+
+    <input type="hidden" value={{tenant.id}} name="unconfirmed">
+        <input type="submit" value="Отклонить запрос жителя">
+
+    <hr>
+    {% endfor %}
+    {% endfor %}
+</form>
+
+
+
+
+
+{% endblock %}

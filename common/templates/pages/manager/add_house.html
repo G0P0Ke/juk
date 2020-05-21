@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% load static %}
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=9d32ec24-ae67-45da-9cb2-a1d51686e32b" type="text/javascript"></script>
+<script src="{% static 'map.js' %}"></script>
+<style>
+       #map {
+           margin: 10px auto;
+           width: 800px;
+           height: 500px;
+       }
+</style>
+<h1 style="margin: 50px auto;">Добавление дома</h1>
+<hr>
+
+<a href="{% url 'manager_main' %}">Вернуться на главную страницу</a>
+<form method="POST">
+    {% csrf_token %}
+
+    <label for="address-id">Ваш адрес:</label>
+    <input style="width:600px" type="text" name="address" id="address-id" value="{{user.tenant.house.address}}"><br>
+
+    <input type="submit" value="Добавить дом">
+</form>
+
+<button onclick="from_form_to_map()">Проверить адрес на карте</button>
+<button onclick="from_map_to_form()">с карты в строку</button>
+
+
+<div id="map"></div>
+
+
+{% endblock %}

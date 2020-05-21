@@ -10,8 +10,13 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import os
+import sys, os
 import django
+def rel(*x):
+    return os.path.join(os.path.abspath(os.path.dirname(__file__)), *x)
+
+sys.path.insert(0, rel('..'))
+
 os.environ['DJANGO_SETTINGS_MODULE'] = 'juk.settings'
 django.setup()
 # -- Project information -----------------------------------------------------
