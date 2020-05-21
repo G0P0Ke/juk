@@ -591,7 +591,8 @@ def test_view(request):
         "date_ok": 0,
     }
     if request.method == 'POST':
-        if request.POST.get('1') == '3' and request.POST.get('2') == '1' and request.POST.get('3') == '1' and request.POST.get('4') == '1':
+        if request.POST.get('1') == '3' and request.POST.get('2') == '1' and request.POST.get('3') == '1' and \
+                request.POST.get('4') == '1' and request.POST.get('5') == '2':
             request.user.tenant.is_vol = 1
             return redirect('/tenant')
         else:

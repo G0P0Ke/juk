@@ -122,7 +122,7 @@ border: none;
 
 .box {
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   margin: 2rem auto;
   background: white;
   border: 1px solid white;
@@ -244,14 +244,24 @@ input:disabled + label:before {
 
             <input type="radio" id="radio12" value="3" name="4">
             <label for="radio12">Сделаю объявление на сайте о том, чтобы дети больше не играли во дворе</label>
+
+            <h5>Приняли бы Вы участие в помощи проведения общественного мероприятия?</h5>
+            <input type="radio" id="radio13" value="1" name="5">
+            <label for="radio13">Возможно, если мне заплатят за мою работу</label>
+
+            <input type="radio" id="radio14" value="2" name="5">
+            <label for="radio14">С удовольствием приму</label>
+
+            <input type="radio" id="radio15" value="3" name="5">
+            <label for="radio15">Нет, у меня много дел</label>
         </div>
         <input class="mdc-button mdc-button--raised" type="submit" value="Завершить" style="float:left; margin: 0 0 0 10%; width: 39%;">
     </form>
     <a href="{% url 'tenant_main' %}"><input class="mdc-button mdc-button--outlined" value="Вернуться" type="button" style="float:right; margin: 0 10% 0 0; width: 39%;"></a>
 </div>
 {% else %}
-<a href="{% url 'tenant_main' %}"><input class="mdc-button mdc-button--outlined" value="Вернуться" type="button" style="float:right; margin: 0 10% 0 0; width: 39%;"></a>
-<h1>Попробуйте пройти тест позже</h1>
+<a href="{% url 'tenant_main' %}"><input class="mdc-button mdc-button--outlined" value="Вернуться" type="button" style="float:right; margin: 5% 10% 0 0; width: 39%;"></a>
+<h1 style="float:left; margin: 5% 0 10% 0;">Попробуйте пройти тест позже</h1>
 {% endif %}
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
