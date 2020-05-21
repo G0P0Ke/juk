@@ -129,7 +129,7 @@ color: #ffffff;
             <label style="font-size: 15pt; text-align: left;" for="address-id">Ваш адрес:</label>
                 <input class="forminput" type="text" name="address" id="address-id" value="{{user.tenant.house.address}}" required><br>
                   <label style="font-size: 15pt; text-align: left;" for="flat-id">Ваша квартира:</label>
-            <input class="forminput" style="width:30%" type="text" name="flat" id="flat-id" value="{{user.tenant.flat}}" required><br>
+            <input class="forminput" style="width:30%" type="number" name="flat" id="flat-id" value="{{user.tenant.flat}}" required><br>
 
                 {% if house_doesnt_exist %}
                 <p style="font-size: 15pt;">Ваш плохой дом не подключен к нашей хорошей сети</p><br>
