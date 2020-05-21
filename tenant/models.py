@@ -3,6 +3,7 @@
 """
 from django.db import models
 from django.contrib.auth.models import User
+from martor.models import MartorField
 
 
 class Company(models.Model):
@@ -150,7 +151,7 @@ class Comment(models.Model):
         :param author: Автор комментария
         :param cr_date: Дата создания комментария
         """
-    text = models.TextField()
+    text = MartorField()
     discussion = models.ForeignKey(
         to=Discussion,
         on_delete=models.CASCADE
@@ -205,7 +206,7 @@ class AppealMessage(models.Model):
         :param creator: Создатель
         :param cr_date: Дата создания сообщения
         """
-    text = models.TextField()
+    text = MartorField()
     appeal = models.ForeignKey(
         to=Appeal,
         on_delete=models.CASCADE,

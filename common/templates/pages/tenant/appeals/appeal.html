@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% load martortags %}
+
 <style>
 
     body{
@@ -109,7 +111,7 @@
         <span style="color:var(--mdc-theme-secondary);">{{ message.appealmessage.creator }}</span>
         <span style="color:#808080; text-transform:lowercase; float:right; font-size:12pt">{{ message.appealmessage.cr_date}}</span>
         <br>
-        <span>{{ message.appealmessage.text }}</span>
+        <span>{{ message.appealmessage.text|safe_markdown }}</span>
     </div>
 
 <div></div>

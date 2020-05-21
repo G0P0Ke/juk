@@ -2,6 +2,8 @@
 {% include 'header.html' %}
 {% block content %}
 
+{% load martortags %}
+
 <br>
 <br>
 <div style="padding-left:30">
@@ -23,7 +25,7 @@
         <div class="card-body">
           <h6 class="card-subtitle mb-2 text-info">{{ item.companyName }}</h6>
             <h6 class="card-subtitle mb-2 text-muted">{{ item.publicationDate | date:"d.m.Y H-i"}}</h6>
-          <p class="card-text">{{ item.publicationText }} </p>
+          <p class="card-text">{{ item.publicationText|safe_markdown }} </p>
           <a href="http://127.0.0.1:8000/" class="card-link">Перейти к новости</a>
         </div>
       </div>
