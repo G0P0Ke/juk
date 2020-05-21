@@ -176,15 +176,15 @@ class HouseContext:
 @login_required
 def tenant_confirming_view(request):
     if request.method == 'POST':
-        tenant_id = request.POST.get('confirmed')
-        if tenant_id:
-            tenant = Tenant.objects.get(pk=tenant_id)
-            tenant.house_confirmed = True
-            tenant.save()
-        tenant_id = request.POST.get('unconfirmed')
-        if tenant_id:
+        tenant_id = int(request.POST.get('unconfirmed'))
+        if tenant_id != 0:
             tenant = Tenant.objects.get(pk=tenant_id)
             tenant.house = None
+            tenant.save()
+        tenant_id = int(request.POST.get('confirmed'))
+        if tenant_id != 0:
+            tenant = Tenant.objects.get(pk=tenant_id)
+            tenant.house_confirmed = True
             tenant.save()
     houses = []
     for house in House.objects.all():
