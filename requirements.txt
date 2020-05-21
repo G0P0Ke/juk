@@ -11,3 +11,9 @@ asgiref==3.2.3
 pytz==2019.3
 Sphinx==3.0.1
 Pillow==7.1.2
+
+# webserver
+daphne==2.5.0
+
+# Database
+mysqlclient==1.4.6

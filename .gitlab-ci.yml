@@ -1,0 +1,28 @@
+image: python:latest
+
+cache:
+    paths:
+        - ~/.cache/pip/
+
+before_script:
+    - python -V
+    - apt-get update
+    - apt-get install ssh-client
+
+stages:
+    - deploy
+
+upload_to_server:
+    stage: deploy
+    before_script:
+        - apt-get install -qq git
+        - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+        - eval $(ssh-agent -s)
+        - ssh-add <(echo "$SSH_PRIVATE_KEY")
+        - mkdir -p ~/.ssh
+        - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    script:
+        - ssh $SSH_USER@$SSH_HOST "cd prodserver_conf/s104_juk && git checkout master && git pull origin master && exit"
+        - ssh $SSH_USER@$SSH_HOST "cd prodserver_conf && docker stop s104_juk && docker rm s104_juk && docker-compose build s104_juk && docker-compose up -d s104_juk && exit"
+    only:
+        - master
