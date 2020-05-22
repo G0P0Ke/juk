@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task, Pass
 import datetime
 import pytz
-#import requests
+import requests
 import urllib
 import json
 
