@@ -9,15 +9,19 @@
 
 </head>
 <body>
+  <div class="roof">
+    <img class="logo" src="{% static 'img/logo.svg' %}">
+    <img src="{% static 'img/roof.svg' %}">
+  </div>
   <div class="wrapper">
 
-    <div class="rectangle-big">
+    <div class="rectangle-big" onclick="window.location.href='/manager/news'">
         <div class="title">Новости</div>
         
         
     </div>
 
-    <div class="rectangle-horizontal " onclick="window.location.href='forum'">
+    <div class="rectangle-horizontal" onclick="window.location.href='forum'">
         <div class="title">Форум</div>
         
         
@@ -58,7 +62,7 @@
         <img src={{user.tenant.photo.url}}>
     </div>
 
-     <div class="square" onclick="window.location.href='news'">
+     <div class="square" onclick="window.location.href='vol/help'">
         <div class="title">Мои задания</div>
         
     </div>
@@ -68,12 +72,12 @@
         
     </div>
 
-    <div class="rectangle-horizontal" onclick="window.location.href='news'">
+    <div class="rectangle-horizontal" onclick="window.location.href='my_appeals'">
         <div class="title">Обращения</div>
         
     </div>
 
-    <div class="rectangle-horizontal" onclick="window.location.href='passes'">
+    <div class="rectangle-horizontal" onclick="window.location.href='tenant/pass'">
         <div class="title">Пропуски</div>
         
     </div>
