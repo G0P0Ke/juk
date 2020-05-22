@@ -270,7 +270,7 @@ def add_house_view(request):
                 )
                 forum.save()
             elif not flag:
-                messages.warning(request, 'Этот дом уже подключен к вашему УК')
+                messages.warning(request, 'Этот дом уже подключен к УК')
 
             return redirect(add_house_view)
         else:
