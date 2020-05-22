@@ -825,6 +825,12 @@ def admin(request):
 
 def admin_create(request):
     user = request.user
+    if hasattr(request.user, 'tenant'):
+        if not user.tenant.is_admin:
+            return HttpResponse("Nice try, bro", status=401)
+    elif hasattr(request.user, 'manager'):
+        if not user.manager.is_admin:
+            return HttpResponse("Nice try, bro", status=401)
     company = Company.objects.filter()
     context = {
         'company': company
