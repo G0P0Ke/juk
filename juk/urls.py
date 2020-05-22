@@ -27,7 +27,7 @@ urlpatterns = [
     path('martor/', include('martor.urls')),
 
     path('admin/', common_views.admin, name='admin'),
-    path('admin/create/', common_views.admin_create , name='create_a_company'),
+    path('admin/create/', common_views.admin_create, name='create_a_company'),
 
     path('', common_views.index_view, name='index'),
 

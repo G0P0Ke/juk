@@ -27,5 +27,5 @@ class ManagerRequestForm(forms.Form):
 
 
 class AppendCompany(forms.Form):
-    inn_company = forms.IntegerField()
+    inn_company = forms.IntegerField(required=True)
     company_name = forms.CharField(required=True)
