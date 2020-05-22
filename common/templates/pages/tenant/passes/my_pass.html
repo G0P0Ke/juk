@@ -2,10 +2,10 @@
 {% block content %}
 
 <a href="{% url 'cr_pass' %}">
-<button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:25%; margin-left:15%; margin-up:10%"><span class="mdc-button__ripple"></span>Заказать пропуск</button>
+<button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:35%; margin-left:10%; margin-up:10%"><span class="mdc-button__ripple"></span>Заказать пропуск</button>
 </a>
 <a href="{% url 'tenant_main' %}">
-<button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:25%; margin-left:15%; margin-up:10%"><span class="mdc-button__ripple"></span>Вернуться на главную</button>
+<button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:35%; margin-left:10%; margin-up:10%"><span class="mdc-button__ripple"></span>Вернуться на главную</button>
 </a>
 <h1>Мои пропуска</h1>
 {% for pass in my_pass %}
