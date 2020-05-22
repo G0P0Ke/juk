@@ -8,11 +8,23 @@ from django.contrib.auth.models import AnonymousUser
 
 from .forms import CreateNewsForm
 from .models import News
-from tenant.models import Appeal, House, Forum, Tenant, Pass, Task
+from tenant.models import Appeal, House, Forum, Tenant, Pass, Task, Company
+from tenant.models import ManagerRequest, Manager
+from tenant.forms import PhotoUpload, ManagerRequestForm, AppendCompany
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 @login_required
 def manager_main_page(request):
+    if request.user.manager.company is None:
+        context = {
+            "companyless": request.user.manager.company is None,
+            "user": request.user,
+            # "house_confirmed": request.user.tenant.house_confirmed,
+        }
+        return render(request, 'pages/manager/manager.html', context)
+
     amount_of_my_opened_tasks = 0
     for task in Task.objects.all():
         if hasattr(task.author, 'manager') and task.author.manager.company == request.user.manager.company:
@@ -61,6 +73,86 @@ def my_cabinet_view(request):
     # f2.save()
     return render(request, 'pages/manager/my_cabinet.html', context)
 
+
+@login_required
+def redact_profile_view(request):
+    """
+    Изменение профиля менеджера
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
+    user = request.user
+    context = {
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    }
+    if request.method == 'POST':
+        form = PhotoUpload(request.POST, request.FILES)
+        if form.is_valid():
+            photo = form.cleaned_data.get('photo')
+            user.manager.photo = photo
+            user.manager.save(update_fields=['photo'])
+            context.update({
+                "user": request.user,
+                "form": form,
+            })
+            return render(request, 'pages/manager/redact_profile.html', context)
+    else:
+        form = PhotoUpload()
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        user.username = username
+        request_form = ManagerRequestForm(request.POST)
+        try:
+            manager_request = ManagerRequest.objects.get(author_id=user.manager.user_id)
+            if manager_request.status == 3:
+                flag = 3
+            elif manager_request.status == 2:
+                flag = 2
+            elif manager_request.status == 1:
+                flag = 1
+        except BaseException:
+            flag = 0
+        if request_form.is_valid():
+            inn = request_form.cleaned_data.get('inn_company')
+            try:
+                get_Company = Company.objects.get(inn=inn)
+                permission = 1
+            except BaseException:
+                permission = 0
+            if permission:
+                new_manager_request = ManagerRequest(author=user, inn_company=inn)
+                new_manager_request.save()
+                messages.success(request, 'Запрос на подключение отправлен')
+            elif not permission:
+                messages.info(request, 'Ваша УК не подключена к нашей системе')
+            context.update({
+                'request_form': request_form,
+                'flag': flag,
+            })
+            return redirect(redact_profile_view)
+    request_form = ManagerRequestForm()
+    try:
+        manager_request = ManagerRequest.objects.get(author_id=user.manager.user_id)
+        if manager_request.status == 3:
+            flag = 3
+        elif manager_request.status == 2:
+            flag = 2
+        elif manager_request.status == 1:
+            flag = 1
+    except BaseException:
+        flag = 0
+    context.update({
+        'request_form': request_form,
+        'flag': flag,
+    })
+    context.update({
+        "user": user,
+        'form': form,
+        "companies": Company.objects.all(),
+    })
+    return render(request, 'pages/manager/redact_profile.html', context)
 
 def news_page(request):
     """

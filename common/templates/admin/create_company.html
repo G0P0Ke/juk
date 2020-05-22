@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+     <div class="bx-pull-left"> <a href="{% url 'admin' %}" class="link"><h5>Return back</h5></a>  </div>
+   <div class="container mt-5">
+       <div class="row justify-content-lg-start">
+                 <div class="col p-5">
+                    <h2> Cуществующие УК:</h2>
+                        {% for comp in company %}
+                        <div class="card ml-2 mt-2 mr-auto">
+                            <div class="card-body">
+                                <h5 class="card-title">ID УК: {{ comp.id }}</h5>
+                                <h6 class="text-muted">ИНН: {{ comp.inn }}</h6>
+                                <h6 class="text-muted">Название УК:</h6>
+                            </div>
+                        </div>
+                        {% endfor %}
+                 </div>
+               <div class="content justify-content-lg-end mt-3">
+                   <div class="container border justify-content-center shadow-sm p-3 mb-2 bg-white rounded">
+                       <div class="col p-5">
+                         <form action="" method="post" class="" enctype="multipart/form-data">
+                             <h2> Добавление нового УК</h2>
+                             <div class="form-group">
+                                 {% csrf_token %}
+                                 {{ form.inn_company.errors }}
+                                 <label> <h5 class="text-muted"> ИНН УК </h5></label>
+                                 {{ form.inn_company }}
+                             </div>
+                             <input type="submit" value="Добавить" class="btn btn-primary btn-block" style="background-color: #7B68EE; color:white; border-color:black">
+                         </form>
+                   </div>
+                   </div>
+
+               </div>
+
+
+        </div>
+    </div>
+
+{% endblock %}

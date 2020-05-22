@@ -1,10 +1,13 @@
 """Required modules"""
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 
 from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task, Pass
+from .models import ManagerRequest, Manager
 import datetime
 import pytz
 import requests
@@ -12,7 +15,7 @@ import urllib
 import json
 
 from django.utils import timezone
-from .forms import PhotoUpload
+from .forms import PhotoUpload, ManagerRequestForm, AppendCompany
 
 from django.http import Http404
 
@@ -67,14 +70,13 @@ def my_cabinet_view(request):
 @login_required
 def redact_profile_view(request):
     """
-    Изменение профиля
+    Изменение профиля жильца
 
     :param request: объект с деталями запроса.
     :return: объект ответа сервера с HTML-кодом внутри
     """
     user = request.user
     context = {
-        "house_doesnt_exist": False,
         "is_tenant": hasattr(request.user, 'tenant'),
         "is_manager": hasattr(request.user, 'manager'),
     }
@@ -82,30 +84,27 @@ def redact_profile_view(request):
         form = PhotoUpload(request.POST, request.FILES)
         if form.is_valid():
             photo = form.cleaned_data.get('photo')
-            if hasattr(request.user, 'tenant'):
-                user.tenant.photo = photo
-                user.tenant.save(update_fields=['photo'])
-            if hasattr(request.user, 'manager'):
-                user.manager.photo = photo
-                user.manager.save(update_fields=['photo'])
+            user.tenant.photo = photo
+            user.tenant.save(update_fields=['photo'])
             context.update({
-                "user": request.user,
+                "user": user,
                 "form": form,
             })
             return render(request, 'pages/tenant/redact_profile.html', context)
     else:
         form = PhotoUpload()
-    if request.method == 'POST' and hasattr(request.user, 'tenant'):
+    if request.method == 'POST':
         username = request.POST.get('username')
         address = request.POST.get('address')
         user.username = username
         if request.user.tenant.house is None or address != request.user.tenant.house.address:
             user.tenant.house_confirmed = False
+            messages.success(request, 'Запрос на подключение отправлен')
             if House.objects.filter(address=address).exists():
                 user.tenant.house = House.objects.filter(address=address)[0]
             else:
+                messages.info(request, 'Ваш дом не подключен к нашей системе к нашей системе')
                 context.update({
-                    "house_doesnt_exist": True,
                     'form': form,
                     "user": user,
                 })
@@ -114,19 +113,9 @@ def redact_profile_view(request):
         user.tenant.save()
         user.save()
         return redirect('/tenant/my_cabinet')
-    if request.method == 'POST' and hasattr(request.user, 'manager'):
-        username = request.POST.get('username')
-        company_inn = request.POST.get('company_inn')
-        user.username = username
-        user.manager.company = Company.objects.filter(inn=company_inn)[0]
-        user.manager.save()
-        user.save()
-        return redirect('manager/my_cabinet')
-
     context.update({
         "user": user,
         'form': form,
-        "companies": Company.objects.all(),
     })
     return render(request, 'pages/tenant/redact_profile.html', context)
 
@@ -782,4 +771,3 @@ def pass_view(request, pass_id):
         elif hasattr(request.user, 'manager'):
             return redirect('/manager')
     return render(request, 'pages/tenant/passes/pass.html', context)
-

@@ -26,7 +26,8 @@ from django.conf import settings
 urlpatterns = [
     path('martor/', include('martor.urls')),
 
-    path('admin/', admin.site.urls),
+    path('admin/', common_views.admin, name='admin'),
+    path('admin/create/', common_views.admin_create , name='create_a_company'),
 
     path('', common_views.index_view, name='index'),
 
@@ -38,6 +39,7 @@ urlpatterns = [
 
     path('manager', manager_views.manager_main_page, name='manager_main'),
     path('manager/my_cabinet', manager_views.my_cabinet_view, name='manager_my_cabinet'),
+    path('manager/redact_profile', manager_views.redact_profile_view, name='manager_redact_profile'),
 
     path('manager/news/', manager_views.news_page, name='news'),
     path('manager/news/create/', manager_views.create_news_page, name='create_news'),
@@ -50,7 +52,7 @@ urlpatterns = [
     path('tenant', tenant_views.tenant_main_page, name='tenant_main'),
     path('tenant/my_cabinet', tenant_views.my_cabinet_view, name='tenant_my_cabinet'),
     #path('tenant/profile/', tenant_views.profile, name='profile'),
-    path('tenant/redact_profile', tenant_views.redact_profile_view, name='redact_profile'),
+    path('tenant/redact_profile', tenant_views.redact_profile_view, name='tenant_redact_profile'),
 
     path('forum/<int:forum_id>', tenant_views.forum_view, name="forum"),
     path('forum/discussion/<int:discussion_id>', tenant_views.discussion_view, name="discussion"),

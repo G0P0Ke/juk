@@ -68,6 +68,9 @@ class Tenant(models.Model):
     house_confirmed = models.BooleanField(
         default=False,
     )
+    is_admin = models.BooleanField(
+        default=False,
+    )
 
 
 class Manager(models.Model):
@@ -85,6 +88,9 @@ class Manager(models.Model):
         upload_to='photo',
         blank=True,
         default='static/default.jpg',
+    )
+    is_admin = models.BooleanField(
+        default=False,
     )
 
 
@@ -292,3 +298,18 @@ class Pass(models.Model):
     )  # Номер машины
     aim = models.TextField()  # Цель визита
 
+
+class ManagerRequest(models.Model):
+    """
+    Модель запроса менеджера на подкдлючение к компании
+    """
+    statuses_requset = (
+        (1, 'Accepted'),
+        (2, 'Refused'),
+        (3, 'Not considered')
+    ) # статусы запроса на подключения
+    author = models.ForeignKey(User, on_delete=models.CASCADE) # author
+    name = models.TextField(default='Antosha') # имя менеджера
+    surname = models.TextField(default='Andreev') # фамилия менеджера
+    status = models.IntegerField(choices=statuses_requset, default=3) # статус запроса на подключение
+    inn_company = models.IntegerField() # ИНН УК

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+        <h1 style="margin: 50px auto;">Редактирование профиля менеджера</h1>
+        <hr>
+
+        <a href="{% url 'manager_my_cabinet' %}">Вернуться в профиль</a>
+
+        <div>
+            <img src="{{ user.manager.photo.url }}" width="260" height="250">
+        </div>
+        <form action="" method="post" class="" enctype="multipart/form-data">
+            <div class="form-group">
+                {% csrf_token %}
+                {{ form.photo.errors }}
+                <label> Моя фотография:</label>
+                {{ form.photo }}
+            </div>
+            <input type="submit" value="Обновить фото" class="button">
+        </form>
+
+        <form method="POST">
+            {% csrf_token %}
+            <label for="username-id">Ваше имя:</label>
+            <input type="text" name="username" id="username-id" value={{user.username}}><br>
+
+                <input type="submit" value="Сохранить изменения">
+        </form>
+        {% if flag == 1 %}
+            <h5 class="text-muted"> Ваш запрос на подключение к УК одобрен. ИНН вашей компании: {{ user.manager.company.inn }}</h5>
+        {% elif flag == 0 %}
+            <h5 class="text-muted"> Вы можете подать запрос на подключение к УК</h5>
+            <form method="POST" action="">
+                <div>
+                    {% csrf_token %}
+                    {{ request_form }}
+                    <input type="submit" name="submit" value="Запросить подключение">
+                </div>
+            </form>
+        {% elif flag == 2 %}
+            <h5 class="text-muted"> Ваш запрос на подключение к УК отклонен. Вы можете попробовать снова</h5>
+            <form method="POST" action="">
+                <div>
+                    {% csrf_token %}
+                    {{ request_form }}
+                    <input type="submit" name="submit" value="Запросить подключение">
+                </div>
+            </form>
+        {% elif flag == 3 %}
+            <h5 class="text-muted"> Ваш запрос на подключение к УК находится в рассмотрении</h5>
+        {% endif %}
+
+
+{% endblock %}
+

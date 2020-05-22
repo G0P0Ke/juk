@@ -20,3 +20,11 @@ class EditProfileForm(forms.ModelForm):
 
 class PhotoUpload(forms.Form):
     photo = forms.ImageField()
+
+
+class ManagerRequestForm(forms.Form):
+    inn_company = forms.IntegerField(label='Выберете вашу компанию по ИНН', )
+
+
+class AppendCompany(forms.Form):
+    inn_company = forms.IntegerField()

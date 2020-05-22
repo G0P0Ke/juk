@@ -9,6 +9,16 @@
 
 </head>
 <body>
+{% if companyless %}
+<!---ЛИЧНЫЙ КАБИНЕТ --->
+<h2>Вы не подключены к компании, для дальнеешего пользование сервисом, пожалуйста, выберите свою компанию в редактировании профиля</h2>
+<div class="square" onclick="window.location.href='/manager/my_cabinet'">
+    <div style="color:green" class="title">Личный кабинет, {{user.username}}</div>
+    <img src="{{ user.manager.photo.url }}" width="40" height="40">
+</div>
+
+{% else %}
+
   <div class="wrapper">
     <!---НОВОСТИ --->
     <div style="color:green" class="rectangle-big" onclick="window.location.href='manager/news'">
@@ -80,5 +90,6 @@
           </div>
       </div>
   </div>
+{% endif %}
 </body>
 </html>
