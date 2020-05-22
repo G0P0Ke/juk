@@ -161,7 +161,6 @@ def feedback(request):
                 'subject': subject,
                 'message': message,
                 'user_mail': user_mail,
-
             }
 
             message = 'Отправитель: ' + user_mail + '\n'\
@@ -236,7 +235,7 @@ def admin_create(request):
                 flag = 1
             if flag:
                 new_company = Company(inn=inn)
-                new_company_forum = Forum.objects.create(company=c, categories="Объявления|Другое")
+                new_company_forum = Forum.objects.create(company=new_company, categories="Объявления|Другое")
                 new_company_forum.save()
                 new_company.save()
                 messages.success(request, "УК добавлена")
