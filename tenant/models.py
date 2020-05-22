@@ -308,8 +308,18 @@ class ManagerRequest(models.Model):
         (2, 'Refused'),
         (3, 'Not considered')
     ) # статусы запроса на подключения
-    author = models.ForeignKey(User, on_delete=models.CASCADE) # author
-    name = models.TextField(default='Antosha') # имя менеджера
-    surname = models.TextField(default='Andreev') # фамилия менеджера
-    status = models.IntegerField(choices=statuses_requset, default=3) # статус запроса на подключение
-    inn_company = models.IntegerField() # ИНН УК
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )  # author
+    name = models.TextField(
+        default='Antosha'
+    )  # имя менеджера
+    surname = models.TextField(
+        default='Andreev'
+    )  # фамилия менеджера
+    status = models.IntegerField(
+        choices=statuses_requset,
+        default=3
+    )  # статус запроса на подключение
+    inn_company = models.IntegerField()  # ИНН УК

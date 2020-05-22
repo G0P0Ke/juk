@@ -577,10 +577,24 @@ def task_view(request, id):
 def test_view(request):
     context = {
         "user": request.user,
+        "date_ok": 0,
     }
     if request.method == 'POST':
-        request.user.tenant.is_vol = True
-        request.user.tenant.save()
+        if request.POST.get('1') == '3' and request.POST.get('2') == '1' and request.POST.get('3') == '1' and \
+                request.POST.get('4') == '1' and request.POST.get('5') == '2':
+            request.user.tenant.is_vol = 1
+            return redirect('/tenant')
+        else:
+            request.user.tenant.test_date = timezone.now()
+            request.user.tenant.save()
+    if request.user.tenant.test_date is None:
+        context.update({
+            "date_ok": 1,
+        })
+    elif timezone.now() - request.user.tenant.test_date > datetime.timedelta(days=3):
+        context.update({
+            "date_ok": 1,
+        })
     return render(request, 'pages/tenant/volunteers/test.html', context)
 
 
