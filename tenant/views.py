@@ -54,6 +54,8 @@ def my_cabinet_view(request):
     :param request: объект с деталями запроса.
     :return: объект ответа сервера с HTML-кодом внутри
     """
+    if not hasattr(request.user, 'tenant'):
+        return redirect('/')
     context = {
         "is_tenant": True,
         "user": request.user,
@@ -76,6 +78,8 @@ def redact_profile_view(request):
     :return: объект ответа сервера с HTML-кодом внутри
     """
     user = request.user
+    if not hasattr(request.user, 'tenant'):
+        return redirect('/')
     context = {
         "is_tenant": hasattr(request.user, 'tenant'),
         "is_manager": hasattr(request.user, 'manager'),
@@ -518,6 +522,8 @@ def help_view(request):
     :type request: :class:`django.http.HttpRequest`
     :return: объект ответа сервера с HTML-кодом внутри
     """
+    if not hasattr(request.user, 'tenant'):
+        return redirect('/')
     user = request.user
     if hasattr(user, 'tenant'):
         opened_tasks = Task.objects.filter(author=request.user, status="opened",)
@@ -600,6 +606,8 @@ def test_view(request):
 
 @login_required
 def tenant_main_page(request):
+    if not hasattr(request.user, 'tenant'):
+        return redirect('/')
     if request.user.tenant.house is None or not request.user.tenant.house_confirmed:
         context = {
             "homeless": request.user.tenant.house is None,

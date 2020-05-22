@@ -87,6 +87,8 @@ def redact_profile_view(request):
         "is_tenant": hasattr(request.user, 'tenant'),
         "is_manager": hasattr(request.user, 'manager'),
     }
+    if not hasattr(request.user, 'manager'):
+        redirect('/')
     if request.method == 'POST':
         form = PhotoUpload(request.POST, request.FILES)
         if form.is_valid():
@@ -186,6 +188,8 @@ def create_news_page(request):
     :return: Перенаправление настраницу новостей
     :return: Отображение страницы создания новостей
     """
+    if not hasattr(request.user, 'manager'):
+        redirect('/')
     context = {
         'user': request.user,
     }
@@ -243,19 +247,34 @@ def add_house_view(request):
     context = {
         "user": request.user,
     }
+    if not hasattr(request.user, 'manager'):
+        redirect('/')
     if request.method == 'POST':
         address = request.POST.get('address')
-        house = House.objects.create(
-            address=address,
-            company=request.user.manager.company,
-        )
-        forum = Forum.objects.create(
-            house=house,
-            categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое",
-        )
-        house.save()
-        forum.save()
-        return redirect('/')
+        if len(address) > 0:
+            try:
+                check_house = House.objects.get(address=address)
+                flag = 0
+            except BaseException:
+                flag = 1
+            if flag:
+                house = House.objects.create(
+                    address=address,
+                    company=request.user.manager.company,
+                )
+                house.save()
+                messages.success(request, "Новый дом добавлен к вашему УК")
+                forum = Forum.objects.create(
+                    house=house,
+                    categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое",
+                )
+                forum.save()
+            elif not flag:
+                messages.warning(request, 'Этот дом уже подключен к вашему УК')
+
+            return redirect(add_house_view)
+        else:
+            messages.warning(request, 'Заполните строку адресс для добавления дома')
     return render(request, 'pages/manager/add_house.html', context)
 
 
