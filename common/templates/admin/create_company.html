@@ -9,9 +9,8 @@
                         {% for comp in company %}
                         <div class="card ml-2 mt-2 mr-auto">
                             <div class="card-body">
-                                <h5 class="card-title">ID УК: {{ comp.id }}</h5>
-                                <h6 class="text-muted">ИНН: {{ comp.inn }}</h6>
-                                <h6 class="text-muted">Название УК:</h6>
+                                <h5 class="card-title">ИНН: {{ comp.inn }}</h5>
+                                <h6 class="text-muted">Название УК: {{ comp.name }}</h6>
                             </div>
                         </div>
                         {% endfor %}
@@ -24,8 +23,14 @@
                              <div class="form-group">
                                  {% csrf_token %}
                                  {{ form.inn_company.errors }}
-                                 <label> <h5 class="text-muted"> ИНН УК </h5></label>
+                                 <h5 class="text-muted"> ИНН УК </h5>
                                  {{ form.inn_company }}
+                             </div>
+                             <div class="form-group">
+                                 {% csrf_token %}
+                                 {{ form.company_name.errors }}
+                                 <h5 class="text-muted"> Название УК </h5>
+                                 {{ form.company_name }}
                              </div>
                              <input type="submit" value="Добавить" class="btn btn-primary btn-block" style="background-color: #7B68EE; color:white; border-color:black">
                          </form>
