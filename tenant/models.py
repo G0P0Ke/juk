@@ -13,7 +13,7 @@ class Company(models.Model):
     :param inn: инн УК
     """
     inn = models.IntegerField()
-
+    name = models.TextField(default=False)
 
 class House(models.Model):
     """

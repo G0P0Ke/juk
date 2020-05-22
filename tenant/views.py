@@ -99,16 +99,16 @@ def redact_profile_view(request):
         user.username = username
         if request.user.tenant.house is None or address != request.user.tenant.house.address:
             user.tenant.house_confirmed = False
-            messages.success(request, 'Запрос на подключение отправлен')
             if House.objects.filter(address=address).exists():
                 user.tenant.house = House.objects.filter(address=address)[0]
-            else:
-                messages.info(request, 'Ваш дом не подключен к нашей системе к нашей системе')
-                context.update({
-                    'form': form,
-                    "user": user,
-                })
-                return render(request, 'pages/tenant/redact_profile.html', context)
+                messages.success(request, 'Запрос на подключение отправлен')
+        else:
+            messages.info(request, 'Ваш дом не подключен к нашей системе')
+            context.update({
+                'form': form,
+                "user": user,
+            })
+            return render(request, 'pages/tenant/redact_profile.html', context)
         user.tenant.flat = request.POST.get('flat')
         user.tenant.save()
         user.save()
