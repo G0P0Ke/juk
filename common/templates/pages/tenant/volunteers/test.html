@@ -205,7 +205,8 @@ input:disabled + label:before {
         <h1>Тест для волонёров</h1>
 
         <div class="box">
-            <h5>У Вас появляется новый сосед, который только что переехал и несёт тяжёлые коробки в свою новую квартиру. Каковы будут Ваши действия?</h5>
+            <h5>У Вас появляется новый сосед, который только что переехал и несёт тяжёлые коробки в свою новую квартиру.
+                Каковы будут Ваши действия?</h5>
             <input type="radio" id="radio1" value="1" name="1">
             <label for="radio1">Познакомлю его с моей собакой</label>
 
@@ -215,7 +216,8 @@ input:disabled + label:before {
             <input type="radio" id="radio3" value="3" name="1">
             <label for="radio3">Предложу свою помощь</label>
 
-            <h5>Управляющая компания Вашего дома набирает добровольцев для посадки деревьев на Вашем дворе. Что Вы сделаете?</h5>
+            <h5>Управляющая компания Вашего дома набирает добровольцев для посадки деревьев на Вашем дворе. Что Вы
+                сделаете?</h5>
             <input type="radio" id="radio4" value="1" name="2">
             <label for="radio4">Я приму участие в посадке</label>
 
@@ -255,15 +257,18 @@ input:disabled + label:before {
             <input type="radio" id="radio15" value="3" name="5">
             <label for="radio15">Нет, у меня много дел</label>
         </div>
-        <input class="mdc-button mdc-button--raised" type="submit" value="Завершить" style="float:left; margin: 0 0 0 10%; width: 39%;">
+        <input class="mdc-button mdc-button--raised" type="submit" value="Завершить"
+               style="float:left; margin: 0 0 0 10%; width: 39%;">
     </form>
-    <a href="{% url 'tenant_main' %}"><input class="mdc-button mdc-button--outlined" value="Вернуться" type="button" style="float:right; margin: 0 10% 0 0; width: 39%;"></a>
+    <a href="{% url 'tenant_main' %}"><input class="mdc-button mdc-button--outlined" value="Вернуться" type="button"
+                                             style="float:right; margin: 0 10% 0 0; width: 39%;"></a>
 </div>
 {% else %}
-<a href="{% url 'tenant_main' %}"><input class="mdc-button mdc-button--outlined" value="Вернуться" type="button" style="float:right; margin: 5% 10% 0 0; width: 39%;"></a>
+<a href="{% url 'tenant_main' %}"><input class="mdc-button mdc-button--outlined" value="Вернуться" type="button"
+                                         style="float:right; margin: 5% 10% 0 0; width: 39%;"></a>
 <h1 style="float:left; margin: 5% 0 10% 0;">Попробуйте пройти тест позже</h1>
 {% endif %}
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 </head>
 {% endblock %}

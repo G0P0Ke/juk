@@ -46,10 +46,11 @@
 
 {% if house_forum %}
 
+<p style="font-size: 20pt; text-align: center;">Это форум дома с адресом <br> {{ house.address }}.</p>
 
-    <p style="font-size: 20pt; text-align: center;">Это форум дома с адресом <br> {{ house.address }}</p>
 {% elif company_forum %}
-<p style="font-size: 20pt; text-align: center;">Это форум компании с инн <br> {{ company.inn }}</p>
+
+<p style="font-size: 20pt; text-align: center;">Это форум компании <br> {{ company.name }}.</p>
 
 
 {% endif %}

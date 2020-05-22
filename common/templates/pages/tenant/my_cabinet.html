@@ -85,6 +85,12 @@ margin:10px auto 0;
                     <img src="{{ user.tenant.photo.url }}" width="260" height="250">
                 </div>
                 <div class="right">
+                    <div class="category">
+                        <p style="font-size: 18pt; text-align: center;">Имя: {{ user.first_name }}</p>
+                    </div>
+                    <div class="category">
+                        <p style="font-size: 18pt; text-align: center;">Фамилия: {{ user.last_name }}</p>
+                    </div>
 
                     {% if homeless %}
                     <div class="category">

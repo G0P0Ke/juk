@@ -62,24 +62,29 @@
     <div class="category">
         <p style="font-size: 20pt;">{{ task.task }}</p>
         <p style="font-size: 15pt; text-align: center;"> Автор: {{ task.author.username }}</p>
-        <p style="font-size: 15pt; text-align: center;"> Адрес: {{ task.author.address }}, кв. {{ task.author.flat }} </p>
-    {% if is_taken %}
+        <p style="font-size: 15pt; text-align: center;"> Адрес: {{ task.author.address }}, кв. {{ task.author.flat
+            }} </p>
+        {% if is_taken %}
         <p style="font-size: 15pt; text-align: center;"> Это задание выполняет: {{ task.volunteer.user.username }}</p>
-    {% endif %}
+        {% endif %}
     </div>
     <form method="POST">
         {% csrf_token %}
         {% if my_task and is_taken %}
         <input type="hidden" value="closed" name="status">
-        <input class="mdc-button mdc-button--raised" type="submit" value="Закрыть задание" style="width:30%; margin-left: 35%;">
+        <input class="mdc-button mdc-button--raised" type="submit" value="Закрыть задание"
+               style="width:30%; margin-left: 35%;">
         {% elif my_task and is_opened %}
         <input type="hidden" value="closed" name="status">
-        <input class="mdc-button mdc-button--raised" type="submit" value="Закрыть задание" style="width:30%; margin-left: 35%;">
+        <input class="mdc-button mdc-button--raised" type="submit" value="Закрыть задание"
+               style="width:30%; margin-left: 35%;">
         {% elif is_opened %}
         <input type="hidden" value="taken" name="status">
-        <input class="mdc-button mdc-button--raised" type="submit" value="Взяться за задание" style="width:30%; margin-left: 35%;">
+        <input class="mdc-button mdc-button--raised" type="submit" value="Взяться за задание"
+               style="width:30%; margin-left: 35%;">
         {% elif is_taken %}
-        <p style="font-size: 15pt; text-align: center; color:var(--mdc-theme-primary)">Вы откликнулись на это задание</p>
+        <p style="font-size: 15pt; text-align: center; color:var(--mdc-theme-primary)">Вы откликнулись на это
+            задание</p>
         {% endif %}
     </form>
 </div>
