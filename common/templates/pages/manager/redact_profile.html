@@ -93,6 +93,30 @@ background-color: var(--mdc-theme-primary);
 color: #ffffff;
 }
 
+ .select{
+    position: relative;
+}
+
+.select select{
+    background: #f2f2f2;
+    padding: 10px 35px 10px 35px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14pt;
+    color: #000;
+    outline: none;
+}
+.select: before{
+    position: absolute;
+    color: #000000;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: #007ce0;
+
+}
+
         </style>
 
 
@@ -128,7 +152,7 @@ color: #ffffff;
                     <input class="forminput" type="text" name="first_name" id="first_name-id" value="{{user.first_name}}" required><br>
 
                 <label style="font-size: 15pt; text-align: left;" for="last_name-id">Ваша фамилия:</label>
-                    <input class="forminput" style="width:60%" type="text" name="last_name" id="last_name-id" value="{{user.last_name}}" required><br>
+                    <input class="forminput" type="text" name="last_name" id="last_name-id" value="{{user.last_name}}" required><br>
 
                 <input class="mdc-button mdc-button--raised" type="submit" value="Сохранить изменения">
             </form>
@@ -140,7 +164,10 @@ color: #ffffff;
                 <form method="POST" action="">
                     <div>
                         {% csrf_token %}
+                        <div class="select">
                         {{ request_form }}
+                        </div>
+                        <br>
                         <input class="mdc-button mdc-button--raised" type="submit" name="submit" value="Запросить подключение">
                     </div>
                 </form>
@@ -149,8 +176,11 @@ color: #ffffff;
                 <form method="POST" action="">
                     <div>
                         {% csrf_token %}
+                         <div class="select">
                         {{ request_form }}
+                              </div>
                     </div>
+                    <br>
                     <input class="mdc-button mdc-button--raised" type="submit" name="submit" value="Запросить подключение">
                 </form>
             {% elif flag == 3 %}
