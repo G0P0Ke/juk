@@ -54,6 +54,8 @@ def my_cabinet_view(request):
     :param request: объект с деталями запроса.
     :return: объект ответа сервера с HTML-кодом внутри
     """
+    if not hasattr(request.user, 'tenant'):
+        return redirect('/')
     context = {
         "is_tenant": True,
         "user": request.user,
@@ -76,6 +78,8 @@ def redact_profile_view(request):
     :return: объект ответа сервера с HTML-кодом внутри
     """
     user = request.user
+    if not hasattr(request.user, 'tenant'):
+        return redirect('/')
     context = {
         "is_tenant": hasattr(request.user, 'tenant'),
         "is_manager": hasattr(request.user, 'manager'),
@@ -95,20 +99,26 @@ def redact_profile_view(request):
         form = PhotoUpload()
     if request.method == 'POST':
         username = request.POST.get('username')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
         address = request.POST.get('address')
         user.username = username
+        user.first_name = first_name
+        user.last_name = last_name
         if request.user.tenant.house is None or address != request.user.tenant.house.address:
             user.tenant.house_confirmed = False
+            user.save()
+            user.tenant.save()
             if House.objects.filter(address=address).exists():
                 user.tenant.house = House.objects.filter(address=address)[0]
                 messages.success(request, 'Запрос на подключение отправлен')
-        else:
-            messages.info(request, 'Ваш дом не подключен к нашей системе')
-            context.update({
-                'form': form,
-                "user": user,
-            })
-            return render(request, 'pages/tenant/redact_profile.html', context)
+            else:
+                messages.info(request, 'Ваш дом не подключен к нашей системе')
+                context.update({
+                    'form': form,
+                    "user": user,
+                })
+                return render(request, 'pages/tenant/redact_profile.html', context)
         user.tenant.flat = request.POST.get('flat')
         user.tenant.save()
         user.save()
@@ -518,6 +528,8 @@ def help_view(request):
     :type request: :class:`django.http.HttpRequest`
     :return: объект ответа сервера с HTML-кодом внутри
     """
+    if not hasattr(request.user, 'tenant'):
+        return redirect('/')
     user = request.user
     if hasattr(user, 'tenant'):
         opened_tasks = Task.objects.filter(author=request.user, status="opened",)
@@ -600,6 +612,8 @@ def test_view(request):
 
 @login_required
 def tenant_main_page(request):
+    if not hasattr(request.user, 'tenant'):
+        return redirect('/')
     if request.user.tenant.house is None or not request.user.tenant.house_confirmed:
         context = {
             "homeless": request.user.tenant.house is None,

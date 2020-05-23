@@ -19,10 +19,12 @@ class SignUpForm(UserCreationForm):
     Форма регистрации
     """
     email = forms.EmailField(max_length=254)
+    first_name = forms.CharField(max_length=25)
+    last_name = forms.CharField(max_length=25)
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2',)
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2',)
 
 
 class FeedbackForm(forms.Form):

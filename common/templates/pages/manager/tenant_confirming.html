@@ -17,7 +17,8 @@
     <hr>
 
     {% for tenant in house.unconfirmed_tenants %}
-    <p>Имя: {{tenant.user.username}}</p>
+    <p>Имя: {{tenant.user.first_name}}</p>
+    <p>Фамилия: {{tenant.user.last_name}}</p>
     <p>Квартира: {{tenant.flat}}</p>
         <input type="submit" onclick="confirm({{tenant.id}});" value="Подтвердить жителя">
         <input type="submit" onclick="notconfirm({{tenant.id}});" value="Отклонить запрос жителя">

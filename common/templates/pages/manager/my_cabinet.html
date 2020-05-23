@@ -83,7 +83,13 @@ margin:10px auto 0;
                     <img src="{{ user.manager.photo.url }}" width="260" height="250">
                 </div>
                 <div class="right">
-                    <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
+                    <div class="category">
+                        <p style="font-size: 18pt; text-align: center;">Имя: {{ user.first_name }}</p>
+                    </div>
+                    <div class="category">
+                        <p style="font-size: 18pt; text-align: center;">Фамилия: {{ user.last_name }}</p>
+                    </div>
+
                     {% if companyless %}
                     <div class="category">
                         <p style="font-size: 18pt; text-align: center;">Вы не подключены к компании, для дальнеешего пользования сервисом, пожалуйста, выберите свою компанию в редактировании профиля</p>
