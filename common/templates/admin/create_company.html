@@ -1,46 +1,50 @@
 {% extends 'base.html' %}
 
 {% block content %}
-     <div class="bx-pull-left"> <a href="{% url 'admin' %}" class="link"><h5>Return back</h5></a>  </div>
-   <div class="container mt-5">
-       <div class="row justify-content-lg-start">
-                 <div class="col p-5">
-                    <h2> Cуществующие УК:</h2>
-                        {% for comp in company %}
-                        <div class="card ml-2 mt-2 mr-auto">
-                            <div class="card-body">
-                                <h5 class="card-title">ИНН: {{ comp.inn }}</h5>
-                                <h6 class="text-muted">Название УК: {{ comp.name }}</h6>
-                            </div>
-                        </div>
-                        {% endfor %}
-                 </div>
-               <div class="content justify-content-lg-end mt-3">
-                   <div class="container border justify-content-center shadow-sm p-3 mb-2 bg-white rounded">
-                       <div class="col p-5">
-                         <form action="" method="post" class="" enctype="multipart/form-data">
-                             <h2> Добавление нового УК</h2>
-                             <div class="form-group">
-                                 {% csrf_token %}
-                                 {{ form.inn_company.errors }}
-                                 <h5 class="text-muted"> ИНН УК </h5>
-                                 {{ form.inn_company }}
-                             </div>
-                             <div class="form-group">
-                                 {% csrf_token %}
-                                 {{ form.company_name.errors }}
-                                 <h5 class="text-muted"> Название УК </h5>
-                                 {{ form.company_name }}
-                             </div>
-                             <input type="submit" value="Добавить" class="btn btn-primary btn-block" style="background-color: #7B68EE; color:white; border-color:black">
-                         </form>
-                   </div>
-                   </div>
 
-               </div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">
+            <a href="{% url 'admin' %}" class="link">Return back</a>
+        </li>
+    </ol>
+</nav>
 
-
+<div class="container">
+    <div class="row">
+        <div class="col card p-5 m-3">
+            <h2 class="mb-3">Существующие УК</h2>
+            {% for comp in company %}
+            <div class="row mt-1 mb-1">
+                <div class="col card">
+                    <div class="card-body">
+                        <h5 class="card-title">ИНН: {{ comp.inn }}</h5>
+                        <h6 class="text-muted">Название УК: {{ comp.name }}</h6>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col card p-5 m-3">
+            <h2 class="mb-3"> Добавление нового УК</h2>
+            <form action="" method="post" class="" enctype="multipart/form-data">
+                <div class="form-group">
+                    {% csrf_token %}
+                    {{ form.inn_company.errors }}
+                    <h5 class="text-muted"> ИНН УК </h5>
+                    {{ form.inn_company }}
+                </div>
+                <div class="form-group">
+                    {% csrf_token %}
+                    {{ form.company_name.errors }}
+                    <h5 class="text-muted"> Название УК </h5>
+                    {{ form.company_name }}
+                </div>
+                <input type="submit" value="Добавить" class="btn btn-primary btn-block"
+                       style="background-color: #7B68EE; color:white; border-color:black">
+            </form>
         </div>
     </div>
+</div>
 
 {% endblock %}
