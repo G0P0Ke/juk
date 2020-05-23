@@ -5,9 +5,9 @@
 
 {% load static %}
 
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=9d32ec24-ae67-45da-9cb2-a1d51686e32b" type="text/javascript"></script>
-<script src="{% static 'map.js' %}"></script>
-<style>
+        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=9d32ec24-ae67-45da-9cb2-a1d51686e32b" type="text/javascript"></script>
+        <script src="{% static 'map.js' %}"></script>
+	    <style>
         #map {
             margin: 10px 0 auto 10%;
             width: 90%px;
@@ -103,51 +103,55 @@ color: #ffffff;
 }
 
         </style>
-<p style="margin: 20px auto 0;font-size: 22pt; text-align: center;">Редактирование профиля жильца</p>
-<a href="{% url 'tenant_my_cabinet' %}"><button class="mdc-button" style="float:left;"><span class="mdc-button__ripple"></span>Вернуться в профиль</button></a>
+<p style="margin: 20px auto;font-size: 22pt; text-align: center;">Редактирование профиля жильца</p>
+       <a class="mdc-button" style="float:right" href="{% url 'tenant_my_cabinet' %}">Вернуться в профиль</a>
 <div class="form">
     <div class="grid">
 
         <hr>
 <div class="left">
 
-    <div>
-        <label style="font-size: 15pt; text-align: center;"> Моя фотография:</label><br>
-        <img src="{{ user.tenant.photo.url }}" width="260" height="250">
-    </div>
-    <form action="" method="post" class="form1" enctype="multipart/form-data">
-        <div class="form-group ">
-            {% csrf_token %}
-            {{ form.photo.errors }}
-            {{ form.photo }}
+        <div>
+            <label style="font-size: 15pt; text-align: center;"> Моя фотография:</label><br>
+            <img src="{{ user.tenant.photo.url }}" width="260" height="250">
         </div>
-        <input class="mdc-button mdc-button--outlined" type="submit" value="Обновить фото" class="button">
-    </form>
+        <form action="" method="post" class="form1" enctype="multipart/form-data">
+            <div class="form-group ">
+                {% csrf_token %}
+                {{ form.photo.errors }}
+                {{ form.photo }}
+            </div>
+            <input class="mdc-button mdc-button--outlined" type="submit" value="Обновить фото" class="button">
+        </form>
 </div>
         <div class="right">
-            <form method="POST">
+        <form method="POST">
 
                 {% csrf_token %}
-                <label style="font-size: 15pt; text-align: left;" for="username-id">Ваше имя:</label>
-                <input class="forminput" type="text" name="username" id="username-id" value="{{user.username}}" required><br>
+                <label style="font-size: 15pt; text-align: left;" for="username-id">Ваш логин:</label>
+                    <input class="forminput" type="text" name="username" id="username-id" value="{{user.username}}" required><br>
 
-                <label style="font-size: 15pt; text-align: left;" for="address-id">Ваш адрес:</label>
+                <label style="font-size: 15pt; text-align: left;" for="first_name-id">Ваше имя:</label>
+                    <input class="forminput" type="text" name="first_name" id="first_name-id" value="{{user.first_name}}" required><br>
+
+                <label style="font-size: 15pt; text-align: left;" for="last_name-id">Ваша фамилия:</label>
+                    <input class="forminput" style="width:60%" type="text" name="last_name" id="last_name-id" value="{{user.last_name}}" required><br>
+
+            <label style="font-size: 15pt; text-align: left;" for="address-id">Ваш адрес:</label>
                 <input class="forminput" type="text" name="address" id="address-id" value="{{user.tenant.house.address}}" required><br>
-                <label style="font-size: 15pt; text-align: left;" for="flat-id">Ваша квартира:</label>
-                <input class="forminput" style="width:30%" type="text" name="flat" id="flat-id" value="{{user.tenant.flat}}" required><br>
 
-                {% if house_doesnt_exist %}
-                <p style="font-size: 15pt;">Ваш плохой дом не подключен к нашей хорошей сети</p><br>
-                {% endif %}
+            <label style="font-size: 15pt; text-align: left;" for="flat-id">Ваша квартира:</label>
+                <input class="forminput" style="width:30%" type="text" name="flat" id="flat-id" value="{{user.tenant.flat}}" required><br>
                 <input class="mdc-button mdc-button--raised" type="submit" value="Сохранить изменения">
-            </form>
+        </form>
             <br><br>
-            <button class="mdc-button" style="float:left; margin:auto auto auto 10%;" onclick="from_form_to_map()">Проверить адрес на карте</button>
-            <button class="mdc-button" style="margin:auto 0 auto 10%;" onclick="from_map_to_form()">с карты в строку</button>
-            <div id="map"></div>
-        </div>
+   <button class="mdc-button" style="float:left; margin:auto auto auto 10%;" onclick="from_form_to_map()">Проверить адрес на карте</button>
+             <button class="mdc-button" style="margin:auto 0 auto 10%;" onclick="from_map_to_form()">с карты в строку</button>
+                <div id="map"></div>
+    </div>
     </div>
 </div>
+
 
 
 {% endblock %}
