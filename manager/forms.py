@@ -26,11 +26,12 @@ class CreateNewsForm(forms.ModelForm):
     """
     class Meta:
         model = News
-        fields = ['publicationTitle', 'publicationText']
-
+        manager/forms.py
+        fields = ['publicationTitle', 'publicationText', 'publicationTag', 'district']
 
 class RegManagerForm(forms.ModelForm):
 
     class Meta:
         model = RegManager
         fields = ('fullName', 'userEmail', 'ukEmail', 'appointment', 'date', 'phoneNumber')
+        manager/forms.py
