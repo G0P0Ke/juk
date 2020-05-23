@@ -16,7 +16,7 @@ Pillow==7.1.2
 daphne==2.5.0
 
 # Database
-mysqlclient==1.4.6ds
+mysqlclient==1.4.6
 
 # markdown
 martor==1.4.9
