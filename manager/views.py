@@ -105,6 +105,8 @@ def create_news_page(request):
                 publicationTitle=createnews.data['publicationTitle'],
                 publicationText=createnews.data['publicationText'],
                 publicationDate=datetime.datetime.now(),
+                publicationTag=createnews.data['publicationTag'],
+                district=createnews.data['district']
             )
             record.save()
             return redirect('news')

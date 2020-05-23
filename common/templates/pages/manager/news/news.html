@@ -19,7 +19,15 @@
     {% for item in record %}
     <div class="col mb-4">
       <div class="card" style="width: 36rem;">
-        <h3 class=" card-header card-title">{{ item.publicationTitle }}</h3>
+        <div class="card-header">
+        <div style="width:50%; float:left">
+        <h3 class="  card-title text-truncate" >{{ item.publicationTitle }} 
+         </h3>
+       </div>
+       <div style="width:50%; float:right; text-align: right;">
+          <small class="d-inline-block mb-2 text-primary text-truncate" style="width: 15rem; margin-left: 2rem" >{{ item.district }}</small>
+        </div>
+        </div>
         <div class="card-body">
           <h6 class="card-subtitle mb-2 text-info">{{ item.companyName }}</h6>
             <h6 class="card-subtitle mb-2 text-muted">{{ item.publicationDate | date:"d.m.Y H-i"}}</h6>

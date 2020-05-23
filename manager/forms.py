@@ -25,4 +25,4 @@ class CreateNewsForm(forms.ModelForm):
     """
     class Meta:
         model = News
-        fields = ['publicationTitle', 'publicationText']
+        fields = ['publicationTitle', 'publicationText', 'publicationTag', 'district']
