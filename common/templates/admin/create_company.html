@@ -3,7 +3,7 @@
 {% block content %}
 
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
+    <ol class="breadcrumb mr-3 ml-3">
         <li class="breadcrumb-item active" aria-current="page">
             <a href="{% url 'admin' %}" class="link">Return back</a>
         </li>
@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row">
         <div class="col card p-5 m-3">
-            <h2 class="mb-3">Существующие УК</h2>
+            <h2 class="mb-3 pl-0">Существующие УК</h2>
             {% for comp in company %}
             <div class="row mt-1 mb-1">
                 <div class="col card">
@@ -40,8 +40,12 @@
                     <h5 class="text-muted"> Название УК </h5>
                     {{ form.company_name }}
                 </div>
-                <input type="submit" value="Добавить" class="btn btn-primary btn-block"
-                       style="background-color: #7B68EE; color:white; border-color:black">
+                <div class="form-group pt-2">
+                    <input type="submit"
+                           value="Добавить"
+                           class="btn btn-primary btn-block"
+                           style="background-color: #7B68EE; color:white; border-color:black">
+                </div>
             </form>
         </div>
     </div>

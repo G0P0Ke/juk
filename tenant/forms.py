@@ -29,5 +29,19 @@ class ManagerRequestForm(forms.Form):
 
 
 class AppendCompany(forms.Form):
-    inn_company = forms.IntegerField(required=True)
-    company_name = forms.CharField(required=True)
+    inn_company = forms.IntegerField(
+        required=True,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'form-control'
+            }
+        )
+    )
+    company_name = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control'
+            }
+        )
+    )
