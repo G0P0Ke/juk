@@ -93,30 +93,53 @@ background-color: var(--mdc-theme-primary);
 color: #ffffff;
 }
 
+ .select{
+    position: relative;
+}
 
+.select select{
+    background: #f2f2f2;
+    padding: 10px 35px 10px 35px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14pt;
+    color: #000;
+    outline: none;
+}
+.select: before{
+    position: absolute;
+    color: #000000;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: #007ce0;
+
+}
 
 </style>
 
 
+
 <p style="margin: 20px auto;font-size: 22pt; text-align: center;">Редактирование профиля менеджера</p>
-<a class="mdc-button" style="float:right" href="{% url 'manager_my_cabinet' %}">Вернуться в профиль</a>
+       <a class="mdc-button" style="float:right" href="{% url 'manager_my_cabinet' %}">Вернуться в профиль</a>
 <div class="form">
     <div class="grid">
         <hr>
         <div class="left">
 
-            <div>
-                <label style="font-size: 15pt; text-align: center;"> Моя фотография:</label><br>
-                <img src="{{ user.manager.photo.url }}" width="260" height="250">
-            </div>
-            <form action="" method="post" class="form1" enctype="multipart/form-data">
-                <div class="form-group ">
-                    {% csrf_token %}
-                    {{ form.photo.errors }}
-                    {{ form.photo }}
+                <div>
+                    <label style="font-size: 15pt; text-align: center;"> Моя фотография:</label><br>
+                    <img src="{{ user.manager.photo.url }}" width="260" height="250">
                 </div>
-                <input class="mdc-button mdc-button--outlined" type="submit" value="Обновить фото" class="button">
-            </form>
+                <form action="" method="post" class="form1" enctype="multipart/form-data">
+                    <div class="form-group ">
+                        {% csrf_token %}
+                        {{ form.photo.errors }}
+                        {{ form.photo }}
+                    </div>
+                    <input class="mdc-button mdc-button--outlined" type="submit" value="Обновить фото" class="button">
+                </form>
         </div>
 
         <div class="right">
@@ -131,8 +154,7 @@ color: #ffffff;
                        required><br>
 
                 <label style="font-size: 15pt; text-align: left;" for="last_name-id">Ваша фамилия:</label>
-                <input class="forminput" style="width:60%" type="text" name="last_name" id="last_name-id"
-                       value="{{user.last_name}}" required><br>
+                    <input class="forminput" type="text" name="last_name" id="last_name-id" value="{{user.last_name}}" required><br>
 
                 <input class="mdc-button mdc-button--raised" type="submit" value="Сохранить изменения">
             </form>
@@ -151,16 +173,16 @@ color: #ffffff;
                 </div>
             </form>
             {% elif flag == 2 %}
-            <h5 class="text-muted"> Ваш запрос на подключение к УК отклонен. Вы можете попробовать снова</h5>
-            <form method="POST" action="">
-                <div>
-                    {% csrf_token %}
-                    {{ request_form }}
-                </div>
-                <input class="mdc-button mdc-button--raised" type="submit" name="submit" value="Запросить подключение">
-            </form>
+                <h5 class="text-muted"> Ваш запрос на подключение к УК отклонен. Вы можете попробовать снова</h5>
+                <form method="POST" action="">
+                    <div>
+                        {% csrf_token %}
+                        {{ request_form }}
+                    </div>
+                    <input class="mdc-button mdc-button--raised" type="submit" name="submit" value="Запросить подключение">
+                </form>
             {% elif flag == 3 %}
-            <h5 class="text-muted"> Ваш запрос на подключение к УК находится в рассмотрении</h5>
+                <h5 class="text-muted"> Ваш запрос на подключение к УК находится в рассмотрении</h5>
             {% endif %}
         </div>
     </div>
