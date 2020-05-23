@@ -46,6 +46,16 @@ from django.http import Http404
 #     return render(request, 'pages/tenant/profile.html', context)
 
 
+#def base_info(request):
+#    houses = House.objects.all()
+#    companies = Company.objects.all()
+#   num_h = len(houses)
+#   num_c = len(companies)
+#   return {
+#       'num_h':num_h,
+#       'num_c': num_c,
+#   }
+
 @login_required
 def my_cabinet_view(request):
     """

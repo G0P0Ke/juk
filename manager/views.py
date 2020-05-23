@@ -177,8 +177,12 @@ def news_page(request):
     :return: отображение страницы новостей
     """
     context = {}
-    record = News.objects.all()
     if request.user is not AnonymousUser:
+        if Manager.objects.get(user = request.user):
+            record = News.objects.filter(company = request.user.manager.company)
+        else:
+            record = News.objects.filter(company = request.user.tenant.house.company)
+
         context.update({
             "is_tenant": hasattr(request.user, 'tenant'),
             "is_manager": hasattr(request.user, 'manager'),
