@@ -2,8 +2,6 @@
 
 {% block content %}
 
-
-
 {% load static %}
         <style>
     a {
@@ -54,7 +52,7 @@
   min-height: 400px;
   margin: 50px auto;
   box-sizing: border-box;
-  padding: 30px 0 30px 0;
+  padding: 30px 0 30px 40px;
   text-align: center;
   border-radius: 4px;
 }
@@ -76,47 +74,36 @@ margin:10px auto 0;
  grid-gap: 5px;
 }
 </style>
-        <p style="margin: 50px auto;font-size: 22pt; text-align: center;">Личный кабинет жителя</p>
+        <p style="margin: 50px auto 0;font-size: 22pt; text-align: center;">Личный кабинет менеджера</p>
+ <a href="{% url 'manager_main' %}"><button class="mdc-button" style="float:left;"><span class="mdc-button__ripple"></span>Вернуться на главную страницу</button></a>
         <div class="form">
             <div class="grid">
                 <div class="left">
 
                     <p style="font-size: 20pt; text-align: center; color:var(--mdc-theme-secondary);">{{ user.username }}</p>
-                    <img src="{{ user.tenant.photo.url }}" width="260" height="250">
+                    <img src="{{ user.manager.photo.url }}" width="260" height="250">
                 </div>
                 <div class="right">
-                    <div class="category">
-                        <p style="font-size: 18pt; text-align: center;">Имя: {{ user.first_name }}</p>
-                    </div>
-                    <div class="category">
-                        <p style="font-size: 18pt; text-align: center;">Фамилия: {{ user.last_name }}</p>
-                    </div>
 
-                    {% if homeless %}
+                    {% if companyless %}
                     <div class="category">
-                        <p style="font-size: 18pt; text-align: center;">Вы не подключены к дому, для дальнеешего пользование сервисом, пожалуйста, выберите свой дом в редактировании профиля</p>
-                    </div>
-
-                    {% elif not house_confirmed %}
-                    <div class="category">
-                        <p style="font-size: 18pt; text-align: center;">Введенные Вами данные проходят проверку</p>
+                        <p style="font-size: 18pt; text-align: center;">Вы не подключены к компании, для дальнеешего пользования сервисом, пожалуйста, выберите свою компанию в редактировании профиля</p>
                     </div>
                     {% else %}
 
                     <div class="category">
-                        <p style="font-size: 18pt; text-align: center;">Ваш адрес: {{ user.tenant.house.address }}</p>
+                        <p style="font-size: 18pt; text-align: center;">Инн вашей компании: {{ user.manager.company.inn }}</p>
                     </div>
 
                     {% endif %}
                 </div>
                 <div class="bottom">
-                    <a href="{% url 'tenant_redact_profile'%}"><button class="mdc-button mdc-button--raised">
+                    <a href="{% url 'redact_profile'%}"><button class="mdc-button mdc-button--raised">
                         <span class="mdc-button__ripple"></span>Редактирование профиля</button></a>
-                    <a href="{% url 'tenant_main' %}"><button class="mdc-button" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться на главную страницу</button></a>
+
                 </div>
             </div>
         </div>
-
 
 
 {% endblock %}

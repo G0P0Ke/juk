@@ -93,68 +93,74 @@ background-color: var(--mdc-theme-primary);
 color: #ffffff;
 }
 
-        </style>
 
+
+</style>
 
 
 <p style="margin: 20px auto;font-size: 22pt; text-align: center;">Редактирование профиля менеджера</p>
-       <a class="mdc-button" style="float:right" href="{% url 'manager_my_cabinet' %}">Вернуться в профиль</a>
+<a class="mdc-button" style="float:right" href="{% url 'manager_my_cabinet' %}">Вернуться в профиль</a>
 <div class="form">
     <div class="grid">
         <hr>
         <div class="left">
 
-                <div>
-                    <label style="font-size: 15pt; text-align: center;"> Моя фотография:</label><br>
-                    <img src="{{ user.manager.photo.url }}" width="260" height="250">
+            <div>
+                <label style="font-size: 15pt; text-align: center;"> Моя фотография:</label><br>
+                <img src="{{ user.manager.photo.url }}" width="260" height="250">
+            </div>
+            <form action="" method="post" class="form1" enctype="multipart/form-data">
+                <div class="form-group ">
+                    {% csrf_token %}
+                    {{ form.photo.errors }}
+                    {{ form.photo }}
                 </div>
-                <form action="" method="post" class="form1" enctype="multipart/form-data">
-                    <div class="form-group ">
-                        {% csrf_token %}
-                        {{ form.photo.errors }}
-                        {{ form.photo }}
-                    </div>
-                    <input class="mdc-button mdc-button--outlined" type="submit" value="Обновить фото" class="button">
-                </form>
+                <input class="mdc-button mdc-button--outlined" type="submit" value="Обновить фото" class="button">
+            </form>
         </div>
 
         <div class="right">
             <form method="POST">
                 {% csrf_token %}
                 <label style="font-size: 15pt; text-align: left;" for="username-id">Ваш логин:</label>
-                    <input class="forminput" type="text" name="username" id="username-id" value="{{user.username}}" required><br>
+                <input class="forminput" type="text" name="username" id="username-id" value="{{user.username}}"
+                       required><br>
 
                 <label style="font-size: 15pt; text-align: left;" for="first_name-id">Ваше имя:</label>
-                    <input class="forminput" type="text" name="first_name" id="first_name-id" value="{{user.first_name}}" required><br>
+                <input class="forminput" type="text" name="first_name" id="first_name-id" value="{{user.first_name}}"
+                       required><br>
 
                 <label style="font-size: 15pt; text-align: left;" for="last_name-id">Ваша фамилия:</label>
-                    <input class="forminput" style="width:60%" type="text" name="last_name" id="last_name-id" value="{{user.last_name}}" required><br>
+                <input class="forminput" style="width:60%" type="text" name="last_name" id="last_name-id"
+                       value="{{user.last_name}}" required><br>
 
                 <input class="mdc-button mdc-button--raised" type="submit" value="Сохранить изменения">
             </form>
             <br><br>
             {% if flag == 1 %}
-                <h5 class="text-muted"> Ваш запрос на подключение к УК одобрен. ИНН вашей компании: {{ user.manager.company.inn }}</h5>
+            <h5 class="text-muted"> Ваш запрос на подключение к УК одобрен. ИНН вашей компании: {{
+                user.manager.company.inn }}</h5>
             {% elif flag == 0 %}
-                <h5 class="text-muted"> Вы можете подать запрос на подключение к УК</h5>
-                <form method="POST" action="">
-                    <div>
-                        {% csrf_token %}
-                        {{ request_form }}
-                        <input class="mdc-button mdc-button--raised" type="submit" name="submit" value="Запросить подключение">
-                    </div>
-                </form>
+            <h5 class="text-muted"> Вы можете подать запрос на подключение к УК</h5>
+            <form method="POST" action="">
+                <div>
+                    {% csrf_token %}
+                    {{ request_form }}
+                    <input class="mdc-button mdc-button--raised" type="submit" name="submit"
+                           value="Запросить подключение">
+                </div>
+            </form>
             {% elif flag == 2 %}
-                <h5 class="text-muted"> Ваш запрос на подключение к УК отклонен. Вы можете попробовать снова</h5>
-                <form method="POST" action="">
-                    <div>
-                        {% csrf_token %}
-                        {{ request_form }}
-                    </div>
-                    <input class="mdc-button mdc-button--raised" type="submit" name="submit" value="Запросить подключение">
-                </form>
+            <h5 class="text-muted"> Ваш запрос на подключение к УК отклонен. Вы можете попробовать снова</h5>
+            <form method="POST" action="">
+                <div>
+                    {% csrf_token %}
+                    {{ request_form }}
+                </div>
+                <input class="mdc-button mdc-button--raised" type="submit" name="submit" value="Запросить подключение">
+            </form>
             {% elif flag == 3 %}
-                <h5 class="text-muted"> Ваш запрос на подключение к УК находится в рассмотрении</h5>
+            <h5 class="text-muted"> Ваш запрос на подключение к УК находится в рассмотрении</h5>
             {% endif %}
         </div>
     </div>

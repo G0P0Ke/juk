@@ -81,17 +81,19 @@
 
 {% if is_tenant %}
     {% if is_taken %}
-        <p>С Вами ведет диалог менеджер компании {{ appeal.company.name }}, {{appeal.manager.user.first_name }} {{appeal.manager.user.last_name}}.</p>
+<p>С Вами ведет диалог менеджер компании {{ appeal.company.name }}, {{appeal.manager.user.first_name }}
+    {{appeal.manager.user.last_name}}.</p>
     {% else %}
-        <p>Ваше обращение к компании <<{{ appeal.tenant.house.company.name }}>> скоро будет рассмотрено.</p>
+<p>Ваше обращение к компании <<{{ appeal.tenant.house.company.name }}>> скоро будет рассмотрено.</p>
     {% endif %}
 {% endif %}
 
 {% if is_manager %}
     {% if is_taken %}
-        <p>С Вами ведет диалог житель {{comment.author.first_name}} {{comment.author.last_name}}.</p>
+<p>С Вами ведет диалог житель {{comment.author.first_name}} {{comment.author.last_name}}.</p>
     {% else %}
-        <p>К вашей компании обращается житель {{comment.author.first_name}} {{comment.author.last_name}}, он очень ждет Вашего ответа.</p>
+<p>К вашей компании обращается житель {{comment.author.first_name}} {{comment.author.last_name}}, он очень ждет Вашего
+    ответа.</p>
     {% endif %}
 {% endif %}
 <form method="POST">
@@ -120,7 +122,7 @@
              <span style="color:var(--mdc-theme-secondary);">{{ message.appealmessage.creator.first_name }}</span>
              <span style="color:#808080; text-transform:lowercase; float:right; font-size:12pt">{{ message.appealmessage.cr_date}}</span>
              <br>
-             <span >{{ message.appealmessage.text|safe_markdown }}</span>
+             <span>{{ message.appealmessage.text|safe_markdown }}</span>
          </div>
     <div></div>
     {% endif %}
