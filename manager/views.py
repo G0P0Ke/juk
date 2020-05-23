@@ -10,6 +10,9 @@ from .forms import CreateNewsForm
 from .models import News
 from tenant.models import Appeal, House, Forum, Tenant, Pass, Task
 
+from .forms import RegManagerForm
+from .models import RegManager
+
 
 @login_required
 def manager_main_page(request):
@@ -231,3 +234,21 @@ def pass_list_view(request, house_id):
     }
     return render(request, 'pages/manager/pass_list.html', context)
 
+
+def registrationManager(request):
+    if request.method == "POST":
+        form = RegManagerForm(request.POST)
+        context = {
+            'form': form,
+        }
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.finished = 0
+            post.save()
+            return redirect('/', context)
+    else:
+        form = RegManagerForm(request.POST)
+        context = {
+            'form': form,
+        }
+    return render(request, 'pages/manager/registrationmanager.html', context)

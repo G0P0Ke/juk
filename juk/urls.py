@@ -70,4 +70,6 @@ urlpatterns = [
     path('tenant/pass/cr_pass', tenant_views.cr_pass_view, name="cr_pass"),
     path('manager/pass/houses', manager_views.pass_view, name="houses_passes"),
     path('manager/pass/house_passes/<int:house_id>', manager_views.pass_list_view, name="pass_list"),
+
+    path('registration/manager', manager_views.registrationManager, name="reg_manager"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
