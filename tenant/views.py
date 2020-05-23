@@ -595,6 +595,7 @@ def test_view(request):
         if request.POST.get('1') == '3' and request.POST.get('2') == '1' and request.POST.get('3') == '1' and \
                 request.POST.get('4') == '1' and request.POST.get('5') == '2':
             request.user.tenant.is_vol = 1
+            request.user.tenant.save()
             return redirect('/tenant')
         else:
             request.user.tenant.test_date = timezone.now()

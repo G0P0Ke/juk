@@ -71,10 +71,11 @@
 <form method="POST">
     {% csrf_token %}
       <input class="forminput" type="text" name="description" maxlength="30" placeholder="Задание" required><br><br>
-        <textarea name="task" maxlength="100" placeholder="Описание задания" required></textarea><br>
+    <textarea name="task" maxlength="240" placeholder="Описание задания" required></textarea><br>
                 <input class="mdc-button mdc-button--raised" type="submit" value="Создать" style="float:left; margin: 0 0 0 10%; width: 39%;">
 
 </form>
-    <a href="{% url 'index' %}"><input  class="mdc-button mdc-button--outlined" value="Вернуться" type="button" style="float:right; margin: 0 10% 0 0; width: 39%;"></a>
+    <a href="{% url 'help' %}"><input class="mdc-button mdc-button--outlined" value="Вернуться" type="button"
+                                      style="float:right; margin: 0 10% 0 0; width: 39%;"></a>
 </div>
 {% endblock %}
