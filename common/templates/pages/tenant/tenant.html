@@ -9,6 +9,10 @@
 
 </head>
 <body>
+<div class="roof">
+    <img class="logo" src="{% static 'img/logo.svg' %}">
+    <img src="{% static 'img/roof.svg' %}">
+</div>
 {% if homeless %}
 <!---ЛИЧНЫЙ КАБИНЕТ --->
 <h2>Вы не подключены к дому, для дальнеешего пользование сервисом, пожалуйста, выберите свой дом в редактировании профиля</h2>
@@ -120,7 +124,7 @@
 
     <!--- ПРОПУСКИ --->
     <div class="rectangle-horizontal" onclick="window.location.href='tenant/pass/my_passes'">
-        <div style="color:green" class="title">Пропуски</div>
+        <div style="color:green" class="title">Пропуска</div>
         
     </div>
 
