@@ -528,8 +528,6 @@ def help_view(request):
     :type request: :class:`django.http.HttpRequest`
     :return: объект ответа сервера с HTML-кодом внутри
     """
-    if not hasattr(request.user, 'tenant'):
-        return redirect('/')
     user = request.user
     if hasattr(user, 'tenant'):
         opened_tasks = Task.objects.filter(author=request.user, status="opened",)
