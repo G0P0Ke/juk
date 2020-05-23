@@ -18,6 +18,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 @login_required
 def manager_main_page(request):
+    if not hasattr(request.user, 'manager'):
+        redirect('/')
     if request.user.manager.company is None:
         context = {
             "companyless": request.user.manager.company is None,
@@ -63,7 +65,8 @@ def my_cabinet_view(request):
         :param request: объект с деталями запроса.
         :return: объект ответа сервера с HTML-кодом внутри
         """
-
+    if not hasattr(request.user, 'manager'):
+        redirect('/')
     context = {
         "user": request.user,
         "companyless": request.user.manager.company is None,
@@ -83,13 +86,13 @@ def redact_profile_view(request):
     :param request: объект с деталями запроса.
     :return: объект ответа сервера с HTML-кодом внутри
     """
+    if not hasattr(request.user, 'manager'):
+        redirect('/')
     user = request.user
     context = {
         "is_tenant": hasattr(request.user, 'tenant'),
         "is_manager": hasattr(request.user, 'manager'),
     }
-    if not hasattr(request.user, 'manager'):
-        redirect('/')
     if request.method == 'POST':
         form = PhotoUpload(request.POST, request.FILES)
         if form.is_valid():
@@ -104,14 +107,15 @@ def redact_profile_view(request):
     else:
         form = PhotoUpload()
     if request.method == 'POST':
-        username = request.POST.get('username')
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
+        if request.POST.get('username') is not None:
+            username = request.POST.get('username')
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
 
-        user.username = username
-        user.first_name = first_name
-        user.last_name = last_name
-        user.save()
+            user.username = username
+            user.first_name = first_name
+            user.last_name = last_name
+            user.save()
 
         request_form = ManagerRequestForm(request.POST)
         try:
@@ -136,7 +140,12 @@ def redact_profile_view(request):
             except BaseException:
                 permission = 0
             if permission:
-                new_manager_request = ManagerRequest(author=user, inn_company=inn)
+                new_manager_request = ManagerRequest(
+                    author=user,
+                    inn_company=inn,
+                    name=user.first_name,
+                    surname=user.last_name,
+                )
                 new_manager_request.save()
                 messages.success(request, 'Запрос на подключение отправлен')
             elif not permission:
@@ -299,6 +308,8 @@ class HouseContext:
 
 @login_required
 def tenant_confirming_view(request):
+    if not hasattr(request.user, 'manager'):
+        redirect('/')
     if request.method == 'POST':
         tenant_id = int(request.POST.get('unconfirmed'))
         if tenant_id != 0:
@@ -327,6 +338,8 @@ def tenant_confirming_view(request):
 
 @login_required
 def pass_view(request):
+    if not hasattr(request.user, 'manager'):
+        redirect('/')
     context = {
         'company_name': request.user.manager.company.inn,
         'house_list': House.objects.filter(company=request.user.manager.company),
@@ -336,6 +349,8 @@ def pass_view(request):
 
 @login_required
 def pass_list_view(request, house_id):
+    if not hasattr(request.user, 'manager'):
+        redirect('/')
     house = House.objects.get(id=house_id)
     human_passes = []
     car_passes = []

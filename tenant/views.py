@@ -107,12 +107,12 @@ def redact_profile_view(request):
         user.last_name = last_name
         if request.user.tenant.house is None or address != request.user.tenant.house.address:
             user.tenant.house_confirmed = False
-            user.save()
-            user.tenant.save()
             if House.objects.filter(address=address).exists():
                 user.tenant.house = House.objects.filter(address=address)[0]
                 messages.success(request, 'Запрос на подключение отправлен')
             else:
+                user.save()
+                user.tenant.save()
                 messages.info(request, 'Ваш дом не подключен к нашей системе')
                 context.update({
                     'form': form,
@@ -246,8 +246,8 @@ def discussion_view(request, discussion_id):
         comment.save()
         return redirect('/forum/discussion/'+str(discussion.id))
     comments = discussion.comment_set.all()
-    #comments = list(comments)
-    #comments.reverse()
+    # comments = list(comments)
+    # comments.reverse()
     context.update({
         "user": request.user,
         "discussion": discussion,
@@ -481,7 +481,7 @@ def cr_task_view(request):
             description=description,
             author=request.user,
             status='opened',
-            cr_date=datetime.datetime.now(),
+            cr_date=timezone.now(),
         )
         task.save()
         return redirect('/vol/task/' + str(task.id))
@@ -585,6 +585,8 @@ def task_view(request, id):
 
 @login_required
 def test_view(request):
+    if not hasattr(request.user, 'tenant'):
+        return redirect('/')
     context = {
         "user": request.user,
         "date_ok": 0,

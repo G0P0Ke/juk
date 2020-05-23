@@ -12,10 +12,12 @@ class EditProfileForm(forms.ModelForm):
     """
     username = forms.CharField(required=True, label='Логин',)
     email = forms.EmailField(required=True)
+    first_name = forms.CharField(max_length=25)
+    last_name = forms.CharField(max_length=25)
 
     class Meta:
         model = User
-        fields = UserCreationForm.Meta.fields + ('email',)
+        fields = UserCreationForm.Meta.fields + ('email', 'first_name', 'last_name', 'username')
 
 
 class PhotoUpload(forms.Form):
