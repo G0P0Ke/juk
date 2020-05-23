@@ -32,7 +32,7 @@
 <p>Передайте данный QR-код посетителю и попросите предъявить этот QR-код на посту охраны</p>
 <img src={{link}} alt="Что-то полшло не так...">
 {% else %}
-<p>Пропуск заказан из квартиры №{{ author.tenant.flat }}</p>
+<p>Пропуск заказан из квартиры №{{ pass.author.tenant.flat }}</p>
 <form method="POST">
   {% csrf_token %}
     <button type="submit">Завершить пропуск</button>

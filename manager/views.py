@@ -12,6 +12,7 @@ from tenant.models import Appeal, House, Forum, Tenant, Pass, Task, Company
 from tenant.models import ManagerRequest, Manager
 from tenant.forms import PhotoUpload, ManagerRequestForm, AppendCompany
 from django.contrib import messages
+from django.utils import timezone
 from django.contrib.messages.views import SuccessMessageMixin
 
 
@@ -196,7 +197,7 @@ def create_news_page(request):
                 company=request.user.manager.company,
                 publicationTitle=createnews.data['publicationTitle'],
                 publicationText=createnews.data['publicationText'],
-                publicationDate=datetime.datetime.now(),
+                publicationDate=timezone.now(),
             )
             record.save()
             return redirect('news')

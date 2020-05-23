@@ -51,7 +51,6 @@ urlpatterns = [
 
     path('tenant', tenant_views.tenant_main_page, name='tenant_main'),
     path('tenant/my_cabinet', tenant_views.my_cabinet_view, name='tenant_my_cabinet'),
-    #path('tenant/profile/', tenant_views.profile, name='profile'),
     path('tenant/redact_profile', tenant_views.redact_profile_view, name='tenant_redact_profile'),
 
     path('forum/<int:forum_id>', tenant_views.forum_view, name="forum"),

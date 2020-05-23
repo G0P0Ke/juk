@@ -761,7 +761,7 @@ def pass_view(request, pass_id):
     if 10 <= minutes <= 20:
         minutes = str(minutes) + ' минут'
     elif minutes % 10 == 1:
-        minutes = str(minutes) + ' минут'
+        minutes = str(minutes) + ' минута'
     elif minutes % 10 == 2 or minutes % 10 == 3 or minutes % 10 == 4:
         minutes = str(minutes) + ' минуты'
     else:
