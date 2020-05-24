@@ -163,34 +163,34 @@ border: 1px solid #FFFFF;
 <div class="form-group row">
     <div class="col-1"></div>
     <div class="col-1.5">
-        {% if comment.author.manager %}
-        <div class="alert shadow" style="background-color: #66CDAA; color:#F25CA2; width:100%" role="alert">
-            {% else %}
-            <div class="alert shadow" style="background-color: #FFFFFF; color:#F25CA2; width:100%" role="alert">
-                {% endif %}
+        {% if comment.comment.author.manager %}
+        <div class="alert shadow" style="background-color: #66CDAA; color:#F25CA2; width:190px" role="alert">
+        {% else %}
+        <div class="alert shadow" style="background-color: #FFFFFF; color:#F25CA2; width:190px" role="alert">
+        {% endif %}
 
 
-            {% if comment.anon %}
+            {% if comment.comment.anon %}
 
                 <div align="center" style="color:00008B"> Аноним</div>
                 <div class="media">
                 <img src="/media/static/default.jpg"  width="140" height="140"  align = "left" alt="...">
             </div>
 
-            {% elif comment.author.tenant %}
+            {% elif comment.comment.author.tenant %}
 
-                <div align="center" style="color:00008B">{{comment.author.first_name}} {{comment.author.last_name}}
+                <div align="center" style="color:00008B">{{comment.comment.author.first_name}} {{comment.comment.author.last_name}}
                 </div>
             <div class="media">
-                <img src="{{ comment.author.tenant.photo.url }}"  width="140" height="140"  align = "left" alt="...">
+                <img src="{{ comment.comment.author.tenant.photo.url }}"  width="140" height="140"  align = "left" alt="...">
             </div>
 
-            {% elif comment.author.manager %}
+            {% elif comment.comment.author.manager %}
 
-                <div align="center" style="color:00008B">{{comment.author.first_name}} {{comment.author.last_name}}
+                <div align="center" style="color:00008B">{{comment.comment.author.first_name}} {{comment.comment.author.last_name}}
                 </div>
             <div class="media">
-                <img src="{{ comment.author.manager.photo.url }}"  width="140" height="140"  align = "left" alt="...">
+                <img src="{{ comment.comment.author.manager.photo.url }}"  width="140" height="140"  align = "left" alt="...">
             </div>
 
                 {% endif %}
@@ -198,15 +198,18 @@ border: 1px solid #FFFFF;
     </div>
         <div class="col-8">
             <div class="forminput" style="width:110%" role="alert">
-            {{ comment.text|safe_markdown }}
+            {{ comment.comment.text|safe_markdown }}
         </div>
-        <!------
         <div style="float: left">
-            <a href="{% url 'thread' discussion_id=discussion.id thread_id=comment.id %} ">
+            <a href="{% url 'thread' discussion_id=discussion.id thread_id=comment.comment.id %} ">
+                {% if comment.answers_count %}
+                <input class="mdc-button" value="Ответить (всего ответов: {{comment.answers_count}})" type="button"> </a>
+                {% else %}
                 <input class="mdc-button" value="Ответить" type="button"> </a>
+                {% endif %}
+
         </div>
-        ------->
-        <div style="float: right; color: #808080;"> {{ comment.cr_date }} </div>
+        <div style="float: right; color: #808080;"> {{ comment.comment.cr_date }} </div>
     </div>
     <div class="col-1"></div>
 </div>

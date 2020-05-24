@@ -62,10 +62,6 @@ def my_cabinet_view(request):
         "homeless": request.user.tenant.house is None,
         "house_confirmed": request.user.tenant.house_confirmed,
     }
-    #c = Company.objects.create(inn=666) #tmp
-    #f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
-    #c.save()
-    #f2.save()
     return render(request, 'pages/tenant/my_cabinet.html', context)
 
 
@@ -94,7 +90,7 @@ def redact_profile_view(request):
                 "user": user,
                 "form": form,
             })
-            return render(request, 'pages/tenant/redact_profile.html', context)
+            return render(request, 'pages/tenant/edit_profile.html', context)
     else:
         form = PhotoUpload()
     if request.method == 'POST':
@@ -118,7 +114,7 @@ def redact_profile_view(request):
                     'form': form,
                     "user": user,
                 })
-                return render(request, 'pages/tenant/redact_profile.html', context)
+                return render(request, 'pages/tenant/edit_profile.html', context)
         user.tenant.flat = request.POST.get('flat')
         user.tenant.save()
         user.save()
@@ -127,7 +123,7 @@ def redact_profile_view(request):
         "user": user,
         'form': form,
     })
-    return render(request, 'pages/tenant/redact_profile.html', context)
+    return render(request, 'pages/tenant/edit_profile.html', context)
 
 
 class Category:
@@ -171,7 +167,6 @@ def forum_view(request, forum_id):
     context = {}
     forum = Forum.objects.get(pk=forum_id)
     owner = ("house" if forum.house else "company")
-    # request.user.id is not AnonymousUser:
     if owner == "house":
         context.update({"house": forum.house, })
     elif owner == "company":
@@ -219,6 +214,20 @@ def category_view(request, forum_id, category_name):
     return render(request, 'pages/tenant/forums/category.html', context)
 
 
+class CommentContext:
+    """
+    Служебный класс для передачи данных в context
+    """
+
+    def __init__(self, comment, answers_count):
+        """
+        :param comment: комметарий
+        :param answers_count: количество ответов
+        """
+        self.comment = comment
+        self.answers_count = answers_count
+
+
 @login_required
 def discussion_view(request, discussion_id):
     """
@@ -245,7 +254,9 @@ def discussion_view(request, discussion_id):
         )
         comment.save()
         return redirect('/forum/discussion/'+str(discussion.id))
-    comments = discussion.comment_set.all()
+    comments = []
+    for comment in discussion.comment_set.all():
+        comments.append(CommentContext(comment, len(Comment.objects.filter(thread=comment))))
     # comments = list(comments)
     # comments.reverse()
     context.update({
@@ -294,7 +305,7 @@ def cr_discussion_view(request, forum_id):
     return render(request, 'pages/tenant/forums/cr_discussion.html', context)
 
 
-def thread(request, discussion_id, thread_id):
+def thread_view(request, discussion_id, thread_id):
     """
     Отображение треда
 
@@ -307,25 +318,24 @@ def thread(request, discussion_id, thread_id):
     """
     current_thread = Comment.objects.get(id=thread_id)
     discussion = Discussion.objects.get(id=discussion_id)
-    comments = Comment.objects.filter(thread=thread)
+    comments = Comment.objects.filter(thread=current_thread)
     context = {
         "user": request.user,
         "comments": comments,
-        "thread": thread,
+        "thread": current_thread,
         "discussion": discussion
     }
-    if request.POST:
+    if request.method == 'POST':
         text = request.POST.get("text")
         r_com = Comment(
             text=text,
             cr_date=datetime.datetime.now(),
             author=request.user,
-            discussion=discussion,
+            discussion=None,
             thread=current_thread
         )
         r_com.save()
-        id = r_com.id
-        return redirect('thread', discussion.id, thread.id)
+        return redirect('thread', discussion.id, current_thread.id)
     return render(request, 'pages/tenant/forums/thread.html', context)
 
 

@@ -161,19 +161,20 @@ class Comment(models.Model):
     text = MartorField()
     discussion = models.ForeignKey(
         to=Discussion,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True,
     )
     author = models.ForeignKey(
         to=User,
         on_delete=models.CASCADE
     )
     cr_date = models.DateTimeField()
-    #thread = models.ForeignKey(
-    #    to='Comment',
-    #    on_delete=models.CASCADE,
-    #    default=None,
-    #    null=True,
-    #)
+    thread = models.ForeignKey(
+        to='Comment',
+        on_delete=models.CASCADE,
+        default=None,
+        null=True,
+    )
     anon = models.BooleanField(
         default=False
     )

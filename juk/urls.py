@@ -55,7 +55,7 @@ urlpatterns = [
 
     path('forum/<int:forum_id>', tenant_views.forum_view, name="forum"),
     path('forum/discussion/<int:discussion_id>', tenant_views.discussion_view, name="discussion"),
-    path('forum/discussion/<int:discussion_id>/thread/<int:thread_id>', tenant_views.thread, name="thread"),
+    path('forum/discussion/<int:discussion_id>/thread/<int:thread_id>', tenant_views.thread_view, name="thread"),
     path('forum/<int:forum_id>/cr_discussion', tenant_views.cr_discussion_view, name="cr_discussion"),
     path('forum/<int:forum_id>/category/<str:category_name>', tenant_views.category_view, name="category"),
 

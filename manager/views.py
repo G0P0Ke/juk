@@ -103,7 +103,7 @@ def redact_profile_view(request):
                 "user": request.user,
                 "form": form,
             })
-            return render(request, 'pages/manager/redact_profile.html', context)
+            return render(request, 'pages/manager/edit_profile.html', context)
     else:
         form = PhotoUpload()
     if request.method == 'POST':
@@ -175,7 +175,7 @@ def redact_profile_view(request):
         'form': form,
         "companies": Company.objects.all(),
     })
-    return render(request, 'pages/manager/redact_profile.html', context)
+    return render(request, 'pages/manager/edit_profile.html', context)
 
 
 def news_page(request):

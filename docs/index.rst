@@ -9,9 +9,10 @@
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Содержание:
 
    code.rst
+   user.rst
 
 
 Таблицы и поиск
