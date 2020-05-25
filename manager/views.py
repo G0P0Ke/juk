@@ -46,7 +46,9 @@ def manager_main_page(request):
                 amount_of_unconfirmed_tenants += 1
 
     amount_of_houses = len(request.user.manager.company.house_set.all())
-
+    if request.method == 'POST':
+        request.user.manager.is_admin = 1
+        request.user.manager.save()
     context = {
         "user": request.user,
         "amount_of_my_opened_tasks": amount_of_my_opened_tasks,
@@ -178,7 +180,7 @@ def edit_profile_view(request):
     return render(request, 'pages/manager/edit_profile.html', context)
 
 
-def news_page(request):
+def my_news_page_view(request):
     """
     Функция для отображения страницы новостей
 
@@ -197,11 +199,11 @@ def news_page(request):
         'user': request.user,
         'record': record,
     })
-    return render(request, 'pages/manager/news/news.html', context)
+    return render(request, 'pages/manager/news/my_news.html', context)
 
 
 @login_required
-def create_news_page(request):
+def create_news_page_view(request):
     """
     Функция для отображения страницы создания новостей
 
@@ -215,17 +217,24 @@ def create_news_page(request):
     context = {
         'user': request.user,
     }
+    print(request.user.manager.company.ya_num)
+    if request.user.manager.company.ya_num != -1:
+        context.update({"donation_possible": 1})
     if request.method == 'POST':
         createnews = CreateNewsForm(request.POST)
+        donation_on = False
+        if request.POST.get('donation_on') == "on":
+            donation_on = True
         if createnews.is_valid():
             record = News(
                 company=request.user.manager.company,
                 publicationTitle=createnews.data['publicationTitle'],
                 publicationText=createnews.data['publicationText'],
                 publicationDate=timezone.now(),
+                donation_on=donation_on
             )
             record.save()
-            return redirect('news')
+            return redirect('my_news')
     else:
         context['createnews'] = CreateNewsForm(
             initial={
@@ -233,7 +242,36 @@ def create_news_page(request):
             }
         )
 
-    return render(request, 'pages/manager/news/create_news.html', context)
+    return render(request, 'pages/manager/news/cr_news.html', context)
+
+
+def news_page(request, news_id):
+    """
+    Функция для отображения новости
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :param news_id: id новости
+    :type news_id: int
+    :return: отображение страницы новостей
+    """
+    context = {}
+    news = News.objects.get(id=news_id)
+    link = "https://money.yandex.ru/quickpay/shop-widget?writer=buyer&targets=&targets-hint=&default-sum=100&" \
+           "button-text=14&payment-type-choice=on&hint=&successURL=&quickpay=shop&account=" + str(news.company.ya_num)
+    if request.user is AnonymousUser:
+        redirect('/')
+    else:
+        context.update({
+            "is_tenant": hasattr(request.user, 'tenant'),
+            "is_manager": hasattr(request.user, 'manager'),
+            "link": link
+        })
+    context.update({
+        'user': request.user,
+        'news': news,
+    })
+    return render(request, 'pages/manager/news/news.html', context)
 
 
 @login_required

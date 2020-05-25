@@ -22,4 +22,6 @@ class News(models.Model):
         max_length=50
     )
     publicationText = MartorField()
-
+    donation_on = models.BooleanField(
+        default=False,
+    )

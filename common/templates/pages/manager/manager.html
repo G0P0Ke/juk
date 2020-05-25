@@ -89,7 +89,12 @@
               <p>Всего домов в Вашей компании: {{ amount_of_houses }}</p>
           </div>
       </div>
+
   </div>
+<form action="" method="post">
+    {% csrf_token %}
+    <button type="submit">Стать админом</button>
+</form>
 {% endif %}
 </body>
 </html>

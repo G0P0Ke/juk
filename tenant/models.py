@@ -14,6 +14,7 @@ class Company(models.Model):
     """
     inn = models.IntegerField()
     name = models.TextField()
+    ya_num = models.IntegerField()
 
 
 class House(models.Model):

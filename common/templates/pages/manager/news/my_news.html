@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{% include 'header.html' %}
+{% block content %}
+
+{% load martortags %}
+
+<br>
+<br>
+<div style="padding-left:30">
+
+    <h1>Сие есть новости</h1>
+    {% if is_tenant %}
+    <a href="{% url 'tenant_main' %}">
+        <button class="mdc-button mdc-button--raised" style="float:right;">Вернуться на главную</button>
+    </a>
+    {% elif is_manager %}
+    <a href="{% url 'manager_main' %}">
+        <button class="mdc-button mdc-button--raised" style="float:right;">Вернуться на главную</button>
+    </a>
+    <a href="{% url 'create_news' %}">
+        <button class="mdc-button mdc-button--raised" style="float:left;">Создать новость</button>
+    </a>
+    {% endif %}
+    <br><br>
+
+    <div class="row row-cols-1 row-cols-md-2">
+        {% for item in record %}
+        <div class="col mb-4">
+            <div class="card" style="width: 36rem;">
+                <h3 class=" card-header card-title">{{ item.publicationTitle }}</h3>
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-info">{{ item.company.name }} {% if item.donation_on %}<span
+                            style="color:green;">Сбор денег{% endif %}</span></h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ item.publicationDate | date:"d.m.Y H-i"}}</h6>
+                    <p class="card-text">{{ item.publicationText|safe_markdown }} </p>
+                    <a href="{% url 'news' news_id=item.id %}" class="card-link">Перейти к новости</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

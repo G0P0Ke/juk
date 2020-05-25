@@ -1,36 +1,40 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-{% include 'header.html' %}
-{% block content %}
-
+{% extends 'base.html' %}
 {% load martortags %}
 
-<br>
-<br>
-<div style="padding-left:30">
+{% block content %}
 
-  <h1>Сие есть новости</h1>
-  {% if is_tenant %}
-  <a href="{% url 'tenant_main' %}"><button class="mdc-button mdc-button--raised">Вернуться на главную</button></a>
-  {% elif is_manager %}
-  <a href="{% url 'manager_main' %}"><button class="mdc-button mdc-button--raised">Вернуться на главную</button></a>
-  <a href="{% url 'create_news' %}"><button class="mdc-button mdc-button--raised">Создать новость</button></a>
-  {% endif %}
-  <br><br>
+<style>
+   a {
+    text-decoration: none;
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+   body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+   }
+}
 
-  <div class="row row-cols-1 row-cols-md-2">
-    {% for item in record %}
-    <div class="col mb-4">
-      <div class="card" style="width: 36rem;">
-        <h3 class=" card-header card-title">{{ item.publicationTitle }}</h3>
-        <div class="card-body">
-          <h6 class="card-subtitle mb-2 text-info">{{ item.companyName }}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">{{ item.publicationDate | date:"d.m.Y H-i"}}</h6>
-          <p class="card-text">{{ item.publicationText|safe_markdown }} </p>
-          <a href="http://127.0.0.1:8000/" class="card-link">Перейти к новости</a>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-</div>
-{% endblock %}
+</style>
+
+{% if is_tenant %}
+<a href="{% url 'my_news' %}">
+    <button class="mdc-button" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться к новостям
+    </button>
+</a>
+{% elif is_manager %}
+<a href="{% url 'my_news' %}">
+    <button class="mdc-button" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться к новостям
+    </button>
+</a>
+{% endif %}
+{{ news.publicationTitle }}<br>
+{{ news.company.name }}<br>
+{{ news.publicationDate | date:"d.m.Y H-i"}}<br>
+{{ news.publicationText|safe_markdown }}<br>
+{% if news.donation_on %}
+<iframe src={{link}} width="423" height="215" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+{% endif %}
+{% endblock%}
