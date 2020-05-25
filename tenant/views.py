@@ -66,7 +66,7 @@ def my_cabinet_view(request):
 
 
 @login_required
-def redact_profile_view(request):
+def edit_profile_view(request):
     """
     Изменение профиля жильца
 

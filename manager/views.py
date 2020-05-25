@@ -79,7 +79,7 @@ def my_cabinet_view(request):
 
 
 @login_required
-def redact_profile_view(request):
+def edit_profile_view(request):
     """
     Изменение профиля менеджера
 
@@ -154,7 +154,7 @@ def redact_profile_view(request):
                 'request_form': request_form,
                 'flag': flag,
             })
-            return redirect(redact_profile_view)
+            return redirect(edit_profile_view)
     request_form = ManagerRequestForm()
     try:
         manager_request = ManagerRequest.objects.get(author_id=user.manager.user_id)
@@ -171,7 +171,7 @@ def redact_profile_view(request):
         'flag': flag,
     })
     context.update({
-        "user": user,
+        "user": request.user,
         'form': form,
         "companies": Company.objects.all(),
     })
