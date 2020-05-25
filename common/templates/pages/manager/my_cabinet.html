@@ -83,6 +83,12 @@ margin:10px auto 0;
                     <img src="{{ user.manager.photo.url }}" width="260" height="250">
                 </div>
                 <div class="right">
+                    <div class="category">
+                        <p style="font-size: 18pt; text-align: left;">Имя: {{ user.first_name }}</p>
+                    </div>
+                    <div class="category">
+                        <p style="font-size: 18pt; text-align: left;">Фамилия: {{ user.last_name }}</p>
+                    </div>
 
                     {% if companyless %}
                     <div class="category">
@@ -91,13 +97,16 @@ margin:10px auto 0;
                     {% else %}
 
                     <div class="category">
-                        <p style="font-size: 18pt; text-align: center;">Инн вашей компании: {{ user.manager.company.inn }}</p>
+                        <p style="font-size: 18pt; text-align: left;">Инн вашей компании: {{ user.manager.company.inn }}</p>
                     </div>
 
                     {% endif %}
                 </div>
+
+
                 <div class="bottom">
-                    <a href="{% url 'redact_profile'%}"><button class="mdc-button mdc-button--raised">
+                    <a href="{% url 'manager_edit_profile'%}">
+                        <button class="mdc-button mdc-button--raised">
                         <span class="mdc-button__ripple"></span>Редактирование профиля</button></a>
                     <a href="{% url 'manager_main' %}"><button class="mdc-button" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться на главную страницу</button></a>
                 </div>

@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url, include
 
 import common.views as common_views
 import manager.views as manager_views
@@ -23,7 +24,10 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('martor/', include('martor.urls')),
+
+    path('admin/', common_views.admin, name='admin'),
+    path('admin/create/', common_views.admin_create, name='create_a_company'),
 
     path('', common_views.index_view, name='index'),
 
@@ -35,9 +39,11 @@ urlpatterns = [
 
     path('manager', manager_views.manager_main_page, name='manager_main'),
     path('manager/my_cabinet', manager_views.my_cabinet_view, name='manager_my_cabinet'),
+                  path('manager/edit_profile', manager_views.edit_profile_view, name='manager_edit_profile'),
 
-    path('manager/news/', manager_views.news_page, name='news'),
-    path('manager/news/create/', manager_views.create_news_page, name='create_news'),
+                  path('manager/news/', manager_views.my_news_page_view, name='my_news'),
+                  path('manager/news/create/', manager_views.create_news_page_view, name='create_news'),
+                  path('manager/news/<int:news_id>', manager_views.news_page, name='news'),
 
     path('manager/company_forums/', manager_views.company_forums_view, name='company_forums'),
     path('manager/company_appeals/', manager_views.company_appeals_view, name='company_appeals'),
@@ -46,12 +52,11 @@ urlpatterns = [
 
     path('tenant', tenant_views.tenant_main_page, name='tenant_main'),
     path('tenant/my_cabinet', tenant_views.my_cabinet_view, name='tenant_my_cabinet'),
-    #path('tenant/profile/', tenant_views.profile, name='profile'),
-    path('tenant/redact_profile', tenant_views.redact_profile_view, name='redact_profile'),
+                  path('tenant/edit_profile', tenant_views.edit_profile_view, name='tenant_edit_profile'),
 
     path('forum/<int:forum_id>', tenant_views.forum_view, name="forum"),
     path('forum/discussion/<int:discussion_id>', tenant_views.discussion_view, name="discussion"),
-    path('forum/discussion/<int:discussion_id>/thread/<int:thread_id>', tenant_views.thread, name="thread"),
+    path('forum/discussion/<int:discussion_id>/thread/<int:thread_id>', tenant_views.thread_view, name="thread"),
     path('forum/<int:forum_id>/cr_discussion', tenant_views.cr_discussion_view, name="cr_discussion"),
     path('forum/<int:forum_id>/category/<str:category_name>', tenant_views.category_view, name="category"),
 

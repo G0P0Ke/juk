@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% load martortags %}
+
 <style>
 
     body{
@@ -79,17 +81,19 @@
 
 {% if is_tenant %}
     {% if is_taken %}
-        <p>Диалог между Вами и менеджером компанией с инн {{ appeal.company.inn }}, {{ appeal.manager.username }}</p>
+<p>С Вами ведет диалог менеджер компании {{ appeal.company.name }}, {{appeal.manager.user.first_name }}
+    {{appeal.manager.user.last_name}}.</p>
     {% else %}
-        <p>Ваше обращение к компании с инн {{ appeal.tenant.house.company.inn }} скоро будет рассмотрено</p>
+<p>Ваше обращение к компании <<{{ appeal.tenant.house.company.name }}>> скоро будет рассмотрено.</p>
     {% endif %}
 {% endif %}
 
 {% if is_manager %}
     {% if is_taken %}
-        <p>Диалог между Вами и жителем {{ appeal.tenant.user.username }}</p>
+<p>С Вами ведет диалог житель {{comment.author.first_name}} {{comment.author.last_name}}.</p>
     {% else %}
-        <p>Это обращение от жителя {{ appeal.tenant.user.username }}, он очень ждет Вашего ответа</p>
+<p>К вашей компании обращается житель {{comment.author.first_name}} {{comment.author.last_name}}, он очень ждет Вашего
+    ответа.</p>
     {% endif %}
 {% endif %}
 <form method="POST">
@@ -106,19 +110,19 @@
     {% for message in appeal_messages %}
     {% if message.my_message %}
     <div class="forminput" style="background:#FFFFFF">
-        <span style="color:var(--mdc-theme-secondary);">{{ message.appealmessage.creator }}</span>
+        <span style="color:var(--mdc-theme-secondary);">{{ message.appealmessage.creator.first_name }}</span>
         <span style="color:#808080; text-transform:lowercase; float:right; font-size:12pt">{{ message.appealmessage.cr_date}}</span>
         <br>
-        <span>{{ message.appealmessage.text }}</span>
+        <span>{{ message.appealmessage.text|safe_markdown }}</span>
     </div>
 
 <div></div>
     {% else %}
          <div class="forminput" style="background:#AACCFF;">
-             <span style="color:var(--mdc-theme-secondary);">{{ message.appealmessage.creator }}</span>
+             <span style="color:var(--mdc-theme-secondary);">{{ message.appealmessage.creator.first_name }}</span>
              <span style="color:#808080; text-transform:lowercase; float:right; font-size:12pt">{{ message.appealmessage.cr_date}}</span>
              <br>
-             <span >{{ message.appealmessage.text }}</span>
+             <span>{{ message.appealmessage.text|safe_markdown }}</span>
          </div>
     <div></div>
     {% endif %}

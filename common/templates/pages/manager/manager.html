@@ -9,6 +9,16 @@
 
 </head>
 <body>
+{% if companyless %}
+<!---ЛИЧНЫЙ КАБИНЕТ --->
+<h2>Вы не подключены к компании, для дальнеешего пользование сервисом, пожалуйста, выберите свою компанию в редактировании профиля</h2>
+<div class="square" onclick="window.location.href='/manager/my_cabinet'">
+    <div style="color:green" class="title">Личный кабинет, {{user.username}}</div>
+    <img src="{{ user.manager.photo.url }}" width="40" height="40">
+</div>
+
+{% else %}
+
   <div class="wrapper">
     <!---НОВОСТИ --->
     <div style="color:green" class="rectangle-big" onclick="window.location.href='manager/news'">
@@ -39,7 +49,7 @@
          <div style="color:green" class="title">Задания моей компании</div>
           <br>
           <div  class="title">
-              <p>Ваших открытых заданий:{{ amount_of_my_opened_tasks }}</p>
+              <p>Ваших открытых заданий: {{ amount_of_my_opened_tasks }}</p>
           </div>
       </div>
 
@@ -54,7 +64,7 @@
         <div style="color:green" class="title">Открытые обращения Вашей компании</div>
         <br><br><br>
         <div  class="title">
-            <p>Всего открытых обращений:{{ amount_of_opened_appeals }}</p>
+            <p>Всего открытых обращений: {{ amount_of_opened_appeals }}</p>
         </div>
     </div>
 
@@ -68,7 +78,7 @@
          <div style="color:green" class="title">Подтверждение жителей</div>
           <br>
           <div  class="title">
-              <p>Неподтвержденных жителей:{{ amount_of_unconfirmed_tenants }}</p>
+              <p>Неподтвержденных жителей: {{ amount_of_unconfirmed_tenants }}</p>
           </div>
       </div>
     <!---Добавление дома --->
@@ -76,9 +86,15 @@
          <div style="color:green" class="title">Добавление дома</div>
           <br>
           <div  class="title">
-              <p>Всего домов в Вашей компании:{{ amount_of_houses }}</p>
+              <p>Всего домов в Вашей компании: {{ amount_of_houses }}</p>
           </div>
       </div>
+
   </div>
+<form action="" method="post">
+    {% csrf_token %}
+    <button type="submit">Стать админом</button>
+</form>
+{% endif %}
 </body>
 </html>

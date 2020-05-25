@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb mr-3 ml-3">
+        <li class="breadcrumb-item active" aria-current="page">
+            <a href="{% url 'admin' %}" class="link">Return back</a>
+        </li>
+    </ol>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col card p-5 m-3">
+            <h2 class="mb-3 pl-0">Существующие УК</h2>
+            {% for comp in company %}
+            <div class="row mt-1 mb-1">
+                <div class="col card">
+                    <div class="card-body">
+                        <h5 class="card-title">ИНН: {{ comp.inn }}</h5>
+                        <h6 class="text-muted">Название УК: {{ comp.name }}</h6>
+                        {% if comp.ya_num != -1 %}
+                        <h6 class="text-muted">Номер аккаунта Я.Деньги: {{ comp.ya_num }}</h6>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col card p-5 m-3">
+            <h2 class="mb-3"> Добавление новой УК</h2>
+            <form action="" method="post" class="" enctype="multipart/form-data">
+                <div class="form-group">
+                    {% csrf_token %}
+                    {{ form.inn_company.errors }}
+                    <h5 class="text-muted"> ИНН УК </h5>
+                    {{ form.inn_company }}
+                </div>
+                <div class="form-group">
+                    {% csrf_token %}
+                    {{ form.company_name.errors }}
+                    <h5 class="text-muted"> Название УК </h5>
+                    {{ form.company_name }}
+                </div>
+                <div class="form-group">
+                    {% csrf_token %}
+                    {{ form.company_ya_num.errors }}
+                    <h5 class="text-muted"> Номер аккаунта Я.Деньги </h5>
+                    {{ form.company_ya_num }}
+                </div>
+                <div class="form-group pt-2">
+                    <input type="submit"
+                           value="Добавить"
+                           class="btn btn-primary btn-block"
+                           style="background-color: #7B68EE; color:white; border-color:black">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

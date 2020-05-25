@@ -1,15 +1,18 @@
 """
 Используемые модули
 """
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, SignUpForm
 from django.core.mail import send_mail
 from .forms import FeedbackForm
 from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
-from tenant.models import Tenant
-from tenant.models import Manager
+from tenant.models import Tenant, Company, Forum
+from tenant.models import Manager, ManagerRequest
+from tenant.forms import ManagerRequestForm, AppendCompany
 
 
 def _get_base_context(title, sign_in_button=True):
@@ -123,6 +126,7 @@ def signup_view(request):
     return render(request, 'accounts/signup/signup_page.html', context)
 
 
+@login_required
 def logout_view(request):
     """
     Функция выхода из аккаунта
@@ -158,7 +162,6 @@ def feedback(request):
                 'subject': subject,
                 'message': message,
                 'user_mail': user_mail,
-
             }
 
             message = 'Отправитель: ' + user_mail + '\n'\
@@ -180,5 +183,82 @@ def feedback(request):
             pass
 
     return render(request, 'pages/feedback.html')
+
+
+@login_required(login_url="/login")
+def admin(request):
+    user = request.user
+    if hasattr(request.user, 'tenant'):
+        if not user.tenant.is_admin:
+            return HttpResponse("Nice try, bro", status=401)
+    elif hasattr(request.user, 'manager'):
+        if not user.manager.is_admin:
+            return HttpResponse("Nice try, bro", status=401)
+    manager_requests = ManagerRequest.objects.filter(status=3)
+    context = {
+        'requests': manager_requests,
+    }
+    if request.method == "POST":
+        for request_man in manager_requests:
+            if request.POST.get("agree"+str(request_man.id)):
+                manager_id = request_man.author_id
+                managers = Manager.objects.filter(user_id=manager_id)
+                for manager in managers:
+                    if manager.user_id == manager_id:
+                        company = Company.objects.filter(inn=request_man.inn_company)
+                        for comp in company:
+                            if comp.inn == request_man.inn_company:
+                                manager.company_id = comp.id
+                                manager.save(update_fields=['company_id'])
+                request_man.status = 1
+                request_man.save()
+            elif request.POST.get("refused" + str(request_man.id)):
+                request_man.status = 2
+                request_man.save()
+        return redirect(admin)
+    return render(request, 'admin/manager_requests.html', context)
+
+
+def admin_create(request):
+    user = request.user
+    if hasattr(request.user, 'tenant'):
+        if not user.tenant.is_admin:
+            return HttpResponse("You are not an administrator", status=401)
+    elif hasattr(request.user, 'manager'):
+        if not user.manager.is_admin:
+            return HttpResponse("You are not an administrator", status=401)
+    company = Company.objects.filter()
+    context = {
+        'company': company
+    }
+    if request.method == 'POST':
+        form = AppendCompany(request.POST)
+        if form.is_valid():
+            inn = form.cleaned_data.get('inn_company')
+            name = form.cleaned_data.get('company_name')
+            ya_num = form.cleaned_data.get('company_ya_num')
+            try:
+                check_company = Company.objects.get(inn=inn)
+                flag = 0
+            except BaseException:
+                flag = 1
+            if flag:
+                if ya_num is None:
+                    new_company = Company(inn=inn, name=name, ya_num=-1)
+                else:
+                    new_company = Company(inn=inn, name=name, ya_num=ya_num)
+                new_company.save()
+                new_company_forum = Forum.objects.create(company=new_company, categories="Объявления|Другое")
+                new_company_forum.save()
+                messages.success(request, "УК добавлена")
+            else:
+                messages.info(request, 'УК с указанным ИНН уже существует')
+            return redirect(admin_create)
+    else:
+        form = AppendCompany()
+    context.update({
+        'form': form
+    })
+    return render(request, 'admin/create_company.html', context)
 
 

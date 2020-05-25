@@ -4,6 +4,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from tenant.models import Company
+from martor.models import MartorField
 
 
 class News(models.Model):
@@ -20,7 +21,7 @@ class News(models.Model):
     publicationTitle = models.CharField(
         max_length=50
     )
-    publicationText = models.TextField(
-        max_length=5000
+    publicationText = MartorField()
+    donation_on = models.BooleanField(
+        default=False,
     )
-

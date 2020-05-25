@@ -1,10 +1,13 @@
 """Required modules"""
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 
 from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task, Pass
+from .models import ManagerRequest, Manager
 import datetime
 import pytz
 import requests
@@ -12,7 +15,7 @@ import urllib
 import json
 
 from django.utils import timezone
-from .forms import PhotoUpload
+from .forms import PhotoUpload, ManagerRequestForm, AppendCompany
 
 from django.http import Http404
 
@@ -51,30 +54,29 @@ def my_cabinet_view(request):
     :param request: объект с деталями запроса.
     :return: объект ответа сервера с HTML-кодом внутри
     """
+    if not hasattr(request.user, 'tenant'):
+        return redirect('/')
     context = {
         "is_tenant": True,
         "user": request.user,
         "homeless": request.user.tenant.house is None,
         "house_confirmed": request.user.tenant.house_confirmed,
     }
-    #c = Company.objects.create(inn=666) #tmp
-    #f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
-    #c.save()
-    #f2.save()
     return render(request, 'pages/tenant/my_cabinet.html', context)
 
 
 @login_required
-def redact_profile_view(request):
+def edit_profile_view(request):
     """
-    Изменение профиля
+    Изменение профиля жильца
 
     :param request: объект с деталями запроса.
     :return: объект ответа сервера с HTML-кодом внутри
     """
     user = request.user
+    if not hasattr(request.user, 'tenant'):
+        return redirect('/')
     context = {
-        "house_doesnt_exist": False,
         "is_tenant": hasattr(request.user, 'tenant'),
         "is_manager": hasattr(request.user, 'manager'),
     }
@@ -82,53 +84,46 @@ def redact_profile_view(request):
         form = PhotoUpload(request.POST, request.FILES)
         if form.is_valid():
             photo = form.cleaned_data.get('photo')
-            if hasattr(request.user, 'tenant'):
-                user.tenant.photo = photo
-                user.tenant.save(update_fields=['photo'])
-            if hasattr(request.user, 'manager'):
-                user.manager.photo = photo
-                user.manager.save(update_fields=['photo'])
+            user.tenant.photo = photo
+            user.tenant.save(update_fields=['photo'])
             context.update({
-                "user": request.user,
+                "user": user,
                 "form": form,
             })
-            return render(request, 'pages/tenant/redact_profile.html', context)
+            return render(request, 'pages/tenant/edit_profile.html', context)
     else:
         form = PhotoUpload()
-    if request.method == 'POST' and hasattr(request.user, 'tenant'):
+    if request.method == 'POST':
         username = request.POST.get('username')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
         address = request.POST.get('address')
         user.username = username
+        user.first_name = first_name
+        user.last_name = last_name
         if request.user.tenant.house is None or address != request.user.tenant.house.address:
             user.tenant.house_confirmed = False
             if House.objects.filter(address=address).exists():
                 user.tenant.house = House.objects.filter(address=address)[0]
+                messages.success(request, 'Запрос на подключение отправлен')
             else:
+                user.save()
+                user.tenant.save()
+                messages.info(request, 'Ваш дом не подключен к нашей системе')
                 context.update({
-                    "house_doesnt_exist": True,
                     'form': form,
                     "user": user,
                 })
-                return render(request, 'pages/tenant/redact_profile.html', context)
+                return render(request, 'pages/tenant/edit_profile.html', context)
         user.tenant.flat = request.POST.get('flat')
         user.tenant.save()
         user.save()
         return redirect('/tenant/my_cabinet')
-    if request.method == 'POST' and hasattr(request.user, 'manager'):
-        username = request.POST.get('username')
-        company_inn = request.POST.get('company_inn')
-        user.username = username
-        user.manager.company = Company.objects.filter(inn=company_inn)[0]
-        user.manager.save()
-        user.save()
-        return redirect('manager/my_cabinet')
-
     context.update({
         "user": user,
         'form': form,
-        "companies": Company.objects.all(),
     })
-    return render(request, 'pages/tenant/redact_profile.html', context)
+    return render(request, 'pages/tenant/edit_profile.html', context)
 
 
 class Category:
@@ -172,7 +167,6 @@ def forum_view(request, forum_id):
     context = {}
     forum = Forum.objects.get(pk=forum_id)
     owner = ("house" if forum.house else "company")
-    # request.user.id is not AnonymousUser:
     if owner == "house":
         context.update({"house": forum.house, })
     elif owner == "company":
@@ -220,6 +214,20 @@ def category_view(request, forum_id, category_name):
     return render(request, 'pages/tenant/forums/category.html', context)
 
 
+class CommentContext:
+    """
+    Служебный класс для передачи данных в context
+    """
+
+    def __init__(self, comment, answers_count):
+        """
+        :param comment: комметарий
+        :param answers_count: количество ответов
+        """
+        self.comment = comment
+        self.answers_count = answers_count
+
+
 @login_required
 def discussion_view(request, discussion_id):
     """
@@ -246,9 +254,11 @@ def discussion_view(request, discussion_id):
         )
         comment.save()
         return redirect('/forum/discussion/'+str(discussion.id))
-    comments = discussion.comment_set.all()
-    #comments = list(comments)
-    #comments.reverse()
+    comments = []
+    for comment in discussion.comment_set.all():
+        comments.append(CommentContext(comment, len(Comment.objects.filter(thread=comment))))
+    # comments = list(comments)
+    # comments.reverse()
     context.update({
         "user": request.user,
         "discussion": discussion,
@@ -295,7 +305,7 @@ def cr_discussion_view(request, forum_id):
     return render(request, 'pages/tenant/forums/cr_discussion.html', context)
 
 
-def thread(request, discussion_id, thread_id):
+def thread_view(request, discussion_id, thread_id):
     """
     Отображение треда
 
@@ -308,25 +318,24 @@ def thread(request, discussion_id, thread_id):
     """
     current_thread = Comment.objects.get(id=thread_id)
     discussion = Discussion.objects.get(id=discussion_id)
-    comments = Comment.objects.filter(thread=thread)
+    comments = Comment.objects.filter(thread=current_thread)
     context = {
         "user": request.user,
         "comments": comments,
-        "thread": thread,
+        "thread": current_thread,
         "discussion": discussion
     }
-    if request.POST:
+    if request.method == 'POST':
         text = request.POST.get("text")
         r_com = Comment(
             text=text,
             cr_date=datetime.datetime.now(),
             author=request.user,
-            discussion=discussion,
+            discussion=None,
             thread=current_thread
         )
         r_com.save()
-        id = r_com.id
-        return redirect('thread', discussion.id, thread.id)
+        return redirect('thread', discussion.id, current_thread.id)
     return render(request, 'pages/tenant/forums/thread.html', context)
 
 
@@ -482,7 +491,7 @@ def cr_task_view(request):
             description=description,
             author=request.user,
             status='opened',
-            cr_date=datetime.datetime.now(),
+            cr_date=timezone.now(),
         )
         task.save()
         return redirect('/vol/task/' + str(task.id))
@@ -586,17 +595,36 @@ def task_view(request, id):
 
 @login_required
 def test_view(request):
+    if not hasattr(request.user, 'tenant'):
+        return redirect('/')
     context = {
         "user": request.user,
+        "date_ok": 0,
     }
     if request.method == 'POST':
-        request.user.tenant.is_vol = True
-        request.user.tenant.save()
+        if request.POST.get('1') == '3' and request.POST.get('2') == '1' and request.POST.get('3') == '1' and \
+                request.POST.get('4') == '1' and request.POST.get('5') == '2':
+            request.user.tenant.is_vol = 1
+            request.user.tenant.save()
+            return redirect('/tenant')
+        else:
+            request.user.tenant.test_date = timezone.now()
+            request.user.tenant.save()
+    if request.user.tenant.test_date is None:
+        context.update({
+            "date_ok": 1,
+        })
+    elif timezone.now() - request.user.tenant.test_date > datetime.timedelta(days=3):
+        context.update({
+            "date_ok": 1,
+        })
     return render(request, 'pages/tenant/volunteers/test.html', context)
 
 
 @login_required
 def tenant_main_page(request):
+    if not hasattr(request.user, 'tenant'):
+        return redirect('/')
     if request.user.tenant.house is None or not request.user.tenant.house_confirmed:
         context = {
             "homeless": request.user.tenant.house is None,
@@ -758,7 +786,7 @@ def pass_view(request, pass_id):
     if 10 <= minutes <= 20:
         minutes = str(minutes) + ' минут'
     elif minutes % 10 == 1:
-        minutes = str(minutes) + ' минут'
+        minutes = str(minutes) + ' минута'
     elif minutes % 10 == 2 or minutes % 10 == 3 or minutes % 10 == 4:
         minutes = str(minutes) + ' минуты'
     else:
@@ -782,4 +810,3 @@ def pass_view(request, pass_id):
         elif hasattr(request.user, 'manager'):
             return redirect('/manager')
     return render(request, 'pages/tenant/passes/pass.html', context)
-

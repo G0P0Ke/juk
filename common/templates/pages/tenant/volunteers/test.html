@@ -3,59 +3,272 @@
 
 
 <style>
-    a {
-    text-decoration: none; /* Убирает подчеркивание для ссылок */
-    outline: none;
-   }
-   a:hover {
-    text-decoration: none;
-   }
-
-    .themes{
-    width:100%;
-    border: 1px solid #FFFFF;
-    border-radius: 4px;
-    box-sizing: border-box;
-    padding: 40px;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
-    }
-
 
     body{
     --mdc-theme-primary: #F25CA2;
     --mdc-theme-secondary: #0433BF;
     --mdc-theme-background: #021859;
+    --mdc-theme-surface: #0B9ED9;
     --mdc-theme-error: #b00020;
     }
 
-    .category {
-    width: 70%;
-    min-height: 60px;
-    font-family: "Roboto", sans-serif;
-    outline: 0;
-    background: #f2f2f2;
-    border: 0;
-    padding: 10px 15px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    font-size: 20pt;
-    margin: 10px 15%;
-    text-align: center;
+.forminput {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 80%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+}
+    .form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 70%;
+  max-height: 2000px;
+  margin: 100px auto 100px;
+  box-sizing: border-box;
+  padding: 30px 0 70px 0;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
 }
 
+.form textarea {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 80%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+  height: 120px;
+  resize: none;
+  overflow: auto;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14pt;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  margin: 20% 0 0 0;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+.demo-width-class {
+  width: 400px;
+}
+
+.select{
+    position: relative;
+    width: 40%;
+    float:left;
+}
+
+.select select{
+    background: #f2f2f2;
+    padding: 10px 35px 10px 35px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14pt;
+    color: #000;
+    outline: none;
+}
+.select: before{
+    position: absolute;
+    color: #000000;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: #007ce0;
+
+}
+.op{
+background: #f2f2f2;
+outline: none;
+font-size: 13pt;
+border: none;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.box {
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  background: white;
+  border: 1px solid white;
+  border-radius: 3px;
+  text-align: left;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+.active-label, label:focus, label:hover, label:active, input:checked + label {
+  color: #e0758e;
+}
+.active-label:before, label:focus:before, label:hover:before, label:active:before, input:checked + label:before {
+  background: white;
+  border-color: #e0758e;
+}
+
+label {
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+  display: block;
+  padding: 1rem 1rem 1rem 3rem;
+  position: relative;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+  whitespace: no-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-transition: all .15s ease;
+  transition: all .15s ease;
+}
+
+label:first-of-type {
+  border: 0;
+}
+
+label:before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: .2rem solid #ccc;
+}
+
+input:checked + label:before {
+  border-color: white;
+  border: none;
+  background: #e0758e;
+}
+
+input:disabled + label {
+  background: #efefef;
+  color: rgba(0, 0, 0, 0.5);
+  cursor: not-allowed;
+}
+
+input:disabled + label:hover {
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+input:disabled + label:before {
+  border-color: white;
+  background: white;
+}
 </style>
 
 
-<br>
-<a href="{% url 'index' %}"><input  class="mdc-button mdc-button--outlined" value="Вернуться на главную страницу" type="button"></a>
-
-<hr>
-<form method="POST">
+{% if date_ok %}
+<div class="form ms-motion-slideUpIn $ms-motion-duration-4">
+    <form method="POST">
     {% csrf_token %}
-    <input class="mdc-button mdc-button--raised" type="hidden" value="done" name="result">
-    <input class="mdc-button mdc-button--raised" type="submit" value="Пройти тест">
-</form>
 
+        <h1>Тест для волонёров</h1>
 
+        <div class="box">
+            <h5>У Вас появляется новый сосед, который только что переехал и несёт тяжёлые коробки в свою новую квартиру.
+                Каковы будут Ваши действия?</h5>
+            <input type="radio" id="radio1" value="1" name="1">
+            <label for="radio1">Познакомлю его с моей собакой</label>
 
+            <input type="radio" id="radio2" value="2" name="1">
+            <label for="radio2">Скажу, чтобы не загромождал подъезд коробками</label>
+
+            <input type="radio" id="radio3" value="3" name="1">
+            <label for="radio3">Предложу свою помощь</label>
+
+            <h5>Управляющая компания Вашего дома набирает добровольцев для посадки деревьев на Вашем дворе. Что Вы
+                сделаете?</h5>
+            <input type="radio" id="radio4" value="1" name="2">
+            <label for="radio4">Я приму участие в посадке</label>
+
+            <input type="radio" id="radio5" value="2" name="2">
+            <label for="radio5">К сожалению, я не смогу выделить на это время</label>
+
+            <input type="radio" id="radio6" value="3" name="2">
+            <label for="radio6">Я возмущусь, ведь деревья будут загораживать доступ солнца к моим окнам</label>
+
+            <h5>Является ли для Вас обычным делом помочь незнакомому Вам человеку с инвалидностью?</h5>
+            <input type="radio" id="radio7" value="1" name="3">
+            <label for="radio7">Да, всегда предлагаю свою помощь</label>
+
+            <input type="radio" id="radio8" value="2" name="3">
+            <label for="radio8">Нет, я не попадал(-а) в такие ситуации</label>
+
+            <input type="radio" id="radio9" value="3" name="3">
+            <label for="radio9">Я не разговариваю с незнакомыми мне людьми</label>
+
+            <h5>Во дворе Вашего дома сломались детские качели и теперь там опасно играть. Что Вы сделаете?</h5>
+            <input type="radio" id="radio10" value="1" name="4">
+            <label for="radio10">Вместе с другими жильцами починю качели</label>
+
+            <input type="radio" id="radio11" value="2" name="4">
+            <label for="radio11">Ничего</label>
+
+            <input type="radio" id="radio12" value="3" name="4">
+            <label for="radio12">Сделаю объявление на сайте о том, чтобы дети больше не играли во дворе</label>
+
+            <h5>Приняли бы Вы участие в помощи проведения общественного мероприятия?</h5>
+            <input type="radio" id="radio13" value="1" name="5">
+            <label for="radio13">Возможно, если мне заплатят за мою работу</label>
+
+            <input type="radio" id="radio14" value="2" name="5">
+            <label for="radio14">С удовольствием приму</label>
+
+            <input type="radio" id="radio15" value="3" name="5">
+            <label for="radio15">Нет, у меня много дел</label>
+        </div>
+        <input class="mdc-button mdc-button--raised" type="submit" value="Завершить"
+               style="float:left; margin: 0 0 0 10%; width: 39%;">
+    </form>
+    <a href="{% url 'tenant_main' %}"><input class="mdc-button mdc-button--outlined" value="Вернуться" type="button"
+                                             style="float:right; margin: 0 10% 0 0; width: 39%;"></a>
+</div>
+{% else %}
+<a href="{% url 'tenant_main' %}"><input class="mdc-button mdc-button--outlined" value="Вернуться" type="button"
+                                         style="float:right; margin: 5% 10% 0 0; width: 39%;"></a>
+<h1 style="float:left; margin: 5% 0 10% 0;">Попробуйте пройти тест позже</h1>
+{% endif %}
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+</head>
 {% endblock %}

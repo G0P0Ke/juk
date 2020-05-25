@@ -6,12 +6,11 @@ body {font-family: Arial;}
 /* Style the tab */
 .tab {
   overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
 }
 
 /* Style the buttons inside the tab */
 .tab button {
+  width:50%;
   background-color: inherit;
   float: left;
   border: none;
@@ -19,7 +18,7 @@ body {font-family: Arial;}
   cursor: pointer;
   padding: 14px 16px;
   transition: 0.3s;
-  font-size: 17px;
+  font-size: 15pt;
 }
 
 /* Change background color of buttons on hover */
@@ -36,51 +35,139 @@ body {font-family: Arial;}
 .tabcontent {
   display: none;
   padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
 }
+
+
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-surface: #0B9ED9;
+    --mdc-theme-error: #b00020;
+    }
+
+.forminput {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 80%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+}
+    .form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 70%;
+  max-height: 700px;
+  margin: 30px auto 100px;
+  box-sizing: border-box;
+  padding: 30px 0 70px 0;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+
+.demo-width-class {
+  width: 400px;
+}
+
+.select{
+    position: relative;
+    min-width: 40%;
+}
+
+.select select{
+    background: #f2f2f2;
+    padding: 10px 35px 10px 35px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14pt;
+    color: #000;
+    outline: none;
+}
+.select: before{
+    position: absolute;
+    color: #000000;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: #007ce0;
+
+}
+.op{
+background: #f2f2f2;
+outline: none;
+font-size: 13pt;
+border: none;
+}
+
+    a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+
 </style>
 <body>
 <a href="{% url 'my_passes' %}">
-<button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:25%; margin-left:75%; margin-up:10%"><span class="mdc-button__ripple"></span>Вернуться</button>
+<button class="mdc-button" style="height: 40px; width:30%; margin-left:35%; margin-up:10%"><span class="mdc-button__ripple"></span>Вернуться</button>
 </a>
-<h2>Пропуск</h2>
-<p>Выберите какой пропуск вы будете заказывать</p>
+<p style="margin: 10px auto 0;font-size: 22pt; text-align: center;">Пропуск</p>
+<p style="margin: 0 auto 0;font-size: 15pt; text-align: center;">Выберите какой пропуск вы будете заказывать</p>
 
+<div class="form">
 <div class="tab">
   <button class="tablinks" onclick="openTarget(event, 'person')" id="defaultOpen">На человека</button>
   <button class="tablinks" onclick="openTarget(event, 'car')">На машину</button>
 </div>
+<br>
 <form method="POST">
   {% csrf_token %}
   <div id="person" class="tabcontent">
-    <input type="text" placeholder="Фамилия" name="surname" required><br>
-    <input type="text" placeholder="Имя" name="name" required><br>
-    <input type="text" placeholder="Отчество" name="patronymic" required><br>
-    <label for="aim1">Цель визита:</label>
-    <select id="aim1" name="aim">
+      <input class="forminput" type="text" placeholder="Фамилия" pattern="[А-ЯЁ][а-яё]{1,}" name="surname" required><br>
+      <input class="forminput" type="text" placeholder="Имя" pattern="[А-ЯЁ][а-яё]{1,}" name="name" required><br>
+      <input class="forminput" type="text" placeholder="Отчество" pattern="[А-ЯЁ][а-яё]{1,}" name="patronymic" required><br>
+    <label style="float:left; margin: 5px 0 0 20%; font-size:14pt" for="aim1">Цель визита:</label>
+    <div class="select">
+    <select class="category" id="aim1" name="aim">
       <option value="Гость">Гость</option>
       <option value="Курьер">Курьер</option>
-    </select><br>
+    </select></div>
+    <br>
     <input type="hidden" name="target" value="person">
-    <button type="submit">Заказать</button>
+    <button class="mdc-button mdc-button--raised" style="font-size:15pt; width:30%" type="submit">Заказать</button>
   </div>
 </form>
+
 <form method="POST">
   {% csrf_token %}
   <div id="car" class="tabcontent">
-    <input type="text" placeholder="Модель машины" name="model" required><br>
-    <input type="text" placeholder="Цвет машины" name="color" required><br>
-    <input type="text" placeholder="Номер машины" name="number" required><br>
-    <label for="aim2">Цель визита:</label>
-    <select id="aim2" name="aim">
+      <input class="forminput" type="text" placeholder="Модель машины" pattern="^[A-Za-zА-Яа-яЁё\s]+$" name="model"
+             required><br>
+      <input class="forminput" type="text" placeholder="Цвет машины" pattern="^[а-яА-ЯёЁ]+$" name="color" required><br>
+      <input class="forminput" type="text" placeholder="Номер машины в формате М 000 ММ 55"
+             pattern="[а-яА-Я] [0-9]{3} [а-яА-Я]{2} [0-9]{2}" name="number" required><br>
+    <label style="float:left; margin: 5px 0 0 20%; font-size:14pt" for="aim2">Цель визита:</label>
+    <div class="select">
+    <select class="category" id="aim2" name="aim">
       <option value="Гость">Гость</option>
       <option value="Курьер">Перевозка груза</option>
-    </select><br>
+    </select></div>
+    <br>
     <input type="hidden" name="target" value="car">
-    <button type="submit">Заказать</button>
+    <button class="mdc-button mdc-button--raised" style="font-size:15pt; width:30%" type="submit">Заказать</button>
   </div>
 </form>
+</div>
 <script>
 document.getElementById("defaultOpen").click();
 function openTarget(evt, targetName) {

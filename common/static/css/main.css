@@ -1,26 +1,31 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 body{
+   margin: 0;
    font-family: 'Open Sans',serif;
 }
 
+.roof{
+  height: 18vh;
+}
+
+.logo{
+  position: absolute;
+  top: 5vh;
+  margin-left: 45vw;
+  width: 10vw;
+}
+
 .wrapper{
-  padding-left:160px;
-  padding-right:160px;
-  padding-top: 80px;
+  padding-left: 8vw;
+  padding-right: 8vw;
+  padding-top: minmax(5vh, 5vw);
   display:grid;
   background-color:white;
   grid-template-columns: repeat(7,1fr);
   grid-auto-rows:minmax(auto, 100px);
   grid-gap:1em;
   background: rgba(0,0,0,0);
-}
-
-@media only screen and (max-width: 1400px) {
-  .wrapper {
-    padding-left: 120px;
-    padding-right: 120px;
-  }
 }
 
 
@@ -76,7 +81,7 @@ body{
     margin-top: 16px;
     margin-left: 16px;
     margin-bottom: -15%;
-    font-size: 18px;
+    font-size: 2vh;
     position: center;
 }
 
@@ -84,7 +89,7 @@ body{
     padding-top: 10%;
     margin-top: 15%;
     margin-left: 10%;
-    font-size: 18px;
+    font-size: 1.5vh;
     
 }
 

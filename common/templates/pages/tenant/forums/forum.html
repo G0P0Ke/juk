@@ -53,8 +53,13 @@
 
 
 {% endif %}
+{% if is_tenant %}
+    <a href="{% url 'tenant_main' %}"><button class="mdc-button" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться на главную страницу</button></a>
+{% elif is_manager %}
+    <a href="{% url 'manager_main' %}"><button class="mdc-button" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться на главную страницу</button></a>
+{% endif %}
 
-
+<br><br>
 <!--<button class="mdc-button mdc-button--raised">
   <div class="mdc-elevation-overlay"></div>
   <div class="mdc-button__ripple"></div>
@@ -76,16 +81,12 @@
 </div>
 
 
-<div style="margin-top:50px; margin-left:30%;">
-<p style="font-size:15pt; margin-left:-20%">Не нашли ответ на интересующий Вас вопрос?</p></div>
+<div style="margin-top:50px; text-align:center;">
+<p style="font-size:15pt;">Не нашли ответ на интересующий Вас вопрос?</p></div>
 <a href="{% url 'cr_discussion' forum_id=forum.id%}">
-    <button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:30%; margin-left:15%">  <span class="mdc-button__ripple"></span>Создать обсуждение</button>
+    <button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:30%; margin: auto 35%;">  <span class="mdc-button__ripple"></span>Создать обсуждение</button>
 </a>
-{% if is_tenant %}
-    <a href="{% url 'tenant_main' %}"><button class="mdc-button" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться на главную страницу</button></a>
-{% elif is_manager %}
-    <a href="{% url 'manager_main' %}"><button class="mdc-button" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться на главную страницу</button></a>
-{% endif %}
+
 
 </div>
 

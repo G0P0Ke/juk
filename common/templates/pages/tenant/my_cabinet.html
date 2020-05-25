@@ -2,8 +2,6 @@
 
 {% block content %}
 
-
-
 {% load static %}
         <style>
     a {
@@ -54,7 +52,7 @@
   min-height: 400px;
   margin: 50px auto;
   box-sizing: border-box;
-  padding: 30px 0 30px 0;
+  padding: 30px 0 30px 40px;
   text-align: center;
   border-radius: 4px;
 }
@@ -85,6 +83,12 @@ margin:10px auto 0;
                     <img src="{{ user.tenant.photo.url }}" width="260" height="250">
                 </div>
                 <div class="right">
+                    <div class="category">
+                        <p style="font-size: 18pt; text-align: center;">Имя: {{ user.first_name }}</p>
+                    </div>
+                    <div class="category">
+                        <p style="font-size: 18pt; text-align: center;">Фамилия: {{ user.last_name }}</p>
+                    </div>
 
                     {% if homeless %}
                     <div class="category">
@@ -104,7 +108,8 @@ margin:10px auto 0;
                     {% endif %}
                 </div>
                 <div class="bottom">
-                    <a href="{% url 'redact_profile'%}"><button class="mdc-button mdc-button--raised">
+                    <a href="{% url 'tenant_edit_profile'%}">
+                        <button class="mdc-button mdc-button--raised">
                         <span class="mdc-button__ripple"></span>Редактирование профиля</button></a>
                     <a href="{% url 'tenant_main' %}"><button class="mdc-button" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться на главную страницу</button></a>
                 </div>
