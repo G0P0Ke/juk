@@ -39,15 +39,16 @@
 <h1 style="text-align:center;">Пропуск на человека</h1>
 <p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">ФИО: {{ pass.surname }} {{ pass.name }} {{ pass.patronymic }}</p>
 <p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Цель визита: {{ pass.aim }}</p>
-<p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Осталось: {{ days }} {% if days == 1 %}день{% elif
-  days == 2 %}дня{% else %}дней{% endif %}, {{ hours }}, {{ minutes }}</p>
+<p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Осталось: {{ days }} {% if days == 1 %}день,{% elif
+  days == 2 %}дня,{% endif %} {{ hours }}, {{ minutes }}</p>
 {% endif %}
 
 {% if pass.target == 'car' %}
 <h1 style="text-align:center;">Пропуск на машину</h1>
 <p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Машина: {{ pass.color }} {{ pass.model }} {{ pass.number }}</p>
 <p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Цель визита: {{ pass.aim }}</p>
-<p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Осталось: {{ days }} {% if days == 1 %}день{% else %}дня{% endif %}, {{ hours }}, {{ minutes }}</p>
+<p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Осталось: {{ days }} {% if days == 1 %}день,{% elif
+  days == 2 %}дня,{% endif %} {{ hours }}, {{ minutes }}</p>
 {% endif %}
 
 {% if tenant %}

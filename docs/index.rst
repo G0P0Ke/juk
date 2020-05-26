@@ -13,6 +13,7 @@
 
    code.rst
    user.rst
+   pp.rst
 
 
 Таблицы и поиск

@@ -598,9 +598,10 @@ def task_view(request, id):
 def test_view(request):
     if not hasattr(request.user, 'tenant'):
         return redirect('/')
+    if request.user.tenant.is_vol:
+        return redirect('/')
     context = {
         "user": request.user,
-        "date_ok": 0,
     }
     if request.method == 'POST':
         if request.POST.get('1') == '3' and request.POST.get('2') == '1' and request.POST.get('3') == '1' and \
@@ -618,6 +619,32 @@ def test_view(request):
     elif timezone.now() - request.user.tenant.test_date > datetime.timedelta(days=3):
         context.update({
             "date_ok": 1,
+        })
+    else:
+        ti_del = datetime.timedelta(days=3) - (timezone.now() - request.user.tenant.test_date)
+        hours = int(ti_del.seconds // 3600)
+        if 10 <= hours <= 20:
+            hours = str(hours) + ' часов'
+        elif hours % 10 == 1:
+            hours = str(hours) + ' час'
+        elif hours % 10 == 2 or hours % 10 == 3 or hours % 10 == 4:
+            hours = str(hours) + ' часа'
+        else:
+            hours = str(hours) + ' часов'
+        minutes = (ti_del.seconds % 3600) // 60
+        if 10 <= minutes <= 20:
+            minutes = str(minutes) + ' минут'
+        elif minutes % 10 == 1:
+            minutes = str(minutes) + ' минута'
+        elif minutes % 10 == 2 or minutes % 10 == 3 or minutes % 10 == 4:
+            minutes = str(minutes) + ' минуты'
+        else:
+            minutes = str(minutes) + ' минут'
+        context.update({
+            "date_ok": 0,
+            "days": ti_del.days,
+            "hours": hours,
+            "minutes": minutes,
         })
     return render(request, 'pages/tenant/volunteers/test.html', context)
 
