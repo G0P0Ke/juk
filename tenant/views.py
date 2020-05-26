@@ -13,6 +13,7 @@ import pytz
 import requests
 import urllib
 import json
+import os
 
 from django.utils import timezone
 from .forms import PhotoUpload, ManagerRequestForm, AppendCompany
