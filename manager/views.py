@@ -12,6 +12,7 @@ from tenant.models import Appeal, House, Forum, Tenant, Pass, Task
 
 from .forms import RegManagerForm
 from .models import RegManager
+from .tasks import send_email
 
 
 @login_required
@@ -245,6 +246,7 @@ def registrationManager(request):
             post = form.save(commit=False)
             post.finished = 0
             post.save()
+            send_email()
             return redirect('/', context)
     else:
         form = RegManagerForm(request.POST)
