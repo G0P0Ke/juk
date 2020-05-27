@@ -12,6 +12,7 @@ from tenant.models import Tenant
 from tenant.models import Manager
 
 from .models import Feedback
+from .tasks import send_email
 
 
 def _get_base_context(title, sign_in_button=True):
@@ -160,6 +161,7 @@ def feedback(request):
             post.text = post.text
 
             post.save()
+            send_email()
             return redirect('/common/feedback', context)
     else:
         form = FeedbackForm()
