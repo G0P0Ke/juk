@@ -46,9 +46,6 @@ def manager_main_page(request):
                 amount_of_unconfirmed_tenants += 1
 
     amount_of_houses = len(request.user.manager.company.house_set.all())
-    if request.method == 'POST':
-        request.user.manager.is_admin = 1
-        request.user.manager.save()
     context = {
         "user": request.user,
         "amount_of_my_opened_tasks": amount_of_my_opened_tasks,
@@ -73,6 +70,9 @@ def my_cabinet_view(request):
         "user": request.user,
         "companyless": request.user.manager.company is None,
     }
+    if request.method == 'POST':
+        request.user.manager.is_admin = 1
+        request.user.manager.save()
     # c = Company.objects.create(inn=666) #tmp
     # f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
     # c.save()
