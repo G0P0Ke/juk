@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='manager',
             name='company',
-            field=models.ForeignKey(blank=True, default=0, on_delete=django.db.models.deletion.CASCADE, to='tenant.Company'),
+            field=models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, to='tenant.Company'),
         ),
     ]
