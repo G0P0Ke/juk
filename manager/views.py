@@ -245,6 +245,7 @@ def registrationManager(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.finished = 0
+            post.date = datetime.datetime.now()
             post.save()
             send_email()
             return redirect('/', context)

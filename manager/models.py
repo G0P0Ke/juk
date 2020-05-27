@@ -47,7 +47,7 @@ class RegManager(models.Model):
     fullName = models.CharField(max_length=200)
     userEmail = models.EmailField(max_length=50)
     ukEmail = models.EmailField(max_length=50)
-    date = models.CharField(max_length=50)
+    date = models.DateField()
     appointment = models.CharField(max_length=50)
     phoneNumber = models.CharField(max_length=50)
     finished = models.BooleanField()
