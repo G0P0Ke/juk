@@ -148,73 +148,77 @@ border: 1px solid #FFFFF;
 </style>
 
 
- <form action='' id="comment" method="post">
-            {% csrf_token %}
-         <div class="col">
-                 <p style="font-size: 25pt; text-align:center">{{discussion.theme}}</p>
-         </div>
-         <div class="col-1"></div>
-                 <p style="font-size: 20pt; text-align: center;">{{discussion.description}}</p>
-
-
-
-{% for comment in comments %}
-
-<div class="form-group row">
+<form action='' id="comment" method="post">
+    {% csrf_token %}
+    <div class="col"><p style="font-size: 25pt; text-align:center">{{discussion.theme}}</p></div>
     <div class="col-1"></div>
-    <div class="col-1.5">
-        {% if comment.comment.author.manager %}
-        <div class="alert shadow" style="background-color: #66CDAA; color:#F25CA2; width:190px" role="alert">
-        {% else %}
-        <div class="alert shadow" style="background-color: #FFFFFF; color:#F25CA2; width:190px" role="alert">
-        {% endif %}
+    <p style="font-size: 20pt; text-align: center;">{{discussion.description}}</p>
 
-
-            {% if comment.comment.anon %}
-
-                <div align="center" style="color:00008B"> Аноним</div>
-                <div class="media">
-                <img src="/media/static/default.jpg"  width="140" height="140"  align = "left" alt="...">
-            </div>
-
-            {% elif comment.comment.author.tenant %}
-
-                <div align="center" style="color:00008B">{{comment.comment.author.first_name}} {{comment.comment.author.last_name}}
-                </div>
-            <div class="media">
-                <img src="{{ comment.comment.author.tenant.photo.url }}"  width="140" height="140"  align = "left" alt="...">
-            </div>
-
-            {% elif comment.comment.author.manager %}
-
-                <div align="center" style="color:00008B">{{comment.comment.author.first_name}} {{comment.comment.author.last_name}}
-                </div>
-            <div class="media">
-                <img src="{{ comment.comment.author.manager.photo.url }}"  width="140" height="140"  align = "left" alt="...">
-            </div>
-
-                {% endif %}
+    <div class="form-group row">
+        <div class="col-1">
+            <a class="mdc-button" href="#end"> Вниз </a>
         </div>
     </div>
-        <div class="col-8">
-            <div class="forminput" style="width:110%" role="alert">
-            {{ comment.comment.text|safe_markdown }}
-        </div>
-        <div style="float: left">
-            <a href="{% url 'thread' discussion_id=discussion.id thread_id=comment.comment.id %} ">
-                {% if comment.answers_count %}
-                <input class="mdc-button" value="Ответить (всего ответов: {{comment.answers_count}})" type="button"> </a>
+
+    {% for comment in comments %}
+        <div class="form-group row">
+            <div class="col-1"></div>
+            <div class="col-1.5">
+
+                {% if comment.comment.author.manager %}
+                <div class="alert shadow" style="background-color: #66CDAA; color:#F25CA2; width:190px" role="alert">
                 {% else %}
-                <input class="mdc-button" value="Ответить" type="button"> </a>
+                <div class="alert shadow" style="background-color: #FFFFFF; color:#F25CA2; width:190px" role="alert">
                 {% endif %}
 
-        </div>
-        <div style="float: right; color: #808080;"> {{ comment.comment.cr_date }} </div>
-    </div>
-    <div class="col-1"></div>
-</div>
 
-{% endfor %}
+                    {% if comment.comment.anon %}
+
+                        <div align="center" style="color:00008B"> Аноним</div>
+                        <div class="media">
+                        <img src="/media/static/default.jpg"  width="140" height="140"  align = "left" alt="...">
+                    </div>
+
+                    {% elif comment.comment.author.tenant %}
+
+                        <div align="center" style="color:00008B">{{comment.comment.author.first_name}} {{comment.comment.author.last_name}}
+                        </div>
+                    <div class="media">
+                        <img src="{{ comment.comment.author.tenant.photo.url }}"  width="140" height="140"  align = "left" alt="...">
+                    </div>
+
+                    {% elif comment.comment.author.manager %}
+
+                        <div align="center" style="color:00008B">{{comment.comment.author.first_name}} {{comment.comment.author.last_name}}
+                        </div>
+                    <div class="media">
+                        <img src="{{ comment.comment.author.manager.photo.url }}"  width="140" height="140"  align = "left" alt="...">
+                    </div>
+
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-9">
+                <div class="forminput" style="width:110%" role="alert">
+                    {{ comment.comment.text|safe_markdown }}
+                </div>
+                <div style="float: left">
+
+                    <a href="{% url 'thread' discussion_id=discussion.id thread_id=comment.comment.id %} ">
+                        {% if comment.answers_count %}
+                        <input class="mdc-button" value="Ответить (всего ответов: {{comment.answers_count}})" type="button"> </a>
+                        {% else %}
+                        <input class="mdc-button" value="Ответить" type="button"> </a>
+                        {% endif %}
+                </div>
+                <div style="float: right; color: #808080;"> {{ comment.comment.cr_date }} </div>
+            </div>
+
+            <div class="col-1"></div>
+        </div>
+    {% endfor %}
+
 
      <div class="form-group row">
          <div class="col-1"></div>
@@ -225,9 +229,8 @@ border: 1px solid #FFFFF;
      <div class="form-group row">
          <div class="col-1"></div>
 
-
          <div class="col-4">
-             <input type="submit" class="mdc-button mdc-button--raised" type="submit" value="Отправить">
+             <input type="submit" class="mdc-button mdc-button--raised" value="Отправить">
          </div>
 
          {% if discussion.anon_allowed %}
@@ -239,5 +242,7 @@ border: 1px solid #FFFFF;
 
          <a href="{% url 'forum' forum_id=discussion.forum.id %}"><input class="mdc-button mdc-button--outlined" value="Вернуться на форум" type="button" style="float:right;"></a>
      </div>
- </form>
+</form>
+
+<div id="end"></div>
 {% endblock %}
