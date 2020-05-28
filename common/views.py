@@ -67,8 +67,12 @@ def login_view(request):
                 if user.is_active:
                     login(request, user)
                     if hasattr(user, 'tenant'):
+                        if user.tenant.is_admin:
+                            return redirect('/admin')
                         return redirect('/tenant')
                     if hasattr(user, 'manager'):
+                        if user.manager.is_admin:
+                            return redirect('/admin')
                         return redirect('/manager')
                 else:
                     context.update({

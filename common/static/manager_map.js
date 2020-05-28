@@ -85,7 +85,7 @@ function add_houses() {
             console.log(coords, address)
 
             firstGeoObject.options.set('preset', 'islands#redCircleIcon');
-            
+
             myMap.geoObjects.add(firstGeoObject);
         });
     }
