@@ -162,9 +162,13 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-# REDIS related settings
-REDIS_HOST = 'localhost'
-REDIS_PORT = '6379'
-BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
-BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
-CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+## Broker settings.
+broker_url = 'amqp://guest:guest@localhost:5672//'
+
+# List of modules to import when the Celery worker starts.
+imports = ('myapp.tasks',)
+
+## Using the database to store task state and results.
+result_backend = 'db+sqlite:///results.db'
+
+task_annotations = {'tasks.add': {'rate_limit': '10/s'}}
