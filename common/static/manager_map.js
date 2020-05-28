@@ -44,6 +44,8 @@ function init () {
         searchControlProvider: 'yandex#search'
     });
 
+    add_houses()
+
     myMap.events.add('click', function (e) {
         var coords = e.get('coords');
 
@@ -62,6 +64,33 @@ function init () {
         getAddress(coords);
     });
 }
+
+function add_houses() {
+    let all_houses_html = document.getElementsByClassName('all_houses');
+
+    console.log("Длина массива: ", all_houses_html.length)
+
+    var myCollection = new ymaps.GeoObjectCollection(),
+    myPoints = []
+
+    for (let i = 0; i < all_houses_html.length; i++) {
+        ymaps.geocode(all_houses_html[i].value, {
+        results: 1,
+        kind: 'house'
+        }).then(function (res) {
+            var firstGeoObject = res.geoObjects.get(0),
+            coords = firstGeoObject.geometry.getCoordinates();
+            address = all_houses_html[i].value
+
+            console.log(coords, address)
+
+            firstGeoObject.options.set('preset', 'islands#redCircleIcon');
+            
+            myMap.geoObjects.add(firstGeoObject);
+        });
+    }
+}
+
 
 function from_form_to_map() {
     let address = document.getElementById('address-id');

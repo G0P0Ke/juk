@@ -18,6 +18,10 @@
 
 <a href="{% url 'manager_main' %}">Вернуться на главную страницу</a>
 
+{% for house in all_houses %}
+<input class="all_houses" type="hidden" value="{{house.address}}"> <!-- Для передачи данных в view() -->
+{% endfor %}
+
 <form method="POST">
     {% csrf_token %}
 

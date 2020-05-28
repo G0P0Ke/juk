@@ -268,6 +268,7 @@ def company_appeals_view(request):
 def add_house_view(request):
     context = {
         "user": request.user,
+        "all_houses": request.user.manager.company.house_set.all()
     }
     if not hasattr(request.user, 'manager'):
         redirect('/')
