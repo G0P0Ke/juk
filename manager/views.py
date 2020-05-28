@@ -273,27 +273,30 @@ def add_house_view(request):
         redirect('/')
     if request.method == 'POST':
         address = request.POST.get('address')
+
         if len(address) > 0:
             try:
                 check_house = House.objects.get(address=address)
                 flag = 0
             except BaseException:
                 flag = 1
-            if flag:
+            if request.POST.get('is_house') == "0":
+                messages.warning(request, "Для добавления введите адрес дома и воспользуйтесь соответствующей"
+                                          " кнопкой взаимодействия с картой")
+            elif not flag:
+                messages.warning(request, 'Этот дом уже подключен к УК')
+            elif flag:
                 house = House.objects.create(
                     address=address,
                     company=request.user.manager.company,
                 )
                 house.save()
-                messages.success(request, "Новый дом добавлен к вашему УК")
                 forum = Forum.objects.create(
                     house=house,
                     categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое",
                 )
                 forum.save()
-            elif not flag:
-                messages.warning(request, 'Этот дом уже подключен к УК')
-
+                messages.success(request, "Новый дом с адресом " + address + " добавлен к вашему УК")
             return redirect(add_house_view)
         else:
             messages.warning(request, 'Заполните строку адресс для добавления дома')

@@ -1,5 +1,7 @@
 var myMap;
 var myPlacemark;
+let type;
+let js_address;
 
 function createPlacemark(coords) {
         return new ymaps.Placemark(coords, {
@@ -41,8 +43,6 @@ function init () {
     }, {
         searchControlProvider: 'yandex#search'
     });
-
-    from_form_to_map()
 
     myMap.events.add('click', function (e) {
         var coords = e.get('coords');
@@ -96,8 +96,12 @@ function from_form_to_map() {
             checkZoomRange: true
         });
 
+        type = firstGeoObject.properties.get('metaDataProperty.GeocoderMetaData.kind');
+        console.log('Тип геообъекта: %s', type);
+
         console.log('Адрес геообъекта: ', firstGeoObject.getAddressLine());
         address.value = firstGeoObject.getAddressLine()
+        js_address = address.value
     });
 }
 
@@ -109,7 +113,28 @@ function from_map_to_form() {
 
         console.log('Адрес геообъекта: ', firstGeoObject.getAddressLine());
 
+        type = firstGeoObject.properties.get('metaDataProperty.GeocoderMetaData.kind');
+        console.log('Тип геообъекта: %s', type);
+
         let address = document.getElementById('address-id');
-        address.value = firstGeoObject.getAddressLine()
+        address.value = firstGeoObject.getAddressLine();
+        js_address = address.value
     });
+}
+
+
+function is_house_check() {
+    let address = document.getElementById('address-id');
+    let answer = document.getElementById('is_house-id');
+
+    if (type == 'house') {
+        if (js_address == address.value) {
+            console.log('ДОМ');
+            answer.value = 1
+        }
+    }
+    else {
+        console.log('НЕДОМ');
+        answer.value = 0
+    }
 }
