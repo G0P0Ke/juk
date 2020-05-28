@@ -1,69 +1,130 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-surface: #0B9ED9;
+    --mdc-theme-error: #b00020;
+    }
 
-<div class="container col-sm-4"
-     style="background-color: #e8e9e9; border-radius: 10px; padding: 20px 5px 30px 5px; margin 20px 20px 20px 20px">
+.forminput {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+}
+    .form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 70%;
+  min-height: 700px;
+  margin: 15px auto 100px;
+  box-sizing: border-box;
+  padding: 30px 0 70px 0;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.form textarea {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 80%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+  height: 120px;
+  resize: none;
+  overflow: auto;
+}
+
+</style>
+
+<div class="form col-sm-4"
+     style="padding: 20px 5px 30px 5px;">
     <div class="row h-100 justify-content-center align-items-center">
         <form method="post" class="col-sm-9 login">
             {% csrf_token %}
-            <h2>Регистрация</h2>
+            <p style="margin: 10px auto 0;font-size: 22pt; text-align: center;">Регистрация</p>
+            <br>
             {% if not error == None %}
             <div style="color: red;">{{ error }}</div>
             {% endif %}
 
             <div class="form-group">
-                <input type="text" class="form-control" required id="id_username" name="username" placeholder="Логин"
+                <input type="text" class="forminput" required id="id_username" name="username" placeholder="Логин"
                        maxlength="150">
             </div>
 
             <div class="form-group">
-                <input type="email" class="form-control" id="id_email" name="email" placeholder="E-mail"
+                <input type="email" class="forminput" id="id_email" name="email" placeholder="E-mail"
                        maxlength="254">
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" name="first_name" pattern="[А-ЯЁ][а-яё]{1,}" placeholder="Имя"
+                <input type="text" class="forminput" name="first_name" pattern="[А-ЯЁ][а-яё]{1,}" placeholder="Имя"
                        maxlength="254">
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" name="last_name" pattern="[А-ЯЁ][а-яё]{1,}"
+                <input type="text" class="forminput" name="last_name" pattern="[А-ЯЁ][а-яё]{1,}"
                        placeholder="Фамилия" maxlength="254">
             </div>
 
             <div class="form-group">
-                <input type="password" class="form-control" id="id_password1" name="password1" placeholder="Пароль">
+                <input type="password" class="forminput" id="id_password1" name="password1" placeholder="Пароль">
             </div>
 
             <div class="form-group">
-                <input type="password" class="form-control" id="id_password2" name="password2"
+                <input type="password" class="forminput" id="id_password2" name="password2"
                        placeholder="Пароль для подтверждения">
             </div>
 
             <div class="form-group">
-                <h6>Выберите роль:</h6>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="role" required id="id_tenant" value="tenant"
-                           checked>
-                    <label class="form-check-label" for="id_tenant">
-                        Житель
-                    </label>
+                <p style="font-size:15pt">Выберите роль:</p>
+            <div class="mdc-form-field">
+                              <div class="mdc-radio" style="margin-left:-10%">
+                <input class="mdc-radio__native-control" type="radio" id="id_tenant"  value="tenant" name="role" required checked>
+                <div class="mdc-radio__background">
+                  <div class="mdc-radio__outer-circle"></div>
+                  <div class="mdc-radio__inner-circle"></div>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="role" required id="id_manager" value="manager">
-                    <label class="form-check-label" for="id_manager">
-                        Менеджер
-                    </label>
+                <div class="mdc-radio__ripple"></div>
+              </div>
+              <label for="id_tenant" style="font-size:15pt; margin: 1px 0 0;">Житель</label>
+
+
+              <div class="mdc-radio" style="margin-left:15%">
+                <input class="mdc-radio__native-control" type="radio" id="id_manager" value="manager" name="role" required>
+                <div class="mdc-radio__background">
+                  <div class="mdc-radio__outer-circle"></div>
+                  <div class="mdc-radio__inner-circle"></div>
                 </div>
+                <div class="mdc-radio__ripple"></div>
+              </div>
+              <label for="id_manager" style="font-size:15pt; margin: 1px 0 0;">Менеджер</label>
+</div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="mdc-button mdc-button--raised" style="width:100%">Зарегистрироваться</button>
             </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-dark">Зарегистрироваться</button>
-            </div>
-
-            <div class="form-group">
-                <a href="{% url 'login' %}">Уже есть аккаунт?</a>
+                <a class="mdc-button" href="{% url 'login' %}">Уже есть аккаунт?</a>
             </div>
         </form>
     </div>

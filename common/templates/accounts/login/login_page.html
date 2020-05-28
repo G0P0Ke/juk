@@ -2,26 +2,119 @@
 
 {% block content %}
 
-<div class="container col-sm-4"
-     style="background-color: #e8e9e9; border-radius: 10px; padding: 20px 5px 30px 5px; margin 20px 20px 20px 20px">
+<style>
+
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-surface: #0B9ED9;
+    --mdc-theme-error: #b00020;
+    }
+
+.forminput {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+}
+    .form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 70%;
+  max-height: 700px;
+  margin: 100px auto 100px;
+  box-sizing: border-box;
+  padding: 30px 0 70px 0;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.form textarea {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 80%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+  height: 120px;
+  resize: none;
+  overflow: auto;
+}
+
+.demo-width-class {
+  width: 400px;
+}
+
+.select{
+    position: relative;
+    width: 40%;
+    float:left;
+}
+
+.select select{
+    background: #f2f2f2;
+    padding: 10px 35px 10px 35px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14pt;
+    color: #000;
+    outline: none;
+}
+.select: before{
+    position: absolute;
+    color: #000000;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: #007ce0;
+
+}
+.op{
+background: #f2f2f2;
+outline: none;
+font-size: 13pt;
+border: none;
+}
+
+
+
+</style>
+
+<div class="form"
+     style="padding: 20px 5px 30px 5px; margin 20px 20px 20px 20px">
     <div class="row h-100 justify-content-center align-items-center">
         <form method="post" class="col-sm-9 login">
             {% csrf_token %}
-            <h2>Вход на сайт</h2>
+            <p style="margin: 10px auto 0;font-size: 22pt; text-align: center;">Вход на сайт</p>
+            <br>
             {% if not error == None %}
             <div style="color: red;">{{ error }}</div>
             {% endif %}
             <div class="form-group">
-                <input type="text" class="form-control" id="login" name="login" placeholder="Логин">
+                <input class="forminput" type="text" class="form-control" id="login" name="login" placeholder="Логин">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Пароль">
+                <input class="forminput" type="password" class="form-control" id="password" name="password" placeholder="Пароль">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-dark">Войти</button>
+                <button type="submit" class="mdc-button mdc-button--raised" style="width:100%">Войти</button>
             </div>
             <div class="form-group">
-                <a href="{% url 'signup' %}">Впервые на нашем сайте?</a>
+                <a class="mdc-button" href="{% url 'signup' %}">Впервые на нашем сайте?</a>
             </div>
         </form>
     </div>
