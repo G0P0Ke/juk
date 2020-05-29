@@ -157,11 +157,14 @@ def feedback(request):
             post.title_back = 'Отзывы о JUK'
             post.text_back = 'Ваш отзыв успешно отправлен'
             post.finished = 0
-
             post.text = post.text
 
             post.save()
-            send_email()
+            send_email(Feedback.objects.last())
+
+            post.finished = 1
+            post.save()
+
             return redirect('/common/feedback', context)
     else:
         form = FeedbackForm()
