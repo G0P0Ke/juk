@@ -10,16 +10,16 @@
 </head>
 <body>
 <div class="roof">
-    <img class="logo" src="{% static 'img/logo.svg' %}">
-    <img src="{% static 'img/roof.svg' %}">
+  <img class="logo" src="{% static 'img/logo.svg' %}">
+  <img class="roofer" src="{% static 'img/qwerty.svg' %}"> 
 </div>
 {% if homeless %}
 <!---ЛИЧНЫЙ КАБИНЕТ --->
 <h2>Вы не подключены к дому, для дальнеешего пользование сервисом, пожалуйста, выберите свой дом в редактировании профиля</h2>
 <div class="wrapper">
     <div class="rectangle-big" onclick="window.location.href='/tenant/my_cabinet'">
-        <div style="color:green" class="title">Личный кабинет, {{user.username}}</div>
-        <img src="{{ user.tenant.photo.url }}" width="40" height="40">
+        <div class="title">Личный кабинет, {{user.username}}</div>
+        <img src="{{ user.tenant.photo.url }}">
     </div>
 </div>
 {% elif not house_confirmed %}
@@ -27,8 +27,8 @@
 <h2>Введенные Вами данные проходят проверку</h2>
 <div class="wrapper">
     <div class="rectangle-big" onclick="window.location.href='/tenant/my_cabinet'">
-        <div style="color:green" class="title">Личный кабинет, {{user.username}}</div>
-        <img src="{{ user.tenant.photo.url }}" width="40" height="40">
+        <div class="title">Личный кабинет, {{user.username}}</div>
+        <img src="{{ user.tenant.photo.url }}">
     </div>
 </div>
 {% else %}
@@ -36,21 +36,15 @@
 
   <div class="wrapper">
     <!---НОВОСТИ --->
-    <div style="color:green" class="rectangle-big" onclick="window.location.href='manager/news'">
+    <div class="rectangle-big" onclick="window.location.href='manager/news'">
         <div class="title">Новости</div>
-        
-        
     </div>
     <!---ФОРУМЫ --->
-    <div style="color:green" class="square" onclick="window.location.href='forum/{{ house_forum_id }}'">
+    <div class="square" onclick="window.location.href='forum/{{ house_forum_id }}'">
         <div class="title">Форум Вашего дома</div>
-        
-        
     </div>
-      <div style="color:green" class="square" onclick="window.location.href='forum/{{ company_forum_id }}'">
+    <div class="square" onclick="window.location.href='forum/{{ company_forum_id }}'">
         <div class="title">Форум Вашей компании</div>
-
-
     </div>
     <!---ПОГОДА --->
     <div class="rectangle-vertical" onclick="window.location.href='https://yandex.ru/pogoda/moscow'">
@@ -82,15 +76,15 @@
     </div>
     <!---ЛИЧНЫЙ КАБИНЕТ --->
       <div class="square" onclick="window.location.href='/tenant/my_cabinet'">
-        <div style="color:green" class="title">Личный кабинет, {{user.username}}</div>
+        <div class="title">Личный кабинет, {{user.username}}</div>
         <img src="{{ user.tenant.photo.url }}" width="40" height="40">
       </div>
 
       <!---МОИ ЗАДАНИЯ --->
       <div class="square" onclick="window.location.href='vol/help'">
-         <div style="color:green" class="title">Мои задания</div>
+         <div class="title">Мои задания</div>
           <br>
-          <div  class="title">
+          <div class="title">
               <p>Ваших открытых заданий: {{ amount_of_my_opened_tasks }}</p>
           </div>
       </div>
@@ -98,7 +92,7 @@
       <!--- ВОЛОНТЁРЫ --->
       {% if user.tenant.is_vol %}
       <div class="square" onclick="window.location.href='vol/volunteer'">
-          <div style="color:green" class="title">Волонтерство</div>
+          <div class="title">Волонтерство</div>
           <br>
           <div class="title">
               <p>Вы волонтёр!!!!!!</p>
@@ -108,7 +102,7 @@
       </div>
       {% else %}
       <div class="square" onclick="window.location.href='vol/test'">
-          <div style="color:green" class="title">Волонтёрство</div>
+          <div  class="title">Волонтёрство</div>
           <br>
           <div class="title">
               <p>Вы не волонтёр! Чтобы им стать, требуется пройти тест.</p>
@@ -118,13 +112,13 @@
 
       <!--- ОБРАЩЕНИЯ --->
     <div class="rectangle-horizontal" onclick="window.location.href='my_appeals'">
-        <div style="color:green" class="title">Обращения</div>
+        <div  class="title">Обращения</div>
         
     </div>
 
     <!--- ПРОПУСКИ --->
     <div class="rectangle-horizontal" onclick="window.location.href='tenant/pass/my_passes'">
-        <div style="color:green" class="title">Пропуска</div>
+        <div class="title">Пропуска</div>
         
     </div>
 
