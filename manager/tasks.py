@@ -5,13 +5,18 @@ from .models import RegManager
 
 
 @app.task
-def send_email():
-    all_feedback = RegManager.objects.all()
+def send_email(mail):
+    title = 'Регистрация менеджера'
+    text = 'Имя: ' + mail.fullName + '\n'
+    text += 'Почта: ' + mail.userEmail + '\n'
+    text += 'Почта УК: ' + mail.ukEmail + '\n'
+    text += 'Должность: ' + mail.appointment + '\n'
+    text += 'Номер телефона: ' + mail.phoneNumber
+    juk_mail = 'juk_feedback_mail@mail.ru'
+    title_back = 'Регистрация менеджера'
+    text_back = 'Ваш запрос расматривается'
 
-    for mail in all_feedback:
-        if mail.finished == 1:
-            continue
-        send_mail(mail.title, mail.text, mail.host, [mail.host], fail_silently=False)
-        send_mail(mail.title, mail.text, mail.host, [mail.yourmail], fail_silently=False)
-        mail.finished = 1
-        mail.save()
+    send_mail(title, text, juk_mail, [juk_mail], fail_silently=False)
+    send_mail(title_back, text_back, juk_mail, [mail.userEmail], fail_silently=False)
+
+    #mail.save()

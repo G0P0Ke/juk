@@ -246,8 +246,13 @@ def registrationManager(request):
             post = form.save(commit=False)
             post.finished = 0
             post.date = datetime.datetime.now()
+
             post.save()
-            send_email()
+            send_email(RegManager.objects.last())
+
+            post.finished = 1
+            post.save()
+
             return redirect('/', context)
     else:
         form = RegManagerForm(request.POST)
