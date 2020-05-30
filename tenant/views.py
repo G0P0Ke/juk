@@ -789,11 +789,12 @@ def tenant_main_page(request):
         "house_confirmed": request.user.tenant.house_confirmed,
     })
     news = News.objects.all()
-    last = news[len(news)-1]
-    text = ' '.join(last.publicationText.split()[:5])
-    context.update({
-        "last_news":last,
-        "news_text":text,
+    if len(news) > 0:
+        last = news[len(news)-1]
+        text = ' '.join(last.publicationText.split()[:5])
+        context.update({
+            "last_news": last,
+            "news_text": text,
         })
     return render(request, 'pages/tenant/tenant.html', context)
 
