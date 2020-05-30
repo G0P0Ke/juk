@@ -19,6 +19,9 @@ daphne==2.5.0
 martor==1.4.9
 Markdown==3.2.2
 
+# celery
+celery==4.4.2
+
 # Database
 mysqlclient==1.4.6
 
