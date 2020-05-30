@@ -40,8 +40,8 @@ class Tenant(models.Model):
         :param photo: фото жителя
         :param house: дом проживания пользователя
         :param is_vol: является ли житель волонтёром
-        :param test_date: Время последнего прохождения (None eсли попыток не было)
-        """
+        :param test_date: Время последнего прохождения (None, eсли попыток не было)
+    """
 
     user = models.OneToOneField(
         User,
@@ -75,6 +75,14 @@ class Tenant(models.Model):
 
 
 class Manager(models.Model):
+    """
+    Модель менеджера
+
+    :param user: Пользователь
+    :param company: УК менеджера
+    :param photo: фото менеджера
+    :param is_admin: является ли менеджер админом
+    """
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,

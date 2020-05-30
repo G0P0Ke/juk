@@ -21,14 +21,23 @@ class EditProfileForm(forms.ModelForm):
 
 
 class PhotoUpload(forms.Form):
+    """
+    Форма добавления аватара профиля
+    """
     photo = forms.ImageField()
 
 
 class ManagerRequestForm(forms.Form):
+    """
+    Форма причисления менеджера к УК
+    """
     inn_company = forms.IntegerField(label='Выберете вашу компанию по ИНН', )
 
 
 class AppendCompany(forms.Form):
+    """
+    Форма добавления компании
+    """
     inn_company = forms.IntegerField(
         required=True,
         widget=forms.NumberInput(

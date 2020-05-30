@@ -2,9 +2,10 @@
 Используемые модули
 """
 from django.db import models
-from django.contrib.auth.models import User
-from tenant.models import Company
+#from django.contrib.auth.models import User
 from martor.models import MartorField
+from tenant.models import Company
+
 
 
 class News(models.Model):
@@ -22,4 +23,3 @@ class News(models.Model):
         max_length=50
     )
     publicationText = MartorField()
-

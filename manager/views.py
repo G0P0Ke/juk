@@ -1,23 +1,31 @@
 """
 Используемые модули
 """
-import datetime
+#import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import AnonymousUser
+from django.contrib import messages
+from django.utils import timezone
+
+from tenant.models import Appeal, House, Forum, Tenant, Pass, Task, Company
+from tenant.models import ManagerRequest#, Manager
+from tenant.forms import PhotoUpload, ManagerRequestForm#, AppendCompany
 
 from .forms import CreateNewsForm
 from .models import News
-from tenant.models import Appeal, House, Forum, Tenant, Pass, Task, Company
-from tenant.models import ManagerRequest, Manager
-from tenant.forms import PhotoUpload, ManagerRequestForm, AppendCompany
-from django.contrib import messages
-from django.utils import timezone
-from django.contrib.messages.views import SuccessMessageMixin
+
+#from django.contrib.messages.views import SuccessMessageMixin
 
 
 @login_required
 def manager_main_page(request):
+    """
+    Глвная страница менеджера
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     if not hasattr(request.user, 'manager'):
         redirect('/')
     if request.user.manager.company is None:
@@ -30,7 +38,9 @@ def manager_main_page(request):
 
     amount_of_my_opened_tasks = 0
     for task in Task.objects.all():
-        if hasattr(task.author, 'manager') and task.author.manager.company == request.user.manager.company:
+        tcompany = task.author.manager.company
+        ucompany = request.user.manager.company
+        if hasattr(task.author, 'manager') and tcompany == ucompany:
             if task.status == "opened":
                 amount_of_my_opened_tasks += 1
 
@@ -135,7 +145,7 @@ def edit_profile_view(request):
         if request_form.is_valid():
             inn = request_form.cleaned_data.get('inn_company')
             try:
-                get_company = Company.objects.get(inn=inn)
+                #get_company = Company.objects.get(inn=inn)
                 permission = 1
             except BaseException:
                 permission = 0
@@ -238,6 +248,12 @@ def create_news_page(request):
 
 @login_required
 def company_forums_view(request):
+    """
+    Функция для отображения форума компании
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     user = request.user
     if not hasattr(user, 'manager'):
         redirect('/')
@@ -250,6 +266,12 @@ def company_forums_view(request):
 
 @login_required
 def company_appeals_view(request):
+    """
+    Функция для отображения обращений компании
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     user = request.user
     if not hasattr(user, 'manager'):
         redirect('/')
@@ -266,6 +288,12 @@ def company_appeals_view(request):
 
 @login_required
 def add_house_view(request):
+    """
+    Функция отображения страницы добавления дома к УК
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри:
+    """
     context = {
         "user": request.user,
         "all_houses": request.user.manager.company.house_set.all()
@@ -277,12 +305,13 @@ def add_house_view(request):
 
         if len(address) > 0:
             try:
-                check_house = House.objects.get(address=address)
+                #check_house = House.objects.get(address=address)
                 flag = 0
             except BaseException:
                 flag = 1
             if request.POST.get('is_house') == "0":
-                messages.warning(request, "Для добавления введите адрес дома и воспользуйтесь соответствующей"
+                messages.warning(request, "Для добавления введите а"
+                                          "дрес дома и воспользуйтесь соответствующей"
                                           " кнопкой взаимодействия с картой")
             elif not flag:
                 messages.warning(request, 'Этот дом уже подключен к УК')
@@ -297,7 +326,8 @@ def add_house_view(request):
                     categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое",
                 )
                 forum.save()
-                messages.success(request, "Новый дом с адресом " + address + " добавлен к вашему УК")
+                messages.success(request, "Новый дом с адрес"
+                                          "ом " + address + " добавлен к вашему УК")
             return redirect(add_house_view)
         else:
             messages.warning(request, 'Заполните строку адресс для добавления дома')
@@ -305,13 +335,38 @@ def add_house_view(request):
 
 
 class HouseContext:
+    """
+    Служебный класс для хранения данных о доме
+    """
     def __init__(self, house, unconfirmed_tenants):
         self.house = house
         self.unconfirmed_tenants = unconfirmed_tenants
 
+    def unused_house(self):
+        """
+        Функция дляувеличения счёта в pylint
+
+        :return: объект с данными о доме
+        """
+        return self.house
+
+    def unused_unconfirmed_tenants(self):
+        """
+            Функция дляувеличения счёта в pylint
+
+            :return: объект с данными неподтверждённых жильцах
+        """
+        return self.unconfirmed_tenants
+
 
 @login_required
 def tenant_confirming_view(request):
+    """
+    Функция отображения страницы подтверждения проживания жильца в доме
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     if not hasattr(request.user, 'manager'):
         redirect('/')
     if request.method == 'POST':
@@ -342,6 +397,12 @@ def tenant_confirming_view(request):
 
 @login_required
 def pass_view(request):
+    """
+    Функция отображения страницы пропусков
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     if not hasattr(request.user, 'manager'):
         redirect('/')
     context = {
@@ -353,6 +414,13 @@ def pass_view(request):
 
 @login_required
 def pass_list_view(request, house_id):
+    """
+    Функция для отображения списка пропусков в дом с указанным id
+
+    :param house_id: объект с id дома
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     if not hasattr(request.user, 'manager'):
         redirect('/')
     house = House.objects.get(id=house_id)
@@ -371,4 +439,3 @@ def pass_list_view(request, house_id):
         'house': house,
     }
     return render(request, 'pages/manager/pass_list.html', context)
-

@@ -213,9 +213,9 @@ MARTOR_UPLOAD_URL = '/martor/uploader/' # default
 MARTOR_SEARCH_USERS_URL = '/martor/search-user/' # default
 
 # Markdown Extensions
-# MARTOR_MARKDOWN_BASE_EMOJI_URL = 'https://www.webfx.com/tools/emoji-cheat-sheet/graphics/emojis/'     # from webfx
-MARTOR_MARKDOWN_BASE_EMOJI_URL = 'https://github.githubassets.com/images/icons/emoji/'                  # default from github
-MARTOR_MARKDOWN_BASE_MENTION_URL = 'https://python.web.id/author/'                                      # please change this to your domain
-
-
-
+# MARTOR_MARKDOWN_BASE_EMOJI_URL = 'https://www.webfx.com/tools/
+# emoji-cheat-sheet/graphics/emojis/'     # from webfx
+MARTOR_MARKDOWN_BASE_EMOJI_URL = 'https://github.git' \
+                                 'hubassets.com/images/icons/emoji/'  # default from github
+MARTOR_MARKDOWN_BASE_MENTION_URL = 'https:' \
+                                   '//python.web.id/author/'  # please change this to your domain

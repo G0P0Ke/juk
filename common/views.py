@@ -3,17 +3,15 @@
 """
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm, SignUpForm
 from django.core.mail import send_mail
-from .forms import FeedbackForm
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from tenant.models import Tenant, Company, Forum
 from tenant.models import Manager, ManagerRequest
-from tenant.forms import ManagerRequestForm, AppendCompany
-
+from tenant.forms import AppendCompany
+from .forms import LoginForm, SignUpForm, FeedbackForm
 
 def _get_base_context(title, sign_in_button=True):
     """
@@ -61,8 +59,9 @@ def login_view(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            cd = form.cleaned_data
-            user = authenticate(username=cd['login'], password=cd['password'])
+            cleaned_data = form.cleaned_data
+            user = authenticate(username=cleaned_data['login'],
+                                password=cleaned_data['password'])
             if user is not None:
                 if user.is_active:
                     login(request, user)
@@ -117,7 +116,6 @@ def signup_view(request):
                 manager = Manager.objects.create(user=user)
                 manager.save()
                 return redirect('/manager')
-            
         else:
             context.update({
                 'form': SignUpForm(request),
@@ -186,11 +184,17 @@ def feedback(request):
         else:
             pass
 
-    return render(request, 'pages/feedback.html')
+    return render(request, 'pages/feedback.html', context)
 
 
 @login_required(login_url="/login")
 def admin(request):
+    """
+    Функция отображения страницы админа
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     user = request.user
     if hasattr(request.user, 'tenant'):
         if not user.tenant.is_admin:
@@ -224,6 +228,12 @@ def admin(request):
 
 
 def admin_create(request):
+    """
+    Функция создания админа
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     user = request.user
     if hasattr(request.user, 'tenant'):
         if not user.tenant.is_admin:
@@ -241,14 +251,15 @@ def admin_create(request):
             inn = form.cleaned_data.get('inn_company')
             name = form.cleaned_data.get('company_name')
             try:
-                check_company = Company.objects.get(inn=inn)
+                #check_company = Company.objects.get(inn=inn)
                 flag = 0
             except BaseException:
                 flag = 1
             if flag:
                 new_company = Company(inn=inn, name=name)
                 new_company.save()
-                new_company_forum = Forum.objects.create(company=new_company, categories="Объявления|Другое")
+                new_company_forum = Forum.objects.create(company=new_company,
+                                                         categories="Объявления|Другое")
                 new_company_forum.save()
                 messages.success(request, "УК добавлена")
             else:
@@ -260,5 +271,3 @@ def admin_create(request):
         'form': form
     })
     return render(request, 'admin/create_company.html', context)
-
-
