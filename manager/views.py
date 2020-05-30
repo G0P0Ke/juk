@@ -197,9 +197,9 @@ def my_news_page_view(request):
     """
     context = {}
     if request.user is not AnonymousUser:
-        if Manager.objects.get(user=request.user):
+        if hasattr(request.user, 'manager'):
             record = News.objects.filter(company=request.user.manager.company)
-        else:
+        if hasattr(request.user, 'tenant'):
             record = News.objects.filter(company=request.user.tenant.house.company)
         context.update({
             "is_tenant": hasattr(request.user, 'tenant'),
