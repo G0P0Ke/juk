@@ -33,5 +33,5 @@ class RegManagerForm(forms.ModelForm):
 
     class Meta:
         model = RegManager
-        fields = ('fullName', 'userEmail', 'ukEmail', 'appointment', 'date', 'phoneNumber')
+        fields = ('fullName', 'userEmail', 'ukEmail', 'appointment', 'phoneNumber')
         #manager/forms.py
