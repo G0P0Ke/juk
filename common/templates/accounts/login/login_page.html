@@ -3,6 +3,13 @@
 {% block content %}
 
 <style>
+    a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
 
     body{
     --mdc-theme-primary: #F25CA2;
@@ -114,7 +121,7 @@ border: none;
                 <button type="submit" class="mdc-button mdc-button--raised" style="width:100%">Войти</button>
             </div>
             <div class="form-group">
-                <a class="mdc-button" href="{% url 'signup' %}">Впервые на нашем сайте?</a>
+                <a class="mdc-button" style="width:100%" href="{% url 'signup' %}"><span class="mdc-button__ripple"></span>Впервые на нашем сайте?</a>
             </div>
         </form>
     </div>

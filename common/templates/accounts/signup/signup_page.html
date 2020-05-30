@@ -4,7 +4,7 @@
 <style>
     body{
     --mdc-theme-primary: #F25CA2;
-    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-secondary: #00C853;
     --mdc-theme-background: #021859;
     --mdc-theme-surface: #0B9ED9;
     --mdc-theme-error: #b00020;
@@ -51,6 +51,13 @@
   resize: none;
   overflow: auto;
 }
+    a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
 
 </style>
 
@@ -124,7 +131,7 @@
             </div>
 
             <div class="form-group">
-                <a class="mdc-button" href="{% url 'login' %}">Уже есть аккаунт?</a>
+                <a class="mdc-button" style="width:100%" href="{% url 'login' %}"><span class="mdc-button__ripple"></span>Уже есть аккаунт?</a>
             </div>
         </form>
     </div>
