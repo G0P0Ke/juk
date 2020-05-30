@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 
+from manager.models import News
 from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task, Pass
 from .models import ManagerRequest, Manager
 import datetime
@@ -718,6 +719,13 @@ def tenant_main_page(request):
     context.update({
         "house_confirmed": request.user.tenant.house_confirmed,
     })
+    news = News.objects.all()
+    last = news[len(news)-1]
+    text = ' '.join(last.publicationText.split()[:5])
+    context.update({
+        "last_news":last,
+        "news_text":text,
+        })
     return render(request, 'pages/tenant/tenant.html', context)
 
 
