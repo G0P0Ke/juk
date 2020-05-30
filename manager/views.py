@@ -1,7 +1,7 @@
 """
 Используемые модули
 """
-#import datetime
+import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import AnonymousUser
@@ -16,6 +16,9 @@ from .forms import CreateNewsForm
 from .models import News
 
 #from django.contrib.messages.views import SuccessMessageMixin
+
+from .forms import RegManagerForm
+from .models import RegManager
 
 
 @login_required
@@ -200,9 +203,9 @@ def my_news_page_view(request):
     """
     context = {}
     if request.user is not AnonymousUser:
-        if Manager.objects.get(user=request.user):
+        if hasattr(request.user, 'manager'):
             record = News.objects.filter(company=request.user.manager.company)
-        else:
+        if hasattr(request.user, 'tenant'):
             record = News.objects.filter(company=request.user.tenant.house.company)
         context.update({
             "is_tenant": hasattr(request.user, 'tenant'),
@@ -245,8 +248,9 @@ def create_news_page_view(request):
                 company=request.user.manager.company,
                 publicationTitle=createnews.data['publicationTitle'],
                 publicationText=createnews.data['publicationText'],
-                publicationDate=timezone.now(),
-                donation_on=donation_on
+                publicationDate=datetime.datetime.now(),
+                publicationTag=createnews.data['publicationTag'],
+                district=createnews.data['district']
             )
             record.save()
             return redirect('my_news')
@@ -484,3 +488,27 @@ def pass_list_view(request, house_id):
         'house': house,
     }
     return render(request, 'pages/manager/pass_list.html', context)
+
+
+def registrationManager(request):
+    """
+    Функция отображения регистрации менеджеров
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
+    if request.method == "POST":
+        form = RegManagerForm(request.POST)
+        context = {
+            'form': form,
+        }
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.finished = 0
+            post.save()
+            return redirect('/', context)
+    else:
+        form = RegManagerForm(request.POST)
+        context = {
+            'form': form,
+        }
+    return render(request, 'pages/manager/registrationmanager.html', context)

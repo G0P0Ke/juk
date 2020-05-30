@@ -3,7 +3,9 @@
 """
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
+from .forms import LoginForm, SignUpForm
 from django.core.mail import send_mail
+from .forms import FeedbackForm
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -12,6 +14,10 @@ from tenant.models import Tenant, Company, Forum
 from tenant.models import Manager, ManagerRequest
 from tenant.forms import AppendCompany
 from .forms import LoginForm, SignUpForm, FeedbackForm
+
+from .models import Feedback
+from .tasks import send_email
+
 
 def _get_base_context(title, sign_in_button=True):
     """
@@ -116,6 +122,7 @@ def signup_view(request):
                 manager = Manager.objects.create(user=user)
                 manager.save()
                 return redirect('/manager')
+            
         else:
             context.update({
                 'form': SignUpForm(request),
@@ -149,41 +156,37 @@ def feedback(request):
     :type request: :class:`django.http.HttpRequest`
     :return: Отображене страницы
     """
+    feedbacks = Feedback.objects.all()[::-1]
+
+    context = {
+        'feedbacks': feedbacks,
+    }
+
     if request.method == "POST":
         form = FeedbackForm(request.POST)
-
+        context.update({
+            'form': form,
+        })
         if form.is_valid():
-            subject = str(form.data['subject'])
-            message = str(form.data['message'])
-            user_mail = str(form.data['user_mail'])
-            mail = 'juk_feedback_mail@mail.ru'
-            subject_back = 'Отзывы о JUK'
-            message_back = 'Ваш отзыв успешно отправлен'
+            post = form.save(commit=False)
+            post.mail = 'juk_feedback_mail@mail.ru'
+            post.title_back = 'Отзывы о JUK'
+            post.text_back = 'Ваш отзыв успешно отправлен'
+            post.finished = 0
+            post.text = post.text
 
-            context = {
-                'subject': subject,
-                'message': message,
-                'user_mail': user_mail,
-            }
+            post.save()
+            send_email(Feedback.objects.last())
 
-            message = 'Отправитель: ' + user_mail + '\n'\
-                      + '\n' + message
+            post.finished = 1
+            post.save()
 
-            # TODO: оформление при помощи django forms
-            # TODO: валидация входных параметров
-
-            message = 'Отправитель: ' + user_mail + '\n' + '\n' + message
-
-            # TODO: вынести отправку письма в отдельный субпроцесс (при помощи celery)
-            send_mail(subject, message, mail,
-                      [mail], fail_silently=False)
-
-            send_mail(subject_back, message_back, mail,
-                      [user_mail], fail_silently=False)
-
-        else:
-            pass
-
+            return redirect('/common/feedback', context)
+    else:
+        form = FeedbackForm()
+        context.update({
+            'form': form,
+        })
     return render(request, 'pages/feedback.html', context)
 
 
