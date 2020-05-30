@@ -1,30 +1,102 @@
 {% extends 'base.html' %}
 {% block content %}
-	
-<a href="{% url 'houses_passes'%}"><button class="mdc-button mdc-button--outlined" style="float:right"><span class="mdc-button__ripple"></span>Вернуться в список домов</button></a>
-	
-<h3>Список пропусков дома {{ house.address }}</h3>
 
-<h1>Список пропусков на людей</h1>
+<style>
+    a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+
+    .themes{
+    width:100%;
+    border: 1px solid #FFFFF;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 40px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+    }
+
+
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-error: #b00020;
+    }
+
+    .category {
+    width: 100%;
+    min-height: 60px;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    border: 0;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 15pt;
+    margin: 10px 0;
+}
+.left{
+  grid-area: left;
+  text-align: center;
+}
+.right{
+  grid-area: right;
+    text-align: center;
+}
+
+
+.bottom{
+margin:10px auto 0;
+  grid-area: bottom;
+}
+.grid {
+  display: grid;
+  grid-template: "left right" auto
+                 "left right" auto;
+ grid-gap: 30px;
+}
+</style>
+
+
+	<a href="{% url 'houses_passes'%}"><button class="mdc-button " style="width:100%;"><span class="mdc-button__ripple"></span>Вернуться в список домов</button></a>
+<p style="font-size: 25pt; text-align: center; margin-bottom: 0;">Список пропусков дома {{ house.address }}</p>
+
+<br>
+
+<div class="grid">
+<div class="left">
+	<p style="font-size: 20pt;">Список пропусков на людей</p>
+
 {% for pass in human_passes %}
-<a href="{% url 'pass' pass_id=pass.id %}">Пропуск</a><br>
+		<div class="category">
+<a href="{% url 'pass' pass_id=pass.id %}" class="mdc-button"> Пропуск</a><br>
     {{ pass.name }}
     {{ pass.surname }}
-	{{ pass.patronymic }}:
-    <br>
-	Цель посещения: {{ pass.aim }}
+	{{ pass.patronymic }} <br>
+			{{ pass.aim }}
+		</div>
 {% endfor %}
 
+</div>
 <br><br>
-
-<h1>Список пропусков на машины</h1>
+<div class="right">
+	<p style="font-size: 20pt;">Список пропусков на машины</p>
 {% for pass in car_passes %}
-<a href="{% url 'pass' pass_id=pass.id %}">Пропуск</a><br>
+				<div class="category">
+<a href="{% url 'pass' pass_id=pass.id %}" class="mdc-button">Пропуск</a><br>
 	{{ pass.model }}
 	{{ pass.color }}
 	{{ pass.number }}:
 	<br>
-	Цель посещения: {{ pass.aim }}
-{% endfor %}
+	{{ pass.aim }}
+				</div>
+			{% endfor %}
 
+</div>
+</div>
 {% endblock %}
