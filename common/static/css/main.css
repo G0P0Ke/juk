@@ -6,7 +6,7 @@ body{
 }
 
 .roof{
-  height: 18vh;
+  height: 19vh;
 }
 
 .logo{
@@ -60,7 +60,7 @@ body{
 
 
 .wrapper > div > img{
-    margin-top: 2vh;
+    margin-top: 1vh;
     padding-top: 15%;
     padding-left: 10%;
     height: 50%;
@@ -78,11 +78,6 @@ body{
     position: center;
     text-align: left
 }
-
-
-
-
-
 
 .title > p {
   color: black;
@@ -113,7 +108,42 @@ body{
   background:#ddd;
 }
 
+.wrapper > div >.house{
+    margin-top: 1vh;
+    padding-top: 10%;
+    padding-left: 10%;
+    height: 65%;
+    width: 80%; 
+    position: center;
+    object-fit: fill; 
+}
+
+.wrapper > div >.company{
+    margin-top: 1vh;
+    padding-top: 10%;
+    padding-left: 10%;
+    height: 62%;
+    width: 80%; 
+    position: center;
+    object-fit: fill; 
+}
+
+
+.wrapper > div >.exit{
+    margin-top: 1vh;
+    padding-top: 25%;
+    padding-left: 30%;
+    height: 50%;
+    width: 40%; 
+    position: center;
+    object-fit: fill; 
+}
+
 @media only screen and (max-width: 1450px) {
+  .roof{
+    height: 23vh;
+  } 
+
   .wrapper {
     grid-template-columns: repeat(5,1fr);
   }
