@@ -151,14 +151,14 @@ STATIC_ROOT = 'staticroot/'
 LOGIN_REDIRECT_URL = '/'
 
 
-#EMAIL_HOST = 'smtp.mail.ru'
-#EMAIL_PORT = 2525
-#EMAIL_HOST_USER = 'juk_feedback_mail@mail.ru'
-#EMAIL_HOST_PASSWORD = 'feedback_mail_pass'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "juk.adms@gmail.com"
-EMAIL_HOST_PASSWORD = "juk.adms.password"
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = 'juk_feedback_mail@mail.ru'
+EMAIL_HOST_PASSWORD = 'feedback_mail_pass'
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_PORT = 587
+#EMAIL_HOST_USER = "juk.adms@gmail.com"
+#EMAIL_HOST_PASSWORD = "juk.adms.password"
 EMAIL_USE_TLS = True
 
 
