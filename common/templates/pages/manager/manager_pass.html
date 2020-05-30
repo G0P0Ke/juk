@@ -1,14 +1,58 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<a href="{% url 'manager_main'%}"><button class="mdc-button mdc-button--outlined" style="float:right"><span class="mdc-button__ripple"></span>Вернуться на главную</button></a>
+<style>
+    a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
 
-<h3>Список домов компании {{ company_inn }}</h3>
+    .themes{
+    width:100%;
+    border: 1px solid #FFFFF;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 40px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+    }
 
+
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-error: #b00020;
+    }
+
+    .category {
+    width: 70%;
+    min-height: 60px;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    border: 0;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 20pt;
+    margin: 10px 15%;
+}
+</style>
+
+<a href="{% url 'manager_main'%}"><button class="mdc-button" style="width:100%;"><span class="mdc-button__ripple"></span>Вернуться на главную</button></a>
+<p style="font-size: 25pt; text-align: center; margin-bottom: 0;">Список домов компании {{ company_inn }}</p>
+
+<div class="themes">
 {% for house in house_list %}
-    <a href="{% url 'pass_list' house_id=house.id %}"><button class="mdc-button mdc-button--outlined" style="float:right"><span class="mdc-button__ripple"></span>Пропуска дома с адресом {{ house.address }}</button></a>
+    <a href="{% url 'pass_list' house_id=house.id %}">
+        <button class="category ms-motion-slideUpIn $ms-motion-duration-4" >
+            <p>Пропуска дома с адресом {{ house.address }}</p>
+        </button></a>
     <br><br>
 {% endfor %}
-
+</div>
 {% endblock %}
 
