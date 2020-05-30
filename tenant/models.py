@@ -10,10 +10,13 @@ class Company(models.Model):
     """
     Модель управляющей компании
 
+    :param name: название УК
     :param inn: инн УК
     """
+    name = models.TextField(
+        max_length=100,
+    )
     inn = models.IntegerField()
-    name = models.TextField()
 
 
 class House(models.Model):
