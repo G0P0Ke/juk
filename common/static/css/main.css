@@ -128,6 +128,25 @@ body{
     object-fit: fill; 
 }
 
+.wrapper > div >.operator{
+    margin-top: 1vh;
+    padding-top: 10%;
+    padding-left: 10%;
+    height:85%;
+    width: 80%; 
+    position: center;
+    object-fit: fill; 
+}
+
+.wrapper > div >.pass{
+    margin-top: 1vh;
+    padding-top: 10%;
+    padding-left: 10%;
+    height:80%;
+    width: 80%; 
+    position: center;
+    object-fit: fill; 
+}
 
 .wrapper > div >.exit{
     margin-top: 1vh;
@@ -153,6 +172,7 @@ body{
    margin-left: 5%; 
    background-color: #eee;
 }
+
 
 @media only screen and (max-width: 1450px) {
   .roof{
