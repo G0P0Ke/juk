@@ -5,19 +5,19 @@ import json
 import requests
 import pytz
 
-from django.shortcuts import render, redirect#, HttpResponse
+from django.shortcuts import render, redirect  # , HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.utils import timezone
-#from django.http import Http404
-#from django.contrib.messages.views import SuccessMessageMixin
+# from django.http import Http404
+# from django.contrib.messages.views import SuccessMessageMixin
 
 from .models import Company, House, Forum, Discussion, \
     Comment, Tenant, Appeal, AppealMessage, Task, Pass
-#from .models import ManagerRequest, Manager
-from .forms import PhotoUpload#, ManagerRequestForm, AppendCompany
+# from .models import ManagerRequest, Manager
+from .forms import PhotoUpload  # , ManagerRequestForm, AppendCompany
 # from tenant.forms import EditProfileForm
 
 # ЭТО ПРОФИЛЬ ОТ COMMON
