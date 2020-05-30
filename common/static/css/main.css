@@ -141,15 +141,17 @@ body{
 
 
 .fakeimg {
-  background-color: #ddd;
-  height: 200px;
+  background-image: url(../img/news.png);
+  height: 45%;
+  background-size: 100% 100% ;
+  background-repeat: no-repeat;
 }
 
 .news {
    margin-top: 18%;
    margin-right: 5%;
    margin-left: 5%; 
-   background-color: #f9f9f9;
+   background-color: #eee;
 }
 
 @media only screen and (max-width: 1450px) {
