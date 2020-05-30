@@ -160,8 +160,7 @@ color: #ffffff;
             </form>
             <br><br>
             {% if flag == 1 %}
-            <h5 class="text-muted"> Ваш запрос на подключение к УК одобрен. ИНН вашей компании: {{
-                user.manager.company.inn }}</h5>
+            <h5 class="text-muted"> Ваш запрос на подключение к УК одобрен. ИНН вашей компании: {{ user.manager.company.inn }}</h5>
             {% elif flag == 0 %}
             <h5 class="text-muted"> Вы можете подать запрос на подключение к УК</h5>
             <form method="POST" action="">
