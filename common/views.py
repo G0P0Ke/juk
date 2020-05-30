@@ -251,7 +251,7 @@ def admin_create(request):
             inn = form.cleaned_data.get('inn_company')
             name = form.cleaned_data.get('company_name')
             try:
-                #check_company = Company.objects.get(inn=inn)
+                check_company = Company.objects.get(inn=inn)
                 flag = 0
             except BaseException:
                 flag = 1
@@ -259,7 +259,7 @@ def admin_create(request):
                 new_company = Company(inn=inn, name=name)
                 new_company.save()
                 new_company_forum = Forum.objects.create(company=new_company,
-                                                         categories="Объявления|Другое")
+                                                         categories="Новости|Петиции|Отчёты компании|Другое")
                 new_company_forum.save()
                 messages.success(request, "УК добавлена")
             else:

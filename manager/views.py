@@ -15,7 +15,7 @@ from tenant.forms import PhotoUpload, ManagerRequestForm#, AppendCompany
 from .forms import CreateNewsForm
 from .models import News
 
-#from django.contrib.messages.views import SuccessMessageMixin
+# from django.contrib.messages.views import SuccessMessageMixin
 
 
 @login_required
@@ -145,7 +145,7 @@ def edit_profile_view(request):
         if request_form.is_valid():
             inn = request_form.cleaned_data.get('inn_company')
             try:
-                #get_company = Company.objects.get(inn=inn)
+                get_company = Company.objects.get(inn=inn)
                 permission = 1
             except BaseException:
                 permission = 0
@@ -305,7 +305,7 @@ def add_house_view(request):
 
         if len(address) > 0:
             try:
-                #check_house = House.objects.get(address=address)
+                check_house = House.objects.get(address=address)
                 flag = 0
             except BaseException:
                 flag = 1
@@ -323,7 +323,7 @@ def add_house_view(request):
                 house.save()
                 forum = Forum.objects.create(
                     house=house,
-                    categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое",
+                    categories="Вода|Электричество|Петиции|Объявления|Пропажи|Другое",
                 )
                 forum.save()
                 messages.success(request, "Новый дом с адрес"
