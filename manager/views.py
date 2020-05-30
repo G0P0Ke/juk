@@ -182,7 +182,8 @@ def news_page(request):
             record = News.objects.filter(company = request.user.manager.company)
         else:
             record = News.objects.filter(company = request.user.tenant.house.company)
-
+    else:
+        record = []
         context.update({
             "is_tenant": hasattr(request.user, 'tenant'),
             "is_manager": hasattr(request.user, 'manager'),
