@@ -1,24 +1,28 @@
 """Required modules"""
-import datetime
-import urllib
-import json
-import requests
-import pytz
-
-from django.shortcuts import render, redirect  # , HttpResponse
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
+
+from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, AppealMessage, Task, Pass
+from .models import ManagerRequest, Manager
+import datetime
+import pytz
+import requests
+import urllib
+import json
+import os
+
 from django.utils import timezone
-# from django.http import Http404
-# from django.contrib.messages.views import SuccessMessageMixin
+from .forms import PhotoUpload, ManagerRequestForm, AppendCompany
 
 from manager.models import News
-from .models import Company, House, Forum, Discussion, \
-    Comment, Tenant, Appeal, AppealMessage, Task, Pass
-# from .models import ManagerRequest, Manager
 from .forms import PhotoUpload  # , ManagerRequestForm, AppendCompany
+from django.http import Http404
+
+
 # from tenant.forms import EditProfileForm
 
 # ЭТО ПРОФИЛЬ ОТ COMMON
@@ -565,11 +569,8 @@ def volunteer_view(request):
         return redirect('/')
     company = request.user.tenant.house.company
     for task in Task.objects.all():
-        mcompany = task.author.manager.company
-        tcompany = task.author.tenant.house.company
-        if (hasattr(task.author, 'manager') and mcompany == company or
-                hasattr(task.author,
-                        'tenant') and tcompany == company) and task.status == "opened":
+        if (hasattr(task.author, 'manager') and task.author.manager.company == company or
+                hasattr(task.author, 'tenant') and task.author.tenant.house.company == company) and task.status == "opened":
             opened_tasks.append(task)
         if task.volunteer == request.user.tenant and task.status == "taken":
             taken_tasks.append(task)
@@ -605,9 +606,7 @@ def help_view(request):
         taken_tasks = []
         closed_tasks = []
         for task in Task.objects.all():
-            acompany = task.author.manager.company
-            ucompany = user.manager.company
-            if hasattr(task.author, 'manager') and acompany == ucompany:
+            if hasattr(task.author, 'manager') and task.author.manager.company == user.manager.company:
                 if task.status == "opened":
                     opened_tasks.append(task)
                 if task.status == "taken":
@@ -637,9 +636,7 @@ def task_view(request, task_id):
     if hasattr(request.user, 'tenant'):
         my_task = request.user == task.author
     if hasattr(request.user, 'manager'):
-        ucompany = request.user.manager.company
-        acompany = task.author.manager.company
-        my_task = hasattr(task.author, 'manager') and ucompany == acompany
+        my_task = hasattr(task.author, 'manager') and request.user.manager.company == task.author.manager.company
     if request.method == 'POST' and hasattr(request.user, 'tenant'):
         status = request.POST.get('status')
         task.status = status
@@ -671,6 +668,8 @@ def test_view(request):
     """
     if not hasattr(request.user, 'tenant'):
         return redirect('/')
+    if request.user.tenant.is_vol:
+        return redirect('/')
     context = {
         "user": request.user,
         "date_ok": 0,
@@ -692,6 +691,32 @@ def test_view(request):
     elif timezone.now() - request.user.tenant.test_date > datetime.timedelta(days=3):
         context.update({
             "date_ok": 1,
+        })
+    else:
+        ti_del = datetime.timedelta(days=3) - (timezone.now() - request.user.tenant.test_date)
+        hours = int(ti_del.seconds // 3600)
+        if 10 <= hours <= 20:
+            hours = str(hours) + ' часов'
+        elif hours % 10 == 1:
+            hours = str(hours) + ' час'
+        elif hours % 10 == 2 or hours % 10 == 3 or hours % 10 == 4:
+            hours = str(hours) + ' часа'
+        else:
+            hours = str(hours) + ' часов'
+        minutes = (ti_del.seconds % 3600) // 60
+        if 10 <= minutes <= 20:
+            minutes = str(minutes) + ' минут'
+        elif minutes % 10 == 1:
+            minutes = str(minutes) + ' минута'
+        elif minutes % 10 == 2 or minutes % 10 == 3 or minutes % 10 == 4:
+            minutes = str(minutes) + ' минуты'
+        else:
+            minutes = str(minutes) + ' минут'
+        context.update({
+            "date_ok": 0,
+            "days": ti_del.days,
+            "hours": hours,
+            "minutes": minutes,
         })
     return render(request, 'pages/tenant/volunteers/test.html', context)
 
@@ -736,6 +761,7 @@ def tenant_main_page(request):
     first_json = json.loads(geo_recv.text)["response"]["GeoObjectCollection"]["featureMember"]
     point = first_json[0]["GeoObject"]["Point"]["pos"]
     point = point.split()
+    
     lat = point[1]
     lon = point[0]
 

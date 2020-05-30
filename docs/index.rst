@@ -11,8 +11,10 @@
    :maxdepth: 2
    :caption: Содержание:
 
-   user.rst
    code.rst
+   user.rst
+   pp.rst
+
 
 Таблицы и поиск
 ===============

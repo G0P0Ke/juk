@@ -54,3 +54,11 @@ class AppendCompany(forms.Form):
             }
         )
     )
+    company_ya_num = forms.IntegerField(
+        required=False,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'form-control'
+            }
+        )
+    )

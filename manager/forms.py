@@ -26,3 +26,4 @@ class CreateNewsForm(forms.ModelForm):
     class Meta:
         model = News
         fields = ['publicationTitle', 'publicationText']
+

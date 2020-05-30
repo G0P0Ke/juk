@@ -15,13 +15,12 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = bool(os.environ.get('JUK_DEBUG', True))
+DEBUG = bool(os.environ.get('JUK_DEBUG', True)) # ????
 
 if DEBUG:
     ALLOWED_HOSTS = []
@@ -75,7 +74,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'juk.context_processors.base_info',
+                'juk.context_processors.base_info', # ????
             ],
         },
     },
@@ -188,8 +187,8 @@ MARTOR_IMGUR_API_KEY = 'd49b868054bc6e3bc19e64413b7d3a241e635187'
 MARTOR_MARKDOWN_SAFE_MODE = True # default
 
 # Markdownify
-MARTOR_MARKDOWNIFY_FUNCTION = 'martor.utils.markdownify' # default
-MARTOR_MARKDOWNIFY_URL = '/martor/markdownify/' # default
+MARTOR_MARKDOWNIFY_FUNCTION = 'martor.utils.markdownify'  # default
+MARTOR_MARKDOWNIFY_URL = '/martor/markdownify/'  # default
 
 # Markdown extensions (default)
 MARTOR_MARKDOWN_EXTENSIONS = [
@@ -210,13 +209,13 @@ MARTOR_MARKDOWN_EXTENSIONS = [
 MARTOR_MARKDOWN_EXTENSION_CONFIGS = {}
 
 # Markdown urls
-MARTOR_UPLOAD_URL = '/martor/uploader/' # default
-MARTOR_SEARCH_USERS_URL = '/martor/search-user/' # default
+MARTOR_UPLOAD_URL = '/martor/uploader/'  # default
+MARTOR_SEARCH_USERS_URL = '/martor/search-user/'  # default
 
 # Markdown Extensions
-# MARTOR_MARKDOWN_BASE_EMOJI_URL = 'https://www.webfx.com/tools/
-# emoji-cheat-sheet/graphics/emojis/'     # from webfx
-MARTOR_MARKDOWN_BASE_EMOJI_URL = 'https://github.git' \
-                                 'hubassets.com/images/icons/emoji/'  # default from github
-MARTOR_MARKDOWN_BASE_MENTION_URL = 'https:' \
-                                   '//python.web.id/author/'  # please change this to your domain
+# MARTOR_MARKDOWN_BASE_EMOJI_URL
+# = 'https://www.webfx.com/tools/emoji-cheat-sheet/graphics/emojis/'     # from webfx
+MARTOR_MARKDOWN_BASE_EMOJI_URL = \
+    'https://github.githubassets.com/images/icons/emoji/'  # default from github
+MARTOR_MARKDOWN_BASE_MENTION_URL \
+    = 'https://python.web.id/author/'  # please change this to your domain

@@ -20,13 +20,16 @@
                     <div class="card-body">
                         <h5 class="card-title">ИНН: {{ comp.inn }}</h5>
                         <h6 class="text-muted">Название УК: {{ comp.name }}</h6>
+                        {% if comp.ya_num != -1 %}
+                        <h6 class="text-muted">Номер аккаунта Я.Деньги: {{ comp.ya_num }}</h6>
+                        {% endif %}
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
         <div class="col card p-5 m-3">
-            <h2 class="mb-3"> Добавление нового УК</h2>
+            <h2 class="mb-3"> Добавление новой УК</h2>
             <form action="" method="post" class="" enctype="multipart/form-data">
                 <div class="form-group">
                     {% csrf_token %}
@@ -39,6 +42,12 @@
                     {{ form.company_name.errors }}
                     <h5 class="text-muted"> Название УК </h5>
                     {{ form.company_name }}
+                </div>
+                <div class="form-group">
+                    {% csrf_token %}
+                    {{ form.company_ya_num.errors }}
+                    <h5 class="text-muted"> Номер аккаунта Я.Деньги </h5>
+                    {{ form.company_ya_num }}
                 </div>
                 <div class="form-group pt-2">
                     <input type="submit"

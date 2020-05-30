@@ -110,6 +110,9 @@ margin:10px auto 0;
                 </div>
             </div>
         </div>
-
+<form action="" method="post">
+    {% csrf_token %}
+    <button type="submit">Стать админом</button>
+</form>
 
 {% endblock %}

@@ -237,10 +237,10 @@ def admin_create(request):
     user = request.user
     if hasattr(request.user, 'tenant'):
         if not user.tenant.is_admin:
-            return HttpResponse("Nice try, bro", status=401)
+            return HttpResponse("You are not an administrator", status=401)
     elif hasattr(request.user, 'manager'):
         if not user.manager.is_admin:
-            return HttpResponse("Nice try, bro", status=401)
+            return HttpResponse("You are not an administrator", status=401)
     company = Company.objects.filter()
     context = {
         'company': company
@@ -250,13 +250,17 @@ def admin_create(request):
         if form.is_valid():
             inn = form.cleaned_data.get('inn_company')
             name = form.cleaned_data.get('company_name')
+            ya_num = form.cleaned_data.get('company_ya_num')
             try:
                 check_company = Company.objects.get(inn=inn)
                 flag = 0
             except BaseException:
                 flag = 1
             if flag:
-                new_company = Company(inn=inn, name=name)
+                if ya_num is None:
+                    new_company = Company(inn=inn, name=name, ya_num=-1)
+                else:
+                    new_company = Company(inn=inn, name=name, ya_num=ya_num)
                 new_company.save()
                 new_company_forum = Forum.objects.create(company=new_company,
                                                          categories="Новости|Петиции|Отчёты компании|Другое")

@@ -5,17 +5,15 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import AnonymousUser
-from django.contrib import messages
-from django.utils import timezone
-
-from tenant.models import Appeal, House, Forum, Tenant, Pass, Task, Company
-from tenant.models import ManagerRequest#, Manager
-from tenant.forms import PhotoUpload, ManagerRequestForm#, AppendCompany
 
 from .forms import CreateNewsForm
 from .models import News
-
-# from django.contrib.messages.views import SuccessMessageMixin
+from tenant.models import Appeal, House, Forum, Tenant, Pass, Task, Company
+from tenant.models import ManagerRequest, Manager
+from tenant.forms import PhotoUpload, ManagerRequestForm, AppendCompany
+from django.contrib import messages
+from django.utils import timezone
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 @login_required
@@ -38,9 +36,7 @@ def manager_main_page(request):
 
     amount_of_my_opened_tasks = 0
     for task in Task.objects.all():
-        tcompany = task.author.manager.company
-        ucompany = request.user.manager.company
-        if hasattr(task.author, 'manager') and tcompany == ucompany:
+        if hasattr(task.author, 'manager') and task.author.manager.company == request.user.manager.company:
             if task.status == "opened":
                 amount_of_my_opened_tasks += 1
 
@@ -81,6 +77,9 @@ def my_cabinet_view(request):
         "user": request.user,
         "companyless": request.user.manager.company is None,
     }
+    if request.method == 'POST':
+        request.user.manager.is_admin = 1
+        request.user.manager.save()
     # c = Company.objects.create(inn=666) #tmp
     # f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
     # c.save()
@@ -188,7 +187,7 @@ def edit_profile_view(request):
     return render(request, 'pages/manager/edit_profile.html', context)
 
 
-def news_page(request):
+def my_news_page_view(request):
     """
     Функция для отображения страницы новостей
 
@@ -197,6 +196,7 @@ def news_page(request):
     :return: отображение страницы новостей
     """
     context = {}
+    record = News.objects.all()
     if request.user is not AnonymousUser:
         if Manager.objects.get(user = request.user):
             record = News.objects.filter(company = request.user.manager.company)
@@ -212,12 +212,11 @@ def news_page(request):
         'user': request.user,
         'record': record,
     })
-    print(record)
-    return render(request, 'pages/manager/news/news.html', context)
+    return render(request, 'pages/manager/news/my_news.html', context)
 
 
 @login_required
-def create_news_page(request):
+def create_news_page_view(request):
     """
     Функция для отображения страницы создания новостей
 
@@ -231,17 +230,24 @@ def create_news_page(request):
     context = {
         'user': request.user,
     }
+    print(request.user.manager.company.ya_num)
+    if request.user.manager.company.ya_num != -1:
+        context.update({"donation_possible": 1})
     if request.method == 'POST':
         createnews = CreateNewsForm(request.POST)
+        donation_on = False
+        if request.POST.get('donation_on') == "on":
+            donation_on = True
         if createnews.is_valid():
             record = News(
                 company=request.user.manager.company,
                 publicationTitle=createnews.data['publicationTitle'],
                 publicationText=createnews.data['publicationText'],
                 publicationDate=timezone.now(),
+                donation_on=donation_on
             )
             record.save()
-            return redirect('news')
+            return redirect('my_news')
     else:
         context['createnews'] = CreateNewsForm(
             initial={
@@ -249,7 +255,36 @@ def create_news_page(request):
             }
         )
 
-    return render(request, 'pages/manager/news/create_news.html', context)
+    return render(request, 'pages/manager/news/cr_news.html', context)
+
+
+def news_page(request, news_id):
+    """
+    Функция для отображения новости
+
+    :param request: объект c деталями запроса
+    :type request: :class:`django.http.HttpRequest`
+    :param news_id: id новости
+    :type news_id: int
+    :return: отображение страницы новостей
+    """
+    context = {}
+    news = News.objects.get(id=news_id)
+    link = "https://money.yandex.ru/quickpay/shop-widget?writer=buyer&targets=&targets-hint=&default-sum=100&" \
+           "button-text=14&payment-type-choice=on&hint=&successURL=&quickpay=shop&account=" + str(news.company.ya_num)
+    if request.user is AnonymousUser:
+        redirect('/')
+    else:
+        context.update({
+            "is_tenant": hasattr(request.user, 'tenant'),
+            "is_manager": hasattr(request.user, 'manager'),
+            "link": link
+        })
+    context.update({
+        'user': request.user,
+        'news': news,
+    })
+    return render(request, 'pages/manager/news/news.html', context)
 
 
 @login_required
@@ -327,6 +362,7 @@ def add_house_view(request):
                     company=request.user.manager.company,
                 )
                 house.save()
+                messages.success(request, "Новый дом добавлен к вашему УК")
                 forum = Forum.objects.create(
                     house=house,
                     categories="Вода|Электричество|Петиции|Объявления|Пропажи|Другое",
@@ -350,7 +386,7 @@ class HouseContext:
 
     def unused_house(self):
         """
-        Функция дляувеличения счёта в pylint
+        Функция для увеличения счёта в pylint
 
         :return: объект с данными о доме
         """
@@ -358,7 +394,7 @@ class HouseContext:
 
     def unused_unconfirmed_tenants(self):
         """
-            Функция дляувеличения счёта в pylint
+            Функция для увеличения счёта в pylint
 
             :return: объект с данными неподтверждённых жильцах
         """
@@ -445,3 +481,4 @@ def pass_list_view(request, house_id):
         'house': house,
     }
     return render(request, 'pages/manager/pass_list.html', context)
+

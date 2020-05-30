@@ -266,7 +266,8 @@ input:disabled + label:before {
 {% else %}
 <a href="{% url 'tenant_main' %}"><input class="mdc-button mdc-button--outlined" value="Вернуться" type="button"
                                          style="float:right; margin: 5% 10% 0 0; width: 39%;"></a>
-<h1 style="float:left; margin: 5% 0 10% 0;">Попробуйте пройти тест позже</h1>
+<h1 style="float:left; margin: 5% 0 10% 0;">Попробуйте пройти тест через {{ days }} {% if days == 1 %}день,{% elif days
+    == 2 %}дня,{% endif %} {{ hours }}, {{ minutes }}</h1>
 {% endif %}
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">

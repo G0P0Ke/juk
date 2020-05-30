@@ -7,7 +7,6 @@ from martor.models import MartorField
 from tenant.models import Company
 
 
-
 class News(models.Model):
     """
     Модель БД для новостей
@@ -23,3 +22,6 @@ class News(models.Model):
         max_length=50
     )
     publicationText = MartorField()
+    donation_on = models.BooleanField(
+        default=False,
+    )
