@@ -21,9 +21,8 @@ from django.conf.urls import include
 import common.views as common_views
 import manager.views as manager_views
 import tenant.views as tenant_views
-
-#from django.contrib import admin
-
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('martor/', include('martor.urls')),
@@ -82,4 +81,6 @@ urlpatterns = [
     path('manager/pass/houses', manager_views.pass_view, name="houses_passes"),
     path('manager/pass/house_passes/'
          '<int:house_id>', manager_views.pass_list_view, name="pass_list"),
+
+    path('registration/manager', manager_views.registrationManager, name="reg_manager"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

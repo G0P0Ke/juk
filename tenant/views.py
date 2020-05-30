@@ -10,7 +10,7 @@ from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, 
 from .models import ManagerRequest, Manager
 import datetime
 import pytz
-import requests
+#import requests
 import urllib
 import json
 import os

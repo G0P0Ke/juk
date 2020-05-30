@@ -1,7 +1,7 @@
 """
 Используемые модули
 """
-#import datetime
+import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import AnonymousUser
@@ -14,6 +14,9 @@ from tenant.forms import PhotoUpload, ManagerRequestForm, AppendCompany
 from django.contrib import messages
 from django.utils import timezone
 from django.contrib.messages.views import SuccessMessageMixin
+
+from .forms import RegManagerForm
+from .models import RegManager
 
 
 @login_required
@@ -242,8 +245,9 @@ def create_news_page_view(request):
                 company=request.user.manager.company,
                 publicationTitle=createnews.data['publicationTitle'],
                 publicationText=createnews.data['publicationText'],
-                publicationDate=timezone.now(),
-                donation_on=donation_on
+                publicationDate=datetime.datetime.now(),
+                publicationTag=createnews.data['publicationTag'],
+                district=createnews.data['district']
             )
             record.save()
             return redirect('my_news')
@@ -480,3 +484,21 @@ def pass_list_view(request, house_id):
     }
     return render(request, 'pages/manager/pass_list.html', context)
 
+
+def registrationManager(request):
+    if request.method == "POST":
+        form = RegManagerForm(request.POST)
+        context = {
+            'form': form,
+        }
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.finished = 0
+            post.save()
+            return redirect('/', context)
+    else:
+        form = RegManagerForm(request.POST)
+        context = {
+            'form': form,
+        }
+    return render(request, 'pages/manager/registrationmanager.html', context)
