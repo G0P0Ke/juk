@@ -207,6 +207,7 @@ def news_page(request):
         'user': request.user,
         'record': record,
     })
+    print(record)
     return render(request, 'pages/manager/news/news.html', context)
 
 

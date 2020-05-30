@@ -38,6 +38,12 @@
     <!---НОВОСТИ --->
     <div class="rectangle-big" onclick="window.location.href='manager/news'">
         <div class="title">Новости</div>
+        <div class="news">
+          <h2>{{last_news.publicationTitle}}</h2>
+          <h5>{{last_news.publicationDate | date:"d.m.Y в H:i"}}</h5>
+          <div class="fakeimg"></div>
+          <p>{{news_text}}...</p>
+        </div>
     </div>
     <!---ФОРУМЫ --->
     <div class="square" onclick="window.location.href='forum/{{ house_forum_id }}'">

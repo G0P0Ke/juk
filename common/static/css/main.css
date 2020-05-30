@@ -139,9 +139,24 @@ body{
     object-fit: fill; 
 }
 
+
+.fakeimg {
+  background-image: url(../img/news.png);
+  height: 45%;
+  background-size: 100% 100% ;
+  background-repeat: no-repeat;
+}
+
+.news {
+   margin-top: 18%;
+   margin-right: 5%;
+   margin-left: 5%; 
+   background-color: #eee;
+}
+
 @media only screen and (max-width: 1450px) {
   .roof{
-    height: 23vh;
+    height: 20vh;
   } 
 
   .wrapper {
@@ -160,3 +175,26 @@ body{
     font-size: 16px;
   }
 }
+
+
+@media only screen and (max-width: 1325px) and (min-width: 1000px){
+  .weather > p{
+    font-size: 12px;
+  }
+}
+
+
+@media only screen and (max-width: 1000px) and (min-width: 800px){
+  .roof{
+    height: 16vh;
+  }
+  .weather > p{
+    font-size: 11px;
+  }
+  .wrapper{
+    grid-auto-rows:minmax(auto, 9vh);
+  }
+}
+
+
+
