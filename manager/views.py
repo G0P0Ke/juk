@@ -196,18 +196,17 @@ def my_news_page_view(request):
     :return: отображение страницы новостей
     """
     context = {}
-    record = News.objects.all()
     if request.user is not AnonymousUser:
-        if Manager.objects.get(user = request.user):
-            record = News.objects.filter(company = request.user.manager.company)
+        if Manager.objects.get(user=request.user):
+            record = News.objects.filter(company=request.user.manager.company)
         else:
-            record = News.objects.filter(company = request.user.tenant.house.company)
-    else:
-        record = []
+            record = News.objects.filter(company=request.user.tenant.house.company)
         context.update({
             "is_tenant": hasattr(request.user, 'tenant'),
             "is_manager": hasattr(request.user, 'manager'),
         })
+    else:
+        record = []
     context.update({
         'user': request.user,
         'record': record,
@@ -362,7 +361,6 @@ def add_house_view(request):
                     company=request.user.manager.company,
                 )
                 house.save()
-                messages.success(request, "Новый дом добавлен к вашему УК")
                 forum = Forum.objects.create(
                     house=house,
                     categories="Вода|Электричество|Петиции|Объявления|Пропажи|Другое",
