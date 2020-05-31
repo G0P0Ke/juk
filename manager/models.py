@@ -46,6 +46,9 @@ class News(models.Model):
 
 
 class RegManager(models.Model):
+    """
+    Модель регистраци менеджера
+    """
     fullName = models.CharField(max_length=200)
     userEmail = models.EmailField(max_length=50)
     ukEmail = models.EmailField(max_length=50)

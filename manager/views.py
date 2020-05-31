@@ -6,10 +6,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import AnonymousUser
 from django.contrib import messages
-from django.utils import timezone
+#from django.utils import timezone
 
 from tenant.models import Appeal, House, Forum, Tenant, Pass, Task, Company
-from tenant.models import ManagerRequest, Manager
+from tenant.models import ManagerRequest#, Manager
 from tenant.forms import PhotoUpload, ManagerRequestForm#, AppendCompany
 
 from .forms import CreateNewsForm
@@ -18,7 +18,7 @@ from .models import News
 #from django.contrib.messages.views import SuccessMessageMixin
 
 from .forms import RegManagerForm
-from .models import RegManager
+#from .models import RegManager
 
 
 @login_required
@@ -240,9 +240,9 @@ def create_news_page_view(request):
         context.update({"donation_possible": 1})
     if request.method == 'POST':
         createnews = CreateNewsForm(request.POST)
-        donation_on = False
+        #donation_on = False
         if request.POST.get('donation_on') == "on":
-            donation_on = True
+            pass#donation_on = True
         if createnews.is_valid():
             record = News(
                 company=request.user.manager.company,
@@ -435,7 +435,7 @@ def tenant_confirming_view(request):
         for tenant in house.tenant_set.all():
             if not tenant.house_confirmed:
                 tenants.append(tenant)
-        if tenants != []:
+        if tenants:
             houses.append(HouseContext(house, tenants))
     context = {
         "user": request.user,
@@ -490,7 +490,7 @@ def pass_list_view(request, house_id):
     return render(request, 'pages/manager/pass_list.html', context)
 
 
-def registrationManager(request):
+def registration_manager(request):
     """
     Функция отображения регистрации менеджеров
     :param request: объект с деталями запроса.

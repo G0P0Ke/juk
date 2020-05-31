@@ -13,16 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf import settings
-from django.conf.urls.static import static
 from django.urls import path
 from django.conf.urls import include
+from django.conf.urls.static import static
+from django.conf import settings
 
 import common.views as common_views
 import manager.views as manager_views
 import tenant.views as tenant_views
-from django.conf.urls.static import static
-from django.conf import settings
 
 urlpatterns = [
     path('martor/', include('martor.urls')),
@@ -82,5 +80,5 @@ urlpatterns = [
     path('manager/pass/house_passes/'
          '<int:house_id>', manager_views.pass_list_view, name="pass_list"),
 
-    path('registration/manager', manager_views.registrationManager, name="reg_manager"),
+    path('registration/manager', manager_views.registration_manager, name="reg_manager"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

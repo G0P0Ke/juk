@@ -1,3 +1,6 @@
+"""
+Используемые модули
+"""
 from __future__ import absolute_import
 
 import os
@@ -21,4 +24,7 @@ app.autodiscover_tasks()
 
 @app.task(bind=True)
 def debug_task(self):
+    """
+    Дебаг
+    """
     print('Request: {0!r}'.format(self.request))

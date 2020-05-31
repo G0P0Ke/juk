@@ -3,9 +3,6 @@
 """
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm, SignUpForm
-from django.core.mail import send_mail
-from .forms import FeedbackForm
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -13,8 +10,8 @@ from django.contrib import messages
 from tenant.models import Tenant, Company, Forum
 from tenant.models import Manager, ManagerRequest
 from tenant.forms import AppendCompany
-from .forms import LoginForm, SignUpForm, FeedbackForm
 
+from .forms import LoginForm, SignUpForm, FeedbackForm
 from .models import Feedback
 from .tasks import send_email
 
@@ -122,7 +119,6 @@ def signup_view(request):
                 manager = Manager.objects.create(user=user)
                 manager.save()
                 return redirect('/manager')
-            
         else:
             context.update({
                 'form': SignUpForm(request),

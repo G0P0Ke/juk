@@ -1,10 +1,10 @@
 """Required modules"""
-
+import urllib
+import json
 import datetime
 import pytz
 import requests
-import urllib
-import json
+
 
 from django.utils import timezone
 from django.shortcuts import render, redirect#, HttpResponse
