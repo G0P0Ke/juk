@@ -199,6 +199,7 @@ def my_news_page_view(request):
     :return: отображение страницы новостей
     """
     context = {}
+    record = []
     if request.user is not AnonymousUser:
         if hasattr(request.user, 'manager'):
             record = News.objects.filter(company=request.user.manager.company)

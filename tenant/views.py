@@ -10,8 +10,8 @@ from .models import Company, House, Forum, Discussion, Comment, Tenant, Appeal, 
 from .models import ManagerRequest, Manager
 import datetime
 import pytz
-#import requests
-import urllib
+import requests
+import urllibas 
 import json
 import os
 
@@ -58,6 +58,7 @@ from django.http import Http404
 #       'num_h':num_h,
 #       'num_c': num_c,
 #   }
+
 
 @login_required
 def my_cabinet_view(request):
