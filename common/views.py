@@ -10,7 +10,7 @@ from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from tenant.models import Tenant, Company, Forum
+from tenant.models import Tenant, Company, Forum, House
 from tenant.models import Manager, ManagerRequest
 from tenant.forms import ManagerRequestForm, AppendCompany
 
@@ -262,3 +262,69 @@ def admin_create(request):
     return render(request, 'admin/create_company.html', context)
 
 
+class HouseContext:
+    def __init__(self, address, company_name):
+        self.address = address
+        self.company_name = company_name
+
+
+import random
+
+
+def config_view(request):
+    IN = open('common/static/houses-companies.txt', 'r')
+
+    all = IN.readlines()
+    # ДОБАВЛЕНИЕ ДОМОВ
+    out_hous = {}
+    out_hous1 = []
+
+
+    for i in range(len(all)):
+        line = all[i]
+        skip = False
+        for j in range(len(line) - 1):
+            if 'А' <= line[j] <= 'Я' and 'А' <= line[j + 1] <= 'Я' and not skip:
+                if line[len(line) - 1] == '\n':
+                    com = line[j:-1]
+                else:
+                    com = line[j:]
+
+                hou = line[:j]
+                while hou[len(hou) - 1] == ' ':
+                    hou = hou[:-1]
+
+                out_hous1.append((hou, com))
+
+                out_hous.update({
+                    hou: com
+                })
+                skip = True
+
+    print(len(out_hous.keys()))
+
+    if request.method == 'POST':
+        for k in out_hous.keys():
+            if len(House.objects.filter(address=k)) == 0:
+                print(k, out_hous.get(k))
+                if len(Company.objects.filter(name=out_hous.get(k))) == 0:
+                    new_company = Company(inn=random.randint(770000000000, 779999999999), name=out_hous.get(k))
+                    new_company.save()
+                house = House.objects.create(
+                    address=k,
+                    company=Company.objects.filter(name=out_hous.get(k))[0],
+                )
+                house.save()
+                forum = Forum.objects.create(
+                    house=house,
+                    categories="Вода|Электричество|Петиции|Объявления|Пропажи|Другое",
+                )
+                forum.save()
+        for c in Company.objects.all():
+            forum = Forum.objects.create(
+                company=c,
+                categories="Новости|Петиции|Отчёты компании|Другое",
+            )
+            forum.save()
+
+    return render(request, 'pages/config.html', {})
