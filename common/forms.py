@@ -29,9 +29,9 @@ class SignUpForm(UserCreationForm):
 
 
 class FeedbackForm(forms.ModelForm):
-
+    """
+    Форма отзыва
+    """
     class Meta:
         model = Feedback
         fields = ('yourmail', 'title', 'text',)
-
-

@@ -5,18 +5,20 @@ import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import AnonymousUser
+from django.contrib import messages
+# from django.utils import timezone
+
+from tenant.models import Appeal, House, Forum, Tenant, Pass, Task, Company
+from tenant.models import ManagerRequest  # , Manager
+from tenant.forms import PhotoUpload, ManagerRequestForm  # , AppendCompany
 
 from .forms import CreateNewsForm
 from .models import News
-from tenant.models import Appeal, House, Forum, Tenant, Pass, Task, Company
-from tenant.models import ManagerRequest, Manager
-from tenant.forms import PhotoUpload, ManagerRequestForm, AppendCompany
-from django.contrib import messages
-from django.utils import timezone
-from django.contrib.messages.views import SuccessMessageMixin
+
+# from django.contrib.messages.views import SuccessMessageMixin
 
 from .forms import RegManagerForm
-from .models import RegManager
+# from .models import RegManager
 
 
 @login_required
@@ -39,7 +41,8 @@ def manager_main_page(request):
 
     amount_of_my_opened_tasks = 0
     for task in Task.objects.all():
-        if hasattr(task.author, 'manager') and task.author.manager.company == request.user.manager.company:
+        if hasattr(task.author,
+                   'manager') and task.author.manager.company == request.user.manager.company:
             if task.status == "opened":
                 amount_of_my_opened_tasks += 1
 
@@ -147,7 +150,7 @@ def edit_profile_view(request):
         if request_form.is_valid():
             inn = request_form.cleaned_data.get('inn_company')
             try:
-                get_company = Company.objects.get(inn=inn)
+                #get_company = Company.objects.get(inn=inn)
                 permission = 1
             except BaseException:
                 permission = 0
@@ -238,9 +241,9 @@ def create_news_page_view(request):
         context.update({"donation_possible": 1})
     if request.method == 'POST':
         createnews = CreateNewsForm(request.POST)
-        donation_on = False
+        #donation_on = False
         if request.POST.get('donation_on') == "on":
-            donation_on = True
+            pass#donation_on = True
         if createnews.is_valid():
             record = News(
                 company=request.user.manager.company,
@@ -274,8 +277,10 @@ def news_page(request, news_id):
     """
     context = {}
     news = News.objects.get(id=news_id)
-    link = "https://money.yandex.ru/quickpay/shop-widget?writer=buyer&targets=&targets-hint=&default-sum=100&" \
-           "button-text=14&payment-type-choice=on&hint=&successURL=&quickpay=shop&account=" + str(news.company.ya_num)
+    link = "https://money.yandex.ru/quickpay/shop-widget?w" \
+           "riter=buyer&targets=&targets-hint=&default-sum=100&" \
+           "button-text=14&payment-type-choice=on&hint=" \
+           "&successURL=&quickpay=shop&account=" + str(news.company.ya_num)
     if request.user is AnonymousUser:
         redirect('/')
     else:
@@ -350,7 +355,7 @@ def add_house_view(request):
 
         if len(address) > 0:
             try:
-                check_house = House.objects.get(address=address)
+                #check_house = House.objects.get(address=address)
                 flag = 0
             except BaseException:
                 flag = 1
@@ -431,7 +436,7 @@ def tenant_confirming_view(request):
         for tenant in house.tenant_set.all():
             if not tenant.house_confirmed:
                 tenants.append(tenant)
-        if tenants != []:
+        if tenants:
             houses.append(HouseContext(house, tenants))
     context = {
         "user": request.user,
@@ -486,7 +491,12 @@ def pass_list_view(request, house_id):
     return render(request, 'pages/manager/pass_list.html', context)
 
 
-def registrationManager(request):
+def registration_manager(request):
+    """
+    Функция отображения регистрации менеджеров
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     if request.method == "POST":
         form = RegManagerForm(request.POST)
         context = {

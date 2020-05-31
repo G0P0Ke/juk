@@ -3,9 +3,6 @@
 """
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm, SignUpForm
-from django.core.mail import send_mail
-from .forms import FeedbackForm
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -13,8 +10,8 @@ from django.contrib import messages
 from tenant.models import Tenant, Company, Forum
 from tenant.models import Manager, ManagerRequest
 from tenant.forms import AppendCompany
-from .forms import LoginForm, SignUpForm, FeedbackForm
 
+from .forms import LoginForm, SignUpForm, FeedbackForm
 from .models import Feedback
 from .tasks import send_email
 
@@ -122,7 +119,6 @@ def signup_view(request):
                 manager = Manager.objects.create(user=user)
                 manager.save()
                 return redirect('/manager')
-            
         else:
             context.update({
                 'form': SignUpForm(request),
@@ -255,7 +251,7 @@ def admin_create(request):
             name = form.cleaned_data.get('company_name')
             ya_num = form.cleaned_data.get('company_ya_num')
             try:
-                check_company = Company.objects.get(inn=inn)
+                #check_company = Company.objects.get(inn=inn)
                 flag = 0
             except BaseException:
                 flag = 1
@@ -266,7 +262,9 @@ def admin_create(request):
                     new_company = Company(inn=inn, name=name, ya_num=ya_num)
                 new_company.save()
                 new_company_forum = Forum.objects.create(company=new_company,
-                                                         categories="Новости|Петиции|Отчёты компании|Другое")
+                                                         categories="Новости|"
+                                                                    "Петиции|"
+                                                                    "Отчёты компании|Другое")
                 new_company_forum.save()
                 messages.success(request, "УК добавлена")
             else:

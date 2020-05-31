@@ -11,7 +11,7 @@ from .models import ManagerRequest, Manager
 import datetime
 import pytz
 import requests
-import urllibas 
+import urllib
 import json
 import os
 
@@ -49,7 +49,7 @@ from django.http import Http404
 #     return render(request, 'pages/tenant/profile.html', context)
 
 
-#def base_info(request):
+# def base_info(request):
 #    houses = House.objects.all()
 #    companies = Company.objects.all()
 #   num_h = len(houses)
@@ -283,7 +283,7 @@ def discussion_view(request, discussion_id):
             anon=anon,
         )
         comment.save()
-        return redirect('/forum/discussion/'+str(discussion.id))
+        return redirect('/forum/discussion/' + str(discussion.id))
     comments = []
     for comment in discussion.comment_set.all():
         comments.append(CommentContext(comment, len(Comment.objects.filter(thread=comment))))
@@ -570,8 +570,11 @@ def volunteer_view(request):
         return redirect('/')
     company = request.user.tenant.house.company
     for task in Task.objects.all():
-        if (hasattr(task.author, 'manager') and task.author.manager.company == company or
-                hasattr(task.author, 'tenant') and task.author.tenant.house.company == company) and task.status == "opened":
+        if (hasattr(task.author, 'manager') and
+                task.author.manager.company == company or
+                hasattr(task.author, 'tenant') and
+                task.author.tenant.house.company == company) and \
+                task.status == "opened":
             opened_tasks.append(task)
         if task.volunteer == request.user.tenant and task.status == "taken":
             taken_tasks.append(task)
@@ -599,7 +602,7 @@ def help_view(request):
     """
     user = request.user
     if hasattr(user, 'tenant'):
-        opened_tasks = Task.objects.filter(author=request.user, status="opened",)
+        opened_tasks = Task.objects.filter(author=request.user, status="opened", )
         taken_tasks = Task.objects.filter(author=request.user, status="taken", )
         closed_tasks = Task.objects.filter(author=request.user, status="closed", )
     if hasattr(user, 'manager'):
@@ -607,7 +610,8 @@ def help_view(request):
         taken_tasks = []
         closed_tasks = []
         for task in Task.objects.all():
-            if hasattr(task.author, 'manager') and task.author.manager.company == user.manager.company:
+            if hasattr(task.author, 'manager') and \
+                    task.author.manager.company == user.manager.company:
                 if task.status == "opened":
                     opened_tasks.append(task)
                 if task.status == "taken":
@@ -637,7 +641,8 @@ def task_view(request, task_id):
     if hasattr(request.user, 'tenant'):
         my_task = request.user == task.author
     if hasattr(request.user, 'manager'):
-        my_task = hasattr(task.author, 'manager') and request.user.manager.company == task.author.manager.company
+        my_task = hasattr(task.author, 'manager') and \
+                  request.user.manager.company == task.author.manager.company
     if request.method == 'POST' and hasattr(request.user, 'tenant'):
         status = request.POST.get('status')
         task.status = status
@@ -757,12 +762,12 @@ def tenant_main_page(request):
         'results': '1',
     })
 
-    geo_url = "https://geocode-maps.yandex.ru/1.x/?"+geo_url
+    geo_url = "https://geocode-maps.yandex.ru/1.x/?" + geo_url
     geo_recv = requests.get(url=geo_url)
     first_json = json.loads(geo_recv.text)["response"]["GeoObjectCollection"]["featureMember"]
     point = first_json[0]["GeoObject"]["Point"]["pos"]
     point = point.split()
-    
+
     lat = point[1]
     lon = point[0]
 
@@ -775,7 +780,7 @@ def tenant_main_page(request):
 
     forecast_url = "https://api.weather.yandex.ru/v1/forecast?" + forecast_url
 
-    req = requests.get(url=forecast_url, headers={"X-Yandex-API-Key" : weather_api_key})
+    req = requests.get(url=forecast_url, headers={"X-Yandex-API-Key": weather_api_key})
     forecasts = json.loads(req.text)["forecasts"][0]
     fore_night = forecasts["parts"]["night"]
     fore_morning = forecasts["parts"]["morning"]
@@ -827,7 +832,7 @@ def tenant_main_page(request):
     })
     news = News.objects.all()
     if len(news) > 0:
-        last = news[len(news)-1]
+        last = news[len(news) - 1]
         text = ' '.join(last.publicationText.split()[:5])
         context.update({
             "last_news": last,
@@ -904,12 +909,12 @@ def pass_view(request, pass_id):
     tenant = 1
     if hasattr(request.user, 'manager'):
         tenant = 0
-    link = "https://api.qrserver.com/v1/create-qr-code/?data=http://127.0.0.1:8000/pass/"\
+    link = "https://api.qrserver.com/v1/create-qr-code/?data=http://127.0.0.1:8000/pass/" \
            + str(pass_id) + "&size=400x400"
     ti_del = datetime.timedelta(days=3) - (timezone.now() - pas.cr_date)
     hours = int(ti_del.seconds // 3600)
     if 10 <= hours <= 20:
-        hours = str(hours)+' часов'
+        hours = str(hours) + ' часов'
     elif hours % 10 == 1:
         hours = str(hours) + ' час'
     elif hours % 10 == 2 or hours % 10 == 3 or hours % 10 == 4:
