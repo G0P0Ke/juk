@@ -10,6 +10,7 @@ class Company(models.Model):
     """
     Модель управляющей компании
 
+    :param name: название УК
     :param inn: инн УК
     """
     inn = models.IntegerField()
