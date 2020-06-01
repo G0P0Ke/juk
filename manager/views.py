@@ -344,18 +344,18 @@ def add_house_view(request):
     :param request: объект с деталями запроса.
     :return: объект ответа сервера с HTML-кодом внутри:
     """
+    if not hasattr(request.user, 'manager'):
+        return redirect('/')
     context = {
         "user": request.user,
         "all_houses": request.user.manager.company.house_set.all()
     }
-    if not hasattr(request.user, 'manager'):
-        redirect('/')
     if request.method == 'POST':
         address = request.POST.get('address')
 
         if len(address) > 0:
             try:
-                #check_house = House.objects.get(address=address)
+                check_house = House.objects.get(address=address)
                 flag = 0
             except BaseException:
                 flag = 1
