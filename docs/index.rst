@@ -13,7 +13,7 @@
 
    code.rst
    user.rst
-   pp.rst
+   patterns.rst
 
 
 Таблицы и поиск
