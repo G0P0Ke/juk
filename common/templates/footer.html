@@ -1,23 +1,40 @@
 <footer class="footer mt-auto py-3 bg-dark">
     <div class="container-fluid">
         {% block footer %}
-        <span class="text-muted"> s104, {% now "Y" %}.</span>
-        <span class="text-muted">К нашей системе подключены {{ num_c }} компаний и {{ num_h }} домов.</span>
+        <style>
+            header ul {
+              list-style-type: none;
+              margin: 0;
+              padding: 0;
+              overflow: hidden;
+            }
+            header ul li {
+              float: left;
+              text-align: center;
+              height: 10%;
+            }
+            li.text-muted {
+                padding: 7px;
+            }
+            .container-fluid li:hover {
+                background-color: blue;
+            }
+            .container-fluid:hover {
+                background-color: black;
+            }
+        </style>
+        <header><ul>
 
-        <span class="float-right">
-            <span class="text-muted">Эл. почта: juk_feedback_mail@mail.ru</span>
+            <li class="text-muted" style="width: 35%;"> s104, {% now "Y" %}. К нашей системе подключены {{ num_c }} компаний и {{ num_h }} домов.</li>
+
+            <li class="text-muted" style="width: 25%;">Эл. почта: juk_feedback_mail@mail.ru</li>
              
-            <a href="/static/docs/index.html" class="btn btn-primary">
-                Документация
-            </a>
+            <li style="width: 16%;"><a href="/static/docs/index.html" class="btn btn-primary">Документация</a></li>
              
-            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
-                Политика конфиденциальности
-            </button>
-              
-            <a href="https://vk.com/juk_project"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/VK.com-logo.svg/1024px-VK.com-logo.svg.png" width="40"
-            height="40" alt="https://vk.com/juk_project"></a>
-        </span>
+            <li style="width: 22%;"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">Политика конфиденциальности</button></li>
+
+        </ul></header>
+
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
