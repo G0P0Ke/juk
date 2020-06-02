@@ -66,6 +66,30 @@ def manager_main_page(request):
         'amount_of_unconfirmed_tenants': amount_of_unconfirmed_tenants,
         'amount_of_houses': amount_of_houses,
     }
+
+    news = News.objects.all()
+    if len(news) > 0:
+        last = news[len(news) - 1]
+        text = ' '.join(last.publicationText.split()[:5])
+        context.update({
+            "last_news": last,
+            "news_text": text,
+        })
+    else:
+        context.update({
+            "last_news": "Новостей пока нет",
+            "news_text": "Новостей пока нет",
+        })
+    my_appeals = request.user.manager.appeal_set.all()
+    if len(my_appeals)>0:
+        last = my_appeals[len(my_appeals) - 1]
+        context.update({
+            "last_appeal": "Последнее обращение: " + last.theme + " c " +last.tenant.user.first_name,
+        })
+    else:
+        context.update({
+            "last_appeal": "У Вас еще нет обращений",
+        })
     return render(request, 'pages/manager/manager.html', context)
 
 
