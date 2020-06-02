@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
 </head>
-<body>
+<body onload=startTime()>
 <div class="roof">
   <img class="logo" src="{% static 'img/logo.svg' %}">
   <img class="roofer" src="{% static 'img/qwerty.svg' %}"> 
@@ -103,9 +103,8 @@
           <div class="title">Волонтерство</div>
           <br>
           <div class="title">
-              <p>Вы волонтёр!!!!!!</p>
-              <p>Требуется помощь в округе: {{ amount_of_opened_tasks }}</p>
-              <p>Вы взялись:{{ amount_of_my_taken_tasks }}</p>
+              <p>Требуется помощь: {{ amount_of_opened_tasks }}</p>
+              <p>Вы взялись: {{ amount_of_my_taken_tasks }}</p>
           </div>
       </div>
       {% else %}
@@ -118,15 +117,21 @@
       </div>
       {% endif %}
 
-    <div class="square" onclick="window.location.href=''">
-        <div class="title">Нужно</div>
+    <div class="square" onclick="window.location.href='https://informatics.ru/'">
+        <div class="title">Наши друзья</div>
+        <img class="friends" src="{% static 'img/friends.png' %}">
     </div>
 
       <!--- ОБРАЩЕНИЯ --->
     <div class="rectangle-horizontal" onclick="window.location.href='my_appeals'">
         <div  class="title">Обращения</div>
-        <img class="operator" src="{% static 'img/operator.png' %}">
-        
+        <br>           
+        <div class="appeal">
+          <p>
+          <img class="operator" src="{% static 'img/operator.png' %}">{{ last_appeal }}
+          </p>
+        </div>
+    
     </div>
 
     <!--- ПРОПУСКИ --->
@@ -135,8 +140,15 @@
         <img class="pass" src="{% static 'img/pass.png' %}">
     </div>
 
-    <div class="rectangle-horizontal" onclick="window.location.href=''">
-        <div class="title">Нужно</div>
+    <div class="timer rectangle-horizontal" onclick="window.location.href=''">
+        <div class="title">Время</div>
+        <div id="clock1" class="clock1">
+            <div class="clock" id="clock">
+                <span class="time" id="hr"></span>:
+                <span class="time" id="min"></span>:
+                <span class="time" id="sec"></span>
+            </div>
+        </div>
     </div>
 
     <div class="square" onclick="window.location.href=`{% url 'logout' %}`">
@@ -146,4 +158,24 @@
   </div>
 {% endif %}
 </body>
+<script type="text/javascript">
+  function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('hr').innerHTML =h;
+    document.getElementById('min').innerHTML =m;
+    document.getElementById('sec').innerHTML =s;
+    var t = setTimeout(startTime,500);
+}
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};
+    return i;
+}
+</script>
 </html>
+
+
