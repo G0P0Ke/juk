@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-pylint manage.py common juk manager tenant
+pylint manage.py common juk manager tenant | tee public/pylint.txt
