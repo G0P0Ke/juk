@@ -58,7 +58,30 @@
    a:hover {
     text-decoration: none;
    }
+input#id_name:focus:invalid, input#id_surname:focus:invalid{
+  background-color: #FFFFCC;
+}
 
+input#id_name:focus:valid, input#id_surname:focus:valid{
+  background-color: #CCFFCC;
+}
+
+/* Это стиль для сообщений об ошибке */
+.error {
+  width: 100%;
+  padding: 0;
+  font-size: 80%;
+  color: white;
+  background-color: #FF0033;
+  border-radius: 5px;
+
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.error.active {
+  padding: 0.3em;
+}
 </style>
 
 <div class="form col-sm-4"
@@ -83,14 +106,16 @@
             </div>
 
             <div class="form-group">
-                <input type="text" class="forminput" name="first_name" pattern="[А-ЯЁ][а-яё]{1,}" placeholder="Имя"
+                <input type="text" class="forminput" id="id_name" name="first_name" pattern="[А-ЯЁ][а-яё]{1,}" placeholder="Имя"
                        maxlength="254">
             </div>
+            <span class="error" aria-live="polite" id="error_name"></span>
 
             <div class="form-group">
-                <input type="text" class="forminput" name="last_name" pattern="[А-ЯЁ][а-яё]{1,}"
+                <input type="text" class="forminput" id="id_surname" name="last_name" pattern="[А-ЯЁ][а-яё]{1,}"
                        placeholder="Фамилия" maxlength="254">
             </div>
+            <span class="error" aria-live="polite" id="error_surname"></span>
 
             <div class="form-group">
                 <input type="password" class="forminput" id="id_password1" name="password1" placeholder="Пароль">
@@ -127,7 +152,7 @@
 </div>
             </div>
             <div class="form-group">
-                <button type="submit" class="mdc-button mdc-button--raised" style="width:100%">Зарегистрироваться</button>
+                <button type="submit" id="form_input" class="mdc-button mdc-button--raised" style="width:100%">Зарегистрироваться</button>
             </div>
 
             <div class="form-group">
@@ -136,5 +161,39 @@
         </form>
     </div>
 </div>
+<script>
+var form_input = document.getElementById('form_input');
+var surname = document.getElementById('id_surname');
+var namer = document.getElementById('id_name');
+var error_surname = document.getElementById('error_surname');
+var error_name = document.getElementById('error_name');
 
+surname.addEventListener("input", function (event) {
+  if (!surname.validity.patternMismatch) {
+    error_surname.innerHTML = "";
+    error_surname.className = "error";
+  }
+}, false);
+
+
+namer.addEventListener("input", function (event) {
+  if (!namer.validity.patternMismatch) {
+    error_name.innerHTML = "";
+    error_name.className = "error";
+  }
+}, false);
+
+form_input.addEventListener("click", function (event) {
+  if (surname.validity.patternMismatch) {
+    error_surname.innerHTML = "Введите фамилию на русском языке, начиная с заглавной буквы";
+    error_surname.className = "error active";
+    event.preventDefault();
+  }
+  if (namer.validity.patternMismatch) {
+    error_name.innerHTML = "Введите имя на русском языке, начиная с заглавной буквы";
+    error_name.className = "error active";
+    event.preventDefault();
+  }
+});
+</script>
 {% endblock %}
