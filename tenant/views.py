@@ -838,6 +838,21 @@ def tenant_main_page(request):
             "last_news": last,
             "news_text": text,
         })
+    else:
+        context.update({
+            "last_news": "Новостей пока нет",
+            "news_text": "Новостей пока нет",
+        })
+    my_appeals = request.user.tenant.appeal_set.all()
+    if len(my_appeals)>0:
+        last = my_appeals[len(my_appeals) - 1]
+        context.update({
+            "last_appeal": "Последнее обращение: " + last.theme,
+        })
+    else:
+        context.update({
+            "last_appeal": "У Вас еще нет обращений",
+        })
     return render(request, 'pages/tenant/tenant.html', context)
 
 
