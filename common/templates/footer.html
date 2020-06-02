@@ -1,20 +1,40 @@
 <footer class="footer mt-auto py-3 bg-dark">
-    <div class="container">
+    <div class="container-fluid">
         {% block footer %}
-        <span class="text-muted"> s104, {% now "Y" %}.</span>
-        <span class="text-muted" >К нашей системе подключены {{ num_c }} компаний и {{ num_h }} домов.</span>
-        <a href="/static/docs/index.html" align = "right" style="border:1px solid; border-radius: 5px; margin-left:2%; padding:1%;">
-            Документация
-        </a>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-         Политика конфиденциальности
-        </button>
-        <br>
-        <span class="text-muted">Телефон: +7(...)...-..-..</span>
-        <br>
-        <span class="text-muted">Эл. почта: ...@...</span>
-        <a href="https://vk.com/juk_project"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/VK.com-logo.svg/1024px-VK.com-logo.svg.png" width="40"
-   height="40" align = "right" alt="https://vk.com/juk_project"></a>
+        <style>
+            header ul {
+              list-style-type: none;
+              margin: 0;
+              padding: 0;
+              overflow: hidden;
+            }
+            header ul li {
+              float: left;
+              text-align: center;
+              height: 10%;
+            }
+            li.text-muted {
+                padding: 7px;
+            }
+            .container-fluid li:hover {
+                background-color: blue;
+            }
+            .container-fluid:hover {
+                background-color: black;
+            }
+        </style>
+        <header><ul>
+
+            <li class="text-muted" style="width: 35%;"> s104, {% now "Y" %}. К нашей системе подключены {{ num_c }} компаний и {{ num_h }} домов.</li>
+
+            <li class="text-muted" style="width: 25%;">Эл. почта: juk_feedback_mail@mail.ru</li>
+             
+            <li style="width: 16%;"><a href="/static/docs/index.html" class="btn btn-primary">Документация</a></li>
+             
+            <li style="width: 22%;"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">Политика конфиденциальности</button></li>
+
+        </ul></header>
+
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">

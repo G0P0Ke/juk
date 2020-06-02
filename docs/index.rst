@@ -13,6 +13,7 @@
 
    code.rst
    user.rst
+   markdown.rst
    patterns.rst
 
 
