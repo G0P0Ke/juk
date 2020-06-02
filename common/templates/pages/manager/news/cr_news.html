@@ -1,28 +1,191 @@
+{% extends 'base.html' %}
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 {% include 'header.html' %}
 {% block content %}
+
+<style>
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  width:50%;
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 15pt;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+}
+
+
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #00c656;
+    --mdc-theme-background: #021859;
+    --mdc-theme-surface: #0B9ED9;
+    --mdc-theme-error: #b00020;
+    }
+
+.form1 input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 80%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+
+  border-radius: 4px;
+}
+
+.form textarea {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 80%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+  height: 300px;
+  resize: none;
+  overflow: auto;
+}
+
+    .form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 90%;
+  margin: 30px auto 100px;
+  box-sizing: border-box;
+  padding: 30px 0 70px 0;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+
+.demo-width-class {
+  width: 400px;
+}
+
+.select{
+    position: relative;
+    min-width: 40%;
+}
+
+.select select{
+    background: #f2f2f2;
+    padding: 10px 35px 10px 35px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14pt;
+    color: #000;
+    outline: none;
+}
+.select: before{
+    position: absolute;
+    color: #000000;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: #007ce0;
+
+}
+.op{
+background: #f2f2f2;
+outline: none;
+font-size: 13pt;
+border: none;
+}
+
+    a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+
+</style>
+
 <br>
 <br>
-<div class="col-12">
+
+<a href="{% url 'my_news' %}">
+    <button class="mdc-button" style="width: 100%;"><span class="mdc-button__ripple"></span>Вернуться к новостям
+    </button>
+</a>
+
+<div class="form">
     <form action="" method="post">
         {% csrf_token %}
-        <div class="form-group">
-            <label>Заголовок</label>
+        <div class="form1" style="font-size: 14pt;">
+            <label style="font-size: 15pt;">Заголовок</label>
             <br>
             {{ createnews.publicationTitle }}
         </div>
-        <div class="form-group">
-            <label>Ваша новость</label>
+        <div>
+            <label  style="font-size: 15pt;">Ваша новость</label>
             <br>
             {{ createnews.publicationText }}
         </div>
         {% if donation_possible %}
-        <label for="donation_on">Собрирать деньги</label>
-        <input type="checkbox" name="donation_on" id="donation_on">
-        <br>
+
+        <label for="donation_on" style="font-size: 15pt;">Собирать деньги</label>
+        <div class="mdc-form-field">
+
+        <div class="mdc-checkbox">
+            <input class="mdc-checkbox__native-control" type="checkbox" name="donation_on" id="donation_on"><br><br>
+            <div class="mdc-checkbox__background">
+      <svg class="mdc-checkbox__checkmark"
+           viewBox="0 0 24 24">
+        <path class="mdc-checkbox__checkmark-path"
+              fill="none"
+              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+      </svg>
+      <div class="mdc-checkbox__mixedmark"></div>
+    </div>
+    <div class="mdc-checkbox__ripple"></div>
+  </div>
+        </div>
+        <br><br>
+
         {% endif %}
-        <input type="submit" class="btn btn-primary" value="Создать новость">
+        <input type="submit" class="mdc-button mdc-button--raised" value="Создать новость">
     </form>
 </div>
+
+
+
+
 {% endblock %}
