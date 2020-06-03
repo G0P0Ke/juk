@@ -81,9 +81,8 @@ body{
 
 .title > p {
   color: black;
-
+  font-size: 1vw;
 }
-
 
 .appeal{
   margin-top: 10%; 
@@ -91,7 +90,8 @@ body{
 }
 
 .appeal > p{
-    font-size: 1.1vw;
+    font-size: 1vw;
+    word-wrap: break-word;
     color:black;
     display: inline;
     text-align: right;
