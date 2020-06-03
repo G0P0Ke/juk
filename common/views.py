@@ -47,6 +47,7 @@ def index_view(request):
         context.update({
             "is_tenant": hasattr(request.user, 'tenant'),
             "is_manager": hasattr(request.user, 'manager'),
+            "all_houses": House.objects.all(),
         })
     return render(request, 'pages/index.html', context)
 

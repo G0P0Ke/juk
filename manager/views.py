@@ -148,12 +148,8 @@ def edit_profile_view(request):
     if request.method == 'POST':
         if request.POST.get('username') is not None:
             username = request.POST.get('username')
-            first_name = request.POST.get('first_name')
-            last_name = request.POST.get('last_name')
 
             user.username = username
-            user.first_name = first_name
-            user.last_name = last_name
             user.save()
 
         request_form = ManagerRequestForm(request.POST)

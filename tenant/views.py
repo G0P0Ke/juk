@@ -109,12 +109,8 @@ def edit_profile_view(request):
         form = PhotoUpload()
     if request.method == 'POST':
         username = request.POST.get('username')
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
         address = request.POST.get('address')
         user.username = username
-        user.first_name = first_name
-        user.last_name = last_name
         if request.user.tenant.house is None or address != request.user.tenant.house.address:
             user.tenant.house_confirmed = False
             if House.objects.filter(address=address).exists():

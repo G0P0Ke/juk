@@ -5,7 +5,7 @@
 
 {% load static %}
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=9d32ec24-ae67-45da-9cb2-a1d51686e32b" type="text/javascript"></script>
-<script src="{% static 'manager1.js' %}"></script>
+<script src="{% static 'manager_map.js' %}"></script>
 <style>
        #map {
            margin: 10px auto;
@@ -19,7 +19,7 @@
 <a href="{% url 'manager_main' %}">Вернуться на главную страницу</a>
 
 {% for house in all_houses %}
-<input class="all_houses" type="hidden" value="{{house.address}}"> <!-- Для передачи данных в view() -->
+<input class="all_houses" type="hidden" value="{{house.address}}" name="{{house.company.name}}"> <!-- Для передачи данных в view() -->
 {% endfor %}
 
 <form method="POST">

@@ -154,11 +154,11 @@ margin:10px auto 0;
                 {% csrf_token %}
                 <label style="font-size: 15pt; text-align: left;" for="username-id">Ваш логин:</label>
                 <input class="forminput" type="text" name="username" id="username-id" value="{{user.username}}"
-                       required><br>
+                       disabled><br>
 
                 <label style="font-size: 15pt; text-align: left;" for="first_name-id">Ваше имя:</label>
                 <input class="forminput" type="text" name="first_name" id="first_name-id" value="{{user.first_name}}"
-                       required><br>
+                       disabled><br>
 
                 <label style="font-size: 15pt; text-align: left;" for="last_name-id">Ваша фамилия:</label>
                     <input class="forminput" type="text" name="last_name" id="last_name-id" value="{{user.last_name}}" required><br>

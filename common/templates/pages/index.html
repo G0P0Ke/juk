@@ -2,6 +2,23 @@
 
 {% block content %}
 
+{% load static %}
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=9d32ec24-ae67-45da-9cb2-a1d51686e32b" type="text/javascript"></script>
+<script src="{% static 'index_map.js' %}"></script>
+
+<style>
+       #map {
+           margin: 10px auto;
+           width: 1000px;
+           height: 800px;
+       }
+</style>
+
+{% for house in all_houses %}
+<input class="all_houses" type="hidden" value="{{house.address}}" name="{{house.company.name}}"> <!-- Для передачи данных в view() -->
+{% endfor %}
+
+<div id="map"></div>
 
 
 {% endblock %}
