@@ -3,6 +3,8 @@
 {% block content %}
 
 {% load static %}
+
+<!--- КАРТА С ДОМАМИ
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=9d32ec24-ae67-45da-9cb2-a1d51686e32b" type="text/javascript"></script>
 <script src="{% static 'index_map.js' %}"></script>
 
@@ -15,10 +17,9 @@
 </style>
 
 {% for house in all_houses %}
-<input class="all_houses" type="hidden" value="{{house.address}}" name="{{house.company.name}}"> <!-- Для передачи данных в view() -->
+<input class="all_houses" type="hidden" value="{{house.address}}" name="{{house.company.name}}">
 {% endfor %}
 
-<div id="map"></div>
-
+<div id="map"></div> --->
 
 {% endblock %}
