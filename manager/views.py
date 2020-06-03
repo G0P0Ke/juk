@@ -170,7 +170,7 @@ def edit_profile_view(request):
         if request_form.is_valid():
             inn = request_form.cleaned_data.get('inn_company')
             try:
-                #get_company = Company.objects.get(inn=inn)
+                get_company = Company.objects.get(inn=inn)  # не комментируйте эту строчку, она нужна
                 permission = 1
             except BaseException:
                 permission = 0
