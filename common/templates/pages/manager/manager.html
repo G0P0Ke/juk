@@ -8,6 +8,31 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
 </head>
+<style>
+    .rectangle-big-1{
+      grid-column-start: 3;
+      grid-column-end: 6;
+      grid-row: span 4;
+    }
+    .wrapper > .rectangle-big-1 > img{
+      height: 80%;
+    }
+    @media only screen and (max-width: 1450px) {
+      .rectangle-big-1{
+        grid-column-start: 2;
+        grid-column-end: 5;
+        grid-row: span 4;
+      }
+    }
+    @media only screen and (max-width: 1000px){
+      .rectangle-big-1{
+        grid-row: span 3;
+      }
+    }
+
+    .square-1{
+    }
+</style>
 <body onload="startTime()">
 <div class="roof">
   <img class="logo" src="{% static 'img/logo.svg' %}">
@@ -15,12 +40,19 @@
 </div>
 {% if companyless %}
 <!---ЛИЧНЫЙ КАБИНЕТ --->
-<h2>Вы не подключены к компании, для дальнеешего пользование сервисом, пожалуйста, выберите свою компанию в редактировании профиля</h2>
-<div class="square" onclick="window.location.href='/manager/my_cabinet'">
-    <div  class="title">Личный кабинет, {{user.username}}</div>
-    <img src="{{ user.manager.photo.url }}" width="40" height="40">
+<div style="text-align: center; font-size: 22pt;">
+    <p>Вы не подключены к компании <br> Для дальнеешего пользование сервисом, пожалуйста, выберите свою компанию в редактировании профиля</p>
+    <div class="wrapper">
+        <div class="rectangle-big-1" onclick="window.location.href='/manager/my_cabinet'">
+            <div  class="title">Личный кабинет, {{user.username}}</div>
+            <img src="{{ user.manager.photo.url }}" width="40" height="40">
+        </div>
+        <div class="square" onclick="window.location.href=`{% url 'logout' %}`">
+            <div class="title">Выйти</div>
+            <img class="exit" src="{% static 'img/exit.png' %}">
+        </div>
+    </div>
 </div>
-
 {% else %}
 
   <div class="wrapper">
