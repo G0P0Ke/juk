@@ -1,59 +1,114 @@
 """
-Необходимые модули
+Используемые модули
 """
-import unittest
-#from django.test import TestCase
-
-from django.contrib.auth import authenticate
-from django.test import Client
+from django.test import TestCase
 
 
-class SimpleTest(unittest.TestCase):
+class Test(TestCase):
     """
     Основной класс тестов
-    На каждый тест стоит написать описание, мне просто немного вломец
     """
-    def setUp(self):
-        """
-        Первый тест
-        """
-        self.client = Client()
-        self.user = get_user_model().objects.create_user(username='test',
-                                                         password='12test12',
-                                                         email='test@example.com')
-        self.user.save()
+    fixtures = ['test_database.json']
 
-    def test_details(self):
+    def test_manager_company_forums(self):
         """
-        Второй тест
+        Тест страницы
         """
-        response = self.client.get('/customer/datails/')
+        self.client.login(username='tenant-test', password='promprog')
+        response = self.client.get('/manager/company_forums/')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
+
+        self.client.login(username='manager-test', password='promprog')
+        response = self.client.get('/manager/company_forums/')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.conext['customers']), 5)
 
-    def tearDown(self):
+    def test_manager_company_appeals(self):
         """
-        Третий тест
+        Тест страницы
         """
-        self.user.delete()
+        self.client.login(username='tenant-test', password='promprog')
+        response = self.client.get('/manager/company_appeals/')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
 
-    def test_correct(self):
-        """
-        Четвёртый тест
-        """
-        user = authenticate(username='test', password='12test12')
-        self.assertTrue((user is not None) and user.is_authenticated)
+        self.client.login(username='manager-test', password='promprog')
+        response = self.client.get('/manager/company_appeals/')
+        self.assertEqual(response.status_code, 200)
 
-    def test_wrong_username(self):
+    def test_manager_add_house(self):
         """
-        Пятый тест
+        Тест страницы
         """
-        user = authenticate(username='wrong', password='12test12')
-        self.assertFalse(user is not None and user.is_authenticated)
+        self.client.login(username='tenant-test', password='promprog')
+        response = self.client.get('/manager/add_house/')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
 
-    def test_wrong_pssword(self):
+        self.client.login(username='manager-test', password='promprog')
+        response = self.client.get('/manager/add_house/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_manager_tenant_confirming(self):
         """
-        Шестой тест
+        Тест страницы
         """
-        user = authenticate(username='test', password='wrong')
-        self.assertFalse(user is not None and user.is_authenticated)
+        self.client.login(username='tenant-test', password='promprog')
+        response = self.client.get('/manager/tenant_confirming/')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
+
+        self.client.login(username='manager-test', password='promprog')
+        response = self.client.get('/manager/tenant_confirming/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_tenant(self):
+        """
+        Тест страницы
+        """
+        self.client.login(username='tenant-test', password='promprog')
+        response = self.client.get('/tenant')
+        self.assertEqual(response.status_code, 200)
+
+        self.client.login(username='manager-test', password='promprog')
+        response = self.client.get('/tenant')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
+
+    def test_tenant_my_cabinet(self):
+        """
+        Тест страницы
+        """
+        self.client.login(username='tenant-test', password='promprog')
+        response = self.client.get('/tenant/my_cabinet')
+        self.assertEqual(response.status_code, 200)
+
+        self.client.login(username='manager-test', password='promprog')
+        response = self.client.get('/tenant/my_cabinet')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
+
+    def test_tenant_edit_profile(self):
+        """
+        Тест страницы
+        """
+        self.client.login(username='tenant-test', password='promprog')
+        response = self.client.get('/tenant/edit_profile')
+        self.assertEqual(response.status_code, 200)
+
+        self.client.login(username='manager-test', password='promprog')
+        response = self.client.get('/tenant/edit_profile')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
+
+    def test_my_appeals(self):
+        """
+        Тест страницы
+        """
+        self.client.login(username='tenant-test', password='promprog')
+        response = self.client.get('/my_appeals')
+        self.assertEqual(response.status_code, 200)
+
+        self.client.login(username='manager-test', password='promprog')
+        response = self.client.get('/my_appeals')
+        self.assertEqual(response.status_code, 200)

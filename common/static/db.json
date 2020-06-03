@@ -1,3970 +1,4754 @@
 [
 {
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$iAwtM6RpaWZ8$btn4ilCeDi272gCj1ddpDaJIuo+JPKpC6RSPJCAnBXc=",
+    "last_login": "2020-06-03T15:19:49.221Z",
+    "is_superuser": false,
+    "username": "admin",
+    "first_name": "\u0410\u0434\u043c\u0438\u043d",
+    "last_name": "\u0410\u0434\u043c\u0438\u043d\u043e\u0432",
+    "email": "admin@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-06-02T17:41:51.868Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$lQkmGFLcUxQJ$mNBb4569Zg2RW3JWyPN5tiXV/RguCylk40mGuhm8DLY=",
+    "last_login": "2020-06-02T22:58:59.537Z",
+    "is_superuser": false,
+    "username": "tolstoy",
+    "first_name": "\u041b\u0435\u0432",
+    "last_name": "\u0422\u043e\u043b\u0441\u0442\u043e\u0439",
+    "email": "tolstoy@yandex.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-06-02T17:44:13.424Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$fysDklyNPgX1$kPx+rEv4DoHFBhUvf3m+r48b5u8POqNgtZWC/2Mgfn0=",
+    "last_login": "2020-06-03T15:27:49.677Z",
+    "is_superuser": false,
+    "username": "pushkin",
+    "first_name": "\u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440",
+    "last_name": "\u041f\u0443\u0448\u043a\u0438\u043d",
+    "email": "pushkin@yandex.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-06-02T17:45:53.380Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$fQBoYzRa9MKp$eRxdUyjURukzAKU05gCXUM/8N+0Zjc/F2nq56GF9mXA=",
+    "last_login": "2020-06-03T15:47:01.097Z",
+    "is_superuser": false,
+    "username": "bulgakov",
+    "first_name": "\u041c\u0438\u0445\u0430\u0438\u043b",
+    "last_name": "\u0411\u0443\u043b\u0433\u0430\u043a\u043e\u0432",
+    "email": "bulgakov@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-06-02T17:47:47.496Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$cHbznmhWus1s$VtplhcxbrGhh4diV20CuZ+iY2Tm/47nrD9ht1gmv4YA=",
+    "last_login": "2020-06-03T15:48:14.889Z",
+    "is_superuser": false,
+    "username": "einstein",
+    "first_name": "\u0410\u043b\u044c\u0431\u0435\u0440\u0442",
+    "last_name": "\u042d\u0439\u043d\u0448\u0442\u0435\u0439\u043d",
+    "email": "einstein@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-06-02T18:07:23.572Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$bxJ9Dw4MliYV$XcM4VOZZUbfkNEC87N8dvWSc4TicK342xnNMP2S9M4k=",
+    "last_login": "2020-06-03T15:28:49.871Z",
+    "is_superuser": false,
+    "username": "tesla",
+    "first_name": "\u041d\u0438\u043a\u043e\u043b\u0430",
+    "last_name": "\u0422\u0435\u0441\u043b\u0430",
+    "email": "tesla@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-06-02T18:08:52.218Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$XtVJCFXC8jpw$1dhk3GScFBsy7Qn32OKujAa6DLOgApw+q9XrpSQ02jo=",
+    "last_login": "2020-06-03T14:41:10.045Z",
+    "is_superuser": false,
+    "username": "maria",
+    "first_name": "\u041c\u0430\u0440\u0438\u044f",
+    "last_name": "\u041a\u044e\u0440\u0438",
+    "email": "maria@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-06-02T18:10:31.693Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$ilKIC6pGzEu1$g6rV5s7CAE6YfIqCOxBaU+WJNaEVqoaNOMRI0vOGOL4=",
+    "last_login": "2020-06-03T14:42:51.241Z",
+    "is_superuser": false,
+    "username": "newton",
+    "first_name": "\u0418\u0441\u0430\u0430\u043a",
+    "last_name": "\u041d\u044c\u044e\u0442\u043e\u043d",
+    "email": "newton@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-06-02T18:12:00.701Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 9,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$IzDO9lzznnSk$Qb/jow6sd+CxQrz+HgbYDlEB0GCe710n4qzSXzaqbkM=",
+    "last_login": "2020-06-02T18:13:53.050Z",
+    "is_superuser": false,
+    "username": "plunk",
+    "first_name": "\u041c\u0430\u043a\u0441",
+    "last_name": "\u041f\u043b\u0430\u043d\u043a",
+    "email": "plunk@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-06-02T18:13:52.680Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 10,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$FO2QsI4BO16j$qxVbnL6wh6GZ/0ZD1DaFAuT/eHrmU56ejbiCkD3pUpo=",
+    "last_login": "2020-06-02T18:15:00.362Z",
+    "is_superuser": false,
+    "username": "dumbledore",
+    "first_name": "\u0410\u043b\u044c\u0431\u0443\u0441",
+    "last_name": "\u0414\u0430\u043c\u0431\u043b\u0434\u043e\u0440",
+    "email": "dumbledore@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-06-02T18:14:59.990Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 11,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$PSR8Wo9zyF2B$9fvaZ95STeoBpUI1sZ0dR1zi8X0cmuiSzomWcRZTbhQ=",
+    "last_login": "2020-06-02T22:04:04.078Z",
+    "is_superuser": false,
+    "username": "lenin",
+    "first_name": "\u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440",
+    "last_name": "\u041b\u0435\u043d\u0438\u043d",
+    "email": "geralt@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-06-02T18:16:15.324Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 12,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$FO23c6GxREHL$SHHTyJwvk9uHPK3IzYIyMUqpMOlCbtQ7+FBbS5lQ/BA=",
+    "last_login": "2020-06-02T18:23:59.872Z",
+    "is_superuser": false,
+    "username": "mendeleev",
+    "first_name": "\u0414\u043c\u0438\u0442\u0440\u0438\u0439",
+    "last_name": "\u041c\u0435\u043d\u0434\u0435\u043b\u0435\u0435\u0432",
+    "email": "mendeleev@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-06-02T18:23:59.542Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 13,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$aD6FEq33qXZ8$ch+KiyWq8pCTi6shgtcw1uH3qqf0P3364g8Iy1E1GvE=",
+    "last_login": "2020-06-02T18:26:04.796Z",
+    "is_superuser": false,
+    "username": "dostoevskiy",
+    "first_name": "\u0424\u0451\u0434\u043e\u0440",
+    "last_name": "\u0414\u043e\u0441\u0442\u043e\u0435\u0432\u0441\u043a\u0438\u0439",
+    "email": "dostoevskiy@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-06-02T18:26:04.455Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 14,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$TxJkDEaHDY3M$2BqUfXw8NGyE/imO56LFMgGaMV7rL8UjVVxakw4qkXM=",
+    "last_login": "2020-06-02T18:29:25.034Z",
+    "is_superuser": false,
+    "username": "vader",
+    "first_name": "\u0414\u0430\u0440\u0442",
+    "last_name": "\u0412\u0435\u0439\u0434\u0435\u0440",
+    "email": "vader@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-06-02T18:29:24.704Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 15,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$W1rJwuvFozC3$49BInCVkov3STn9q/dgHT980y8oh3xU2IVk5YvFa0xc=",
+    "last_login": "2020-06-02T19:38:11.688Z",
+    "is_superuser": false,
+    "username": "ceasar",
+    "first_name": "\u042e\u043b\u0438\u0439",
+    "last_name": "\u0426\u0435\u0437\u0430\u0440\u044c",
+    "email": "ceasar@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-06-02T19:00:24.068Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 16,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$N7vkRXcdRrvk$SAtt4fceYKcCeWvOTwUOrwR+FCZuCBAebG2CuhBscoM=",
+    "last_login": "2020-06-03T14:48:32.880Z",
+    "is_superuser": false,
+    "username": "gagarin",
+    "first_name": "\u042e\u0440\u0438\u0439",
+    "last_name": "\u0413\u0430\u0433\u0430\u0440\u0438\u043d",
+    "email": "gagarin@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-06-02T19:16:08.892Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
   "model": "tenant.company",
   "pk": 1,
   "fields": {
+    "inn": 7731288482,
     "name": "\u0413\u0411\u0423 \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a \u0440\u0430\u0439\u043e\u043d\u0430 \u0424\u0438\u043b\u0438-\u0414\u0430\u0432\u044b\u0434\u043a\u043e\u0432\u043e\u00bb",
-    "inn": 7731288482
+    "ya_num": 410018983944204
   }
 },
 {
   "model": "tenant.company",
   "pk": 2,
   "fields": {
+    "inn": 7721026689,
     "name": "\u0413\u0411\u0423 \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a \u0440\u0430\u0439\u043e\u043d\u0430 \u041a\u0443\u0437\u044c\u043c\u0438\u043d\u043a\u0438\u00bb",
-    "inn": 7721026689
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 3,
   "fields": {
+    "inn": 7727846180,
     "name": "\u0413\u0411\u0423 \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a \u0440\u0430\u0439\u043e\u043d\u0430 \u042e\u0436\u043d\u043e\u0435 \u0411\u0443\u0442\u043e\u0432\u043e\u00bb",
-    "inn": 7727846180
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 4,
   "fields": {
+    "inn": 7703820360,
     "name": "\u0413\u0411\u0423 \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a \u041f\u0440\u0435\u0441\u043d\u0435\u043d\u0441\u043a\u043e\u0433\u043e \u0440\u0430\u0439\u043e\u043d\u0430\u00bb",
-    "inn": 7703820360
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 5,
   "fields": {
+    "inn": 7709966213,
     "name": "\u0413\u0411\u0423 \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a \u0422\u0430\u0433\u0430\u043d\u0441\u043a\u043e\u0433\u043e \u0440\u0430\u0439\u043e\u043d\u0430\u00bb",
-    "inn": 7709966213
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 6,
   "fields": {
+    "inn": 7706816114,
     "name": "\u0413\u0411\u0423 \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a \u0440\u0430\u0439\u043e\u043d\u0430 \u042f\u043a\u0438\u043c\u0430\u043d\u043a\u0430\u00bb",
-    "inn": 7706816114
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 7,
   "fields": {
+    "inn": 7721818170,
     "name": "\u0413\u0411\u0423 \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a \u0416\u0443\u043b\u0435\u0431\u0438\u043d\u043e \u0440\u0430\u0439\u043e\u043d\u0430 \u0412\u044b\u0445\u0438\u043d\u043e-\u0416\u0443\u043b\u0435\u0431\u0438\u043d\u043e\u00bb",
-    "inn": 7721818170
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 8,
   "fields": {
+    "inn": 7721818162,
     "name": "\u0413\u0411\u0423 \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a \u0412\u044b\u0445\u0438\u043d\u043e \u0440\u0430\u0439\u043e\u043d\u0430 \u0412\u044b\u0445\u0438\u043d\u043e-\u0416\u0443\u043b\u0435\u0431\u0438\u043d\u043e\u00bb",
-    "inn": 7721818162
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 9,
   "fields": {
+    "inn": 7743087220,
     "name": "\u0422\u0421\u0416 \u00ab\u0424\u0435\u0441\u0442\u0438\u0432\u0430\u043b\u044c\u043d\u0430\u044f 24/2\u00bb",
-    "inn": 7743087220
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 10,
   "fields": {
+    "inn": 7736669273,
     "name": "\u0413\u0411\u0423 \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a \u0440\u0430\u0439\u043e\u043d\u0430 \u041b\u043e\u043c\u043e\u043d\u043e\u0441\u043e\u0432\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7736669273
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 11,
   "fields": {
+    "inn": 7734036155,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u0440\u0430\u0441\u043d\u043e\u0434\u0430\u0440\u00bb",
-    "inn": 7734036155
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 12,
   "fields": {
+    "inn": 7732084322,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u043b\u043d\u0446\u0435\u0432\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7732084322
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 13,
   "fields": {
+    "inn": 7731091006,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u0435\u0442\u0443\u043d\u044c\u043a\u0430\u00bb",
-    "inn": 7731091006
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 14,
   "fields": {
+    "inn": 7729305892,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u043e\u043b\u0434\u0438\u043d\u043e\u00bb",
-    "inn": 7729305892
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 15,
   "fields": {
+    "inn": 7728123890,
     "name": "\u0416\u0421\u041a \u00ab\u0425\u0440\u0438\u0437\u043e\u043b\u0438\u0442\u00bb",
-    "inn": 7728123890
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 16,
   "fields": {
+    "inn": 7728091422,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u0435\u0433\u0430\u0441\u00bb",
-    "inn": 7728091422
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 17,
   "fields": {
+    "inn": 7728042841,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u044f\u0437\u0430\u043d\u044c\u00bb",
-    "inn": 7728042841
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 18,
   "fields": {
+    "inn": 7727071470,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u0430\u0437\u0432\u0435\u0434\u043a\u0430 \u043d\u0435\u0434\u0440\u00bb",
-    "inn": 7727071470
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 19,
   "fields": {
+    "inn": 7727021662,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0442\u043e\u0432\u043e-15\u00bb",
-    "inn": 7727021662
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 20,
   "fields": {
+    "inn": 7724180720,
     "name": "\u0416\u0421\u041a \u00ab\u0424\u0440\u044f\u0437\u0438\u043d\u043e\u00bb",
-    "inn": 7724180720
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 21,
   "fields": {
+    "inn": 7724180230,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u043e\u0432\u0440\u043e\u0432\u00bb",
-    "inn": 7724180230
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 22,
   "fields": {
+    "inn": 7721061891,
     "name": "\u0416\u0421\u041a \u00ab\u0416\u0434\u0430\u043d\u043e\u0432\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7721061891
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 23,
   "fields": {
+    "inn": 7720059970,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u043e\u043c\u043f\u0430\u0441\u00bb",
-    "inn": 7720059970
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 24,
   "fields": {
+    "inn": 7719062739,
     "name": "\u0416\u0421\u041a \u00ab\u0426\u0435\u043b\u0438\u043d\u043e\u0433\u0440\u0430\u0434\u00bb",
-    "inn": 7719062739
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 25,
   "fields": {
+    "inn": 7716109587,
     "name": "\u0416\u0421\u041a \u00ab\u0424\u0438\u043b\u044c\u043c\u00bb",
-    "inn": 7716109587
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 26,
   "fields": {
+    "inn": 7716063685,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u0438\u0440\u0438\u0442\u00bb",
-    "inn": 7716063685
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 27,
   "fields": {
+    "inn": 7715069444,
     "name": "\u0416\u0421\u041a \u00ab\u0417\u0438\u043c\u043d\u0438\u0439\u00bb",
-    "inn": 7715069444
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 28,
   "fields": {
+    "inn": 7714580504,
     "name": "\u0422\u0421\u0416 \u00ab\u041d\u0410 \u0411\u041e\u041b\u042c\u0428\u041e\u041c \u041a\u041e\u041f\u0422\u0415\u0412\u0421\u041a\u041e\u041c\u00bb",
-    "inn": 7714580504
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 29,
   "fields": {
+    "inn": 7713644226,
     "name": "\u041e\u041e\u041e \u00ab\u0423\u041a \u0414\u0415\u0417 \u0440\u0430\u0439\u043e\u043d\u0430 \u0414\u043c\u0438\u0442\u0440\u043e\u0432\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7713644226
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 30,
   "fields": {
+    "inn": 7710722780,
     "name": "\u0422\u0421\u0416 \u00ab\u0422\u0432\u0435\u0440\u0441\u043a\u0430\u044f 19\u00bb",
-    "inn": 7710722780
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 31,
   "fields": {
+    "inn": 7708600833,
     "name": "\u041e\u041e\u041e \u00ab\u0423\u041a \u00ab\u041a\u0440\u0430\u0441\u043d\u043e\u0435 \u0441\u0435\u043b\u043e\u00bb",
-    "inn": 7708600833
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 32,
   "fields": {
+    "inn": 7705853265,
     "name": "\u041e\u041e\u041e \u00ab\u041a\u043e\u043c\u043f\u0430\u043d\u0438\u044f \u0421\u0410\u0413\u0438\u041a\u00bb",
-    "inn": 7705853265
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 33,
   "fields": {
+    "inn": 7704238242,
     "name": "\u0422\u0421\u0416 \u00ab\u0420\u0435\u0442\u0440\u043e-35\u00bb",
-    "inn": 7704238242
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 34,
   "fields": {
+    "inn": 7703052848,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u0438\u043c\u0435\u0442\u00bb",
-    "inn": 7703052848
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 35,
   "fields": {
+    "inn": 7743063035,
     "name": "\u0422\u0421\u0416 \u00ab\u041b\u0435\u043d\u0438\u043d\u0433\u0440\u0430\u0434\u0441\u043a\u043e\u0435 \u0448\u043e\u0441\u0441\u0435, 52\u0411\u00bb",
-    "inn": 7743063035
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 36,
   "fields": {
+    "inn": 7736160944,
     "name": "\u0416\u0421\u041a \u00ab\u0422\u0438\u0433\u0440\u0438\u0441\u00bb",
-    "inn": 7736160944
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 37,
   "fields": {
+    "inn": 7734003880,
     "name": "\u041e\u041e\u041e \u00ab\u0418\u0412\u0410-XXI\u00bb",
-    "inn": 7734003880
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 38,
   "fields": {
+    "inn": 7732084210,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u043e\u043b\u043d\u0446\u0435\u0432\u043e-16\u00bb",
-    "inn": 7732084210
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 39,
   "fields": {
+    "inn": 7731062862,
     "name": "\u0416\u0421\u041a \u00ab\u0414\u0430\u0443\u0433\u0430\u0432\u0430\u00bb",
-    "inn": 7731062862
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 40,
   "fields": {
+    "inn": 7729301104,
     "name": "\u0416\u0421\u041a \u00ab\u041d\u0435\u0439\u0442\u0440\u043e\u043d\u00bb",
-    "inn": 7729301104
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 41,
   "fields": {
+    "inn": 7728120592,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u0442\u0440\u043e\u0439\u043f\u043b\u0430\u0441\u0442\u0438\u043a\u00bb",
-    "inn": 7728120592
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 42,
   "fields": {
+    "inn": 7728090860,
     "name": "\u0416\u0421\u041a \u00ab\u0428\u0430\u0439\u0431\u0430\u00bb",
-    "inn": 7728090860
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 43,
   "fields": {
+    "inn": 7728035837,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u0440\u0438\u043f\u0442\u043e\u043d\u00bb",
-    "inn": 7728035837
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 44,
   "fields": {
+    "inn": 7727071261,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0418\u0420\u0413\u042d\u041c\u00bb",
-    "inn": 7727071261
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 45,
   "fields": {
+    "inn": 7727021020,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-23\u00bb",
-    "inn": 7727021020
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 46,
   "fields": {
+    "inn": 7724180632,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u043e\u0432\u043d\u043e\u00bb",
-    "inn": 7724180632
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 47,
   "fields": {
+    "inn": 7724176139,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0410\u041a\u0423\u00bb",
-    "inn": 7724176139
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 48,
   "fields": {
+    "inn": 7721029866,
     "name": "\u0416\u0421\u041a \u00ab\u041b\u044c\u0432\u043e\u0432\u00bb",
-    "inn": 7721029866
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 49,
   "fields": {
+    "inn": 7720059850,
     "name": "\u0416\u0421\u041a \u00ab\u0412\u0441\u0442\u0440\u0435\u0447\u0430\u00bb",
-    "inn": 7720059850
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 50,
   "fields": {
+    "inn": 7719048702,
     "name": "\u0416\u0421\u041a \u00ab\u041d\u0418\u0418\u041f\u0420\u041e\u0415\u041a\u0422\u00bb",
-    "inn": 7719048702
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 51,
   "fields": {
+    "inn": 7719078055,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u0432\u0435\u0442\u0441\u043a\u0430\u044f \u043c\u0435\u0434\u0438\u0446\u0438\u043d\u0430\u00bb",
-    "inn": 7719078055
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 52,
   "fields": {
+    "inn": 7717011898,
     "name": "\u0416\u0421\u041a \u00ab\u0425\u0438\u043c\u043d\u0435\u0444\u0442\u0435\u043c\u0430\u0448\u00bb",
-    "inn": 7717011898
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 53,
   "fields": {
+    "inn": 7716086650,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u0430\u043b\u0438\u043e\u0442\u0438\u0441\u00bb",
-    "inn": 7716086650
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 54,
   "fields": {
+    "inn": 7715115965,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0430\u0433\u0443\u043b\u044c\u043d\u0438\u043a\u00bb",
-    "inn": 7715115965
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 55,
   "fields": {
+    "inn": 7714711940,
     "name": "\u041e\u041e\u041e \u00ab\u0410\u043b\u044c\u0442\u0435\u0440\u043d\u0430\u0442\u0438\u0432\u043d\u044b\u0435 \u0421\u0438\u0441\u0442\u0435\u043c\u044b \u041e\u043f\u0442\u0438\u043c\u0443\u043c\u00bb",
-    "inn": 7714711940
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 56,
   "fields": {
+    "inn": 7713659600,
     "name": "\u0422\u0421\u0416 \u00ab\u041a\u043b\u044f\u0437\u044c\u043c\u0438\u043d\u0441\u043a\u043e\u0435\u00bb",
-    "inn": 7713659600
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 57,
   "fields": {
+    "inn": 7712036659,
     "name": "\u0416\u0421\u041a \u00ab\u0412\u0435\u0442\u0435\u0440\u0430\u043d \u0442\u0440\u0443\u0434\u0430-\u0443\u0433\u043e\u043b\u044c\u0449\u0438\u043a\u00bb",
-    "inn": 7712036659
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 58,
   "fields": {
+    "inn": 7709093960,
     "name": "\u0417\u0410\u041e\u00bb \u0416\u0438\u043b\u0438\u0449\u043d\u043e-\u044d\u043a\u0441\u043f\u043b\u0443\u0430\u0442\u0430\u0446\u0438\u043e\u043d\u043d\u043e\u0435 \u043f\u0440\u0435\u0434\u043f\u0440\u0438\u044f\u0442\u0438\u0435 \u00ab\u0418\u043c\u043f\u0443\u043b\u044c\u0441-\u0416\u0438\u043b\u0441\u0442\u0440\u043e\u0439\u00bb",
-    "inn": 7709093960
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 59,
   "fields": {
+    "inn": 7707013825,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0418\u0418\u0422\u00bb",
-    "inn": 7707013825
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 60,
   "fields": {
+    "inn": 7704511149,
     "name": "\u0422\u0421\u0416 \u00ab\u0421\u0442\u0430\u0440\u043e\u043f\u0435\u0442\u0440\u043e\u0432\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7704511149
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 61,
   "fields": {
+    "inn": 7703116876,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u043e\u043b\u043e\u0434\u043e\u0439 \u043a\u0438\u043d\u0435\u043c\u0430\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0441\u0442\u00bb",
-    "inn": 7703116876
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 62,
   "fields": {
+    "inn": 7701327053,
     "name": "\u0422\u0421\u0416 \u00ab\u041c\u044f\u0441\u043d\u0438\u0446\u043a\u0430\u044f 24\u00bb",
-    "inn": 7701327053
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 63,
   "fields": {
+    "inn": 7743571818,
     "name": "\u0422\u0421\u0416 \u00ab\u0424\u0435\u0441\u0442\u0438\u0432\u0430\u043b\u044c\u043d\u0430\u044f 24\u0410\u00bb",
-    "inn": 7743571818
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 64,
   "fields": {
+    "inn": 7737023027,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0445\u0430\u0440\u0430\u00bb",
-    "inn": 7737023027
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 65,
   "fields": {
+    "inn": 7734060077,
     "name": "\u0416\u0421\u041a \u00ab\u0410\u0434\u043b\u0435\u0440\u00bb",
-    "inn": 7734060077
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 66,
   "fields": {
+    "inn": 7733006655,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-52\u041a\u00bb",
-    "inn": 7733006655
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 67,
   "fields": {
+    "inn": 7731111534,
     "name": "\u0416\u0421\u041a \u00ab\u0414\u0438\u0430\u043b\u044e\u043a\u0441\u00bb",
-    "inn": 7731111534
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 68,
   "fields": {
+    "inn": 7729582409,
     "name": "\u0417\u0410\u041e \u00ab\u0421\u0423-\u0416\u041a\u0425\u00bb",
-    "inn": 7729582409
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 69,
   "fields": {
+    "inn": 7728125640,
     "name": "\u0416\u0421\u041a \u00ab\u0414\u0440\u0443\u0436\u0431\u0430-18\u00bb",
-    "inn": 7728125640
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 70,
   "fields": {
+    "inn": 7728091937,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u043e\u044e\u0437-\u0410\u043f\u043e\u043b\u043b\u043e\u043d\u00bb",
-    "inn": 7728091937
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 71,
   "fields": {
+    "inn": 7728048096,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-49\u041a\u00bb",
-    "inn": 7728048096
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 72,
   "fields": {
+    "inn": 7727093515,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0442\u043e\u0432\u043e-21\u00bb",
-    "inn": 7727093515
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 73,
   "fields": {
+    "inn": 7727023966,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-29 \u00ab",
-    "inn": 7727023966
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 74,
   "fields": {
+    "inn": 7725003788,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u043e\u043b\u043e\u043c\u0435\u043d\u0441\u043a\u043e\u0435\u00bb",
-    "inn": 7725003788
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 75,
   "fields": {
+    "inn": 7724180270,
     "name": "\u0416\u0421\u041a \u00ab\u0410\u0431\u0430\u043a\u0430\u043d\u00bb",
-    "inn": 7724180270
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 76,
   "fields": {
+    "inn": 7723147537,
     "name": "\u041e\u041e\u041e \u00ab\u041f\u0422\u041e \u041f\u0415\u041a\u0410\u00bb",
-    "inn": 7723147537
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 77,
   "fields": {
+    "inn": 7720060038,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u0440\u0438\u0432\u0435\u0442\u00bb",
-    "inn": 7720060038
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 78,
   "fields": {
+    "inn": 7719077975,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u0430\u0431\u043e\u0442\u043d\u0438\u043a \u044d\u043d\u0446\u0438\u043a\u043b\u043e\u043f\u0435\u0434\u0438\u0438\u00bb",
-    "inn": 7719077975
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 79,
   "fields": {
+    "inn": 7716112780,
     "name": "\u0416\u0421\u041a \u00ab\u0417\u0430\u0433\u043e\u0440\u0441\u043a\u00bb",
-    "inn": 7716112780
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 80,
   "fields": {
+    "inn": 7716078113,
     "name": "\u0416\u0421\u041a \u00ab\u0414\u0443\u0434\u0438\u043d\u043a\u0430\u00bb",
-    "inn": 7716078113
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 81,
   "fields": {
+    "inn": 7715101850,
     "name": "\u0416\u0421\u041a \u00ab\u0422\u0431\u0438\u043b\u0438\u0441\u0438\u00bb",
-    "inn": 7715101850
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 82,
   "fields": {
+    "inn": 7714664031,
     "name": "\u041e\u041e\u041e \u0423\u043f\u0440\u0430\u0432\u043b\u044f\u044e\u0449\u0430\u044f \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u044f \u0414\u0438\u0440\u0435\u043a\u0446\u0438\u044f \u042d\u043a\u0441\u043f\u043b\u0443\u0430\u0442\u0430\u0446\u0438\u0438 \u0437\u0434\u0430\u043d\u0438\u0439 \u00ab\u0411\u0435\u0433\u043e\u0432\u0430\u044f\u00bb",
-    "inn": 7714664031
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 83,
   "fields": {
+    "inn": 7713650325,
     "name": "\u0422\u0421\u0416 \u00ab\u0414\u0443\u0431\u043d\u0438\u043d\u0441\u043a\u0430\u044f 71\u00bb",
-    "inn": 7713650325
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 84,
   "fields": {
+    "inn": 7711051277,
     "name": "\u0417\u0410\u041e \u00ab\u0410\u043b\u043d\u0438\u0442\u0430\u00bb",
-    "inn": 7711051277
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 85,
   "fields": {
+    "inn": 7709032982,
     "name": "\u0416\u0421\u041a \u00ab\u0425\u0443\u0434\u043e\u0436\u043d\u0438\u043a\u043e\u0432-\u0433\u0440\u0430\u0444\u0438\u043a\u043e\u0432\u00bb",
-    "inn": 7709032982
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 86,
   "fields": {
+    "inn": 7706205186,
     "name": "\u0417\u0410\u041e \u00ab\u0421\u043b\u0443\u0436\u0431\u0430 \u0421\u0435\u0440\u0432\u0438\u0441\u0430 \u0412\u0430\u0448\u0435\u0433\u043e \u0414\u043e\u043c\u0430\u00bb",
-    "inn": 7706205186
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 87,
   "fields": {
+    "inn": 7704508379,
     "name": "\u0422\u0421\u0416 \u00ab\u0410\u0440\u0431\u0430\u0442 23\u00bb",
-    "inn": 7704508379
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 88,
   "fields": {
+    "inn": 7703116844,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0430\u043b\u044b\u0439 \u0442\u0435\u0430\u0442\u0440\u00bb",
-    "inn": 7703116844
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 89,
   "fields": {
+    "inn": 7701261892,
     "name": "\u0422\u0421\u0416 \u00ab\u0425\u0430\u0440\u0438\u0442\u043e\u043d\u044c\u0435\u00bb",
-    "inn": 7701261892
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 90,
   "fields": {
+    "inn": 7743087318,
     "name": "\u0422\u0421\u0416 \u00ab\u0414\u0435\u0433\u0443\u043d\u0438\u043d\u043e\u00bb",
-    "inn": 7743087318
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 91,
   "fields": {
+    "inn": 7737019510,
     "name": "\u0416\u0421\u041a \u00ab\u041b\u0430\u0439\u043d\u0435\u0440\u00bb",
-    "inn": 7737019510
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 92,
   "fields": {
+    "inn": 7734060020,
     "name": "\u0416\u0421\u041a \u00ab\u0412\u043e\u0434\u043e\u043f\u0430\u0434\u00bb",
-    "inn": 7734060020
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 93,
   "fields": {
+    "inn": 7733002812,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0438\u0442\u0438\u043d\u043e-17\u00bb",
-    "inn": 7733002812
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 94,
   "fields": {
+    "inn": 7731109990,
     "name": "\u0416\u0421\u041a \u00ab\u041d\u0430\u0440\u0430\u00bb",
-    "inn": 7731109990
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 95,
   "fields": {
+    "inn": 7729524407,
     "name": "\u041e\u041e\u041e \u00ab\u042e\u043d\u0438\u0441\u0435\u0440\u0432\u0438\u0441\u00bb",
-    "inn": 7729524407
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 96,
   "fields": {
+    "inn": 7728124460,
     "name": "\u0416\u0421\u041a \u00ab\u0423\u043c\u0435\u0440\u0435\u043d\u043d\u044b\u0439\u00bb",
-    "inn": 7728124460
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 97,
   "fields": {
+    "inn": 7728091711,
     "name": "\u0416\u0421\u041a \u00ab\u0428\u0438\u0440\u043e\u0442\u0430\u00bb",
-    "inn": 7728091711
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 98,
   "fields": {
+    "inn": 7728043098,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u0443\u0440\u044c\u0435\u0432\u00bb",
-    "inn": 7728043098
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 99,
   "fields": {
+    "inn": 7727086758,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0442\u043e\u0432\u043e-25\u00bb",
-    "inn": 7727086758
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 100,
   "fields": {
+    "inn": 7727021983,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-36\u041a\u00bb",
-    "inn": 7727021983
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 101,
   "fields": {
+    "inn": 7719597396,
     "name": "\u041e\u0410\u041e \u00ab\u0420\u042d\u0423 56 \u0440\u0430\u0439\u043e\u043d\u0430 \u0412\u043e\u0441\u0442\u043e\u0447\u043d\u044b\u0439\u00bb",
-    "inn": 7719597396
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 102,
   "fields": {
+    "inn": 7718019152,
     "name": "\u0416\u0421\u041a \u00ab\u0417\u0435\u043b\u0435\u043d\u044b\u0439 \u043b\u0443\u0447\u00bb",
-    "inn": 7718019152
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 103,
   "fields": {
+    "inn": 7716090248,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0442\u043e\u0432\u043e-26\u00bb",
-    "inn": 7716090248
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 104,
   "fields": {
+    "inn": 7715158630,
     "name": "\u041d\u041e \u0422\u0421\u0416 \u00ab\u0428\u0410\u041d\u0421\u00bb",
-    "inn": 7715158630
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 105,
   "fields": {
+    "inn": 7715040854,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u043e\u0441\u0441\u0438\u044f\u043d\u043a\u0430\u00bb",
-    "inn": 7715040854
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 106,
   "fields": {
+    "inn": 7714038563,
     "name": "\u041e\u041e\u041e \u00ab\u0421\u043e\u043a\u043e \u041c\u041f\u0425\u00bb",
-    "inn": 7714038563
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 107,
   "fields": {
+    "inn": 7712097683,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u0443\u0441\u0430\u043b\u043a\u0430\u00bb",
-    "inn": 7712097683
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 108,
   "fields": {
+    "inn": 7709859290,
     "name": "\u0417\u0410\u041e \u0423\u041a \u00ab\u041a\u0430\u043f\u0438\u0442\u0430\u043b-\u0418\u043d\u0432\u0435\u0441\u0442 \u042e\u0433\u00bb",
-    "inn": 7709859290
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 109,
   "fields": {
+    "inn": 7707107696,
     "name": "\u0414\u041e\u0421\u0420 \u041c\u0416\u041a \u00ab\u0418\u043a\u0430\u0440\u00bb",
-    "inn": 7707107696
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 110,
   "fields": {
+    "inn": 7705012696,
     "name": "\u0413\u0423\u041f \u00ab\u0414\u0415\u0417 \u0440\u0430\u0439\u043e\u043d\u0430 \u0417\u0430\u043c\u043e\u0441\u043a\u0432\u043e\u0440\u0435\u0447\u044c\u0435\u00bb",
-    "inn": 7705012696
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 111,
   "fields": {
+    "inn": 7703546734,
     "name": "\u0422\u0421\u0416 \u00ab\u0421\u043a\u0430\u0442\u0435\u0440\u0442\u043d\u044b\u0439 15\u00bb",
-    "inn": 7703546734
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 112,
   "fields": {
+    "inn": 7703001201,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u0438\u0434\u0440\u043e\u0441\u0442\u0430\u043b\u044c\u00bb",
-    "inn": 7703001201
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 113,
   "fields": {
+    "inn": 7737056625,
     "name": "\u0416\u0421\u041a \u00ab\u042f\u0445\u043e\u043d\u0442\u00bb",
-    "inn": 7737056625
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 114,
   "fields": {
+    "inn": 7734637974,
     "name": "\u041e\u041e\u041e \u00ab\u0423\u041a \u0420\u0415\u0421\u0423\u0420\u0421\u042d\u041d\u0415\u0420\u0413\u041e\u041f\u0420\u041e\u041c\u00bb",
-    "inn": 7734637974
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 115,
   "fields": {
+    "inn": 7733052080,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0438\u0442\u0438\u043d\u043e-16\u00bb",
-    "inn": 7733052080
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 116,
   "fields": {
+    "inn": 7731147234,
     "name": "\u0416\u0421\u041a \u00ab\u0414\u043d\u0435\u0441\u0442\u0440\u00bb",
-    "inn": 7731147234
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 117,
   "fields": {
+    "inn": 7730688625,
     "name": "\u0413\u0411\u0423 \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a \u0440\u0430\u0439\u043e\u043d\u0430 \u0414\u043e\u0440\u043e\u0433\u043e\u043c\u0438\u043b\u043e\u0432\u043e\u00bb",
-    "inn": 7730688625
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 118,
   "fields": {
+    "inn": 7728130960,
     "name": "\u0416\u0421\u041a \u00ab\u0422\u0435\u043f\u043b\u043e\u0441\u0442\u0430\u043d\u0435\u0446\u00bb",
-    "inn": 7728130960
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 119,
   "fields": {
+    "inn": 7728105160,
     "name": "\u0416\u0421\u041a \u00ab\u0417\u0430\u0440\u0430\u0439\u0441\u043a\u00bb",
-    "inn": 7728105160
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 120,
   "fields": {
+    "inn": 7728080967,
     "name": "\u0416\u0421\u041a \u00ab\u0422\u0435\u0440\u043c\u0435\u0437\u00bb",
-    "inn": 7728080967
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 121,
   "fields": {
+    "inn": 7728007244,
     "name": "\u0416\u0421\u041a \u00ab\u0424\u043e\u0441\u0444\u043e\u0440\u00bb",
-    "inn": 7728007244
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 122,
   "fields": {
+    "inn": 7727038000,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-24\u00bb",
-    "inn": 7727038000
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 123,
   "fields": {
+    "inn": 7726200700,
     "name": "\u0416\u0421\u041a \u00ab\u041b\u0438\u043d\u0437\u0430\u00bb",
-    "inn": 7726200700
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 124,
   "fields": {
+    "inn": 7724180488,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u041e\u0421\u041a\u0412\u041e\u0420\u0415\u0427\u042c\u0415-12\u00bb",
-    "inn": 7724180488
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 125,
   "fields": {
+    "inn": 7724156990,
     "name": "\u0416\u0421\u041a \u00ab\u0415\u043b\u0435\u0446\u043a\u0438\u0439\u00bb",
-    "inn": 7724156990
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 126,
   "fields": {
+    "inn": 7720079208,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u0442\u0430\u043b\u044c\u00bb",
-    "inn": 7720079208
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 127,
   "fields": {
+    "inn": 7719585390,
     "name": "\u041e\u0410\u041e \u00ab\u0420\u042d\u0423 18 \u0440\u0430\u0439\u043e\u043d\u0430 \u0412\u043e\u0441\u0442\u043e\u0447\u043d\u043e\u0435 \u0418\u0437\u043c\u0430\u0439\u043b\u043e\u0432\u043e\u00bb",
-    "inn": 7719585390
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 128,
   "fields": {
+    "inn": 7718019106,
     "name": "\u0416\u0421\u041a \u00ab\u0425\u0440\u043e\u043c\u0430\u0442\u0440\u043e\u043d\u00bb",
-    "inn": 7718019106
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 129,
   "fields": {
+    "inn": 7716086717,
     "name": "\u0416\u0421\u041a \u00ab\u0414\u043e\u0437\u043e\u0440\u043d\u044b\u0439\u00bb",
-    "inn": 7716086717
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 130,
   "fields": {
+    "inn": 7715139050,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u0438\u043e\u043d\u00bb",
-    "inn": 7715139050
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 131,
   "fields": {
+    "inn": 7715040646,
     "name": "\u0416\u0421\u041a \u00ab\u0412\u0438\u0442\u0435\u0431\u0441\u043a\u00bb",
-    "inn": 7715040646
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 132,
   "fields": {
+    "inn": 7714032201,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u043e\u0441\u043a\u043e\u0432\u0441\u043a\u0438\u0439 \u043f\u0438\u0441\u0430\u0442\u0435\u043b\u044c\u00bb",
-    "inn": 7714032201
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 133,
   "fields": {
+    "inn": 7712090536,
     "name": "\u0416\u0421\u041a \u00ab\u041e\u0431\u0435\u0440\u0442\u043e\u043d\u00bb",
-    "inn": 7712090536
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 134,
   "fields": {
+    "inn": 7709677476,
     "name": "\u0422\u0421\u0416 \u00ab\u0412\u043e\u0440\u043e\u043d\u0446\u043e\u0432\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7709677476
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 135,
   "fields": {
+    "inn": 7707094567,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u0430\u043b\u043b\u0430\u0434\u0430\u00bb",
-    "inn": 7707094567
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 136,
   "fields": {
+    "inn": 7704738943,
     "name": "\u041e\u041e\u041e \u00ab\u0414\u0438\u0440\u0435\u043a\u0446\u0438\u044f \u0435\u0434\u0438\u043d\u043e\u0433\u043e \u0437\u0430\u043a\u0430\u0437\u0447\u0438\u043a\u0430 \u0440\u0430\u0439\u043e\u043d\u0430 \u0410\u0440\u0431\u0430\u0442\u00bb",
-    "inn": 7704738943
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 137,
   "fields": {
+    "inn": 7703538701,
     "name": "\u0422\u0421\u0416 \u00ab\u041f\u0440\u0435\u0434\u0442\u0435\u0447\u0435\u043d\u043a\u0430\u00bb",
-    "inn": 7703538701
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 138,
   "fields": {
+    "inn": 7702504643,
     "name": "\u0422\u0421\u0416 \u00ab\u041f\u0435\u0447\u0430\u0442\u043d\u0438\u043a\u043e\u0432-16\u00bb",
-    "inn": 7702504643
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 139,
   "fields": {
+    "inn": 7737055484,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u043b\u0430\u0442\u0438\u043d\u0430\u00bb",
-    "inn": 7737055484
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 140,
   "fields": {
+    "inn": 7734120311,
     "name": "\u0416\u0421\u041a \u00ab\u042f\u0434\u0440\u043e\u00bb",
-    "inn": 7734120311
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 141,
   "fields": {
+    "inn": 7733048077,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0438\u0442\u0438\u043d\u043e-12\u00bb",
-    "inn": 7733048077
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 142,
   "fields": {
+    "inn": 7731147202,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u0443\u0431\u043b\u0435\u0432\u043e\u00bb",
-    "inn": 7731147202
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 143,
   "fields": {
+    "inn": 7730124869,
     "name": "\u041e\u041e\u041e \u00ab3\u0441\u043c\u00bb",
-    "inn": 7730124869
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 144,
   "fields": {
+    "inn": 7728129362,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u0430\u0440\u0431\u043e\u043d\u00bb",
-    "inn": 7728129362
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 145,
   "fields": {
+    "inn": 7728099090,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u043b\u0451\u0441\u00bb",
-    "inn": 7728099090
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 146,
   "fields": {
+    "inn": 7728074963,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u043e\u0440\u043e\u0434\u0438\u043d\u043e\u00bb",
-    "inn": 7728074963
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 147,
   "fields": {
+    "inn": 7728000344,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0438\u0442\u0438\u043d\u043e-18\u00bb",
-    "inn": 7728000344
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 148,
   "fields": {
+    "inn": 7727036122,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-14\u00bb",
-    "inn": 7727036122
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 149,
   "fields": {
+    "inn": 7726191990,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u0440\u0435\u0439\u0441\u0435\u0440\u00bb",
-    "inn": 7726191990
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 150,
   "fields": {
+    "inn": 7724180424,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u043e\u0441\u043a\u0432\u043e\u0440\u0435\u0447\u044c\u0435-10\u00bb",
-    "inn": 7724180424
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 151,
   "fields": {
+    "inn": 7726191990,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u0440\u0435\u0439\u0441\u0435\u0440\u00bb",
-    "inn": 7726191990
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 152,
   "fields": {
+    "inn": 7724180424,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u043e\u0441\u043a\u0432\u043e\u0440\u0435\u0447\u044c\u0435-10\u00bb",
-    "inn": 7724180424
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 153,
   "fields": {
+    "inn": 7724156982,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u043e\u0433\u0434\u0438\u0430\u043d\u0430\u00bb",
-    "inn": 7724156982
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 154,
   "fields": {
+    "inn": 7720079110,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0440\u0430\u0442\u0441\u043a\u00bb",
-    "inn": 7720079110
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 155,
   "fields": {
+    "inn": 7719577329,
     "name": "\u041e\u0410\u041e \u00ab\u0420\u042d\u0423 21 \u0440\u0430\u0439\u043e\u043d\u0430 \u0418\u0437\u043c\u0430\u0439\u043b\u043e\u0432\u043e\u00bb",
-    "inn": 7719577329
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 156,
   "fields": {
+    "inn": 7718019096,
     "name": "\u0416\u0421\u041a \u00ab\u041b\u0435\u0441\u043d\u043e\u0435 \u044d\u0445\u043e\u00bb",
-    "inn": 7718019096
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 157,
   "fields": {
+    "inn": 7716086700,
     "name": "\u0416\u041a \u00ab\u0421\u0442\u0430\u0440\u0442\u0435\u0440\u00bb",
-    "inn": 7716086700
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 158,
   "fields": {
+    "inn": 7715137091,
     "name": "\u0416\u0421\u041a \u00ab\u0428\u0435\u0440\u0435\u043c\u0435\u0442\u044c\u0435\u0432\u043e\u00bb",
-    "inn": 7715137091
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 159,
   "fields": {
+    "inn": 7715010095,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0435\u0441\u043a\u0443\u0434\u043d\u0438\u043a\u043e\u0432\u043e\u00bb",
-    "inn": 7715010095
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 160,
   "fields": {
+    "inn": 7714031663,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u043e\u0432\u0435\u0442\u0441\u043a\u0438\u0439 \u043f\u0438\u0441\u0430\u0442\u0435\u043b\u044c\u00bb",
-    "inn": 7714031663
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 161,
   "fields": {
+    "inn": 7712083899,
     "name": "\u0416\u0421\u041a \u00ab\u0418\u043d\u0444\u043e\u0440\u043c\u0430\u0442\u0438\u043a\u0430\u00bb",
-    "inn": 7712083899
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 162,
   "fields": {
+    "inn": 7709645918,
     "name": "\u041d\u041f \u00ab\u0421\u0421\u0416 \u0424\u0430\u043a\u0435\u043b\u00bb",
-    "inn": 7709645918
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 163,
   "fields": {
+    "inn": 7707093612,
     "name": "\u0416\u0421\u041a \u00ab\u0410\u0440\u0442\u0438\u0441\u0442 \u044d\u0441\u0442\u0440\u0430\u0434\u044b\u00bb",
-    "inn": 7707093612
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 164,
   "fields": {
+    "inn": 7704609200,
     "name": "\u0422\u0421\u0416 \u00ab\u0414\u043e\u043c \u043d\u0430 \u041f\u043e\u0432\u0430\u0440\u0441\u043a\u043e\u0439\u00bb",
-    "inn": 7704609200
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 165,
   "fields": {
+    "inn": 7703392499,
     "name": "\u0422\u0421\u0416 \u00ab\u0422\u0435\u0440\u0435\u043c\u043e\u043a \u043d\u0430 \u041f\u0440\u0435\u0441\u043d\u0435\u00bb",
-    "inn": 7703392499
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 166,
   "fields": {
+    "inn": 7702125638,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0435\u0440\u0435\u0437\u0430\u00bb",
-    "inn": 7702125638
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 167,
   "fields": {
+    "inn": 7737054882,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u043e\u0438\u0441\u043a\u00bb",
-    "inn": 7737054882
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 168,
   "fields": {
+    "inn": 7734098592,
     "name": "\u0416\u0421\u041a \u00ab\u041d\u043e\u0432\u043e\u0433\u043e\u0440\u0441\u043a\u00bb",
-    "inn": 7734098592
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 169,
   "fields": {
+    "inn": 7733031549,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u0430\u043a\u0443\u0440\u0441\u00bb",
-    "inn": 7733031549
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 170,
   "fields": {
+    "inn": 7731147178,
     "name": "\u0416\u0421\u041a \u00ab\u0422\u044b\u043d\u0434\u0430\u00bb",
-    "inn": 7731147178
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 171,
   "fields": {
+    "inn": 7730047565,
     "name": "\u0416\u0421\u041a \u00ab\u0414\u043e\u043c\u0430 \u0423\u0447\u0435\u043d\u044b\u0445\u00bb",
-    "inn": 7730047565
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 172,
   "fields": {
+    "inn": 7728127911,
     "name": "\u0416\u0421\u041a \u00ab\u042d\u043b\u0438\u043e\u043d\u00bb",
-    "inn": 7728127911
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 173,
   "fields": {
+    "inn": 7728098192,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u0435\u043e\u0441\u0442\u0440\u043e\u043c\u00bb",
-    "inn": 7728098192
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 174,
   "fields": {
+    "inn": 7728073198,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0435\u0434\u0446\u0432\u0435\u0442\u043c\u0435\u0442\u00bb",
-    "inn": 7728073198
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 175,
   "fields": {
+    "inn": 7727651270,
     "name": "\u0417\u0410\u041e \u0423\u041a \u00ab\u0418\u043d\u0442\u0435\u043b\u043b\u0435\u043a\u0442\u0421\u0435\u0440\u0432\u0438\u0441\u00bb",
-    "inn": 7727651270
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 176,
   "fields": {
+    "inn": 7727029622,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0442\u043e\u0432\u043e-22\u00bb",
-    "inn": 7727029622
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 177,
   "fields": {
+    "inn": 7726086280,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u0438\u0440\u043e\u0432\u043e\u0433\u0440\u0430\u0434\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7726086280
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 178,
   "fields": {
+    "inn": 7724180382,
     "name": "\u0416\u0421\u041a \u00ab\u041b\u0438\u043d\u043a\u043e\u0440\u00bb",
-    "inn": 7724180382
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 179,
   "fields": {
+    "inn": 7724156975,
     "name": "\u0416\u0421\u041a \u00ab\u0416\u0443\u0440\u0430\u0432\u0443\u0448\u043a\u0430\u00bb",
-    "inn": 7724156975
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 180,
   "fields": {
+    "inn": 7720060126,
     "name": "\u0416\u0421\u041a \u00ab\u042e\u043d\u043e\u0441\u0442\u044c \u042d\u0441\u0442\u0440\u0430\u0434\u044b\u00bb",
-    "inn": 7720060126
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 181,
   "fields": {
+    "inn": 7719568652,
     "name": "\u041e\u0410\u041e \u00ab\u041c\u0420\u0421\u0423 \u0412\u0410\u041e\u00bb",
-    "inn": 7719568652
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 182,
   "fields": {
+    "inn": 7717080059,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u043e\u0441\u043a\u043e\u043d\u0446\u0435\u0440\u0442\u00bb",
-    "inn": 7717080059
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 183,
   "fields": {
+    "inn": 7716086690,
     "name": "\u0416\u0421\u041a \u00ab\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043d\u0430\u00bb",
-    "inn": 7716086690
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 184,
   "fields": {
+    "inn": 7715136475,
     "name": "\u0416\u0421\u041a \u00ab\u0418\u0436\u0435\u0432\u0441\u043a\u00bb",
-    "inn": 7715136475
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 185,
   "fields": {
+    "inn": 7714816100,
     "name": "\u041e\u041e\u041e \u0414\u042d\u0417 \u00ab\u0421\u0430\u0432\u0435\u043b\u043e\u0432\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7714816100
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 186,
   "fields": {
+    "inn": 7714031430,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u043e\u043b\u043b\u0435\u043a\u0442\u0438\u0432\u043d\u044b\u0439 \u0441\u0442\u0440\u043e\u0438\u0442\u0435\u043b\u044c\u00bb",
-    "inn": 7714031430
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 187,
   "fields": {
+    "inn": 7712074686,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u0440\u043e\u043c\u0441\u0442\u0440\u043e\u0439\u043c\u0430\u0442\u0435\u0440\u0438\u0430\u043b\u044b\u00bb",
-    "inn": 7712074686
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 188,
   "fields": {
+    "inn": 7709275600,
     "name": "\u0416\u0421\u041a \u0432\u043e\u0435\u043d\u043d\u043e\u0441\u043b\u0443\u0436\u0430\u0449\u0438\u0445 \u00ab\u0412\u0435\u0442\u0435\u0440\u0430\u043d\u00bb",
-    "inn": 7709275600
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 189,
   "fields": {
+    "inn": 7707084400,
     "name": "\u0416\u0421\u041a \u0410\u0420\u0422\u0418\u0421\u0422\u041e\u0412 \u0411\u0410\u041b\u0415\u0422\u0410 \u0411\u041e\u041b\u042c\u0428\u041e\u0413\u041e \u0422\u0415\u0410\u0422\u0420\u0410 \u0421\u041e\u042e\u0417\u0410 \u0421\u0421\u0420",
-    "inn": 7707084400
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 190,
   "fields": {
+    "inn": 7704550596,
     "name": "\u0422\u0421\u0416 \u00ab\u041a\u0440\u043e\u043f\u043e\u0442\u043a\u0438\u043d\u0441\u043a\u043e\u0435\u00bb",
-    "inn": 7704550596
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 191,
   "fields": {
+    "inn": 7703127155,
     "name": "\u0416\u0438\u043b\u0442\u043e\u0432\u0430\u0440\u0438\u0449\u0435\u0441\u0442\u0432\u043e \u00ab\u042d\u0439\u0434\u0435\u0442\u0438\u043a\u0430\u00bb",
-    "inn": 7703127155
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 192,
   "fields": {
+    "inn": 7702125500,
     "name": "\u0416\u0421\u041a \u00ab\u0425\u0440\u043e\u043d\u0438\u043a\u0430\u00bb",
-    "inn": 7702125500
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 193,
   "fields": {
+    "inn": 7743682331,
     "name": "\u0422\u0421\u0416 \u00ab\u0412\u0410\u0421\u041f 13\u00bb",
-    "inn": 7743682331
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 194,
   "fields": {
+    "inn": 7737054868,
     "name": "\u0416\u0421\u041a \u00ab\u042e\u0433\u043e-\u0412\u043e\u0441\u0442\u043e\u043a\u00bb",
-    "inn": 7737054868
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 195,
   "fields": {
+    "inn": 7734097422,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u0430\u043b\u0438\u043d\u0438\u043d\u0433\u0440\u0430\u0434\u00bb",
-    "inn": 7734097422
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 196,
   "fields": {
+    "inn": 7733023570,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0438\u0442\u0438\u043d\u043e-15\u00bb",
-    "inn": 7733023570
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 197,
   "fields": {
+    "inn": 7731126266,
     "name": "\u0416\u0421\u041a \u00ab\u0424\u0438\u043b\u0435\u0432\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7731126266
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 198,
   "fields": {
+    "inn": 7730010170,
     "name": "\u0416\u0421\u041a \u00ab\u0412\u0435\u0440\u0435\u0441\u043a\u00bb",
-    "inn": 7730010170
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 199,
   "fields": {
+    "inn": 7728126932,
     "name": "\u0416\u0421\u041a \u00ab\u041e\u0440\u0444\u0435\u0439\u00bb",
-    "inn": 7728126932
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 200,
   "fields": {
+    "inn": 7728097576,
     "name": "\u0416\u0421\u041a \u00ab\u0422\u0430\u043c\u0430\u043d\u044c\u00bb",
-    "inn": 7728097576
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 201,
   "fields": {
+    "inn": 7728073141,
     "name": "\u0416\u0421\u041a \u00ab\u0422\u0443\u0440\u0431\u043e\u0431\u0443\u0440\u00bb",
-    "inn": 7728073141
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 202,
   "fields": {
+    "inn": 7727121339,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-21\u00bb",
-    "inn": 7727121339
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 203,
   "fields": {
+    "inn": 7727029573,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-44\u041a\u00bb",
-    "inn": 7727029573
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 204,
   "fields": {
+    "inn": 7726079388,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d\u00bb",
-    "inn": 7726079388
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 205,
   "fields": {
+    "inn": 7724180350,
     "name": "\u0416\u0421\u041a \u00ab\u0417\u0430\u0434\u043e\u043d\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7724180350
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 206,
   "fields": {
+    "inn": 7723895250,
     "name": "\u0413\u0411\u0423 \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a \u0440\u0430\u0439\u043e\u043d\u0430 \u041f\u0435\u0447\u0430\u0442\u043d\u0438\u043a\u0438\u00bb",
-    "inn": 7723895250
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 207,
   "fields": {
+    "inn": 7720060084,
     "name": "\u0416\u0421\u041a \u00ab\u0424\u0440\u0435\u043e\u043d\u00bb",
-    "inn": 7720060084
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 208,
   "fields": {
+    "inn": 7719114850,
     "name": "\u0416\u0421\u041a \u00ab\u0423\u0424\u0410\u00bb",
-    "inn": 7719114850
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 209,
   "fields": {
+    "inn": 7717043586,
     "name": "\u0416\u0421\u041a \u00ab\u0417\u0434\u043e\u0440\u043e\u0432\u044c\u0435-74\u00bb",
-    "inn": 7717043586
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 210,
   "fields": {
+    "inn": 7716086682,
     "name": "\u0416\u0421\u041a \u00ab\u0412\u0417\u041f\u0418\u00bb",
-    "inn": 7716086682
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 211,
   "fields": {
+    "inn": 7715135288,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u043b\u0430\u0434\u0438\u043e\u043b\u0443\u0441\u00bb",
-    "inn": 7715135288
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 212,
   "fields": {
+    "inn": 7714776970,
     "name": "\u041e\u041e\u041e \u00ab\u0421\u0432\u0435\u0442 \u0416\u0438\u043b\u0441\u0435\u0440\u0432\u0438\u0441\u00bb",
-    "inn": 7714776970
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 213,
   "fields": {
+    "inn": 7714009234,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u043e\u0441\u043a\u043e\u0432\u0441\u043a\u0438\u0439 \u0445\u0443\u0434\u043e\u0436\u043d\u0438\u043a\u00bb",
-    "inn": 7714009234
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 214,
   "fields": {
+    "inn": 7712074012,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u0440\u043e\u043d\u0448\u0442\u0430\u0434\u0442\u00bb",
-    "inn": 7712074012
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 215,
   "fields": {
+    "inn": 7709270458,
     "name": "\u0422\u0421\u0416 \u00ab\u0417\u0432\u0435\u0437\u0434\u043e\u043f\u0430\u0434\u00bb",
-    "inn": 7709270458
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 216,
   "fields": {
+    "inn": 7707071288,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u0430\u0437\u0435\u0442\u0447\u0438\u043a\u00bb",
-    "inn": 7707071288
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 217,
   "fields": {
+    "inn": 7704543895,
     "name": "\u0422\u0421\u0416 \u00ab\u0421\u0438\u0432\u0446\u0435\u0432 \u0412\u0440\u0430\u0436\u0435\u043a 20\u00bb",
-    "inn": 7704543895
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 218,
   "fields": {
+    "inn": 7703118305,
     "name": "\u0416\u0421\u041a \u00ab\u0412\u0422\u041e-\u0412\u0422\u041e\u0420\u041e\u0419\u00bb",
-    "inn": 7703118305
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 219,
   "fields": {
+    "inn": 7702019661,
     "name": "\u0417\u0410\u041e \u0440\u0435\u043c\u043e\u043d\u0442\u043d\u043e-\u0441\u0442\u0440\u043e\u0438\u0442\u0435\u043b\u044c\u043d\u0430\u044f \u0444\u0438\u0440\u043c\u0430 \u00ab\u0420\u0435\u043c\u0441\u0442\u0440\u043e\u0439\u0441\u0435\u0440\u0432\u0438\u0441\u00bb",
-    "inn": 7702019661
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 220,
   "fields": {
+    "inn": 7743615208,
     "name": "\u041e\u041e\u041e \u00ab\u0423\u041a \u0414\u0415\u0417 \u0413\u043e\u043b\u043e\u0432\u0438\u043d\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7743615208
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 221,
   "fields": {
+    "inn": 7737054603,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u0443\u0445\u0443\u043c\u0438\u00bb",
-    "inn": 7737054603
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 222,
   "fields": {
+    "inn": 7734095714,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u043b\u0443\u0442\u043e\u043d\u00bb",
-    "inn": 7734095714
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 223,
   "fields": {
+    "inn": 7733020321,
     "name": "\u0416\u0421\u041a \u00ab\u0410\u0440\u0433\u0443\u043d\u044c\u00bb",
-    "inn": 7733020321
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 224,
   "fields": {
+    "inn": 7731116885,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u043e\u0431\u0440\u0443\u0439\u0441\u043a\u00bb",
-    "inn": 7731116885
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 225,
   "fields": {
+    "inn": 7730010075,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u0438\u0435\u0432\u00bb",
-    "inn": 7730010075
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 226,
   "fields": {
+    "inn": 7728126749,
     "name": "\u0416\u0421\u041a \u00ab\u0414\u0440\u0443\u0436\u0431\u0430-17\u00bb",
-    "inn": 7728126749
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 227,
   "fields": {
+    "inn": 7728096942,
     "name": "\u0416\u0421\u041a \u00ab\u0422\u0435\u043b\u0435\u0442\u0430\u0439\u043f\u00bb",
-    "inn": 7728096942
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 228,
   "fields": {
+    "inn": 7728069378,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u0435\u0440\u0432\u043e\u043f\u0435\u0447\u0430\u0442\u043d\u0438\u043a \u0424\u0435\u0434\u043e\u0440\u043e\u0432\u00bb",
-    "inn": 7728069378
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 229,
   "fields": {
+    "inn": 7727101815,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0442\u043e\u0432\u043e-27\u00bb",
-    "inn": 7727101815
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 230,
   "fields": {
+    "inn": 7727027833,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0442\u043e\u0432\u043e-10\u00bb",
-    "inn": 7727027833
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 231,
   "fields": {
+    "inn": 7725815123,
     "name": "\u0413\u0411\u0423 \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a \u0414\u043e\u043d\u0441\u043a\u043e\u0433\u043e \u0440\u0430\u0439\u043e\u043d\u0430\u00bb",
-    "inn": 7725815123
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 232,
   "fields": {
+    "inn": 7724180304,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u043e\u0440\u0438\u0441\u043e\u0432\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7724180304
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 233,
   "fields": {
+    "inn": 7723304814,
     "name": "\u0416\u0421\u041a \u00ab\u041b\u0443\u0436\u043a\u0438\u00bb",
-    "inn": 7723304814
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 234,
   "fields": {
+    "inn": 7720060077,
     "name": "\u0416\u0421\u041a \u00ab\u0422\u0430\u043c\u0431\u043e\u0432\u00bb",
-    "inn": 7720060077
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 235,
   "fields": {
+    "inn": 7719078337,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u0435\u0440\u043c\u044c\u00bb",
-    "inn": 7719078337
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 236,
   "fields": {
+    "inn": 7717033997,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u0435\u043e\u043b\u043e\u0433-\u044d\u043a\u043e\u043d\u043e\u043c\u0438\u0441\u0442\u00bb",
-    "inn": 7717033997
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 237,
   "fields": {
+    "inn": 7716086668,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u043e\u043b\u044c\u0448\u0435\u0432\u0438\u0447\u043a\u0430\u00bb",
-    "inn": 7716086668
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 238,
   "fields": {
+    "inn": 7715131607,
     "name": "\u0416\u0421\u041a \u00ab\u0417\u043d\u0430\u043c\u044f \u041f\u043e\u0431\u0435\u0434\u044b\u00bb",
-    "inn": 7715131607
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 239,
   "fields": {
+    "inn": 7714761902,
     "name": "\u0422\u0421\u0416 \u00ab\u0425\u043e\u0440\u043e\u0448\u0435\u0432\u043a\u0430 82\u00bb",
-    "inn": 7714761902
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 240,
   "fields": {
+    "inn": 7714002302,
     "name": "\u0416\u0421\u041a \u00ab\u041e\u0440\u043a\u0435\u0441\u0442\u0440 \u0413\u0410\u0411\u0422\u00bb",
-    "inn": 7714002302
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 241,
   "fields": {
+    "inn": 7712073756,
     "name": "\u0416\u0421\u041a \u00ab\u0414\u043e\u043d\u043e\u0440\u00bb",
-    "inn": 7712073756
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 242,
   "fields": {
+    "inn": 7709124383,
     "name": "\u0413\u0423\u041f \u00ab\u0414\u0415\u0417 \u0422\u0430\u0433\u0430\u043d\u0441\u043a\u043e\u0433\u043e \u0440\u0430\u0439\u043e\u043d\u0430\u00bb",
-    "inn": 7709124383
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 243,
   "fields": {
+    "inn": 7707060857,
     "name": "\u0416\u0421\u041a \u00ab\u0425\u0438\u043c\u0438\u043a-19\u00bb",
-    "inn": 7707060857
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 244,
   "fields": {
+    "inn": 7704535421,
     "name": "\u0422\u0421\u0416 \u00ab\u0422\u0440\u0443\u0431\u043d\u0438\u043a\u043e\u0432\u0441\u043a\u0438\u0439 24\u00bb",
-    "inn": 7704535421
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 245,
   "fields": {
+    "inn": 7703116876,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u043e\u043b\u043e\u0434\u043e\u0439 \u043a\u0438\u043d\u0435\u043c\u0430\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0441\u0442\u00bb",
-    "inn": 7703116876
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 246,
   "fields": {
+    "inn": 7701327053,
     "name": "\u0422\u0421\u0416 \u00ab\u041c\u044f\u0441\u043d\u0438\u0446\u043a\u0430\u044f 24\u00bb",
-    "inn": 7701327053
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 247,
   "fields": {
+    "inn": 7743588106,
     "name": "\u0422\u0421\u0416 \u00ab\u0421\u043e\u043b\u043d\u0435\u0447\u043d\u043e\u0433\u043e\u0440\u0441\u043a\u0430\u044f 10\u00bb",
-    "inn": 7743588106
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 248,
   "fields": {
+    "inn": 7737053688,
     "name": "\u0416\u0421\u041a \u00ab\u0416\u0438\u0432\u043e\u043f\u0438\u0441\u043d\u044b\u0439\u00bb",
-    "inn": 7737053688
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 249,
   "fields": {
+    "inn": 7734060091,
     "name": "\u0416\u0421\u041a \u00ab\u0427\u0435\u0440\u043d\u043e\u0432\u0446\u044b\u00bb",
-    "inn": 7734060091
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 250,
   "fields": {
+    "inn": 7733012610,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0438\u0442\u0438\u043d\u043e-10\u00bb",
-    "inn": 7733012610
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 251,
   "fields": {
+    "inn": 7731036735,
     "name": "\u0416\u0421\u041a \u00ab\u041b\u0438\u0435\u043f\u0430\u044f\u00bb",
-    "inn": 7731036735
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 252,
   "fields": {
+    "inn": 7728848617,
     "name": "\u0413\u0411\u0423 \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a \u0440\u0430\u0439\u043e\u043d\u0430 \u0410\u043a\u0430\u0434\u0435\u043c\u0438\u0447\u0435\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7728848617
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 253,
   "fields": {
+    "inn": 7728112577,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u0430\u0440\u0430\u043b\u043b\u0435\u043b\u044c\u00bb",
-    "inn": 7728112577
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 254,
   "fields": {
+    "inn": 7728085644,
     "name": "\u0416\u0421\u041a \u00ab\u0418\u043d\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044f\u00bb",
-    "inn": 7728085644
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 255,
   "fields": {
+    "inn": 7728026328,
     "name": "\u0416\u0421\u041a \u00ab\u0417\u0432\u0443\u043a\u00bb",
-    "inn": 7728026328
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 256,
   "fields": {
+    "inn": 7727066455,
     "name": "\u0416\u0421\u041a \u00ab\u0412\u0430\u043a\u0443\u0443\u043c\u0449\u0438\u043a\u00bb",
-    "inn": 7727066455
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 257,
   "fields": {
+    "inn": 7727019818,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0442\u043e\u0432\u043e-14\u00bb",
-    "inn": 7727019818
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 258,
   "fields": {
+    "inn": 7724180544,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u043e\u0441\u043a\u0432\u043e\u0440\u0435\u0447\u044c\u0435-16\u00bb",
-    "inn": 7724180544
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 259,
   "fields": {
+    "inn": 7724157104,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u043e\u0434\u043e\u043b\u044c\u0441\u043a\u00bb",
-    "inn": 7724157104
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 260,
   "fields": {
+    "inn": 7720093700,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u043e\u043d\u0430\u0442\u0430\u00bb",
-    "inn": 7720093700
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 261,
   "fields": {
+    "inn": 7720058416,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0430\u0440\u0442\u0435\u043d\u00bb",
-    "inn": 7720058416
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 262,
   "fields": {
+    "inn": 7718116903,
     "name": "\u0416\u0421\u041a \u00ab\u042d\u043a\u0441\u0442\u0440\u0430\u00bb",
-    "inn": 7718116903
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 263,
   "fields": {
+    "inn": 7716104003,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0435\u043b\u043e\u0437\u0435\u0440\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7716104003
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 264,
   "fields": {
+    "inn": 7716038590,
     "name": "\u0416\u0421\u041a \u00ab\u041b\u043e\u0441\u044c\u00bb",
-    "inn": 7716038590
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 265,
   "fields": {
+    "inn": 7715045690,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u0435\u0439\u0441\u00bb",
-    "inn": 7715045690
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 266,
   "fields": {
+    "inn": 7714061072,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u0430\u0448\u0442\u0430\u043d\u044b\u00bb",
-    "inn": 7714061072
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 267,
   "fields": {
+    "inn": 7713045247,
     "name": "\u0416\u0421\u041a \u00ab\u0412\u043e\u043b\u043e\u0433\u0434\u0430\u00bb",
-    "inn": 7713045247
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 268,
   "fields": {
+    "inn": 7710058752,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u043e\u043b\u043e\u0434\u0435\u0436\u044c \u0442\u0435\u0430\u0442\u0440\u043e\u0432\u00bb",
-    "inn": 7710058752
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 269,
   "fields": {
+    "inn": 7707523657,
     "name": "\u0422\u0421\u0416 \u00ab\u041b\u0430\u043c\u0438\u0440\u0430\u043b\u044c\u00bb",
-    "inn": 7707523657
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 270,
   "fields": {
+    "inn": 7705519207,
     "name": "\u0422\u0421\u0416 \u00ab\u041e\u0440\u0434\u044b\u043d\u043a\u0430 31\u00bb",
-    "inn": 7705519207
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 271,
   "fields": {
+    "inn": 7704047103,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u0410\u0411\u0422 \u041b\u0418\u0420\u0410\u00bb",
-    "inn": 7704047103
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 272,
   "fields": {
+    "inn": 7703011584,
     "name": "\u0422\u0421\u0416 \u00ab\u041c\u0416\u041a \u00ab\u041a\u0440\u0430\u0441\u043d\u0430\u044f \u041f\u0440\u0435\u0441\u043d\u044f\u00bb",
-    "inn": 7703011584
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 273,
   "fields": {
+    "inn": 7737058301,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0430\u0440\u043d\u0430\u0443\u043b\u00bb",
-    "inn": 7737058301
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 274,
   "fields": {
+    "inn": 7736034403,
     "name": "\u0416\u0421\u041a \u00ab\u0412\u043e\u0440\u043e\u043d\u0446\u043e\u0432\u043e\u00bb",
-    "inn": 7736034403
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 275,
   "fields": {
+    "inn": 7733126977,
     "name": "\u0417\u0410\u041e \u00ab\u042d\u0441\u0442\u0435\u0439\u0442 \u0421\u0435\u0440\u0432\u0438\u0441 \u0434\u0438\u0440\u0435\u043a\u0446\u0438\u044f \u041a\u0443\u0440\u043a\u0438\u043d\u043e \u0421\u0417\u0410\u041e\u00bb",
-    "inn": 7733126977
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 276,
   "fields": {
+    "inn": 7731155193,
     "name": "\u0416\u0421\u041a \u00ab\u042d\u041c\u0411\u0410\u00bb",
-    "inn": 7731155193
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 277,
   "fields": {
+    "inn": 7731031247,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u043b\u0430\u0439\u043f\u0435\u0434\u0430\u00bb",
-    "inn": 7731031247
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 278,
   "fields": {
+    "inn": 7728617240,
     "name": "\u0417\u0410\u041e \u00ab\u0416\u041a \u0410\u0440\u043a\u0430\u0434\u0430 \u0425\u0430\u0443\u0441\u00bb",
-    "inn": 7728617240
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 279,
   "fields": {
+    "inn": 7728112295,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u043e\u043d\u0433\u0440\u0435\u0441\u0441\u00bb",
-    "inn": 7728112295
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 280,
   "fields": {
+    "inn": 7728085154,
     "name": "\u0416\u0421\u041a \u00ab\u0414\u0430\u043b\u044c\u043d\u0435\u0432\u043e\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u00bb",
-    "inn": 7728085154
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 281,
   "fields": {
+    "inn": 7728025469,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0438\u0442\u0438\u043d\u043e-23\u00bb",
-    "inn": 7728025469
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 282,
   "fields": {
+    "inn": 7727066423,
     "name": "\u0416\u0421\u041a \u00ab\u0412\u0438\u0441\u043c\u0443\u0442\u00bb",
-    "inn": 7727066423
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 283,
   "fields": {
+    "inn": 7727011791,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0442\u043e\u0432\u043e-11\u00bb",
-    "inn": 7727011791
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 284,
   "fields": {
+    "inn": 7724180520,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u043e\u0441\u043a\u0432\u043e\u0440\u0435\u0447\u044c\u0435-14 \u00ab",
-    "inn": 7724180520
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 285,
   "fields": {
+    "inn": 7724157070,
     "name": "\u0416\u0421\u041a \u00ab\u0415\u0440\u0435\u0432\u0430\u043d\u00bb",
-    "inn": 7724157070
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 286,
   "fields": {
+    "inn": 7720093266,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u044e\u0439\u0441\u00bb",
-    "inn": 7720093266
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 287,
   "fields": {
+    "inn": 7720017064,
     "name": "\u0416\u0421\u041a \u00ab\u0416\u0430\u0432\u043e\u0440\u043e\u043d\u043e\u043a\u00bb",
-    "inn": 7720017064
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 288,
   "fields": {
+    "inn": 7718055400,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u0440\u0435\u043d\u0430\u0434\u0430\u00bb",
-    "inn": 7718055400
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 289,
   "fields": {
+    "inn": 7716098624,
     "name": "\u0416\u0421\u041a \u00ab\u0424\u043b\u043e\u0440\u0430\u00bb",
-    "inn": 7716098624
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 290,
   "fields": {
+    "inn": 7716033747,
     "name": "\u0416\u0421\u041a \u00ab\u0414\u0437\u0435\u0440\u0436\u0438\u043d\u0435\u0446-17\u00bb",
-    "inn": 7716033747
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 291,
   "fields": {
+    "inn": 7715044672,
     "name": "\u0416\u0421\u041a \u00ab\u0412\u044b\u0441\u0442\u0440\u0435\u043b\u00bb",
-    "inn": 7715044672
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 292,
   "fields": {
+    "inn": 7714041894,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0435\u0442\u0440\u043e\u00bb",
-    "inn": 7714041894
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 293,
   "fields": {
+    "inn": 7713035009,
     "name": "\u0416\u0421\u041a \u00ab\u042d\u043b\u0435\u043a\u0442\u0440\u043e\u043c\u0430\u0433\u043d\u0438\u0442\u00bb",
-    "inn": 7713035009
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 294,
   "fields": {
+    "inn": 7710030563,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0430\u0441\u0442\u0435\u0440\u0430 \u042d\u0441\u0442\u0440\u0430\u0434\u044b\u00bb",
-    "inn": 7710030563
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 295,
   "fields": {
+    "inn": 7707121884,
     "name": "\u0416\u0421\u041a \u00ab\u0425\u0438\u043c\u0438\u043a-18\u00bb",
-    "inn": 7707121884
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 296,
   "fields": {
+    "inn": 7705502267,
     "name": "\u0417\u0410\u041e \u00ab\u0414\u0435\u043a\u0440\u0430-\u0421\u0442\u0440\u043e\u0439\u044d\u043a\u0441\u043f\u043b\u0443\u0430\u0442\u0430\u0446\u0438\u044f\u00bb",
-    "inn": 7705502267
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 297,
   "fields": {
+    "inn": 7703660437,
     "name": "\u041e\u041e\u041e \u00ab\u0423\u041a -10 \u041f\u0440\u0435\u0441\u043d\u0435\u043d\u0441\u043a\u043e\u0433\u043e \u0440\u0430\u0439\u043e\u043d\u0430\u00bb",
-    "inn": 7703660437
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 298,
   "fields": {
+    "inn": 7703010005,
     "name": "\u041e\u0410\u041e \u00ab\u041c\u043e\u0441\u043a\u043e\u0432\u0441\u043a\u0438\u0439 \u043c\u0430\u0448\u0438\u043d\u043e\u0441\u0442\u0440\u043e\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0439 \u0437\u0430\u0432\u043e\u0434 \u00ab\u0420\u0430\u0441\u0441\u0432\u0435\u0442\u00bb",
-    "inn": 7703010005
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 299,
   "fields": {
+    "inn": 7737058220,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u044f\u0442\u0438\u0433\u043e\u0440\u0441\u043a\u00bb",
-    "inn": 7737058220
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 300,
   "fields": {
+    "inn": 7735020711,
     "name": "\u0413\u0411\u0423 \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a \u0440\u0430\u0439\u043e\u043d\u0430 \u041a\u0440\u044e\u043a\u043e\u0432\u043e\u00bb",
-    "inn": 7735020711
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 301,
   "fields": {
+    "inn": 7734036155,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u0440\u0430\u0441\u043d\u043e\u0434\u0430\u0440\u00bb",
-    "inn": 7734036155
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 302,
   "fields": {
+    "inn": 7732084322,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u043b\u043d\u0446\u0435\u0432\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7732084322
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 303,
   "fields": {
+    "inn": 7731091006,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u0435\u0442\u0443\u043d\u044c\u043a\u0430\u00bb",
-    "inn": 7731091006
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 304,
   "fields": {
+    "inn": 7729305892,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u043e\u043b\u0434\u0438\u043d\u043e\u00bb",
-    "inn": 7729305892
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 305,
   "fields": {
+    "inn": 7728123890,
     "name": "\u0416\u0421\u041a \u00ab\u0425\u0440\u0438\u0437\u043e\u043b\u0438\u0442\u00bb",
-    "inn": 7728123890
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 306,
   "fields": {
+    "inn": 7728091422,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u0435\u0433\u0430\u0441\u00bb",
-    "inn": 7728091422
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 307,
   "fields": {
+    "inn": 7728042841,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u044f\u0437\u0430\u043d\u044c\u00bb",
-    "inn": 7728042841
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 308,
   "fields": {
+    "inn": 7727071470,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u0430\u0437\u0432\u0435\u0434\u043a\u0430 \u043d\u0435\u0434\u0440\u00bb",
-    "inn": 7727071470
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 309,
   "fields": {
+    "inn": 7727021662,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0442\u043e\u0432\u043e-15\u00bb",
-    "inn": 7727021662
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 310,
   "fields": {
+    "inn": 7724180720,
     "name": "\u0416\u0421\u041a \u00ab\u0424\u0440\u044f\u0437\u0438\u043d\u043e\u00bb",
-    "inn": 7724180720
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 311,
   "fields": {
+    "inn": 7724180230,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u043e\u0432\u0440\u043e\u0432\u00bb",
-    "inn": 7724180230
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 312,
   "fields": {
+    "inn": 7721061891,
     "name": "\u0416\u0421\u041a \u00ab\u0416\u0434\u0430\u043d\u043e\u0432\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7721061891
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 313,
   "fields": {
+    "inn": 7720059970,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u043e\u043c\u043f\u0430\u0441\u00bb",
-    "inn": 7720059970
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 314,
   "fields": {
+    "inn": 7719062739,
     "name": "\u0416\u0421\u041a \u00ab\u0426\u0435\u043b\u0438\u043d\u043e\u0433\u0440\u0430\u0434\u00bb",
-    "inn": 7719062739
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 315,
   "fields": {
+    "inn": 7716109587,
     "name": "\u0416\u0421\u041a \u00ab\u0424\u0438\u043b\u044c\u043c\u00bb",
-    "inn": 7716109587
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 316,
   "fields": {
+    "inn": 7716063685,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u0438\u0440\u0438\u0442\u00bb",
-    "inn": 7716063685
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 317,
   "fields": {
+    "inn": 7715069444,
     "name": "\u0416\u0421\u041a \u00ab\u0417\u0438\u043c\u043d\u0438\u0439\u00bb",
-    "inn": 7715069444
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 318,
   "fields": {
+    "inn": 7714580504,
     "name": "\u0422\u0421\u0416 \u00ab\u041d\u0410 \u0411\u041e\u041b\u042c\u0428\u041e\u041c \u041a\u041e\u041f\u0422\u0415\u0412\u0421\u041a\u041e\u041c\u00bb",
-    "inn": 7714580504
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 319,
   "fields": {
+    "inn": 7713644226,
     "name": "\u041e\u041e\u041e \u00ab\u0423\u041a \u0414\u0415\u0417 \u0440\u0430\u0439\u043e\u043d\u0430 \u0414\u043c\u0438\u0442\u0440\u043e\u0432\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7713644226
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 320,
   "fields": {
+    "inn": 7710722780,
     "name": "\u0422\u0421\u0416 \u00ab\u0422\u0432\u0435\u0440\u0441\u043a\u0430\u044f 19\u00bb",
-    "inn": 7710722780
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 321,
   "fields": {
+    "inn": 7708600833,
     "name": "\u041e\u041e\u041e \u00ab\u0423\u041a \u00ab\u041a\u0440\u0430\u0441\u043d\u043e\u0435 \u0441\u0435\u043b\u043e\u00bb",
-    "inn": 7708600833
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 322,
   "fields": {
+    "inn": 7705853265,
     "name": "\u041e\u041e\u041e \u00ab\u041a\u043e\u043c\u043f\u0430\u043d\u0438\u044f \u0421\u0410\u0413\u0438\u041a\u00bb",
-    "inn": 7705853265
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 323,
   "fields": {
+    "inn": 7704238242,
     "name": "\u0422\u0421\u0416 \u00ab\u0420\u0435\u0442\u0440\u043e-35\u00bb",
-    "inn": 7704238242
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 324,
   "fields": {
+    "inn": 7703052848,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u0438\u043c\u0435\u0442\u00bb",
-    "inn": 7703052848
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 325,
   "fields": {
+    "inn": 7743063035,
     "name": "\u0422\u0421\u0416 \u00ab\u041b\u0435\u043d\u0438\u043d\u0433\u0440\u0430\u0434\u0441\u043a\u043e\u0435 \u0448\u043e\u0441\u0441\u0435, 52\u0411\u00bb",
-    "inn": 7743063035
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 326,
   "fields": {
+    "inn": 7736160944,
     "name": "\u0416\u0421\u041a \u00ab\u0422\u0438\u0433\u0440\u0438\u0441\u00bb",
-    "inn": 7736160944
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 327,
   "fields": {
+    "inn": 7734003880,
     "name": "\u041e\u041e\u041e \u00ab\u0418\u0412\u0410-XXI\u00bb",
-    "inn": 7734003880
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 328,
   "fields": {
+    "inn": 7732084210,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u043e\u043b\u043d\u0446\u0435\u0432\u043e-16\u00bb",
-    "inn": 7732084210
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 329,
   "fields": {
+    "inn": 7731062862,
     "name": "\u0416\u0421\u041a \u00ab\u0414\u0430\u0443\u0433\u0430\u0432\u0430\u00bb",
-    "inn": 7731062862
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 330,
   "fields": {
+    "inn": 7729301104,
     "name": "\u0416\u0421\u041a \u00ab\u041d\u0435\u0439\u0442\u0440\u043e\u043d\u00bb",
-    "inn": 7729301104
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 331,
   "fields": {
+    "inn": 7728120592,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u0442\u0440\u043e\u0439\u043f\u043b\u0430\u0441\u0442\u0438\u043a\u00bb",
-    "inn": 7728120592
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 332,
   "fields": {
+    "inn": 7728090860,
     "name": "\u0416\u0421\u041a \u00ab\u0428\u0430\u0439\u0431\u0430\u00bb",
-    "inn": 7728090860
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 333,
   "fields": {
+    "inn": 7728035837,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u0440\u0438\u043f\u0442\u043e\u043d\u00bb",
-    "inn": 7728035837
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 334,
   "fields": {
+    "inn": 7727071261,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0418\u0420\u0413\u042d\u041c\u00bb",
-    "inn": 7727071261
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 335,
   "fields": {
+    "inn": 7727021020,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-23\u00bb",
-    "inn": 7727021020
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 336,
   "fields": {
+    "inn": 7724180632,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u043e\u0432\u043d\u043e\u00bb",
-    "inn": 7724180632
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 337,
   "fields": {
+    "inn": 7724176139,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0410\u041a\u0423\u00bb",
-    "inn": 7724176139
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 338,
   "fields": {
+    "inn": 7721029866,
     "name": "\u0416\u0421\u041a \u00ab\u041b\u044c\u0432\u043e\u0432\u00bb",
-    "inn": 7721029866
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 339,
   "fields": {
+    "inn": 7720059850,
     "name": "\u0416\u0421\u041a \u00ab\u0412\u0441\u0442\u0440\u0435\u0447\u0430\u00bb",
-    "inn": 7720059850
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 340,
   "fields": {
+    "inn": 7719048702,
     "name": "\u0416\u0421\u041a \u00ab\u041d\u0418\u0418\u041f\u0420\u041e\u0415\u041a\u0422\u00bb",
-    "inn": 7719048702
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 341,
   "fields": {
+    "inn": 7716105991,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u043e\u043b\u0443\u0431\u043e\u0439 \u042d\u043a\u0440\u0430\u043d\u00bb",
-    "inn": 7716105991
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 342,
   "fields": {
+    "inn": 7716059368,
     "name": "\u0416\u0421\u041a \u00ab\u0422\u043e\u0431\u043e\u043b\u00bb",
-    "inn": 7716059368
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 343,
   "fields": {
+    "inn": 7715049060,
     "name": "\u0416\u0421\u041a \u00ab\u0425\u0443\u0434\u043e\u0436\u043d\u0438\u043a \u043a\u043d\u0438\u0433\u0438\u00bb",
-    "inn": 7715049060
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 344,
   "fields": {
+    "inn": 7714522189,
     "name": "\u0422\u0421\u0416 \u00ab\u041c\u0430\u043b\u0430\u0445\u0438\u0442-26\u00bb",
-    "inn": 7714522189
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 345,
   "fields": {
+    "inn": 7713593860,
     "name": "\u041e\u041e\u041e \u00ab\u0423\u041a \u0411\u0435\u0441\u043a\u0443\u0434\u043d\u0438\u043a\u043e\u0432\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7713593860
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 346,
   "fields": {
+    "inn": 7710631814,
     "name": "\u0422\u0421\u0416 \u00ab\u0414\u043e\u043c \u043d\u0430 \u0413\u0430\u0448\u0435\u043a\u0430\u00bb",
-    "inn": 7710631814
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 347,
   "fields": {
+    "inn": 7708178065,
     "name": "\u0422\u0421\u0416 \u00ab\u041d\u0430 \u0413\u0440\u043e\u0445\u043e\u043b\u044c\u0441\u043a\u043e\u043c\u00bb",
-    "inn": 7708178065
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 348,
   "fields": {
+    "inn": 7705741032,
     "name": "\u0422\u0421\u0416 \u00ab\u041f\u044f\u0442\u043d\u0438\u0446\u043a\u0430\u044f 37\u00bb",
-    "inn": 7705741032
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 349,
   "fields": {
+    "inn": 7704232843,
     "name": "\u0422\u0421\u0416 \u00ab\u0410\u0440\u0431\u0430\u0442 43\u00bb",
-    "inn": 7704232843
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 350,
   "fields": {
+    "inn": 7703041356,
     "name": "\u0416\u0421\u041a \u00ab\u0425\u0438\u043c\u0438\u043a-\u043f\u0440\u043e\u0435\u043a\u0442\u0438\u0440\u043e\u0432\u0449\u0438\u043a\u00bb",
-    "inn": 7703041356
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 351,
   "fields": {
+    "inn": 7743058910,
     "name": "\u0422\u0421\u0416 \u00ab\u041b\u0430\u0432\u043e\u0447\u043a\u0438\u043d\u0430 40 49\u00bb",
-    "inn": 7743058910
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 352,
   "fields": {
+    "inn": 7736134221,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u043e\u043b\u043e\u0446\u043a\u00bb",
-    "inn": 7736134221
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 353,
   "fields": {
+    "inn": 7733729943,
     "name": "\u041e\u041e\u041e \u00ab\u0418\u041d\u042d\u041a-\u0416\u0418\u041b\u042c\u0415\u00bb",
-    "inn": 7733729943
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 354,
   "fields": {
+    "inn": 7732084185,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u043e\u043b\u043d\u0446\u0435\u0432\u043e-12\u00bb",
-    "inn": 7732084185
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 355,
   "fields": {
+    "inn": 7731055030,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u0443\u043f\u0430\u0432\u043d\u0430\u00bb",
-    "inn": 7731055030
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 356,
   "fields": {
+    "inn": 7729154594,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u0410\u041d \u0421\u0421\u0421\u0420\u00bb",
-    "inn": 7729154594
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 357,
   "fields": {
+    "inn": 7728118402,
     "name": "\u0416\u0421\u041a \u00ab\u0410\u0440\u043c\u0430\u0432\u0438\u0440\u00bb",
-    "inn": 7728118402
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 358,
   "fields": {
+    "inn": 7728090612,
     "name": "\u0416\u0421\u041a \u00ab\u041b\u0430\u043d\u044c\u00bb",
-    "inn": 7728090612
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 359,
   "fields": {
+    "inn": 7728029086,
     "name": "\u0416\u0421\u041a \u00ab\u0425\u0443\u0434\u043e\u0436\u043d\u0438\u043a-\u043c\u043e\u0434\u0435\u043b\u044c\u0435\u0440\u00bb",
-    "inn": 7728029086
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 360,
   "fields": {
+    "inn": 7727067730,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0442\u043e\u0432\u043e-18\u00bb",
-    "inn": 7727067730
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 361,
   "fields": {
+    "inn": 7727020482,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0442\u043e\u0432\u043e-16\u00bb",
-    "inn": 7727020482
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 362,
   "fields": {
+    "inn": 7724180625,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u0438\u0446\u0430\u00bb",
-    "inn": 7724180625
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 363,
   "fields": {
+    "inn": 7724176097,
     "name": "\u0416\u0421\u041a \u00ab\u041b\u0430\u0437\u0443\u0440\u044c\u00bb",
-    "inn": 7724176097
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 364,
   "fields": {
+    "inn": 7720099469,
     "name": "\u0416\u0421\u041a \u00ab\u0410\u043d\u0433\u0430\u0440\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7720099469
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 365,
   "fields": {
+    "inn": 7720058462,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u0430\u0434\u0438\u0439\u00bb",
-    "inn": 7720058462
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 366,
   "fields": {
+    "inn": 7719005579,
     "name": "\u0416\u0421\u041a \u00ab\u042d\u043b\u043b\u0430\u0434\u0430\u00bb",
-    "inn": 7719005579
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 367,
   "fields": {
+    "inn": 7716104780,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u0435\u0440\u0435\u043a\u043e\u043f\u00bb",
-    "inn": 7716104780
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 368,
   "fields": {
+    "inn": 7716057025,
     "name": "\u0416\u0421\u041a \u00ab\u0412\u044f\u0437\u044c\u00bb",
-    "inn": 7716057025
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 369,
   "fields": {
+    "inn": 7715048797,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u0441\u043a\u043e\u0432\u00bb",
-    "inn": 7715048797
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 370,
   "fields": {
+    "inn": 7714259058,
     "name": "\u0417\u0410\u041e \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u043e-\u043a\u043e\u043c\u043c\u0443\u043d\u0430\u043b\u044c\u043d\u0430\u044f \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u044f \u00ab\u0420\u0435\u0444\u043e\u0440\u043c\u0430\u00bb",
-    "inn": 7714259058
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 371,
   "fields": {
+    "inn": 7713569233,
     "name": "\u0422\u0421\u0416 \u00ab\u041d\u0430 \u0411\u0430\u0437\u043e\u0432\u0441\u043a\u043e\u0439\u00bb",
-    "inn": 7713569233
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 372,
   "fields": {
+    "inn": 7710171109,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u043e\u0432\u0435\u0442\u0441\u043a\u0438\u0439 \u0440\u0430\u0431\u043e\u0442\u043d\u0438\u043a\u00bb",
-    "inn": 7710171109
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 373,
   "fields": {
+    "inn": 7708053161,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u043f\u0430\u0441\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7708053161
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 374,
   "fields": {
+    "inn": 7705707419,
     "name": "\u0422\u0421\u0416 \u00ab\u0413\u043e\u043b\u0438\u043a\u043e\u0432\u0441\u043a\u0438\u0439 15\u00bb",
-    "inn": 7705707419
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 375,
   "fields": {
+    "inn": 7704136593,
     "name": "\u0416\u0421\u041a \u00ab\u041b\u0438\u0434\u0430\u0440\u00bb",
-    "inn": 7704136593
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 376,
   "fields": {
+    "inn": 7703041148,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u0438\u0434\u0440\u043e\u043c\u0435\u0442\u0446\u0435\u043d\u0442\u0440\u00bb",
-    "inn": 7703041148
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 377,
   "fields": {
+    "inn": 7743036835,
     "name": "\u0422\u0421\u0416 \u00ab\u0421\u041e\u041a\u041e\u041b\u0418\u041d\u041e\u0415 \u0413\u041d\u0415\u0417\u0414\u041e\u00bb",
-    "inn": 7743036835
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 378,
   "fields": {
+    "inn": 7736131936,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u043b\u0430\u0432\u043c\u043e\u0441\u0441\u0442\u0440\u043e\u0435\u0432\u0435\u0446\u00bb",
-    "inn": 7736131936
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 379,
   "fields": {
+    "inn": 7733642682,
     "name": "\u041e\u041e\u041e \u00ab\u0424\u044c\u044e\u0447\u0435\u0434\u0435\u0439 \u0421\u0435\u0440\u0432\u0438\u0441\u00bb",
-    "inn": 7733642682
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 380,
   "fields": {
+    "inn": 7732072694,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u0435\u0440\u0435\u0434\u0435\u043b\u043a\u0438\u043d\u043e\u00bb",
-    "inn": 7732072694
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 381,
   "fields": {
+    "inn": 7731040844,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u0442\u0430\u0440\u0442-\u0411\u0435\u043b\u043e\u0432\u0435\u0436\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7731040844
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 382,
   "fields": {
+    "inn": 7729109305,
     "name": "\u0416\u0421\u041a \u00ab\u041b\u0435\u043d\u0438\u043d\u0441\u043a\u0438\u0435 \u0433\u043e\u0440\u044b\u00bb",
-    "inn": 7729109305
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 383,
   "fields": {
+    "inn": 7728117871,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u0443\u0437\u0430\u00bb",
-    "inn": 7728117871
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 384,
   "fields": {
+    "inn": 7728088042,
     "name": "\u0416\u0421\u041a \u00ab\u0427\u0435\u043b\u044f\u0431\u0438\u043d\u0441\u043a\u00bb",
-    "inn": 7728088042
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 385,
   "fields": {
+    "inn": 7728027378,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u0430\u0432\u043b\u043e\u0432\u0441\u043a\u00bb",
-    "inn": 7728027378
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 386,
   "fields": {
+    "inn": 7727066494,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u043e\u043b\u043e\u0434\u043e\u0439 \u044d\u043a\u043e\u043d\u043e\u043c\u0438\u0441\u0442\u00bb",
-    "inn": 7727066494
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 387,
   "fields": {
+    "inn": 7727020450,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0442\u043e\u0432\u043e-13\u00bb",
-    "inn": 7727020450
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 388,
   "fields": {
+    "inn": 7724180600,
     "name": "\u0416\u0421\u041a \u00ab\u041e\u0434\u0435\u0440\u00bb",
-    "inn": 7724180600
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 389,
   "fields": {
+    "inn": 7724165480,
     "name": "\u0416\u0421\u041a \u00ab\u041e\u0440\u0435\u0445\u043e\u0432\u044b\u0439\u00bb",
-    "inn": 7724165480
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 390,
   "fields": {
+    "inn": 7720093756,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u043e\u043d\u043e\u043c\u0435\u0440\u00bb",
-    "inn": 7720093756
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 391,
   "fields": {
+    "inn": 7720058430,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u0435\u043d\u0438\u0439\u00bb",
-    "inn": 7720058430
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 392,
   "fields": {
+    "inn": 7718938741,
     "name": "\u0413\u0411\u0423 \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a \u0440\u0430\u0439\u043e\u043d\u0430 \u0413\u043e\u043b\u044c\u044f\u043d\u043e\u0432\u043e\u00bb",
-    "inn": 7718938741
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 393,
   "fields": {
+    "inn": 7716104243,
     "name": "\u0416\u0421\u041a \u00ab\u0420\u0430\u0434\u043e\u043d\u00bb",
-    "inn": 7716104243
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 394,
   "fields": {
+    "inn": 7716053207,
     "name": "\u0416\u0421\u041a \u00ab\u0423\u0433\u043b\u0435\u043c\u0430\u0448\u00bb",
-    "inn": 7716053207
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 395,
   "fields": {
+    "inn": 7715048532,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u043e\u043d\u0438\u0442\u043e\u0440\u00bb",
-    "inn": 7715048532
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 396,
   "fields": {
+    "inn": 7714097382,
     "name": "\u0416\u0421\u041a \u00ab\u0414\u0440\u0430\u043c\u0430\u0442\u0443\u0440\u0433\u00bb",
-    "inn": 7714097382
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 397,
   "fields": {
+    "inn": 7713059465,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0442\u043e\u0432\u043e-24\u00bb",
-    "inn": 7713059465
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 398,
   "fields": {
+    "inn": 7710077138,
     "name": "\u0422\u0421\u0416 \u00ab\u0422\u0432\u0435\u0440\u0441\u043a\u0430\u044f \u0437\u0430\u0441\u0442\u0430\u0432\u0430\u00bb",
-    "inn": 7710077138
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 399,
   "fields": {
+    "inn": 7708000522,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0438\u0442\u0438\u043d\u043e-22\u00bb",
-    "inn": 7708000522
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 400,
   "fields": {
+    "inn": 7705639409,
     "name": "\u0422\u0421\u0416 \u00ab\u0414\u043e\u043c \u043d\u0430 \u041a\u043b\u0438\u043c\u0435\u043d\u0442\u043e\u0432\u0441\u043a\u043e\u043c\u00bb",
-    "inn": 7705639409
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 401,
   "fields": {
+    "inn": 7703116844,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0430\u043b\u044b\u0439 \u0442\u0435\u0430\u0442\u0440\u00bb",
-    "inn": 7703116844
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 402,
   "fields": {
+    "inn": 7701261892,
     "name": "\u0422\u0421\u0416 \u00ab\u0425\u0430\u0440\u0438\u0442\u043e\u043d\u044c\u0435\u00bb",
-    "inn": 7701261892
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 403,
   "fields": {
+    "inn": 7743087318,
     "name": "\u0422\u0421\u0416 \u00ab\u0414\u0435\u0433\u0443\u043d\u0438\u043d\u043e\u00bb",
-    "inn": 7743087318
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 404,
   "fields": {
+    "inn": 7737019510,
     "name": "\u0416\u0421\u041a \u00ab\u041b\u0430\u0439\u043d\u0435\u0440\u00bb",
-    "inn": 7737019510
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 405,
   "fields": {
+    "inn": 7734060020,
     "name": "\u0416\u0421\u041a \u00ab\u0412\u043e\u0434\u043e\u043f\u0430\u0434\u00bb",
-    "inn": 7734060020
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 406,
   "fields": {
+    "inn": 7733002812,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0438\u0442\u0438\u043d\u043e-17\u00bb",
-    "inn": 7733002812
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 407,
   "fields": {
+    "inn": 7731109990,
     "name": "\u0416\u0421\u041a \u00ab\u041d\u0430\u0440\u0430\u00bb",
-    "inn": 7731109990
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 408,
   "fields": {
+    "inn": 7729524407,
     "name": "\u041e\u041e\u041e \u00ab\u042e\u043d\u0438\u0441\u0435\u0440\u0432\u0438\u0441\u00bb",
-    "inn": 7729524407
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 409,
   "fields": {
+    "inn": 7728124460,
     "name": "\u0416\u0421\u041a \u00ab\u0423\u043c\u0435\u0440\u0435\u043d\u043d\u044b\u0439\u00bb",
-    "inn": 7728124460
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 410,
   "fields": {
+    "inn": 7728091711,
     "name": "\u0416\u0421\u041a \u00ab\u0428\u0438\u0440\u043e\u0442\u0430\u00bb",
-    "inn": 7728091711
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 411,
   "fields": {
+    "inn": 7728043098,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u0443\u0440\u044c\u0435\u0432\u00bb",
-    "inn": 7728043098
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 412,
   "fields": {
+    "inn": 7727086758,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0442\u043e\u0432\u043e-25\u00bb",
-    "inn": 7727086758
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 413,
   "fields": {
+    "inn": 7727021983,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-36\u041a\u00bb",
-    "inn": 7727021983
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 414,
   "fields": {
+    "inn": 7724180745,
     "name": "\u0416\u0421\u041a \u00ab\u042e\u0440\u043c\u0430\u043b\u0430\u00bb",
-    "inn": 7724180745
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 415,
   "fields": {
+    "inn": 7724180248,
     "name": "\u0416\u0421\u041a \u00ab\u0410\u0433\u0430\u0432\u0430\u00bb",
-    "inn": 7724180248
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 416,
   "fields": {
+    "inn": 7723093835,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u0430\u043a\u0442\u0443\u0441\u00bb",
-    "inn": 7723093835
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 417,
   "fields": {
+    "inn": 7720059995,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0430\u0448\u043f\u0440\u043e\u0435\u043a\u0442\u00bb",
-    "inn": 7720059995
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 418,
   "fields": {
+    "inn": 7719077750,
     "name": "\u0416\u0421\u041a \u00ab\u0410\u0432\u0442\u043e\u043c\u0430\u0442\u0438\u043a\u0430\u00bb",
-    "inn": 7719077750
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 419,
   "fields": {
+    "inn": 7716110134,
     "name": "\u0416\u0421\u041a \u00ab\u041e\u043b\u0435\u043d\u044c\u00bb",
-    "inn": 7716110134
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 420,
   "fields": {
+    "inn": 7716067351,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0430\u043b\u0445\u0430\u0448\u00bb",
-    "inn": 7716067351
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 421,
   "fields": {
+    "inn": 7715082710,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0438\u0442\u0438\u043d\u043e-24\u00bb",
-    "inn": 7715082710
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 422,
   "fields": {
+    "inn": 7714663366,
     "name": "\u041e\u041e\u041e \u0423\u043f\u0440\u0430\u0432\u043b\u044f\u044e\u0449\u0430\u044f \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u044f \u00ab\u0425\u043e\u0440\u043e\u0448\u0435\u0432\u043a\u0430-42\u00bb",
-    "inn": 7714663366
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 423,
   "fields": {
+    "inn": 7713644804,
     "name": "\u0422\u0421\u0416 \u00ab\u0410\u043d\u0433\u0430\u0440\u0441\u043a\u0430\u044f \u2014 47\u00bb",
-    "inn": 7713644804
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 424,
   "fields": {
+    "inn": 7711026633,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-22\u00bb",
-    "inn": 7711026633
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 425,
   "fields": {
+    "inn": 7708648585,
     "name": "\u0417\u0410\u041e \u00ab\u0423\u041a \u0414\u0415\u0417 \u041a\u0440\u0430\u0441\u043d\u043e\u0441\u0435\u043b\u044c\u0441\u043a\u043e\u0433\u043e \u0440\u0430\u0439\u043e\u043d\u0430\u00bb",
-    "inn": 7708648585
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 426,
   "fields": {
+    "inn": 7705915874,
     "name": "\u0422\u0421\u0416 \u00ab\u0411.\u0421\u0435\u0440\u043f\u0443\u0445\u043e\u0432\u0441\u043a\u0430\u044f 31/2\u00bb",
-    "inn": 7705915874
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 427,
   "fields": {
+    "inn": 7704251740,
     "name": "\u0422\u0421\u0416 \u00ab\u041a\u0430\u0440\u043c\u0430\u043d\u0438\u0446\u043a\u0438\u0439 10\u00bb",
-    "inn": 7704251740
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 428,
   "fields": {
+    "inn": 7703103884,
     "name": "\u0422\u0421\u0416 \u00ab\u041d\u0430 \u0443\u043b\u0438\u0446\u0435 \u041d\u0435\u0436\u0434\u0430\u043d\u043e\u0432\u043e\u0439\u00bb",
-    "inn": 7703103884
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 429,
   "fields": {
+    "inn": 7709645918,
     "name": "\u041d\u0435\u043a\u043e\u043c\u043c\u0435\u0440\u0447\u0435\u0441\u043a\u043e\u0435 \u041f\u0430\u0440\u0442\u043d\u0435\u0440\u0441\u0442\u0432\u043e \u00ab\u0421\u043e\u0434\u0440\u0443\u0436\u0435\u0441\u0442\u0432\u043e \u0441\u043e\u0431\u0441\u0442\u0432\u0435\u043d\u043d\u0438\u043a\u043e\u0432 \u0436\u0438\u043b\u044c\u044f \u00ab\u0424\u0410\u041a\u0415\u041b\u00bb",
-    "inn": 7709645918
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 430,
   "fields": {
+    "inn": 7704047103,
     "name": "\u0416\u0421\u041a \u0413\u043e\u0441\u0443\u0434\u0430\u0440\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0433\u043e \u0410\u043a\u0430\u0434\u0435\u043c\u0438\u0447\u0435\u0441\u043a\u043e\u0433\u043e \u0411\u043e\u043b\u044c\u0448\u043e\u0433\u043e \u0442\u0435\u0430\u0442\u0440\u0430 \u00ab\u041b\u0418\u0420\u0410\u00bb",
-    "inn": 7704047103
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 431,
   "fields": {
+    "inn": 7713644226,
     "name": "\u041e\u041e\u041e \u00ab\u0423\u043f\u0440\u0430\u0432\u043b\u044f\u044e\u0449\u0430\u044f \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u044f \u0414\u0415\u0417 \u0440\u0430\u0439\u043e\u043d\u0430 \u0414\u043c\u0438\u0442\u0440\u043e\u0432\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7713644226
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 432,
   "fields": {
+    "inn": 7734637974,
     "name": "\u041e\u041e\u041e \u00ab\u0423\u043f\u0440\u0430\u0432\u043b\u044f\u044e\u0449\u0430\u044f \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u044f \u0420\u0415\u0421\u0423\u0420\u0421\u042d\u041d\u0415\u0420\u0413\u041e\u041f\u0420\u041e\u041c\u00bb",
-    "inn": 7734637974
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 433,
   "fields": {
+    "inn": 7713593860,
     "name": "\u041e\u041e\u041e \u00ab\u0423\u043f\u0440\u0430\u0432\u043b\u044f\u044e\u0449\u0430\u044f \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u044f \u0440\u0430\u0439\u043e\u043d\u0430 \u00ab\u0411\u0435\u0441\u043a\u0443\u0434\u043d\u0438\u043a\u043e\u0432\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7713593860
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 434,
   "fields": {
+    "inn": 7743615208,
     "name": "\u041e\u041e\u041e \u00ab\u0423\u043f\u0440\u0430\u0432\u043b\u044f\u044e\u0449\u0430\u044f \u041a\u043e\u043c\u043f\u0430\u043d\u0438\u044f \u0414\u0438\u0440\u0435\u043a\u0446\u0438\u044f \u042d\u043a\u0441\u043f\u043b\u0443\u0430\u0442\u0430\u0446\u0438\u0438 \u0417\u0434\u0430\u043d\u0438\u0439 \u0413\u043e\u043b\u043e\u0432\u0438\u043d\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7743615208
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 435,
   "fields": {
+    "inn": 7737028240,
     "name": "\u0413\u0423\u041f \u00ab\u0414\u0415\u0417 \u0440\u0430\u0439\u043e\u043d\u0430 \u0411\u0438\u0440\u044e\u043b\u0435\u0432\u043e-\u0412\u043e\u0441\u0442\u043e\u0447\u043d\u043e\u0435\u00bb",
-    "inn": 7737028240
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 436,
   "fields": {
+    "inn": 7702018080,
     "name": "\u0413\u0423\u041f \u00ab\u0414\u0415\u0417 \u041c\u0435\u0449\u0430\u043d\u0441\u043a\u043e\u0433\u043e \u0440\u0430\u0439\u043e\u043d\u0430\u00bb",
-    "inn": 7702018080
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 437,
   "fields": {
+    "inn": 7708005016,
     "name": "\u0413\u0423\u041f \u00ab\u0414\u0415\u0417 \u0440\u0430\u0439\u043e\u043d\u0430 \u041a\u0440\u0430\u0441\u043d\u043e\u0441\u0435\u043b\u044c\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 7708005016
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 438,
   "fields": {
+    "inn": 7704010270,
     "name": "\u0413\u0423\u041f \u042d\u0412\u0410\u0416\u0414 \u0424\u0438\u043b\u0438\u0430\u043b \u211614",
-    "inn": 7704010270
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 439,
   "fields": {
+    "inn": 7704010270,
     "name": "\u0413\u0423\u041f \u042d\u0412\u0410\u0416\u0414 \u0424\u0438\u043b\u0438\u0430\u043b \u211613",
-    "inn": 7704010270
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 440,
   "fields": {
+    "inn": 7704010270,
     "name": "\u0413\u0423\u041f \u042d\u0412\u0410\u0416\u0414 \u0424\u0438\u043b\u0438\u0430\u043b \u211611",
-    "inn": 7704010270
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 441,
   "fields": {
+    "inn": 7704010270,
     "name": "\u0413\u0423\u041f \u042d\u0412\u0410\u0416\u0414 \u0424\u0438\u043b\u0438\u0430\u043b \u211610",
-    "inn": 7704010270
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 442,
   "fields": {
+    "inn": 7704010270,
     "name": "\u0413\u0423\u041f \u042d\u0412\u0410\u0416\u0414 \u0424\u0438\u043b\u0438\u0430\u043b \u21169",
-    "inn": 7704010270
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 443,
   "fields": {
+    "inn": 7704010270,
     "name": "\u0413\u0423\u041f \u042d\u0412\u0410\u0416\u0414 \u0424\u0438\u043b\u0438\u0430\u043b \u21168",
-    "inn": 7704010270
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 444,
   "fields": {
+    "inn": 7704010270,
     "name": "\u0413\u0423\u041f \u042d\u0412\u0410\u0416\u0414 \u0424\u0438\u043b\u0438\u0430\u043b \u21165",
-    "inn": 7704010270
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 445,
   "fields": {
+    "inn": 7704010270,
     "name": "\u0413\u0423\u041f \u042d\u0412\u0410\u0416\u0414 \u0424\u0438\u043b\u0438\u0430\u043b \u21164",
-    "inn": 7704010270
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 446,
   "fields": {
+    "inn": 7704010270,
     "name": "\u0413\u0423\u041f \u042d\u0412\u0410\u0416\u0414 \u0424\u0438\u043b\u0438\u0430\u043b \u21162",
-    "inn": 7704010270
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 447,
   "fields": {
+    "inn": 7704010270,
     "name": "\u0413\u0423\u041f \u042d\u0412\u0410\u0416\u0414",
-    "inn": 7704010270
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 448,
   "fields": {
+    "inn": 7701023471,
     "name": "\u0413\u0423\u041f \u00ab\u0414\u0415\u0417 \u0411\u0430\u0441\u043c\u0430\u043d\u043d\u043e\u0433\u043e \u0440\u0430\u0439\u043e\u043d\u0430\u00bb",
-    "inn": 7701023471
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 449,
   "fields": {
+    "inn": 7709121103,
     "name": "\u0413\u0423\u041f \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a-1\u00bb",
-    "inn": 7709121103
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 450,
   "fields": {
+    "inn": 7727025755,
     "name": "\u041e\u0410\u041e \u0414\u0415\u0417 \u00ab\u042e\u0436\u043d\u043e\u0435 \u0411\u0443\u0442\u043e\u0432\u043e\u00bb",
-    "inn": 7727025755
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 451,
   "fields": {
+    "inn": 7726746592,
     "name": "\u041e\u041e\u041e \u00ab\u0422\u0435\u0440\u043c\u043e\u0438\u043d\u0436\u0441\u0435\u0440\u0432\u0438\u0441\u00bb",
-    "inn": 7726746592
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 452,
   "fields": {
+    "inn": 778599482974,
     "name": "\u0416\u0421\u041a \u00ab\u042d\u043c\u0431\u043b\u0435\u043c\u0430\u00bb",
-    "inn": 778599482974
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 453,
   "fields": {
+    "inn": 770948788915,
     "name": "\u0413\u0411\u0423 \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a \u0440\u0430\u0439\u043e\u043d\u0430 \u0421\u0442\u0440\u043e\u0433\u0438\u043d\u043e\u00bb",
-    "inn": 770948788915
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 454,
   "fields": {
+    "inn": 770356702184,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-28\u00bb",
-    "inn": 770356702184
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 455,
   "fields": {
+    "inn": 777779581924,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0434\u0435\u043d\u043d\u043e\u0432\u0441\u043a\u00bb",
-    "inn": 777779581924
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 456,
   "fields": {
+    "inn": 772471584173,
     "name": "\u0416\u0421\u041a \u00ab\u0424\u0435\u043e\u0434\u043e\u0441\u0438\u044f\u00bb",
-    "inn": 772471584173
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 457,
   "fields": {
+    "inn": 773666439479,
     "name": "\u0416\u0421\u041a \u00ab\u042f\u0445\u0440\u043e\u043c\u0430\u00bb",
-    "inn": 773666439479
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 458,
   "fields": {
+    "inn": 777661456498,
     "name": "\u0416\u0421\u041a \u00ab\u041b\u0435\u043d\u0441\u043a\u00bb",
-    "inn": 777661456498
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 459,
   "fields": {
+    "inn": 774849714255,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u0430\u0433\u0430\u0440\u0438\u043d\u0435\u0446\u00bb",
-    "inn": 774849714255
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 460,
   "fields": {
+    "inn": 774454984906,
     "name": "\u0416\u0421\u041a \u00ab\u0422\u0435\u0440\u0435\u043a\u00bb",
-    "inn": 774454984906
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 461,
   "fields": {
+    "inn": 772703629636,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-15\u00bb",
-    "inn": 772703629636
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 462,
   "fields": {
+    "inn": 772107171790,
     "name": "\u0413\u0411\u0423 \u00ab\u0416\u0438\u043b\u0438\u0449\u043d\u0438\u043a \u041d\u0430\u0433\u043e\u0440\u043d\u043e\u0433\u043e \u0440\u0430\u0439\u043e\u043d\u0430\u00bb",
-    "inn": 772107171790
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 463,
   "fields": {
+    "inn": 773719017588,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u043e\u0441\u043a\u0432\u043e\u0440\u0435\u0447\u044c\u0435-11\u00bb",
-    "inn": 773719017588
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 464,
   "fields": {
+    "inn": 773111773313,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-16\u00bb",
-    "inn": 773111773313
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 465,
   "fields": {
+    "inn": 777579736266,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u043b\u0430\u0433\u043e\u0432\u0435\u0449\u0435\u043d\u0441\u043a\u00bb",
-    "inn": 777579736266
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 466,
   "fields": {
+    "inn": 773865102342,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u0418\u041f\u0418\u00bb",
-    "inn": 773865102342
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 467,
   "fields": {
+    "inn": 772978218128,
     "name": "\u0416\u0421\u041a \u00ab\u0428\u0438\u043f\u0438\u043b\u043e\u0432\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 772978218128
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 468,
   "fields": {
+    "inn": 774650015321,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u043e\u0441\u0442\u0435\u0445\u043d\u0438\u043a\u0430\u00bb",
-    "inn": 774650015321
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 469,
   "fields": {
+    "inn": 770105381018,
     "name": "\u0416\u0421\u041a \u00ab\u041e\u0447\u0430\u043a\u043e\u0432\u00bb",
-    "inn": 770105381018
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 470,
   "fields": {
+    "inn": 776406422920,
     "name": "\u0416\u0421\u041a \u00ab\u041b\u0438\u043c\u0431\u00bb",
-    "inn": 776406422920
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 471,
   "fields": {
+    "inn": 772269730892,
     "name": "\u0416\u0421\u041a \u00ab\u041d\u043e\u0432\u043e\u0433\u0438\u0440\u0435\u0435\u0432\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 772269730892
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 472,
   "fields": {
+    "inn": 779505712874,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u043e\u043b\u044c\u044f\u043d\u043e\u0432\u0441\u043a\u0438\u0439 \u0440\u0430\u0431\u043e\u0442\u043d\u0438\u043a\u043e\u0432 \u041a\u0413\u0411\u00bb",
-    "inn": 779505712874
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 473,
   "fields": {
+    "inn": 772514619558,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u043b\u0438\u0437\u043a\u0438\u0439\u00bb",
-    "inn": 772514619558
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 474,
   "fields": {
+    "inn": 771044647199,
     "name": "\u0416\u0421\u041a \u00ab\u0413\u043e\u0441\u0441\u0442\u0440\u043e\u0435\u0432\u0435\u0446\u00bb",
-    "inn": 771044647199
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 475,
   "fields": {
+    "inn": 774908104922,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-30\u00bb",
-    "inn": 774908104922
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 476,
   "fields": {
+    "inn": 770044983413,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u043b\u0435\u0445\u0430\u043d\u043e\u0432\u0435\u0446\u00bb",
-    "inn": 770044983413
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 477,
   "fields": {
+    "inn": 776521964312,
     "name": "\u0416\u0421\u041a \u00ab\u041e\u0440\u0448\u0430\u00bb",
-    "inn": 776521964312
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 478,
   "fields": {
+    "inn": 776351118070,
     "name": "\u0416\u0421\u041a \u00ab\u041f\u0447\u0435\u043b\u043a\u0430\u00bb",
-    "inn": 776351118070
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 479,
   "fields": {
+    "inn": 772258398072,
     "name": "\u0416\u0421\u041a \u00ab\u041a\u043e\u043b\u0445\u0438\u0434\u0430\u00bb",
-    "inn": 772258398072
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 480,
   "fields": {
+    "inn": 772173071158,
     "name": "\u0416\u0421\u041a \u00ab\u0412\u0435\u0440\u0435\u044f\u00bb",
-    "inn": 772173071158
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 481,
   "fields": {
+    "inn": 771234298387,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u043e\u0441\u043a\u043e\u0432\u0441\u043a\u0430\u044f \u043f\u0440\u0435\u0441\u0441\u0430\u00bb",
-    "inn": 771234298387
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 482,
   "fields": {
+    "inn": 771920956316,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0443\u0442\u043e\u0432\u043e-17\u00bb",
-    "inn": 771920956316
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 483,
   "fields": {
+    "inn": 772743128463,
     "name": "\u0416\u0421\u041a \u00ab\u0411\u0430\u043b\u0442\u0438\u0439\u0441\u043a\u00bb",
-    "inn": 772743128463
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 484,
   "fields": {
+    "inn": 779842570089,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u043f\u043b\u0430\u0432\u00bb",
-    "inn": 779842570089
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 485,
   "fields": {
+    "inn": 771350950283,
     "name": "\u0417\u0410\u041e \u0416\u0438\u043b\u0438\u0449\u043d\u043e-\u044d\u043a\u0441\u043f\u043b\u0443\u0430\u0442\u0430\u0446\u0438\u043e\u043d\u043d\u043e\u0435 \u043f\u0440\u0435\u0434\u043f\u0440\u0438\u044f\u0442\u0438\u0435 \u00ab\u0418\u043c\u043f\u0443\u043b\u044c\u0441-\u0416\u0438\u043b\u0441\u0442\u0440\u043e\u0439\u00bb",
-    "inn": 771350950283
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 486,
   "fields": {
+    "inn": 777001671703,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u0438\u0442\u0438\u043d\u043e-20\u00bb",
-    "inn": 777001671703
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 487,
   "fields": {
+    "inn": 771683344774,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u043c\u043e\u043b\u0435\u043d\u0441\u043a\u00bb",
-    "inn": 771683344774
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 488,
   "fields": {
+    "inn": 775783099880,
     "name": "\u0416\u0421\u041a \u00ab\u0410\u043c\u0443\u0440\u0441\u043a\u0438\u0439\u00bb",
-    "inn": 775783099880
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 489,
   "fields": {
+    "inn": 773391592843,
     "name": "\u0416\u0421\u041a \u00ab\u042d\u0444\u0438\u0440-\u044d\u043a\u0440\u0430\u043d\u00bb",
-    "inn": 773391592843
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 490,
   "fields": {
+    "inn": 772541193983,
     "name": "\u0416\u0421\u041a \u00ab\u041e\u0420\u0421\u041a\u00bb",
-    "inn": 772541193983
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 491,
   "fields": {
+    "inn": 779596068326,
     "name": "\u0416\u0421\u041a \u00ab\u0418\u043d\u0442\u0435\u043b\u043b\u0435\u043a\u0442\u00bb",
-    "inn": 779596068326
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 492,
   "fields": {
+    "inn": 773779564989,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-50\u041a\u00bb",
-    "inn": 773779564989
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 493,
   "fields": {
+    "inn": 778211363186,
     "name": "\u0416\u041a \u00ab\u0421\u043e\u044e\u0437-20\u00bb",
-    "inn": 778211363186
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 494,
   "fields": {
+    "inn": 777310743229,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u043e\u0441\u043a\u0432\u043e\u0440\u0435\u0447\u044c\u0435-17\u00bb",
-    "inn": 777310743229
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 495,
   "fields": {
+    "inn": 779961887051,
     "name": "\u0416\u0421\u041a \u00ab\u041c\u043e\u0441\u043a\u0432\u043e\u0440\u0435\u0447\u044c\u0435-15 \u00ab",
-    "inn": 779961887051
+    "ya_num": -1
   }
 },
 {
   "model": "tenant.company",
   "pk": 496,
   "fields": {
+    "inn": 771874794556,
     "name": "\u0416\u0421\u041a \u00ab\u0421\u0442\u0440\u0430\u0442\u043e\u0441\u0444\u0435\u0440\u0430\u00bb",
-    "inn": 771874794556
+    "ya_num": -1
   }
 },
 {
@@ -34397,6 +35181,222 @@
   "fields": {
     "address": "\u041a\u043e\u043c\u043c\u0443\u043d\u0430\u0440\u043a\u0430, \u0434.20.",
     "company": 451
+  }
+},
+{
+  "model": "tenant.house",
+  "pk": 3805,
+  "fields": {
+    "address": "\u0420\u043e\u0441\u0441\u0438\u044f, \u041c\u043e\u0441\u043a\u0432\u0430, \u0443\u043b\u0438\u0446\u0430 \u0413\u0435\u0440\u0430\u0441\u0438\u043c\u0430 \u041a\u0443\u0440\u0438\u043d\u0430, 26",
+    "company": 1
+  }
+},
+{
+  "model": "tenant.house",
+  "pk": 3806,
+  "fields": {
+    "address": "\u0420\u043e\u0441\u0441\u0438\u044f, \u041c\u043e\u0441\u043a\u0432\u0430, \u041a\u0430\u0441\u0442\u0430\u043d\u0430\u0435\u0432\u0441\u043a\u0430\u044f \u0443\u043b\u0438\u0446\u0430, 45\u043a2",
+    "company": 1
+  }
+},
+{
+  "model": "tenant.tenant",
+  "pk": 1,
+  "fields": {
+    "user": 5,
+    "photo": "photo/einstein_icuhMEb.jpg",
+    "house": 3805,
+    "flat": "1",
+    "is_vol": false,
+    "test_date": null,
+    "house_confirmed": true,
+    "is_admin": false
+  }
+},
+{
+  "model": "tenant.tenant",
+  "pk": 2,
+  "fields": {
+    "user": 6,
+    "photo": "photo/nikola_tesla_v86k94T.jpg",
+    "house": 3805,
+    "flat": "2",
+    "is_vol": true,
+    "test_date": null,
+    "house_confirmed": true,
+    "is_admin": false
+  }
+},
+{
+  "model": "tenant.tenant",
+  "pk": 3,
+  "fields": {
+    "user": 7,
+    "photo": "photo/kuri_yY7izdk.jpg",
+    "house": 3805,
+    "flat": "4",
+    "is_vol": false,
+    "test_date": null,
+    "house_confirmed": true,
+    "is_admin": false
+  }
+},
+{
+  "model": "tenant.tenant",
+  "pk": 4,
+  "fields": {
+    "user": 8,
+    "photo": "photo/\u041d\u044c\u044e\u0442\u043e\u043d_Nh3HJR2.jpeg",
+    "house": 3805,
+    "flat": "5",
+    "is_vol": false,
+    "test_date": null,
+    "house_confirmed": true,
+    "is_admin": false
+  }
+},
+{
+  "model": "tenant.tenant",
+  "pk": 5,
+  "fields": {
+    "user": 9,
+    "photo": "photo/\u041c\u0430\u043a\u0441_\u041f\u043b\u0430\u043d\u043a_JoqEVJv.jpg",
+    "house": 3805,
+    "flat": "8",
+    "is_vol": false,
+    "test_date": null,
+    "house_confirmed": false,
+    "is_admin": false
+  }
+},
+{
+  "model": "tenant.tenant",
+  "pk": 6,
+  "fields": {
+    "user": 10,
+    "photo": "static/default.jpg",
+    "house": 3805,
+    "flat": "100",
+    "is_vol": false,
+    "test_date": null,
+    "house_confirmed": false,
+    "is_admin": false
+  }
+},
+{
+  "model": "tenant.tenant",
+  "pk": 7,
+  "fields": {
+    "user": 11,
+    "photo": "photo/lenin.jpeg",
+    "house": 3806,
+    "flat": "1",
+    "is_vol": false,
+    "test_date": null,
+    "house_confirmed": true,
+    "is_admin": false
+  }
+},
+{
+  "model": "tenant.tenant",
+  "pk": 8,
+  "fields": {
+    "user": 12,
+    "photo": "static/default.jpg",
+    "house": 3806,
+    "flat": "5",
+    "is_vol": false,
+    "test_date": null,
+    "house_confirmed": false,
+    "is_admin": false
+  }
+},
+{
+  "model": "tenant.tenant",
+  "pk": 9,
+  "fields": {
+    "user": 15,
+    "photo": "photo/\u0426\u0435\u0437\u0430\u0440\u044c.jpeg",
+    "house": 3806,
+    "flat": "123",
+    "is_vol": false,
+    "test_date": null,
+    "house_confirmed": true,
+    "is_admin": false
+  }
+},
+{
+  "model": "tenant.tenant",
+  "pk": 10,
+  "fields": {
+    "user": 16,
+    "photo": "photo/gagarin.jpeg",
+    "house": 3806,
+    "flat": "228",
+    "is_vol": false,
+    "test_date": null,
+    "house_confirmed": true,
+    "is_admin": false
+  }
+},
+{
+  "model": "tenant.manager",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "company": null,
+    "photo": "static/default.jpg",
+    "is_admin": true
+  }
+},
+{
+  "model": "tenant.manager",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "company": 1,
+    "photo": "photo/\u0422\u043e\u043b\u0441\u0442\u043e\u0439.jpg",
+    "is_admin": false
+  }
+},
+{
+  "model": "tenant.manager",
+  "pk": 3,
+  "fields": {
+    "user": 3,
+    "company": 1,
+    "photo": "photo/\u041f\u0443\u0448\u043a\u0438\u043d1.jpg",
+    "is_admin": false
+  }
+},
+{
+  "model": "tenant.manager",
+  "pk": 4,
+  "fields": {
+    "user": 4,
+    "company": 1,
+    "photo": "photo/\u0411\u0443\u043b\u0448\u0430\u043a\u043e\u0432_feDKSyh.jpg",
+    "is_admin": false
+  }
+},
+{
+  "model": "tenant.manager",
+  "pk": 5,
+  "fields": {
+    "user": 13,
+    "company": null,
+    "photo": "static/default.jpg",
+    "is_admin": false
+  }
+},
+{
+  "model": "tenant.manager",
+  "pk": 6,
+  "fields": {
+    "user": 14,
+    "company": null,
+    "photo": "static/default.jpg",
+    "is_admin": false
   }
 },
 {
@@ -73098,6 +74098,761 @@
     "company": 496,
     "categories": "\u041d\u043e\u0432\u043e\u0441\u0442\u0438|\u041f\u0435\u0442\u0438\u0446\u0438\u0438|\u041e\u0442\u0447\u0451\u0442\u044b \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0438|\u0414\u0440\u0443\u0433\u043e\u0435"
   }
-}
+},
+{
+  "model": "tenant.forum",
+  "pk": 4301,
+  "fields": {
+    "house": 3805,
+    "company": null,
+    "categories": "\u0412\u043e\u0434\u0430|\u042d\u043b\u0435\u043a\u0442\u0440\u0438\u0447\u0435\u0441\u0442\u0432\u043e|\u041f\u0435\u0442\u0438\u0446\u0438\u0438|\u041e\u0431\u044a\u044f\u0432\u043b\u0435\u043d\u0438\u044f|\u041f\u0440\u043e\u043f\u0430\u0436\u0438|\u0414\u0440\u0443\u0433\u043e\u0435"
+  }
+},
+{
+  "model": "tenant.forum",
+  "pk": 4302,
+  "fields": {
+    "house": 3806,
+    "company": null,
+    "categories": "\u0412\u043e\u0434\u0430|\u042d\u043b\u0435\u043a\u0442\u0440\u0438\u0447\u0435\u0441\u0442\u0432\u043e|\u041f\u0435\u0442\u0438\u0446\u0438\u0438|\u041e\u0431\u044a\u044f\u0432\u043b\u0435\u043d\u0438\u044f|\u041f\u0440\u043e\u043f\u0430\u0436\u0438|\u0414\u0440\u0443\u0433\u043e\u0435"
+  }
+},
+{
+  "model": "tenant.discussion",
+  "pk": 1,
+  "fields": {
+    "theme": "\u041f\u043e\u0436\u0430\u0440 \u0440\u0435\u0432\u043e\u043b\u044e\u0446\u0438\u0438.",
+    "category": "\u041f\u0435\u0442\u0438\u0446\u0438\u0438",
+    "description": "\u0422\u043e\u0432\u0430\u0440\u0438\u0449\u0438! \u042f \u043f\u0440\u0438\u0437\u044b\u0432\u0430\u044e \u0432\u0441\u0435\u0445 \u0438 \u043a\u0430\u0436\u0434\u043e\u0433\u043e \u0432\u043e\u0441\u0441\u0442\u0430\u0442\u044c \u043f\u0440\u043e\u0442\u0438\u0432 \u0433\u0443\u0431\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0439 \u0434\u0438\u043a\u0442\u0430\u0442\u0443\u0440\u044b \u0438 \u0434\u0430\u0442\u044c \u0432\u0441\u044e \u0432\u043b\u0430\u0441\u0442\u044c \u0441\u043e\u0432\u0435\u0442\u0430\u043c!!",
+    "forum": 3805,
+    "author": 11,
+    "cr_date": "2020-06-02T18:57:38.157Z",
+    "anon_allowed": false
+  }
+},
+{
+  "model": "tenant.discussion",
+  "pk": 2,
+  "fields": {
+    "theme": "\u0420\u0435\u0444\u043e\u0440\u043c\u0430 \u043f\u043b\u043e\u0449\u0430\u0434\u043a\u0438",
+    "category": "\u041f\u0435\u0442\u0438\u0446\u0438\u0438",
+    "description": "\u041f\u0440\u0435\u0434\u043b\u0430\u0433\u0430\u044e \u043f\u0435\u0440\u0435\u043e\u0431\u043e\u0440\u0443\u0434\u043e\u0432\u0430\u0442\u044c \u0441\u043f\u043e\u0440\u0442\u0438\u0432\u043d\u0443\u044e \u043f\u043b\u043e\u0449\u0430\u0434\u043a\u0443 \u043f\u043e\u0434 \u0438\u0441\u043f\u044b\u0442\u0430\u0442\u0435\u043b\u044c\u043d\u044b\u0439 \u043f\u043e\u043b\u0438\u0433\u043e\u043d.",
+    "forum": 4301,
+    "author": 8,
+    "cr_date": "2020-06-02T19:09:10.238Z",
+    "anon_allowed": false
+  }
+},
+{
+  "model": "tenant.discussion",
+  "pk": 3,
+  "fields": {
+    "theme": "\u041f\u0440\u043e\u0441\u0442\u043e \u0442\u0430\u043a",
+    "category": "\u0414\u0440\u0443\u0433\u043e\u0435",
+    "description": "\u041a\u0430\u043a \u0443 \u0432\u0441\u0435\u0445 \u0434\u0435\u043b\u0430?",
+    "forum": 4301,
+    "author": 6,
+    "cr_date": "2020-06-02T22:13:23.145Z",
+    "anon_allowed": false
+  }
+},
+{
+  "model": "tenant.discussion",
+  "pk": 4,
+  "fields": {
+    "theme": "\u041d\u043e\u0432\u044b\u0439 \u0436\u0438\u0442\u0435\u043b\u044c",
+    "category": "\u041e\u0431\u044a\u044f\u0432\u043b\u0435\u043d\u0438\u044f",
+    "description": "\u041a \u043d\u0430\u043c \u0437\u0430\u0441\u0435\u043b\u044f\u0435\u0442\u0441\u044f \u043d\u043e\u0432\u044b\u0439 \u0436\u0438\u0442\u0435\u043b\u044c, \u041c\u0430\u043a\u0441 \u041f\u043b\u0430\u043d\u043a. \u041e\u043d \u043f\u043e\u0441\u0435\u043b\u0438\u0442\u0441\u044f \u0432 10 \u043a\u0432\u0430\u0440\u0442\u0438\u0440\u0435.",
+    "forum": 4301,
+    "author": 2,
+    "cr_date": "2020-06-02T22:21:36.901Z",
+    "anon_allowed": true
+  }
+},
+{
+  "model": "tenant.discussion",
+  "pk": 5,
+  "fields": {
+    "theme": "\u0414\u0430\u0442\u044b \u0432\u043e\u0434\u044b",
+    "category": "\u0412\u043e\u0434\u0430",
+    "description": "\u042f \u0445\u043e\u0442\u0435\u043b \u0431\u044b \u0443\u0437\u043d\u0430\u0442\u044c, \u0441\u043a\u043e\u0440\u043e \u043b\u0438 \u0432\u043e\u0441\u0441\u0442\u0430\u043d\u043e\u0432\u044f\u0442 \u0433\u043e\u0440\u044f\u0447\u0443\u044e \u0432\u043e\u0434\u0443 \u0432 \u043d\u0430\u0448\u0435\u043c \u0434\u043e\u043c\u0435, \u044d\u0442\u043e \u0431\u044b\u043b\u043e \u0432 \u043d\u043e\u0432\u043e\u0441\u0442\u044f\u0445, \u043d\u043e \u0442\u0430\u043a \u043d\u0435 \u0445\u043e\u0447\u0435\u0442\u0441\u044f \u0442\u0430\u043c \u0440\u044b\u0442\u044c\u0441\u044f. \u0415\u0441\u0442\u044c \u0443 \u043a\u043e\u0433\u043e-\u043d\u0438\u0431\u0443\u0434\u044c \u043e\u0431 \u044d\u0442\u043e\u043c \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044f?",
+    "forum": 4301,
+    "author": 5,
+    "cr_date": "2020-06-02T22:34:20.627Z",
+    "anon_allowed": false
+  }
+},
+{
+  "model": "tenant.discussion",
+  "pk": 6,
+  "fields": {
+    "theme": "\u0417\u0430\u043f\u0430\u0445\u0438 \u043d\u0430 \u043f\u0435\u0440\u0432\u043e\u043c \u044d\u0442\u0430\u0436\u0435",
+    "category": "\u0414\u0440\u0443\u0433\u043e\u0435",
+    "description": "\u041e\u0442 \u043a\u043e\u0433\u043e-\u0442\u043e \u043d\u0430 \u043f\u0435\u0440\u0432\u043e\u043c \u044d\u0442\u0430\u0436\u0435 \u0438\u0441\u0445\u043e\u0434\u044f\u0442 \u043d\u0435\u0441\u043d\u043e\u0441\u043d\u044b\u0435 \u0437\u0430\u043f\u0430\u0445\u0438, \u043f\u0440\u043e\u0448\u0443 \u043a\u0430\u043a-\u0442\u043e \u0438\u0441\u043f\u0440\u0430\u0432\u0438\u0442\u044c\u0441\u044f \u044d\u0442\u0443 \u043f\u0440\u043e\u0431\u043b\u0435\u043c\u0443, \u044f \u0443\u0432\u0435\u0440\u0435\u043d, \u0447\u0442\u043e \u044f \u043d\u0435 \u043e\u0434\u0438\u043d \u043f\u043e\u0441\u0442\u0440\u0430\u0434\u0430\u0432\u0448\u0438\u0439.",
+    "forum": 4301,
+    "author": 5,
+    "cr_date": "2020-06-02T22:36:25.312Z",
+    "anon_allowed": false
+  }
+},
+{
+  "model": "tenant.discussion",
+  "pk": 7,
+  "fields": {
+    "theme": "\u041b\u0438\u0447\u043d\u044b\u0439 \u0431\u043b\u043e\u043a\u043d\u043e\u0442",
+    "category": "\u041f\u0440\u043e\u043f\u0430\u0436\u0438",
+    "description": "\u041f\u0440\u0438\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044e \u0432\u0441\u0435\u0445, \u044f \u043f\u043e\u043a\u0430 \u0437\u0430\u043d\u0438\u043c\u0430\u043b\u0441\u044f \u0432\u043e\u043b\u043e\u043d\u0442\u0451\u0440\u0441\u0442\u0432\u043e\u043c \u0443 \u043a\u043e\u0433\u043e \u0442\u043e \u0432 \u043a\u0432\u0430\u0440\u0442\u0438\u0440\u0435 \u0437\u0430\u0431\u044b\u043b \u0431\u043b\u043e\u043a\u043d\u043e\u0442 \u0434\u043b\u044f \u0437\u0430\u043f\u0438\u0441\u0438 \u043c\u043e\u0438\u0445 \u0438\u0434\u0435\u0439. \u041f\u0440\u043e\u0441\u044c\u0431\u0430 \u0441\u043e\u043e\u0431\u0449\u0438\u0442\u044c \u0435\u0441\u043b\u0438 \u043d\u0430\u0439\u0434\u0435\u0442\u0435 \u0447\u0442\u043e \u0442\u043e \u043f\u043e\u0434\u043e\u0431\u043d\u043e\u0435",
+    "forum": 4301,
+    "author": 6,
+    "cr_date": "2020-06-03T14:24:00.181Z",
+    "anon_allowed": false
+  }
+},
+{
+  "model": "tenant.discussion",
+  "pk": 8,
+  "fields": {
+    "theme": "\u041f\u043e\u0442\u043e\u043c\u043a\u0430\u043c",
+    "category": "\u0414\u0440\u0443\u0433\u043e\u0435",
+    "description": "\u041d\u0443 \u043a\u0430\u043a \u0432\u044b \u0442\u0430\u043c, \u043f\u043e\u0442\u043e\u043c\u043a\u0438, \u0434\u043e\u043b\u0435\u0442\u0435\u043b\u0438 \u043d\u0430 \u043c\u0430\u0440\u0441?",
+    "forum": 3805,
+    "author": 16,
+    "cr_date": "2020-06-03T14:49:22.546Z",
+    "anon_allowed": true
+  }
+},
+{
+  "model": "tenant.discussion",
+  "pk": 9,
+  "fields": {
+    "theme": "\u0418\u043d\u0441\u043f\u0435\u043a\u0446\u0438\u044f \u0441\u0430\u0439\u0442\u0430",
+    "category": "\u041d\u043e\u0432\u043e\u0441\u0442\u0438",
+    "description": "\u0423\u0432\u0430\u0436\u0430\u0435\u043c\u044b\u0435 \u0436\u0438\u0442\u0435\u043b\u0438, \u0432 \u0431\u043b\u0438\u0436\u0430\u0439\u0448\u0443\u044e \u0441\u0443\u0431\u0431\u043e\u0442\u0443, 6 \u0438\u044e\u043d\u044f, \u043d\u0430 \u0441\u0430\u0439\u0442\u0435 JUK \u043f\u0440\u043e\u0439\u0434\u0451\u0442 \u0430\u0442\u0442\u0435\u0441\u0442\u0430\u0446\u0438\u044f. \u041f\u043e\u044d\u0442\u043e\u043c\u0443 \u043a \u043d\u0430\u043c \u043f\u043e\u0441\u0442\u0443\u043f\u0438\u043b\u0430 \u043f\u0440\u043e\u0441\u044c\u0431\u0430 \u043e\u0442 \u0430\u0434\u043c\u0438\u043d\u0438\u0441\u0442\u0440\u0430\u0442\u043e\u0440\u043e\u0432 \u0441\u0430\u0439\u0442\u0430 \u043f\u0440\u043e\u0441\u043b\u0435\u0434\u0438\u0442\u044c, \u0447\u0442\u043e\u0431 \u043d\u0430 \u0441\u0430\u0439\u0442\u0435 \u043d\u0435 \u0431\u044b\u043b\u043e \u043d\u0435\u0446\u0435\u043d\u0437\u0443\u0440\u043d\u043e\u0433\u043e \u043a\u043e\u043d\u0442\u0435\u043d\u0442\u0430. \u041f\u0440\u043e\u0441\u0438\u043c \u043f\u0440\u043e\u044f\u0432\u0438\u0442\u044c \u043f\u043e\u043d\u0438\u043c\u0430\u043d\u0438\u0435.\r\n",
+    "forum": 3805,
+    "author": 3,
+    "cr_date": "2020-06-03T15:11:14.014Z",
+    "anon_allowed": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 1,
+  "fields": {
+    "text": "**\u0423\u0420\u0420\u0410\u0410\u0410\u0410**",
+    "discussion": 1,
+    "author": 11,
+    "cr_date": "2020-06-02T18:59:01.932Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 2,
+  "fields": {
+    "text": "\u0413\u043e\u0441\u043f\u043e\u0434\u0430, \u043c\u043d\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043d\u043e, \u0447\u0442\u043e \u043c\u043d\u043e\u0433\u043e \u043a\u043e\u0433\u043e \u044d\u0442\u043e \u0438\u043d\u0442\u0435\u0440\u0435\u0441\u0443\u0435\u0442. \u041f\u0440\u043e\u044f\u0432\u0438\u0442\u0435 \u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u044c, \u0438 \u0443 \u043d\u0430\u0441 \u043f\u043e\u043b\u0443\u0447\u0438\u0442\u0441\u044f \u043f\u0440\u0438\u0432\u043b\u0435\u0447\u044c \u0432\u043d\u0438\u043c\u0430\u043d\u0438\u0435 \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0438!!",
+    "discussion": 2,
+    "author": 8,
+    "cr_date": "2020-06-02T19:10:46.133Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 3,
+  "fields": {
+    "text": "\u0422\u0430\u043a \u0438\u043c\u043f\u0435\u0440\u0438\u044e \u043d\u0435 \u043f\u043e\u0441\u0442\u0440\u043e\u0438\u0442\u0435...  :-1:",
+    "discussion": 1,
+    "author": 15,
+    "cr_date": "2020-06-02T19:44:50.077Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 4,
+  "fields": {
+    "text": "\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u044d\u0442\u043e \u043d\u0430 \u043f\u043e\u043a\u0430, \u0430 \u0432\u043e\u0442 \u043d\u0430\u0443\u043a\u0430 \u044d\u0442\u043e \u043d\u0430 \u0432\u0435\u043a\u0430",
+    "discussion": 1,
+    "author": 6,
+    "cr_date": "2020-06-02T19:53:56.597Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 5,
+  "fields": {
+    "text": "\u0410\u0433\u0430, \u0442\u0432\u043e\u044f \u0442\u043e \u0438\u043c\u043f\u0435\u0440\u0438\u044f \u0441\u0435\u0439\u0447\u0430\u0441 \u043f\u0440\u043e\u0446\u0432\u0435\u0442\u0430\u0435\u0442.....",
+    "discussion": null,
+    "author": 11,
+    "cr_date": "2020-06-02T22:04:49.520Z",
+    "thread": 3,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 6,
+  "fields": {
+    "text": "\u041f\u043e\u043b\u043d\u043e\u0441\u0442\u044c\u044e \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u044e!!",
+    "discussion": 2,
+    "author": 7,
+    "cr_date": "2020-06-02T22:11:42.102Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 7,
+  "fields": {
+    "text": "\u041c\u0430\u043a\u0441 \u041a\u0430\u0440\u043b \u041f\u043b\u0430\u043d\u043a \u0443\u0432\u0430\u0436\u0430\u0435\u043c\u044b\u0439 \u0444\u0438\u0437\u0438\u043a\u0438 \u0438\u0437\u0432\u0435\u0441\u0442\u043d\u044b\u0439 \u0443\u0447\u0435\u043d\u044b\u0439. \u041e\u0442\u043d\u043e\u0441\u0438\u0442\u0435\u0441\u044c \u0434\u043e\u043b\u0436\u043d\u044b\u043c \u043e\u0431\u0440\u0430\u0437\u043e\u043c.",
+    "discussion": 4,
+    "author": 2,
+    "cr_date": "2020-06-02T22:21:54.352Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 8,
+  "fields": {
+    "text": "\u041f\u043e\u043d\u0430\u0435\u0445\u0430\u043b\u0438 \u043e\u043f\u044f\u0442\u044c...",
+    "discussion": 4,
+    "author": 5,
+    "cr_date": "2020-06-02T22:26:05.642Z",
+    "thread": null,
+    "anon": true
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 9,
+  "fields": {
+    "text": "\u0425\u043e\u0440\u043e\u0448\u043e! \u041d\u0430 \u0443\u043b\u0438\u0446\u0435 \u0434\u043e\u0436\u0434\u043b\u0438\u0432\u043e, \u043d\u043e \u0441\u043c\u043e\u0442\u0440\u0435\u043b \u043f\u0440\u043e\u0433\u043d\u043e\u0437: \u0433\u043e\u0432\u043e\u0440\u044f\u0442, \u0447\u0442\u043e \u0441\u043a\u043e\u0440\u043e \u0441\u043e\u043b\u043d\u0446\u0435.",
+    "discussion": 3,
+    "author": 5,
+    "cr_date": "2020-06-02T22:37:43.197Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 10,
+  "fields": {
+    "text": "\u041e\u0442\u043b\u0438\u0447\u043d\u043e, \u0432\u0441\u0435 \u043f\u043e\u043c\u043d\u044f\u0442, \u0447\u0442\u043e \u043d\u0430 \u044d\u0442\u043e\u0439 \u043d\u0435\u0434\u0435\u043b\u0435 \u0441\u0443\u0431\u0431\u043e\u0442\u043d\u0438\u043a?",
+    "discussion": 3,
+    "author": 7,
+    "cr_date": "2020-06-02T22:39:06.008Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 11,
+  "fields": {
+    "text": "\u042f, \u0443\u0432\u044b \u043d\u0435 \u0441\u043c\u043e\u0433\u0443 \u043f\u0440\u0438\u0439\u0442\u0438, \u043d\u0435\u043e\u0442\u043b\u043e\u0436\u043d\u044b\u0435 \u0438\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u043d\u0438\u044f..",
+    "discussion": 3,
+    "author": 8,
+    "cr_date": "2020-06-02T22:40:25.577Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 12,
+  "fields": {
+    "text": "\u041f\u0440\u043e\u0448\u0443 \u0432\u043e\u0439\u0442\u0438 \u0432 \u043f\u043e\u043b\u043e\u0436\u0435\u043d\u0438\u0435",
+    "discussion": 3,
+    "author": 8,
+    "cr_date": "2020-06-02T22:40:42.399Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 13,
+  "fields": {
+    "text": "\u041d\u0435 \u0434\u0430\u0432\u0430\u0442\u044c \u0434\u0435\u0442\u044f\u043c \u0434\u043e\u0441\u0442\u0443\u043f \u043a \u044d\u0442\u043e\u0439 \u043f\u0435\u0442\u0438\u0446\u0438\u0438 \u043d\u0435\u0447\u0435\u0441\u0442\u043d\u043e.",
+    "discussion": 2,
+    "author": 2,
+    "cr_date": "2020-06-03T14:05:55.384Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 14,
+  "fields": {
+    "text": "\u0414\u043e 10 \u0438\u044e\u043d\u044f \u0442\u043e\u0447\u043d\u043e \u043d\u0435 \u0436\u0434\u0438\u0442\u0435.",
+    "discussion": 5,
+    "author": 6,
+    "cr_date": "2020-06-03T14:19:11.220Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 15,
+  "fields": {
+    "text": "\u0418\u0441\u0430\u0430\u043a, \u044f \u0437\u043d\u0430\u044e, \u0447\u0442\u043e \u044d\u0442\u043e \u0432\u044b, \u0431\u0443\u0434\u044c\u0442\u0435 \u0434\u0440\u0443\u0436\u0435\u043b\u044e\u0431\u043d\u0435\u0435.",
+    "discussion": null,
+    "author": 6,
+    "cr_date": "2020-06-03T14:37:23.996Z",
+    "thread": 8,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 16,
+  "fields": {
+    "text": "\u041d\u044c\u044e\u0442\u043e\u043d, ![\u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0430](http://risovach.ru/upload/2019/12/mem/sovpadenie--ne-dumayu_226250474_orig_.jpg)",
+    "discussion": 3,
+    "author": 6,
+    "cr_date": "2020-06-03T14:39:11.381Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 17,
+  "fields": {
+    "text": "\u041d\u0430\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u044f \u0437\u043d\u0430\u044e, \u044d\u0442\u043e \u0432\u0441\u0451 \u041c\u0430\u0440\u0438\u044f",
+    "discussion": 6,
+    "author": 6,
+    "cr_date": "2020-06-03T14:40:15.601Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 18,
+  "fields": {
+    "text": "\u041e\u0447\u0435\u043d\u044c \u0440\u0430\u0434\u044b \u043f\u0440\u0438\u0432\u0435\u0442\u0441\u0442\u0432\u043e\u0432\u0430\u0442\u044c!",
+    "discussion": 4,
+    "author": 7,
+    "cr_date": "2020-06-03T14:42:10.212Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 19,
+  "fields": {
+    "text": "\u0417\u043d\u0430\u0442\u044c \u043d\u0435 \u0437\u043d\u0430\u044e, \u0432\u0435\u0434\u0430\u0442\u044c \u043d\u0435 \u0432\u0435\u0434\u0430\u044e.",
+    "discussion": 7,
+    "author": 8,
+    "cr_date": "2020-06-03T14:43:19.066Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 20,
+  "fields": {
+    "text": "- \u041a\u0430\u043a\u0438\u0435 \u043f\u043e\u0442\u043e\u043c\u043a\u0438, \u0442\u0443\u0442 \u0432\u0441\u0435 \u0441\u0442\u0430\u0440\u0448\u0435 \u0442\u0435\u0431\u044f\n- \u0444\u044b\u0432",
+    "discussion": 8,
+    "author": 3,
+    "cr_date": "2020-06-03T14:58:39.698Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 21,
+  "fields": {
+    "text": "\u0423\u0432\u0430\u0436\u0430\u0435\u043c\u044b\u0439 \u041d\u0438\u043a\u043e\u043b\u0430, \u043c\u044b \u043e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u043e \u0432\u0430\u043c \u043f\u043e\u043c\u043e\u0436\u0435\u043c \u0432 \u043f\u043e\u0438\u0441\u043a\u0430\u0445",
+    "discussion": 7,
+    "author": 4,
+    "cr_date": "2020-06-03T15:21:07.060Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.comment",
+  "pk": 22,
+  "fields": {
+    "text": "\u041d\u0435 \u0434\u0435\u0437\u0438\u043d\u0444\u043e\u0440\u043c\u0438\u0440\u0443\u0439\u0442\u0435 \u0410\u043b\u044c\u0431\u0435\u0440\u0442\u0430, \u0412\u043e\u0434\u0430 \u043f\u043e\u044f\u0432\u0438\u0442\u0441\u044f 5 \u0438\u044e\u043d\u044f",
+    "discussion": 5,
+    "author": 4,
+    "cr_date": "2020-06-03T15:22:05.172Z",
+    "thread": null,
+    "anon": false
+  }
+},
+{
+  "model": "tenant.appeal",
+  "pk": 1,
+  "fields": {
+    "theme": "\u042d\u043a\u0441\u043f\u0435\u0440\u0435\u043c\u0435\u043d\u0442\u044b",
+    "tenant": 1,
+    "manager": 2,
+    "cr_date": "2020-06-02T19:05:06.481Z"
+  }
+},
+{
+  "model": "tenant.appeal",
+  "pk": 2,
+  "fields": {
+    "theme": "\u0420\u0430\u0431\u043e\u0442\u044b \u0441 \u0440\u0430\u0434\u0438\u0435\u043c",
+    "tenant": 3,
+    "manager": null,
+    "cr_date": "2020-06-02T19:35:07.054Z"
+  }
+},
+{
+  "model": "tenant.appeal",
+  "pk": 3,
+  "fields": {
+    "theme": "\u042d\u043b\u0435\u043a\u0442\u0440\u0438\u0447\u0435\u0441\u0442\u0432\u043e",
+    "tenant": 2,
+    "manager": null,
+    "cr_date": "2020-06-02T19:51:13.886Z"
+  }
+},
+{
+  "model": "tenant.appeal",
+  "pk": 4,
+  "fields": {
+    "theme": "\u041a\u043e\u0448\u043a\u0430 \u0432 \u043f\u043e\u0434\u044a\u0435\u0437\u0434\u0435",
+    "tenant": 1,
+    "manager": 4,
+    "cr_date": "2020-06-02T22:29:41.078Z"
+  }
+},
+{
+  "model": "tenant.appealmessage",
+  "pk": 1,
+  "fields": {
+    "text": "\u0423\u0432\u0430\u0436\u0430\u0435\u043c\u044b\u0439 \u0410\u043b\u044c\u0431\u0435\u0440\u0442 \u042d\u0439\u043d\u0448\u0442\u0435\u0439\u043d, \u043f\u0440\u043e\u0448\u0443 \u0412\u0430\u0441 \u043e\u0442 \u0438\u043c\u0435\u043d\u0438 \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0438 \u043f\u0435\u0440\u0435\u0441\u0442\u0430\u0442\u044c \u043f\u0440\u043e\u0432\u043e\u0434\u0438\u0442\u044c \u044d\u043a\u0441\u043f\u0435\u0440\u0438\u043c\u0435\u043d\u0442\u044b. \u0412\u0430\u0448\u0438 \u0441\u043e\u0441\u0435\u0434\u0438 \u0436\u0430\u043b\u0443\u044e\u0442\u0441\u044f.",
+    "appeal": 1,
+    "creator": 2,
+    "cr_date": "2020-06-02T19:05:06.487Z"
+  }
+},
+{
+  "model": "tenant.appealmessage",
+  "pk": 2,
+  "fields": {
+    "text": "\u041f\u0440\u043e\u0448\u0443 \u0432\u0430\u0441 \u043d\u0435 \u043e\u0431\u0440\u0430\u0449\u0430\u0442\u044c \u0432\u043d\u0438\u043c\u0430\u043d\u0438\u044f \u043d\u0430 \u0436\u0430\u043b\u043e\u0431\u044b \u0441\u043e\u0441\u0435\u0434\u0435\u0439. \u041c\u043e\u0438 \u0438\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u043d\u0438\u044f \u043f\u043e\u043b\u043d\u043e\u0441\u0442\u044c\u044e \u0431\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u044b.",
+    "appeal": 2,
+    "creator": 7,
+    "cr_date": "2020-06-02T19:35:07.061Z"
+  }
+},
+{
+  "model": "tenant.appealmessage",
+  "pk": 3,
+  "fields": {
+    "text": "\u0421\u043a\u0430\u0436\u0438\u0442\u0435, \u0430 \u044d\u0442\u043e \u0447\u0435\u0441\u0442\u043d\u043e, \u0447\u0442\u043e \u044f \u0438\u0437\u043e\u0431\u0440\u0435\u043b \u043b\u0430\u043c\u043f\u043e\u0447\u043a\u0443, \u0438 \u044f \u0434\u043e\u043b\u0436\u0435\u043d \u043f\u043b\u0430\u0442\u0438\u0442\u044c \u0437\u0430 \u0435\u0451 \u0441\u0432\u0435\u0442??",
+    "appeal": 3,
+    "creator": 6,
+    "cr_date": "2020-06-02T19:51:13.893Z"
+  }
+},
+{
+  "model": "tenant.appealmessage",
+  "pk": 4,
+  "fields": {
+    "text": "\u042d\u0442\u043e \u0432\u0441\u0451 \u0438\u0441\u043a\u043b\u044e\u0447\u0438\u0442\u0435\u043b\u044c\u043d\u043e \u0432 \u043d\u0430\u0443\u0447\u043d\u044b\u0445 \u0446\u0435\u043b\u044f\u0445!!!",
+    "appeal": 1,
+    "creator": 5,
+    "cr_date": "2020-06-02T22:27:17.607Z"
+  }
+},
+{
+  "model": "tenant.appealmessage",
+  "pk": 5,
+  "fields": {
+    "text": "\u0417\u0434\u0440\u0430\u0432\u0441\u0442\u0432\u0443\u0439\u0442\u0435, \u044f \u0445\u043e\u0442\u0435\u043b \u043e\u0431\u0440\u0430\u0442\u0438\u0442\u044c\u0441\u044f \u0441 \u0446\u0435\u043b\u044c\u044e \u0440\u0435\u0448\u0435\u043d\u0438\u044f \u0432\u043e\u043f\u0440\u043e\u0441\u0430 \u043a\u0430\u0441\u0430\u0442\u0435\u043b\u044c\u043d\u043e \u043a\u043e\u0448\u043a\u0438, \u0436\u0438\u0432\u0443\u0449\u0435\u0439 \u0432 \u043d\u0430\u0448\u0435\u043c \u043f\u043e\u0434\u044a\u0435\u0437\u0434\u0435. \u0423 \u043c\u0435\u043d\u044f \u0430\u043b\u043b\u0435\u0440\u0433\u0438\u044f, \u044f \u043f\u0440\u043e\u0448\u0443 \u0435\u0451 \u0443\u0431\u0440\u0430\u0442\u044c.",
+    "appeal": 4,
+    "creator": 5,
+    "cr_date": "2020-06-02T22:29:41.086Z"
+  }
+},
+{
+  "model": "tenant.appealmessage",
+  "pk": 6,
+  "fields": {
+    "text": "\u041c\u044b \u0432\u0441\u0451 \u043f\u043e\u043d\u0438\u043c\u0430\u0435\u043c, \u043d\u043e \u0434\u043b\u044f \u043f\u043e\u0434\u043e\u0431\u043d\u044b\u0445 \u0438\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u043d\u0438\u0439 **\u043d\u0430\u0448 \u0434\u043e\u043c \u043d\u0435 \u043f\u043e\u0434\u0445\u043e\u0434\u0438\u0442**.",
+    "appeal": 1,
+    "creator": 2,
+    "cr_date": "2020-06-03T14:03:32.674Z"
+  }
+},
+{
+  "model": "tenant.appealmessage",
+  "pk": 7,
+  "fields": {
+    "text": "\u0417\u0434\u0440\u0430\u0432\u0441\u0442\u0432\u0443\u0439\u0442\u0435, \u043d\u0430\u0448\u0430 \u043a\u043e\u0448\u043a\u0430 \u0436\u0438\u0432\u0451\u0442 \u0443 \u043d\u0430\u0441 \u0434\u0430\u0432\u043d\u043e, \u0432\u0441\u0435 \u0436\u0438\u0442\u0435\u043b\u0438 \u043a \u043d\u0435\u0439 \u043f\u0440\u0438\u0432\u044b\u043a\u043b\u0438, \u0432\u044b \u043f\u0440\u043e\u0445\u043e\u0434\u0438\u0442\u0435 \u043c\u0438\u043c\u043e \u043d\u0435\u0451 \u0432\u0441\u0435\u0433\u043e \u043f\u0430\u0440\u0443 \u0440\u0430\u0437 \u0432 \u043d\u0435\u0434\u0435\u043b\u044e, \u043f\u0440\u043e\u0441\u0438\u043c \u043f\u043e\u0442\u0435\u0440\u043f\u0435\u0442\u044c.",
+    "appeal": 4,
+    "creator": 4,
+    "cr_date": "2020-06-03T15:23:57.941Z"
+  }
+},
+{
+  "model": "tenant.task",
+  "pk": 1,
+  "fields": {
+    "description": "\u041c\u0430\u0433\u0430\u0437\u0438\u043d",
+    "task": "\u0417\u0434\u0440\u0430\u0432\u0441\u0442\u0432\u0443\u0439\u0442\u0435, \u044f \u0438\u0441\u0442\u0440\u0430\u0442\u0438\u043b \u0441\u0432\u043e\u0439 \u043f\u0440\u043e\u043f\u0443\u0441\u043a \u043d\u0430 \u043f\u043e\u0445\u043e\u0434 \u0432 \u043c\u0430\u0433\u0430\u0437\u0438\u043d, \u0430 \u044f\u0431\u043b\u043e\u043a\u0438 \u043a\u0443\u043f\u0438\u0442\u044c \u0437\u0430\u0431\u044b\u043b. \u041e\u0447\u0435\u043d\u044c \u043d\u0443\u0436\u043d\u0430 \u043f\u043e\u043c\u043e\u0449\u044c!",
+    "author": 8,
+    "volunteer": 2,
+    "cr_date": "2020-06-03T15:27:06.634Z",
+    "status": "taken"
+  }
+},
+{
+  "model": "tenant.task",
+  "pk": 2,
+  "fields": {
+    "description": "\u041a\u0440\u0430\u043d",
+    "task": "\u0423 \u043c\u0435\u043d\u044f \u043f\u0440\u043e\u0442\u0435\u043a\u0430\u0435\u0442 \u043a\u0440\u0430\u043d, \u043d\u0443\u0436\u0435\u043d \u0447\u0435\u043b\u043e\u0432\u0435\u043a \u0441 \u043e\u043f\u044b\u0442\u043e\u043c, \u044f \u0441\u0430\u043c \u0440\u0430\u0437\u043e\u0431\u0440\u0430\u0442\u044c\u0441\u044f \u043d\u0435 \u0441\u043c\u043e\u0433(",
+    "author": 5,
+    "volunteer": null,
+    "cr_date": "2020-06-02T22:46:21.006Z",
+    "status": "closed"
+  }
+},
+{
+  "model": "tenant.task",
+  "pk": 3,
+  "fields": {
+    "description": "\u0412\u0441\u0442\u0440\u0435\u0442\u0438\u0442\u044c \u0433\u043e\u0441\u0442\u044f",
+    "task": "\u0417\u0434\u0440\u0430\u0432\u0441\u0442\u0432\u0443\u0439\u0442\u0435, \u043d\u0435\u0442 \u0441\u0438\u043b \u0431\u0435\u0433\u0430\u0442\u044c \u0432\u043d\u0438\u0437 \u0438 \u0432\u0432\u0435\u0440\u0445, \u0447\u0442\u043e\u0431\u044b \u0432\u0441\u0442\u0440\u0435\u0442\u0438\u0442\u044c \u0436\u0435\u043d\u0443, \u043f\u043e\u043c\u043e\u0433\u0438\u0442\u0435, \u043f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430",
+    "author": 5,
+    "volunteer": null,
+    "cr_date": "2020-06-02T22:47:46.313Z",
+    "status": "closed"
+  }
+},
+{
+  "model": "tenant.task",
+  "pk": 4,
+  "fields": {
+    "description": "\u0412\u044b\u043d\u0435\u0441\u0442\u0438 \u043c\u0443\u0441\u043e\u0440",
+    "task": "\u041a\u0442\u043e \u0441\u0430\u043c\u044b\u0439 \u043c\u043e\u043b\u043e\u0434\u043e\u0439, \u0443 \u043d\u0430\u0441 \u043c\u0443\u0441\u043e\u0440\u043d\u044b\u0439 \u0431\u0430\u043a \u043d\u0430 \u044d\u0442\u0430\u0436\u0435 \u0437\u0430\u043f\u043e\u043b\u043d\u0435\u043d, \u043d\u0430\u0434\u043e \u043e\u0441\u0432\u043e\u0431\u043e\u0434\u0438\u0442\u044c.",
+    "author": 5,
+    "volunteer": 2,
+    "cr_date": "2020-06-02T22:50:23.959Z",
+    "status": "taken"
+  }
+},
+{
+  "model": "tenant.task",
+  "pk": 5,
+  "fields": {
+    "description": "\u0412\u043e\u0434\u044b \u043e\u0445\u0440\u0430\u043d\u043d\u0438\u043a\u0443",
+    "task": "\u041d\u0430\u0448 \u0443\u0432\u0430\u0436\u0430\u0435\u043c\u044b\u0439 \u043e\u0445\u0440\u0430\u043d\u043d\u0438\u043a \u0441\u0442\u0440\u0430\u0434\u0430\u0435\u0442 \u043e\u0442 \u043e\u0431\u0435\u0437\u0432\u043e\u0436\u0438\u0432\u0430\u043d\u0438\u044f, \u043d\u043e \u043e\u043d \u0438 \u043d\u0435 \u0434\u0443\u043c\u0430\u0435\u0442 \u043f\u043e\u043a\u0438\u0434\u0430\u0442\u044c \u043f\u043e\u0441\u0442, \u0432\u0435\u0434\u044c \u043e\u043d \u0441\u043e\u0442\u0440\u0443\u0434\u043d\u0438\u043a \u043d\u0430\u0448\u0435\u0439 \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0438. \u041f\u0440\u043e\u0441\u0438\u043c \u043a\u043e\u0433\u043e-\u043d\u0438\u0431\u0443\u0434\u044c \u043a\u0443\u043f\u0438\u0442\u044c \u0438 \u043f\u0440\u0438\u043d\u0435\u0441\u0442\u0438 \u0435\u043c\u0443 \u0432\u043e\u0434\u044b, \u0434\u0435\u043d\u044c\u0433\u0438 \u043c\u044b \u0432\u044b\u0434\u0435\u043b\u0438\u043c. ",
+    "author": 3,
+    "volunteer": null,
+    "cr_date": "2020-06-03T15:17:25.900Z",
+    "status": "opened"
+  }
+},
+{
+  "model": "tenant.task",
+  "pk": 6,
+  "fields": {
+    "description": "\u0421\u043b\u043e\u043c\u0430\u043d\u043d\u0430\u044f \u043b\u0430\u0432\u043e\u0447\u043a\u0430",
+    "task": "\u0423 \u043d\u0430\u0441 \u0432\u043e \u0434\u0432\u043e\u0440\u0435 \u0434\u0435\u0442\u0438 \u0432 \u043e\u0447\u0435\u0440\u0435\u0434\u043d\u043e\u0439 \u0440\u0430\u0437 \u0441\u043b\u043e\u043c\u0430\u043b\u0438 \u043b\u0430\u0432\u043e\u0447\u043a\u0443, \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u044f \u043f\u0440\u043e\u0441\u0438\u0442 \u0434\u043e\u0431\u0440\u043e\u0432\u043e\u043b\u044c\u0446\u0430 \u043f\u043e\u0447\u0438\u043d\u0438\u0442\u044c \u0435\u0451.",
+    "author": 3,
+    "volunteer": 2,
+    "cr_date": "2020-06-03T15:28:16.969Z",
+    "status": "closed"
+  }
+},
+{
+  "model": "tenant.task",
+  "pk": 7,
+  "fields": {
+    "description": "\u041c\u0430\u0433\u0430\u0437\u0438\u043d",
+    "task": "\u041a\u0443\u043f\u0438\u0442\u044c \u043f\u0440\u043e\u0434\u0443\u043a\u0442\u044b \u0434\u043e\u043c\u0443",
+    "author": 4,
+    "volunteer": 2,
+    "cr_date": "2020-06-03T15:26:43.796Z",
+    "status": "taken"
+  }
+},
+{
+  "model": "tenant.task",
+  "pk": 8,
+  "fields": {
+    "description": "\u0428\u0442\u0443\u043a\u0430\u0442\u0443\u0440\u043a\u0430",
+    "task": "\u0423 \u043d\u0430\u0441 \u0440\u044f\u0434\u043e\u043c \u0441 \u043b\u0438\u0444\u0442\u043e\u043c \u0443\u043f\u0430\u043b\u0430 \u0448\u0442\u0443\u043a\u0430\u0442\u0443\u0440\u043a\u0430, \u043d\u0430\u0434\u043e \u043f\u043e\u0447\u0438\u043d\u0438\u0442\u044c",
+    "author": 4,
+    "volunteer": 2,
+    "cr_date": "2020-06-03T15:28:25.172Z",
+    "status": "closed"
+  }
+},
+{
+  "model": "tenant.task",
+  "pk": 9,
+  "fields": {
+    "description": "\u0417\u0435\u0440\u043a\u0430\u043b\u043e \u0432 \u043b\u0438\u0444\u0442\u0435",
+    "task": "\u041a\u0430\u043a\u0438\u0435 \u0442\u043e \u043d\u0435\u0433\u043e\u0434\u044f\u0438 \u0443\u043a\u0440\u0430\u043b\u0438 \u0437\u0435\u0440\u043a\u0430\u043b\u043e \u0443 \u043d\u0430\u0441 \u0438\u0437 \u043b\u0438\u0444\u0442\u0430, \u043d\u0430\u0434\u043e \u0438\u0445 \u0432\u044b\u0441\u043b\u0435\u0434\u0438\u0442\u044c \u0438 \u043e\u0442\u043e\u0431\u0440\u0430\u0442\u044c \u0435\u0433\u043e",
+    "author": 4,
+    "volunteer": null,
+    "cr_date": "2020-06-03T15:26:05.966Z",
+    "status": "opened"
+  }
+},
+{
+  "model": "tenant.pass",
+  "pk": 1,
+  "fields": {
+    "author": 6,
+    "cr_date": "2020-06-02T19:59:10.648Z",
+    "status": "active",
+    "target": "person",
+    "name": "\u0422\u043e\u043c\u0430\u0441",
+    "surname": "\u042d\u0434\u0434\u0438\u0441\u043e\u043d",
+    "patronymic": "\u0410\u043b\u0432\u0430",
+    "model": null,
+    "color": null,
+    "number": null,
+    "aim": "\u0413\u043e\u0441\u0442\u044c"
+  }
+},
+{
+  "model": "tenant.pass",
+  "pk": 2,
+  "fields": {
+    "author": 8,
+    "cr_date": "2020-06-03T14:47:03.937Z",
+    "status": "active",
+    "target": "car",
+    "name": null,
+    "surname": null,
+    "patronymic": null,
+    "model": "\u0410\u0443\u0434\u0438",
+    "color": "\u0441\u0435\u0440\u0430\u044f",
+    "number": "\u0410 256 \u041a\u0415 77",
+    "aim": "\u0413\u043e\u0441\u0442\u044c"
+  }
+},
+{
+  "model": "tenant.pass",
+  "pk": 3,
+  "fields": {
+    "author": 6,
+    "cr_date": "2020-06-03T15:29:31.395Z",
+    "status": "active",
+    "target": "car",
+    "name": null,
+    "surname": null,
+    "patronymic": null,
+    "model": "\u0424\u0435\u0440\u0430\u0440\u0440\u0438",
+    "color": "\u043a\u0440\u0430\u0441\u043d\u0430\u044f",
+    "number": "\u0412 888 \u0412\u0412 77",
+    "aim": "\u0413\u043e\u0441\u0442\u044c"
+  }
+},
+{
+  "model": "tenant.managerrequest",
+  "pk": 1,
+  "fields": {
+    "author": 2,
+    "name": "\u041b\u0435\u0432",
+    "surname": "\u0422\u043e\u043b\u0441\u0442\u043e\u0439",
+    "status": 1,
+    "inn_company": 7731288482
+  }
+},
+{
+  "model": "tenant.managerrequest",
+  "pk": 2,
+  "fields": {
+    "author": 3,
+    "name": "\u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440",
+    "surname": "\u041f\u0443\u0448\u043a\u0438\u043d",
+    "status": 1,
+    "inn_company": 7731288482
+  }
+},
+{
+  "model": "tenant.managerrequest",
+  "pk": 3,
+  "fields": {
+    "author": 4,
+    "name": "\u041c\u0438\u0445\u0430\u0438\u043b",
+    "surname": "\u0411\u0443\u043b\u0433\u0430\u043a\u043e\u0432",
+    "status": 1,
+    "inn_company": 7731288482
+  }
+},
+{
+  "model": "tenant.managerrequest",
+  "pk": 4,
+  "fields": {
+    "author": 13,
+    "name": "\u0424\u0451\u0434\u043e\u0440",
+    "surname": "\u0414\u043e\u0441\u0442\u043e\u0435\u0432\u0441\u043a\u0438\u0439",
+    "status": 3,
+    "inn_company": 7731288482
+  }
+},
+{
+  "model": "tenant.managerrequest",
+  "pk": 5,
+  "fields": {
+    "author": 14,
+    "name": "\u0414\u0430\u0440\u0442",
+    "surname": "\u0412\u0435\u0439\u0434\u0435\u0440",
+    "status": 3,
+    "inn_company": 7731288482
+  }
+},
+{
+  "model": "manager.news",
+  "pk": 1,
+  "fields": {
+    "company": 1,
+    "publicationDate": null,
+    "publicationTitle": "\u0421\u0440\u043e\u043a\u0438 \u0415\u0413\u042d",
+    "publicationText": "\u0414\u0430\u0442\u044b \u0441\u0434\u0430\u0447\u0438 \u0438\u0442\u043e\u0433\u043e\u0432\u043e\u0439 \u0430\u0442\u0442\u0435\u0441\u0442\u0430\u0446\u0438\u0438 \u0432 \u043e\u0447\u0435\u0440\u0435\u0434\u043d\u043e\u0439 \u0440\u0430\u0437 \u043f\u0435\u0440\u0435\u043d\u0435\u0441\u043b\u0438. \u041f\u043e \u043f\u043e\u0441\u043b\u0435\u0434\u043d\u0438\u043c \u0434\u0430\u043d\u043d\u044b\u043c \u0441\u0440\u043e\u043a\u0438 \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0435:\n\n* **3 \u0438\u044e\u043b\u044f**, \u043f\u044f\u0442\u043d\u0438\u0446\u0430 \u2014 \u0433\u0435\u043e\u0433\u0440\u0430\u0444\u0438\u044f, \u043b\u0438\u0442\u0435\u0440\u0430\u0442\u0443\u0440\u0430, \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0442\u0438\u043a\u0430.\n* **6-7 \u0438\u044e\u043b\u044f**, \u043f\u043e\u043d\u0435\u0434\u0435\u043b\u044c\u043d\u0438\u043a-\u0432\u0442\u043e\u0440\u043d\u0438\u043a  \u2014 \u0440\u0443\u0441\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a\n* **10 \u0438\u044e\u043b\u044f**, \u043f\u044f\u0442\u043d\u0438\u0446\u0430 \u2014 \u043f\u0440\u043e\u0444\u0438\u043b\u044c\u043d\u0430\u044f \u043c\u0430\u0442\u0435\u043c\u0430\u0442\u0438\u043a\u0430 (\u0431\u0430\u0437\u043e\u0432\u0443\u044e \u043c\u0430\u0442\u0435\u043c\u0430\u0442\u0438\u043a\u0443 \u043e\u0442\u043c\u0435\u043d\u0438\u043b\u0438)\n* **13 \u0438\u044e\u043b\u044f**, \u043f\u043e\u043d\u0435\u0434\u0435\u043b\u044c\u043d\u0438\u043a \u2014 \u0444\u0438\u0437\u0438\u043a\u0430, \u0438\u0441\u0442\u043e\u0440\u0438\u044f\n* **16 \u0438\u044e\u043b\u044f**, \u0447\u0435\u0442\u0432\u0435\u0440\u0433 \u2014 \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e\u0437\u043d\u0430\u043d\u0438\u0435, \u0445\u0438\u043c\u0438\u044f\n* **20 \u0438\u044e\u043b\u044f**, \u043f\u043e\u043d\u0435\u0434\u0435\u043b\u044c\u043d\u0438\u043a \u2014 \u0431\u0438\u043e\u043b\u043e\u0433\u0438\u044f, \u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u043d\u044b\u0435 \u044f\u0437\u044b\u043a\u0438 (\u043f\u0438\u0441\u044c\u043c\u0435\u043d\u043d\u043e)\n* **22-23 \u0438\u044e\u043b\u044f**, \u0441\u0440\u0435\u0434\u0430-\u0447\u0435\u0442\u0432\u0435\u0440\u0433 \u2014 \u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u043d\u044b\u0435 \u044f\u0437\u044b\u043a\u0438 (\u0443\u0441\u0442\u043d\u043e)",
+    "donation_on": false
+  }
+},
+{
+  "model": "manager.news",
+  "pk": 2,
+  "fields": {
+    "company": 1,
+    "publicationDate": "2020-06-03T15:40:22.386Z",
+    "publicationTitle": "\u0418\u0441\u043f\u044b\u0442\u0430\u0442\u0435\u043b\u044c\u043d\u044b\u0439 \u043f\u043e\u043b\u0438\u0433\u043e\u043d",
+    "publicationText": "\u041c\u044b \u0443\u0441\u043b\u044b\u0448\u0430\u043b\u0438 \u043c\u043d\u0435\u043d\u0438\u0435 \u0436\u0438\u0442\u0435\u043b\u0435\u0439 \u0438 \u0441\u043e\u0431\u0438\u0440\u0430\u0435\u043c\u0441\u044f \u043f\u043e\u0441\u0442\u0440\u043e\u0438\u0442\u044c \u0438\u0441\u043f\u044b\u0442\u0430\u0442\u0435\u043b\u044c\u043d\u044b\u0439 \u043f\u043e\u043b\u0438\u0433\u043e\u043d \u0432 \u043d\u0430\u0448\u0435\u043c \u0440\u0430\u0439\u043e\u043d\u0435, \u043d\u043e \u0432\u044b\u0434\u0435\u043b\u0435\u043d\u043d\u044b\u0445 \u0441\u0440\u0435\u0434\u0441\u0442\u0432 \u044f\u0432\u043d\u043e \u043d\u0435 \u0434\u043e\u0441\u0442\u0430\u0442\u043e\u0447\u043d\u043e, \u043e\u0441\u0442\u0430\u043b\u043e\u0441\u044c \u0441\u043e\u0431\u0440\u0430\u0442\u044c 99 \u043c\u043b\u043d 980 \u0442\u044b\u0441 \u0440\u0443\u0431\u043b\u0435\u0439.",
+    "donation_on": true
+  }
+},
+{
+  "model": "manager.news",
+  "pk": 3,
+  "fields": {
+    "company": 1,
+    "publicationDate": "2020-06-03T15:45:32.288Z",
+    "publicationTitle": "\u041c\u0430\u0442\u0447 \u0432\u0435\u043a\u0430",
+    "publicationText": "18 \u0438\u044e\u043d\u044f \u0441\u043e\u0441\u0442\u043e\u0438\u0442\u0441\u044f \u043c\u0430\u0442\u0447 \u0432\u0435\u043a\u0430 \u043c\u0435\u0436\u0434\u0443 \u0434\u043e\u043c\u0430\u043c\u0438 *\u0423\u043b\u0438\u0446\u0430 \u0413\u0435\u0440\u0430\u0441\u0438\u043c\u0430 \u041a\u0443\u0440\u0438\u043d\u0430 26* \u0438 *\u041a\u043e\u0441\u0442\u0430\u043d\u0430\u0435\u0432\u0441\u043a\u0430\u044f 45\u043a2*. \u041a\u043e\u043c\u0430\u043d\u0434\u044b \u043f\u043e 30 \u0447\u0435\u043b\u043e\u0432\u0435\u043a \u0431\u0443\u0434\u0443\u0442 \u0438\u0433\u0440\u0430\u0442\u044c \u0432\u0435\u0441\u044c \u0434\u0435\u043d\u044c. \u0421\u043c\u0435\u043d\u044b \u043f\u0440\u043e\u0438\u0441\u0445\u043e\u0434\u044f\u0442 \u0440\u0430\u0437 \u0432 \u0447\u0430\u0441. \u041f\u0440\u0438\u0445\u043e\u0434\u0438\u0442\u0435 \u043f\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u043d\u0430 \u043b\u0435\u0433\u0435\u043d\u0434\u0430\u0440\u043d\u043e\u0435 \u0441\u043e\u0431\u044b\u0442\u0438\u0435!!\n![\u0444\u0443\u0442\u0431\u043e\u043b](https://www.dk-yamkino.ru/media/2018/08/14/1227665324/image_image_4651677.jpg)",
+    "donation_on": false
+  }
 }
 ]

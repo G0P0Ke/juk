@@ -30,7 +30,6 @@ def _get_base_context(title, sign_in_button=True):
     context = {
         'title': title,
         'if_sign_but': sign_in_button,
-
     }
     return context
 
@@ -48,6 +47,7 @@ def index_view(request):
         context.update({
             "is_tenant": hasattr(request.user, 'tenant'),
             "is_manager": hasattr(request.user, 'manager'),
+            "all_houses": House.objects.all(),
         })
     return render(request, 'pages/index.html', context)
 

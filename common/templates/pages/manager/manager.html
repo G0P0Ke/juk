@@ -8,12 +8,16 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
 </head>
-<body>
+<body onload="startTime()">
+<div class="roof">
+  <img class="logo" src="{% static 'img/logo.svg' %}">
+  <img class="roofer" src="{% static 'img/qwerty.svg' %}"> 
+</div>
 {% if companyless %}
 <!---ЛИЧНЫЙ КАБИНЕТ --->
 <h2>Вы не подключены к компании, для дальнеешего пользование сервисом, пожалуйста, выберите свою компанию в редактировании профиля</h2>
 <div class="square" onclick="window.location.href='/manager/my_cabinet'">
-    <div style="color:green" class="title">Личный кабинет, {{user.username}}</div>
+    <div  class="title">Личный кабинет, {{user.username}}</div>
     <img src="{{ user.manager.photo.url }}" width="40" height="40">
 </div>
 
@@ -21,32 +25,36 @@
 
   <div class="wrapper">
     <!---НОВОСТИ --->
-    <div style="color:green" class="rectangle-big" onclick="window.location.href='manager/news'">
+    <div  class="rectangle-big" onclick="window.location.href='manager/news'">
         <div class="title">Новости</div>
-
+        <div class="news">
+          <h2>{{last_news.publicationTitle}}</h2>
+          <h5>{{last_news.publicationDate | date:"d.m.Y в H:i"}}</h5>
+          <div class="fakeimg"></div>
+          <p>{{news_text}}...</p>
+        </div>
     </div>
 
     <!---ФОРУМЫ --->
-    <div style="color:green" class="square" onclick="window.location.href='manager/company_forums'">
+    <div  class="square" onclick="window.location.href='manager/company_forums'">
         <div class="title">Форумы домов вашей компании</div>
-
-
+        <img class="house" src="{% static 'img/house.png' %}">
     </div>
-      <div style="color:green" class="square" onclick="window.location.href='forum/{{ user.manager.company.forum.id }}'">
+
+    <div  class="square" onclick="window.location.href='forum/{{ user.manager.company.forum.id }}'">
         <div class="title">Форум моей компании</div>
-
-
+        <img class="house" src="{% static 'img/company.png' %}">
     </div>
 
     <!---ЛИЧНЫЙ КАБИНЕТ --->
       <div class="square" onclick="window.location.href='/manager/my_cabinet'">
-        <div style="color:green" class="title">Личный кабинет, {{user.username}}</div>
+        <div  class="title">Личный кабинет {{user.first_name}}</div>
         <img src="{{ user.manager.photo.url }}" width="40" height="40">
       </div>
 
       <!---МОИ ЗАДАНИЯ --->
       <div class="square" onclick="window.location.href='vol/help'">
-         <div style="color:green" class="title">Задания моей компании</div>
+         <div  class="title">Задания моей компании</div>
           <br>
           <div  class="title">
               <p>Ваших открытых заданий: {{ amount_of_my_opened_tasks }}</p>
@@ -55,42 +63,82 @@
 
       <!---МОИ ОБРАЩЕНИЯ --->
     <div class="rectangle-horizontal" onclick="window.location.href='my_appeals'">
-        <div style="color:green" class="title">Мои обращения</div>
-
+        <div  class="title">Мои обращения</div>
+        <br>
+        <div class="appeal">
+          <p>
+          <img class="male_operator" src="{% static 'img/male_operator.png' %}">{{ last_appeal }}
+          </p>
+        </div>
     </div>
 
       <!---ОБРАЩЕНИЯ МОЕЙ КОМПАНИИ--->
     <div class="rectangle-horizontal" onclick="window.location.href='manager/company_appeals'">
-        <div style="color:green" class="title">Открытые обращения Вашей компании</div>
-        <br><br><br>
-        <div  class="title">
-            <p>Всего открытых обращений: {{ amount_of_opened_appeals }}</p>
+        <div  class="title">Открытые обращения</div>
+        <br>
+        <div class="appeal">
+          <p>
+          <img class="operator" src="{% static 'img/operator.png' %}">Всего открытых обращений: {{ amount_of_opened_appeals }}
+          </p>
         </div>
     </div>
 
     <!--- ПРОПУСКИ --->
     <div class="rectangle-horizontal" onclick="window.location.href='manager/pass/houses'">
-        <div style="color:green" class="title">Пропуски</div>
-
+        <div  class="title">Пропуска</div>
+        <img class="pass" src="{% static 'img/pass.png' %}">
     </div>
     <!---ПОДТВЕРЖДЕНИЕ ЖИТЕЛЕЙ --->
       <div class="square" onclick="window.location.href='manager/tenant_confirming'">
-         <div style="color:green" class="title">Подтверждение жителей</div>
+         <div  class="title">Подтверждение жителей</div>
           <br>
           <div  class="title">
-              <p>Неподтвержденных жителей: {{ amount_of_unconfirmed_tenants }}</p>
+              <p>Жителей не подтверждено: {{ amount_of_unconfirmed_tenants }}</p>
           </div>
       </div>
     <!---Добавление дома --->
       <div class="square" onclick="window.location.href='manager/add_house'">
-         <div style="color:green" class="title">Добавление дома</div>
+         <div  class="title">Добавление дома</div>
           <br>
           <div  class="title">
               <p>Всего домов в Вашей компании: {{ amount_of_houses }}</p>
           </div>
       </div>
 
+      <div class="timer rectangle-horizontal" onclick="window.location.href=''">
+          <div class="title">Время</div>
+          <div id="clock1" class="clock1">
+              <div class="clock" id="clock">
+                  <span class="time" id="hr"></span>:
+                  <span class="time" id="min"></span>:
+                  <span class="time" id="sec"></span>
+              </div>
+          </div>
+      </div>
+
+      <div class="square" onclick="window.location.href=`{% url 'logout' %}`">
+        <div class="title">Выйти</div>
+        <img class="exit" src="{% static 'img/exit.png' %}">
+    </div>
   </div>
 {% endif %}
 </body>
+<script type="text/javascript">
+  function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('hr').innerHTML =h;
+    document.getElementById('min').innerHTML =m;
+    document.getElementById('sec').innerHTML =s;
+    var t = setTimeout(startTime,500);
+}
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};
+    return i;
+}
+</script>
 </html>

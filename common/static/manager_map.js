@@ -44,7 +44,7 @@ function init () {
         searchControlProvider: 'yandex#search'
     });
 
-    add_houses()
+    add_houses();
 
     myMap.events.add('click', function (e) {
         var coords = e.get('coords');
@@ -70,9 +70,6 @@ function add_houses() {
 
     console.log("Длина массива: ", all_houses_html.length)
 
-    var myCollection = new ymaps.GeoObjectCollection(),
-    myPoints = []
-
     for (let i = 0; i < all_houses_html.length; i++) {
         ymaps.geocode(all_houses_html[i].value, {
         results: 1,
@@ -81,12 +78,23 @@ function add_houses() {
             var firstGeoObject = res.geoObjects.get(0),
             coords = firstGeoObject.geometry.getCoordinates();
             address = all_houses_html[i].value
+            company = all_houses_html[i].name
 
-            console.log(coords, address)
+            var HousePlacemark = new ymaps.Placemark(coords, {
+            hintContent: company,
+            balloonContent: address
+            }, {
+                iconLayout: 'default#image',
+                iconImageHref: 'https://img2.freepng.ru/20180326/fzw/kisspng-house-logo-home-real-estate-business-home-5ab8bd2d3421a9.5548848215220564932135.jpg', // 1
+                //iconImageHref: 'https://www.pngkey.com/png/detail/785-7855984_artificial-grass-family-icon-png-pink.png', //  2
+                //iconImageHref: 'img/house.png', // не работает (по необъяснимым причинам)
+                iconImageSize: [18, 18],
+                // Смещение левого верхнего угла иконки относительно
+                // её "ножки" (точки привязки).
+                iconImageOffset: [-5, -5]
+            });
 
-            firstGeoObject.options.set('preset', 'islands#redCircleIcon');
-
-            myMap.geoObjects.add(firstGeoObject);
+            myMap.geoObjects.add(HousePlacemark);
         });
     }
 }

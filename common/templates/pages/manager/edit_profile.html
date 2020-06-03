@@ -158,10 +158,10 @@ margin:10px auto 0;
 
                 <label style="font-size: 15pt; text-align: left;" for="first_name-id">Ваше имя:</label>
                 <input class="forminput" type="text" name="first_name" id="first_name-id" value="{{user.first_name}}"
-                       required><br>
+                       disabled><br>
 
                 <label style="font-size: 15pt; text-align: left;" for="last_name-id">Ваша фамилия:</label>
-                    <input class="forminput" type="text" name="last_name" id="last_name-id" value="{{user.last_name}}" required><br>
+                    <input class="forminput" type="text" name="last_name" id="last_name-id" value="{{user.last_name}}" disabled><br>
 
                 <input class="mdc-button mdc-button--raised" style="margin:auto auto auto 25%;width:40%;" type="submit" value="Сохранить изменения">
             </form>
@@ -169,8 +169,7 @@ margin:10px auto 0;
 
 <div class="f" style="text-align: center; margin-left: -10%;">
             {% if flag == 1 %}
-            <p style="font-size: 15pt"> Ваш запрос на подключение к УК одобрен. <br> ИНН вашей компании: {{
-                user.manager.company.inn }}</p>
+            <p style="font-size: 15pt"> Ваш запрос на подключение к УК одобрен. <br> ИНН вашей компании: {{ user.manager.company.inn }}</p>
             {% elif flag == 0 %}
             <p style="font-size: 15pt"> Вы можете подать запрос на подключение к УК</p>
             <form method="POST" action="">

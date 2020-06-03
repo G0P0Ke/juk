@@ -75,7 +75,7 @@ margin:10px auto 0;
         <div class="category">
             <p style="font-size: 22pt; text-align: center;">Открытые задания для выполнения</p>
             {% for task in opened_tasks %}
-            <a style="color: var(--mdc-theme-primary)" href="{% url 'task' id=task.id %}">{{ task.description }}</a><br><br>
+            <a style="color: var(--mdc-theme-primary)" href="{% url 'task' task_id=task.id %}">{{ task.description }}</a><br><br>
             {% endfor %}
         </div>
     </div>
@@ -83,13 +83,13 @@ margin:10px auto 0;
         <div class="category">
             <p style="font-size: 22pt; text-align: center;">Задания за которые вы взялись</p>
             {% for task in taken_tasks %}
-            <a style="color: var(--mdc-theme-primary)" href="{% url 'task' id=task.id %}"> {{ task.description }}</a><br><br>
+            <a style="color: var(--mdc-theme-primary)" href="{% url 'task' task_id=task.id %}"> {{ task.description }}</a><br><br>
             {% endfor %}
         </div>
         <div class="category">
             <p style="font-size: 22pt; text-align: center;">Задания, которые вы выполнили</p>
             {% for task in closed_tasks %}
-            <a style="color: var(--mdc-theme-primary)" href="{% url 'task' id=task.id %}"> {{ task.description }}</a><br><br>
+            <a style="color: var(--mdc-theme-primary)" href="{% url 'task' task_id=task.id %}"> {{ task.description }}</a><br><br>
             {% endfor %}
         </div>
     </div>

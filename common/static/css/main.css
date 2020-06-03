@@ -3,6 +3,8 @@
 body{
    margin: 0;
    font-family: 'Open Sans',serif;
+   --mdc-theme-primary: #F25CA2;
+   --mdc-theme-secondary: #00C853;
 }
 
 .roof{
@@ -70,7 +72,7 @@ body{
   }
 
 .wrapper > div > .title{
-    color: green;
+    color: var(--mdc-theme-primary);
     margin-top: 2vh;
     margin-left: 1vw;
     margin-bottom: -15%;
@@ -81,7 +83,34 @@ body{
 
 .title > p {
   color: black;
+  font-size: 1vw;
+}
 
+.appeal{
+  margin-top: 10%; 
+  padding: 0; 
+}
+
+.appeal > p{
+    font-size: 1vw;
+    word-wrap: break-word;
+    color:black;
+    display: inline;
+    text-align: right;
+}
+
+.appeal > p > img{
+    width: 60%;
+    height: 80%;
+    float: left;
+}
+
+.appeal > p > .male_operator{
+    margin-left:15%;
+    margin-top: 2%;
+    width: 40%;
+    height: 70%;
+    float: left;
 }
 
 .weather > p{
@@ -118,6 +147,16 @@ body{
     object-fit: fill; 
 }
 
+.wrapper > div >.friends{
+    margin-top: 2vh;
+    padding-top: 10%;
+    padding-left: 10%;
+    height: 65%;
+    width: 80%; 
+    position: center;
+    object-fit: fill; 
+}
+
 .wrapper > div >.company{
     margin-top: 1vh;
     padding-top: 10%;
@@ -128,15 +167,7 @@ body{
     object-fit: fill; 
 }
 
-.wrapper > div >.operator{
-    margin-top: 1vh;
-    padding-top: 10%;
-    padding-left: 10%;
-    height:85%;
-    width: 80%; 
-    position: center;
-    object-fit: fill; 
-}
+
 
 .wrapper > div >.pass{
     margin-top: 1vh;
@@ -171,6 +202,41 @@ body{
    margin-right: 5%;
    margin-left: 5%; 
    background-color: #eee;
+}
+
+.clock1{
+    padding: 20px;
+    background-color: #eee;
+    max-width: 600px;
+    margin-top: 15%;
+    height: 57%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+}
+.clock1:hover{
+    box-shadow: 0 0 11px #3498DB;
+    background-color: #ddd;
+}
+.clock{
+    width: 100%;
+    height: 80%;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    background-color: #3498DB;
+    font-size: 400%;
+    text-align: center;
+    color: rgb(50,50,50);
+}
+.time{
+    letter-spacing: 10px;
+    text-align: center;
+}
+
+.timer.rectangle-horizontal:hover{
+  background-color: #eee;
 }
 
 

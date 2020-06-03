@@ -109,12 +109,8 @@ def edit_profile_view(request):
         form = PhotoUpload()
     if request.method == 'POST':
         username = request.POST.get('username')
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
         address = request.POST.get('address')
         user.username = username
-        user.first_name = first_name
-        user.last_name = last_name
         if request.user.tenant.house is None or address != request.user.tenant.house.address:
             user.tenant.house_confirmed = False
             if House.objects.filter(address=address).exists():
@@ -425,7 +421,6 @@ class Message:
             :return: объект с данными о моих сообщениях
         """
         return self.my_message
-
 
 
 @login_required
@@ -844,6 +839,21 @@ def tenant_main_page(request):
         context.update({
             "last_news": last,
             "news_text": text,
+        })
+    else:
+        context.update({
+            "last_news": "Новостей пока нет",
+            "news_text": "Новостей пока нет",
+        })
+    my_appeals = request.user.tenant.appeal_set.all()
+    if len(my_appeals) > 0:
+        last = my_appeals[len(my_appeals) - 1]
+        context.update({
+            "last_appeal": "Последнее обращение: " + last.theme,
+        })
+    else:
+        context.update({
+            "last_appeal": "У Вас еще нет обращений",
         })
     return render(request, 'pages/tenant/tenant.html', context)
 
