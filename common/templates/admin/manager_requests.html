@@ -1,16 +1,28 @@
 {% extends 'base.html' %}
 
-{% block content %}
-    <div class="bx-pull-right"> <a href="{% url 'create_a_company' %}" class="link"><h5>Добавить УК</h5></a>  </div>
-    <div class="bx-pull-right"> <a href="{% url 'new_admin' %}" class="link"><h5>Подтверждение админов</h5></a>  </div>
+{% block content %}<!--
+    <div class="bx-pull-right"> <a href="{% url 'create_a_company' %}" class="link"><h5>Добавить УК</h5></a></div>
+    <div class="bx-pull-right"> <a href="{% url 'new_admin' %}" class="link"><h5>Добавить УК</h5></a></div>-->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mr-3 ml-3">
+            <li class="breadcrumb-item active" aria-current="page">
+                <a href="{% url 'create_a_company' %}" class="link">Добавить УК</a>
+            </li>
+            {% if user.is_superuser %}
+            <li class="breadcrumb-item active" aria-current="page">
+                <a href="{% url 'new_admin' %}" class="link">Добавить админов</a>
+            </li>
+            {% endif %}
+        </ol>
+    </nav>
     <div class="row">
         <div class="col">
             {% for request in requests %}
             <div class="card ml-4 mt-2 mr-auto" >
                 <div class="card-body">
                     <h5 class="card-title"> Запрос менеджера</h5>
-                     <h6 class="card-subtitle mb-2 text-muted"> Name: {{ request.name }}</h6>
-                     <h6 class="card-subtitle mb-2 text-muted"> Surname: {{ request.surname }}</h6>
+                     <h6 class="card-subtitle mb-2 text-muted"> Имя: {{ request.name }}</h6>
+                     <h6 class="card-subtitle mb-2 text-muted"> Фамилия: {{ request.surname }}</h6>
                     <p class="card-text">ИНН Компании: {{ request.inn_company }}</p>
                     <div class="row">
                     <form action="" method="post" class="ml-3 mr-2">

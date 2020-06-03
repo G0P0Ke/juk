@@ -1,53 +1,175 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container col-sm-4"
-     style="background-color: #e8e9e9; border-radius: 10px; padding: 20px 5px 30px 5px;">
+<style>
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #00C853;
+    --mdc-theme-background: #021859;
+    --mdc-theme-surface: #0B9ED9;
+    --mdc-theme-error: #b00020;
+    }
+
+.forminput {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+}
+    .form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 70%;
+  min-height: 700px;
+  margin: 15px auto 100px;
+  box-sizing: border-box;
+  padding: 30px 0 70px 0;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.form textarea {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 80%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+  height: 120px;
+  resize: none;
+  overflow: auto;
+}
+    a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+input#id_name:focus:invalid, input#id_surname:focus:invalid{
+  background-color: #FFFFCC;
+}
+
+input#id_name:focus:valid, input#id_surname:focus:valid{
+  background-color: #CCFFCC;
+}
+
+/* Это стиль для сообщений об ошибке */
+.error {
+  width: 100%;
+  padding: 0;
+  font-size: 80%;
+  color: white;
+  background-color: #FF0033;
+  border-radius: 5px;
+
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.error.active {
+  padding: 0.3em;
+}
+</style>
+
+<div class="form col-sm-4"
+     style="padding: 20px 5px 30px 5px;">
     <div class="row h-100 justify-content-center align-items-center">
         <form method="post" class="col-sm-9 login">
             {% csrf_token %}
-            <h2>Регистрация</h2>
+            <p style="margin: 10px auto 0;font-size: 22pt; text-align: center;">Регистрация</p>
+            <br>
             {% if not error == None %}
             <div style="color: red;">{{ error }}</div>
             {% endif %}
 
             <div class="form-group">
-                <input type="text" class="form-control" required id="id_username" name="username" placeholder="Логин"
+                <input type="text" class="forminput" required id="id_username" name="username" placeholder="Логин"
                        maxlength="150">
             </div>
 
             <div class="form-group">
-                <input type="email" class="form-control" id="id_email" name="email" placeholder="E-mail"
+                <input type="email" class="forminput" id="id_email" name="email" placeholder="E-mail"
                        maxlength="254">
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" name="first_name" pattern="[А-ЯЁ][а-яё]{1,}" placeholder="Имя"
+                <input type="text" class="forminput" id="id_name" name="first_name" pattern="[А-ЯЁ][а-яё]{1,}" placeholder="Имя"
                        maxlength="254">
             </div>
+            <span class="error" aria-live="polite" id="error_name"></span>
 
             <div class="form-group">
-                <input type="text" class="form-control" name="last_name" pattern="[А-ЯЁ][а-яё]{1,}"
+                <input type="text" class="forminput" id="id_surname" name="last_name" pattern="[А-ЯЁ][а-яё]{1,}"
                        placeholder="Фамилия" maxlength="254">
             </div>
+            <span class="error" aria-live="polite" id="error_surname"></span>
 
             <div class="form-group">
-                <input type="password" class="form-control" id="id_password1" name="password1" placeholder="Пароль">
+                <input type="password" class="forminput" id="id_password1" name="password1" placeholder="Пароль">
             </div>
 
             <div class="form-group">
-                <input type="password" class="form-control" id="id_password2" name="password2"
+                <input type="password" class="forminput" id="id_password2" name="password2"
                        placeholder="Пароль для подтверждения">
             </div>
+
             <div class="form-group">
-                <button type="submit" class="btn btn-dark">Зарегистрироваться</button>
+                <button type="submit" id="form_input" class="mdc-button mdc-button--raised" style="width:100%">Зарегистрироваться</button>
             </div>
 
             <div class="form-group">
-                <a href="{% url 'login' %}">Уже есть аккаунт?</a>
+                <a class="mdc-button" style="width:100%" href="{% url 'login' %}"><span class="mdc-button__ripple"></span>Уже есть аккаунт?</a>
             </div>
         </form>
     </div>
 </div>
+<script>
+var form_input = document.getElementById('form_input');
+var surname = document.getElementById('id_surname');
+var namer = document.getElementById('id_name');
+var error_surname = document.getElementById('error_surname');
+var error_name = document.getElementById('error_name');
+
+surname.addEventListener("input", function (event) {
+  if (!surname.validity.patternMismatch) {
+    error_surname.innerHTML = "";
+    error_surname.className = "error";
+  }
+}, false);
+
+
+namer.addEventListener("input", function (event) {
+  if (!namer.validity.patternMismatch) {
+    error_name.innerHTML = "";
+    error_name.className = "error";
+  }
+}, false);
+
+form_input.addEventListener("click", function (event) {
+  if (surname.validity.patternMismatch) {
+    error_surname.innerHTML = "Введите фамилию на русском языке, начиная с заглавной буквы";
+    error_surname.className = "error active";
+    event.preventDefault();
+  }
+  if (namer.validity.patternMismatch) {
+    error_name.innerHTML = "Введите имя на русском языке, начиная с заглавной буквы";
+    error_name.className = "error active";
+    event.preventDefault();
+  }
+});
+</script>
 
 {% endblock %}

@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import AnonymousUser
 from django.contrib import messages
-# from django.utils import timezone
+from django.utils import timezone
 
 from tenant.models import Appeal, House, Forum, Tenant, Pass, Task, Company
 from tenant.models import ManagerRequest  # , Manager
@@ -268,7 +268,7 @@ def create_news_page_view(request):
                 company=request.user.manager.company,
                 publicationTitle=createnews.data['publicationTitle'],
                 publicationText=createnews.data['publicationText'],
-                publicationDate=datetime.datetime.now(),
+                publicationDate=timezone.now(),
                 donation_on=donation_on,
             )
             record.save()

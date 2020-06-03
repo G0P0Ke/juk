@@ -46,12 +46,6 @@
         <img class="house" src="{% static 'img/company.png' %}">
     </div>
 
-    <!---ЛИЧНЫЙ КАБИНЕТ --->
-      <div class="square" onclick="window.location.href='/manager/my_cabinet'">
-        <div  class="title">Личный кабинет {{user.first_name}}</div>
-        <img src="{{ user.manager.photo.url }}" width="40" height="40">
-      </div>
-
       <!---МОИ ЗАДАНИЯ --->
       <div class="square" onclick="window.location.href='vol/help'">
          <div  class="title">Задания моей компании</div>
@@ -59,6 +53,12 @@
           <div  class="title">
               <p>Ваших открытых заданий: {{ amount_of_my_opened_tasks }}</p>
           </div>
+      </div>
+
+      <!---ЛИЧНЫЙ КАБИНЕТ --->
+      <div class="square" onclick="window.location.href='/manager/my_cabinet'">
+        <div  class="title">Личный кабинет {{user.first_name}}</div>
+        <img src="{{ user.manager.photo.url }}" width="40" height="40">
       </div>
 
       <!---МОИ ОБРАЩЕНИЯ --->
