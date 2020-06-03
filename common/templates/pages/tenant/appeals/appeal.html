@@ -90,9 +90,9 @@
 
 {% if is_manager %}
     {% if is_taken %}
-<p>С Вами ведет диалог житель {{comment.author.first_name}} {{comment.author.last_name}}.</p>
+<p>С Вами ведет диалог житель {{ appeal.tenant.user.first_name}} {{appeal.tenant.user.last_name}}.</p>
     {% else %}
-<p>К вашей компании обращается житель {{comment.author.first_name}} {{comment.author.last_name}}, он очень ждет Вашего
+<p>К вашей компании обращается житель {{appeal.tenant.user.first_name}} {{appeal.tenant.user.last_name}}, он очень ждет Вашего
     ответа.</p>
     {% endif %}
 {% endif %}

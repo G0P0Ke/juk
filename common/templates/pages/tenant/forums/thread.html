@@ -2,6 +2,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{% load martortags %}
+
 <style>
 
     a {
@@ -183,7 +185,7 @@ border: 1px solid #FFFFF;
          <div class="col">
              <div class="col 7">
                  <div class="alert comment shadow" role="alert">
-                     {{thread.text}}
+                     {{thread.text|safe_markdown}}
                  </div>
              </div>
          </div>
@@ -232,7 +234,7 @@ border: 1px solid #FFFFF;
             </div>
          <div class="col-9">
              <div class="alert comment shadow" role="alert">
-                 {{comment.text}}
+                 {{comment.text|safe_markdown}}
              </div>
              <div style="float: right; color: #808080;"> {{ comment.cr_date }} </div>
          </div>

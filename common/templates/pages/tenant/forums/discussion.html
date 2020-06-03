@@ -150,9 +150,39 @@ border: 1px solid #FFFFF;
 
 <form action='' id="comment" method="post">
     {% csrf_token %}
-    <div class="col"><p style="font-size: 25pt; text-align:center">{{discussion.theme}}</p></div>
-    <div class="col-1"></div>
-    <p style="font-size: 20pt; text-align: center;">{{discussion.description}}</p>
+    <div class="form-group row">
+        <div class="col-3">
+            {% if discussion.author.manager %}
+            <div class="alert shadow" style="background-color: #66CDAA; color:#F25CA2; width:190px" role="alert">
+            {% else %}
+            <div class="alert shadow" style="background-color: #FFFFFF; color:#F25CA2; width:190px" role="alert">
+            {% endif %}
+
+                {% if discussion.author.tenant %}
+
+                <div align="center" style="color:00008B">{{discussion.author.first_name}} {{discussion.author.last_name}}</div>
+                <div class="media">
+                    <img src="{{ discussion.author.tenant.photo.url }}"  width="160" height="160"  align = "left" alt="...">
+                </div>
+
+                {% elif discussion.author.manager %}
+
+                <div align="center" style="color:00008B">{{discussion.author.first_name}} {{discussion.author.last_name}}</div>
+                <div class="media">
+                    <img src="{{ discussion.author.manager.photo.url }}"  width="160" height="160"  align = "left" alt="...">
+                </div>
+
+                {% endif %}
+            </div>
+        </div>
+
+
+        <div class="col-8">
+            <p style="font-size: 25pt; text-align:center">{{discussion.theme}}</p>
+            <p style="font-size: 20pt; text-align: left;">{{discussion.description}}</p>
+        </div>
+    </div>
+
 
     <div class="form-group row">
         <div class="col-1">

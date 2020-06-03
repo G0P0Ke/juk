@@ -319,7 +319,7 @@ class ManagerRequest(models.Model):
         (1, 'Accepted'),
         (2, 'Refused'),
         (3, 'Not considered')
-    ) # статусы запроса на подключения
+    )  # статусы запроса на подключения
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE
