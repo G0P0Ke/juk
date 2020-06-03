@@ -346,12 +346,16 @@ def company_appeals_view(request):
     if not hasattr(user, 'manager'):
         return redirect('/')
     opened_appeals = []
+    flag = 0
     for appeal in Appeal.objects.all():
         if appeal.tenant.house.company == user.manager.company and appeal.manager is None:
             opened_appeals.append(appeal)
+    if len(opened_appeals) == 0:
+        flag = 1
     context = {
         'user': user,
         "opened_appeals": opened_appeals,
+        'flag': flag,
     }
     return render(request, 'pages/manager/appeals/company_appeals.html', context)
 
@@ -458,9 +462,13 @@ def tenant_confirming_view(request):
                 tenants.append(tenant)
         if tenants:
             houses.append(HouseContext(house, tenants))
+    flag = 0
+    if len(houses) == 0:
+        flag = 1
     context = {
         "user": request.user,
         "houses": houses,
+        'flag': flag,
     }
     return render(request, 'pages/manager/tenant_confirming.html', context)
 
