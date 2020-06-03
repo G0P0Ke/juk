@@ -389,6 +389,9 @@ def my_appeals_view(request):
         context.update({
             "is_manager": True,
         })
+    flag = 0
+    if len(my_appeals) == 0:
+        flag = 1
     context.update({
         "my_appeals": my_appeals,
     })
@@ -618,12 +621,16 @@ def help_view(request):
                     taken_tasks.append(task)
                 if task.status == "closed":
                     closed_tasks.append(task)
+    flag = 0
+    if len(opened_tasks) == 0:
+        flag = 1
     context = {
         "opened_tasks": opened_tasks,
         "taken_tasks": taken_tasks,
         "closed_tasks": closed_tasks,
         "is_tenant": hasattr(request.user, 'tenant'),
         "is_manager": hasattr(request.user, 'manager'),
+        'flag': flag,
     }
     return render(request, 'pages/tenant/volunteers/help.html', context)
 

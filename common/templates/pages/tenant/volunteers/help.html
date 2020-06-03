@@ -77,6 +77,9 @@ margin:10px auto 0;
     <div class="left">
 <div class="category">
 <p style="font-size: 20pt; text-align: center;">Открытые задания</p>
+{% if flag %}
+<h5> Сейчас заданий нет. Подождите или создайте своё </h5>
+{% endif %}
 {% for task in opened_tasks %}
 <a href="{% url 'task' id=task.id%}" style="color:var(--mdc-theme-primary)">{{ task.description }}</a><br>
 {% endfor %}

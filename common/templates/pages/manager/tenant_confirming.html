@@ -12,6 +12,9 @@
     <input type="hidden" id="confirm-id" value=0 name="confirmed">
     <input type="hidden" id="notconfirm-id" value=0 name="unconfirmed">
     {% csrf_token %}
+    {% if flag %}
+        <h5>Новых запросов от жителей пока не поступало. Заходите позже</h5>
+    {% endif %}
     {% for house in houses %}
     <h3>{{ house.house.address }}</h3>
     <hr>

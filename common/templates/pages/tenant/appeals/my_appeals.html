@@ -93,6 +93,9 @@
 
 <br><br>
 <hr>
+    {% if flag %}
+        <h5> Обращений пока нет. Заходите позже</h5>
+    {% endif %}
 {% for appeal in my_appeals %}
 <a href="{% url 'appeal' appeal_id=appeal.id%}"><button class="category">{{ appeal.theme }}</button></a>
 {% endfor %}
