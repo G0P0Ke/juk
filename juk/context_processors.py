@@ -11,10 +11,8 @@ def base_info(request):
     :param request: объект с деталями запроса.
     :return: объект с наполнением футера
     """
-    houses = House.objects.all()
-    companies = Company.objects.all()
-    num_h = len(houses)
-    num_c = len(companies)
+    num_h = House.objects.count()
+    num_c = Company.objects.count()
     return {
         'num_h': num_h,
         'num_c': num_c,

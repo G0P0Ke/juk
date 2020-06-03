@@ -11,24 +11,6 @@ class News(models.Model):
     """
     Модель БД для новостей
     """
-    choices = [
-        ('INTERESTING', 'interesting'),
-        ('IMPORTANT', 'important'),
-        ('URGENTLY', 'urgently')
-    ]
-
-    publicationTag = models.CharField(
-        choices=choices,
-        max_length=11,
-        default='INTERESTING'
-    )
-
-    district = models.CharField(
-        max_length=100,
-        blank=True,
-        null=True
-    )
-
     company = models.ForeignKey(
         to=Company,
         on_delete=models.CASCADE,

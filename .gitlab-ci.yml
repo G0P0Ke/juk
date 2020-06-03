@@ -8,9 +8,13 @@ before_script:
     - python -V
     - apt-get update
     - apt-get install ssh-client
+    - mkdir public
 
 stages:
     - deploy
+    - style
+    - docs
+    - test
 
 upload_to_server:
     stage: deploy
@@ -26,3 +30,45 @@ upload_to_server:
         - ssh $SSH_USER@$SSH_HOST "cd prodserver_conf && docker stop s104_juk && docker rm s104_juk && docker-compose build s104_juk && docker-compose up -d s104_juk && exit"
     only:
         - master
+
+pylint:
+    stage: style
+    before_script:
+        - pip install -r ci/pylint_requirements.txt
+    script:
+        - ./ci/pylint_runner.sh
+    artifacts:
+        paths:
+            - public/pylint.txt
+
+pep8:
+    stage: style
+    before_script:
+        - pip install -r ci/pycodestyle_requirements.txt
+    script:
+        - ./ci/pycodestyle_runner.sh
+    artifacts:
+        paths:
+            - public/pycodestyle.txt
+
+sphinx:
+  stage: docs
+  before_script:
+    - pip install -r ci/sphinx_requirements.txt
+  script:
+    - ./ci/sphinx_runner.sh
+  artifacts:
+    paths:
+      - public/docs
+
+test:
+    stage: test
+    before_script:
+        - pip install -r requirements.txt
+        - pip install coverage
+    script:
+        - ./ci/test_runner.sh
+    artifacts:
+        paths:
+            - public/test.txt
+            - public/code_coverage.txt

@@ -260,22 +260,20 @@ def create_news_page_view(request):
     context = {
         'user': request.user,
     }
-    print(request.user.manager.company.ya_num)
     if request.user.manager.company.ya_num != -1:
         context.update({"donation_possible": 1})
     if request.method == 'POST':
         createnews = CreateNewsForm(request.POST)
-        #donation_on = False
+        donation_on = False
         if request.POST.get('donation_on') == "on":
-            pass#donation_on = True
+            donation_on = True
         if createnews.is_valid():
             record = News(
                 company=request.user.manager.company,
                 publicationTitle=createnews.data['publicationTitle'],
                 publicationText=createnews.data['publicationText'],
                 publicationDate=datetime.datetime.now(),
-                publicationTag=createnews.data['publicationTag'],
-                district=createnews.data['district']
+                donation_on=donation_on,
             )
             record.save()
             return redirect('my_news')

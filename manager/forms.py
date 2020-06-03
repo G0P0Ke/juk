@@ -27,7 +27,7 @@ class CreateNewsForm(forms.ModelForm):
     class Meta:
         model = News
         #manager/forms.py
-        fields = ['publicationTitle', 'publicationText', 'publicationTag', 'district']
+        fields = ['publicationTitle', 'publicationText', 'donation_on']
 
 
 class RegManagerForm(forms.ModelForm):
