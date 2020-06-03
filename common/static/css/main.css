@@ -3,6 +3,8 @@
 body{
    margin: 0;
    font-family: 'Open Sans',serif;
+   --mdc-theme-primary: #F25CA2;
+   --mdc-theme-secondary: #00C853;
 }
 
 .roof{
@@ -70,7 +72,7 @@ body{
   }
 
 .wrapper > div > .title{
-    color: #548A54;
+    color: var(--mdc-theme-primary);
     margin-top: 2vh;
     margin-left: 1vw;
     margin-bottom: -15%;
