@@ -9,9 +9,12 @@ from .forms import FeedbackForm
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from tenant.models import Tenant, Company, Forum
 
 from tenant.models import Tenant, Company, Forum, House
 from tenant.models import Manager, ManagerRequest
+from tenant.forms import ManagerRequestForm, AppendCompany
+from .models import Admin
 from tenant.forms import AppendCompany, ManagerRequestForm
 
 from .forms import LoginForm, SignUpForm, FeedbackForm
@@ -79,6 +82,11 @@ def login_view(request):
                         if user.manager.is_admin:
                             return redirect('/admin')
                         return redirect('/manager')
+                    elif hasattr(user, 'admin'):
+                        if user.admin.is_admin:
+                            return redirect('/admin')
+                        else:
+                            messages.info(request, "Подождите подтверждения вашей регистрации")
                 else:
                     context.update({
                         'error': 'Аккаунт отключён',
@@ -133,6 +141,35 @@ def signup_view(request):
             'form': SignUpForm(),
         })
     return render(request, 'accounts/signup/signup_page.html', context)
+
+
+def admin_signup(request):
+    context = _get_base_context('sign up', False)
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print('save form')
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            first_name = form.cleaned_data.get("first_name")
+            second_name = form.cleaned_data.get("last_name")
+            admin = Admin.objects.create(user=user, name=first_name, surname=second_name)
+            admin.save()
+            messages.success(request, "Ваша заявка отправлена")
+            return redirect(login_view)
+        else:
+            context.update({
+                'form': SignUpForm(request),
+                'error': 'Форма не валидна',
+            })
+    else:
+        context.update({
+            'form': SignUpForm(),
+        })
+    return render(request, 'admin/admin_signup.html', context)
 
 
 @login_required
@@ -265,10 +302,7 @@ def admin_create(request):
                 else:
                     new_company = Company(inn=inn, name=name, ya_num=ya_num)
                 new_company.save()
-                new_company_forum = Forum.objects.create(company=new_company,
-                                                         categories="Новости|"
-                                                                    "Петиции|"
-                                                                    "Отчёты компании|Другое")
+                new_company_forum = Forum.objects.create(company=new_company, categories="Объявления|Другое")
                 new_company_forum.save()
                 messages.success(request, "УК добавлена")
             else:
@@ -281,4 +315,25 @@ def admin_create(request):
     })
     return render(request, 'admin/create_company.html', context)
 
+
+def admin_verification(request):
+    user = request.user
+    if not user.is_superuser:
+        return HttpResponse("У вас нет разрешения на подтверждение администраторов", status=401)
+    admins = Admin.objects.filter(is_admin=0)
+    context = {
+        'admins': admins,
+    }
+    if request.method == "POST":
+        for request_admin in admins:
+            if request.POST.get("agree" + str(request_admin.id)):
+                request_admin.is_admin = 1
+                request_admin.save()
+                messages.success(request, "Новый администратор одобрен")
+            elif request.POST.get("refused"+ str(request_admin.id)):
+                request_admin.is_admin = 0
+                request_admin.save()
+                messages.info(request, "Запрос на подключение нового администратора отклонен")
+        return redirect(admin_verification)
+    return render(request, 'admin/admin_verification.html', context)
 

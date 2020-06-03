@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div class="bx-pull-right"> <a href="{% url 'admin' %}" class="link"><h5>Запросы менеджеров</h5></a>  </div>
     <div class="bx-pull-right"> <a href="{% url 'create_a_company' %}" class="link"><h5>Добавить УК</h5></a>  </div>
-    <div class="bx-pull-right"> <a href="{% url 'new_admin' %}" class="link"><h5>Подтверждение админов</h5></a>  </div>
     <div class="row">
         <div class="col">
-            {% for request in requests %}
+            {% for request in admins %}
             <div class="card ml-4 mt-2 mr-auto" >
                 <div class="card-body">
-                    <h5 class="card-title"> Запрос менеджера</h5>
+                    <h5 class="card-title"> Запрос админа</h5>
                      <h6 class="card-subtitle mb-2 text-muted"> Name: {{ request.name }}</h6>
                      <h6 class="card-subtitle mb-2 text-muted"> Surname: {{ request.surname }}</h6>
-                    <p class="card-text">ИНН Компании: {{ request.inn_company }}</p>
                     <div class="row">
                     <form action="" method="post" class="ml-3 mr-2">
                             {% csrf_token %}
@@ -25,8 +24,7 @@
                 </div>
             </div>
             {% endfor %}
-        </div>
+         </div>
     </div>
-
 
 {% endblock %}
