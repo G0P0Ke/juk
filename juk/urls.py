@@ -26,6 +26,8 @@ from django.conf import settings
 urlpatterns = [
     path('martor/', include('martor.urls')),
 
+    path('admin/verification', common_views.admin_verification, name="new_admin"),
+    path('admin/signup/', common_views.admin_signup, name="admin_signup"),
     path('admin/', common_views.admin, name='admin'),
     path('admin/create/', common_views.admin_create, name='create_a_company'),
 

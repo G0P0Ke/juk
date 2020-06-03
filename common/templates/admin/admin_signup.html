@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class="container col-sm-4"
+    <div class="container col-sm-4"
      style="background-color: #e8e9e9; border-radius: 10px; padding: 20px 5px 30px 5px;">
     <div class="row h-100 justify-content-center align-items-center">
         <form method="post" class="col-sm-9 login">
@@ -40,24 +39,6 @@
                 <input type="password" class="form-control" id="id_password2" name="password2"
                        placeholder="Пароль для подтверждения">
             </div>
-
-            <div class="form-group">
-                <h6>Выберите роль:</h6>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="role" required id="id_tenant" value="tenant"
-                           checked>
-                    <label class="form-check-label" for="id_tenant">
-                        Житель
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="role" required id="id_manager" value="manager">
-                    <label class="form-check-label" for="id_manager">
-                        Менеджер
-                    </label>
-                </div>
-            </div>
-
             <div class="form-group">
                 <button type="submit" class="btn btn-dark">Зарегистрироваться</button>
             </div>
