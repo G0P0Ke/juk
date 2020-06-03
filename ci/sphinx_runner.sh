@@ -1,5 +1,5 @@
 #!/bin/bash
-
+mkdir public
 cd docs
 export PYTHONPATH=..
 make html
