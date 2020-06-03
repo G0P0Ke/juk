@@ -424,7 +424,6 @@ class Message:
         return self.my_message
 
 
-
 @login_required
 def appeal_view(request, appeal_id):
     """
@@ -844,7 +843,7 @@ def tenant_main_page(request):
             "news_text": "Новостей пока нет",
         })
     my_appeals = request.user.tenant.appeal_set.all()
-    if len(my_appeals)>0:
+    if len(my_appeals) > 0:
         last = my_appeals[len(my_appeals) - 1]
         context.update({
             "last_appeal": "Последнее обращение: " + last.theme,

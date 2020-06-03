@@ -44,7 +44,7 @@ function init () {
         searchControlProvider: 'yandex#search'
     });
 
-    add_houses()
+    add_houses();
 
     myMap.events.add('click', function (e) {
         var coords = e.get('coords');
@@ -70,9 +70,6 @@ function add_houses() {
 
     console.log("Длина массива: ", all_houses_html.length)
 
-    var myCollection = new ymaps.GeoObjectCollection(),
-    myPoints = []
-
     for (let i = 0; i < all_houses_html.length; i++) {
         ymaps.geocode(all_houses_html[i].value, {
         results: 1,
@@ -82,11 +79,19 @@ function add_houses() {
             coords = firstGeoObject.geometry.getCoordinates();
             address = all_houses_html[i].value
 
-            console.log(coords, address)
+            var HousePlacemark = new ymaps.Placemark(coords, {
+            hintContent: 'Адрес',
+            balloonContent: 'Это красивая метка'
+            }, {
+                iconLayout: 'default#image',
+                iconImageHref: 'static/house.png',
+                iconImageSize: [30, 42],
+                // Смещение левого верхнего угла иконки относительно
+                // её "ножки" (точки привязки).
+                iconImageOffset: [-5, -38]
+            });
 
-            firstGeoObject.options.set('preset', 'islands#redCircleIcon');
-
-            myMap.geoObjects.add(firstGeoObject);
+            myMap.geoObjects.add(HousePlacemark);
         });
     }
 }

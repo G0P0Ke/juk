@@ -71,7 +71,7 @@ urlpatterns = [
     path('vol/volunteer', tenant_views.volunteer_view, name="volunteer"),
     path('vol/help', tenant_views.help_view, name="help"),
     path('vol/help/cr_task', tenant_views.cr_task_view, name="cr_task"),
-    path('vol/task/<int:id>', tenant_views.task_view, name="task"),
+    path('vol/task/<int:task_id>', tenant_views.task_view, name="task"),
 
     path('tenant/pass/my_passes', tenant_views.my_pass_view, name="my_passes"),
     path('pass/<int:pass_id>', tenant_views.pass_view, name="pass"),

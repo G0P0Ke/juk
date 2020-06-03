@@ -81,7 +81,7 @@
 
 {% if is_tenant %}
     {% if is_taken %}
-<p>С Вами ведет диалог менеджер компании {{ appeal.company.name }}, {{appeal.manager.user.first_name }}
+<p>С Вами ведет диалог менеджер компании {{ appeal.manager.company.name }}, {{appeal.manager.user.first_name }}
     {{appeal.manager.user.last_name}}.</p>
     {% else %}
 <p>Ваше обращение к компании {{ appeal.tenant.house.company.name }} скоро будет рассмотрено.</p>
