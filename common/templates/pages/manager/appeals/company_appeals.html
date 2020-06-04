@@ -1,20 +1,56 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<style>
+        a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-error: #b00020;
+    }
+     .category {
+        width: 70%;
+        height: 60px;
+        font-family: "Roboto", sans-serif;
+        outline: 0;
+        background: #f2f2f2;
+        border: 0;
+        padding: 10px 15px;
+        box-sizing: border-box;
+        border-radius: 4px;
+        font-size: 18pt;
+        margin: 10px 15%;
+}
+</style>
 
 
 
-<br>
-<h1>Сие есть свободные обращения к вашей компании</h1>
-<hr>
-<a href="{% url 'manager_main' %}">Вернуться на главную</a>
-<hr>
-    {% if flag %}
+<p style="margin: 30px auto 0; text-align: center; font-size: 22pt;">Открытые обращения к Вашей компании</p>
+<a href="{% url 'manager_main' %}">
+    <button class="mdc-button" style="width: 100%;">
+        <span class="mdc-button__ripple"></span>
+        Вернуться на главную страницу
+    </button>
+</a>
+
+{% if flag %}
         <h5>Обращений к Вашей компании пока нет. Возможно, скоро они появятся, следите за этим.</h5>
     {% endif %}
+
 {% for appeal in opened_appeals %}
-<a href="{% url 'appeal' appeal_id=appeal.id %}"><button>Обращение ползователя {{ appeal.tenant.user.username }}</button></a>
-<hr>
+<a href="{% url 'appeal' appeal_id=appeal.id %}">
+    <button class="category">
+        Обращение пользователя {{ appeal.tenant.user.username }}
+    </button>
+</a>
+
 {% endfor %}
 
 

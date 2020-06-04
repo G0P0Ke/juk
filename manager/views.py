@@ -30,6 +30,7 @@ def manager_main_page(request):
     :param request: объект с деталями запроса.
     :return: объект ответа сервера с HTML-кодом внутри
     """
+    context = {}
     if not hasattr(request.user, 'manager'):
         return redirect('/')
     if request.user.manager.company is None:
@@ -38,7 +39,11 @@ def manager_main_page(request):
             "user": request.user,
             # "house_confirmed": request.user.tenant.house_confirmed,
         }
-        return render(request, 'pages/manager/manager.html', context)
+
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
 
     amount_of_my_opened_tasks = 0
     for task in Task.objects.all():
@@ -91,6 +96,10 @@ def manager_main_page(request):
         context.update({
             "last_appeal": "У Вас еще нет обращений",
         })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/manager/manager.html', context)
 
 
@@ -112,6 +121,11 @@ def my_cabinet_view(request):
     # f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
     # c.save()
     # f2.save()
+
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/manager/my_cabinet.html', context)
 
 
@@ -139,6 +153,10 @@ def edit_profile_view(request):
             context.update({
                 "user": request.user,
                 "form": form,
+            })
+            context.update({
+                "is_tenant": hasattr(request.user, 'tenant'),
+                "is_manager": hasattr(request.user, 'manager'),
             })
             return render(request, 'pages/manager/edit_profile.html', context)
     else:
@@ -208,6 +226,10 @@ def edit_profile_view(request):
         'form': form,
         "companies": Company.objects.all(),
     })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/manager/edit_profile.html', context)
 
 
@@ -235,6 +257,10 @@ def my_news_page_view(request):
     context.update({
         'user': request.user,
         'record': record,
+    })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
     })
     return render(request, 'pages/manager/news/my_news.html', context)
 
@@ -277,7 +303,10 @@ def create_news_page_view(request):
                 'companyName': request.user,
             }
         )
-
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/manager/news/cr_news.html', context)
 
 
@@ -309,6 +338,10 @@ def news_page(request, news_id):
         'user': request.user,
         'news': news,
     })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/manager/news/news.html', context)
 
 
@@ -329,6 +362,10 @@ def company_forums_view(request):
         'user': user,
         "houses": user.manager.company.house_set.all(),
     }
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/manager/company_forums.html', context)
 
 
@@ -355,6 +392,10 @@ def company_appeals_view(request):
         "opened_appeals": opened_appeals,
         'flag': flag,
     }
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/manager/appeals/company_appeals.html', context)
 
 
@@ -403,6 +444,10 @@ def add_house_view(request):
             return redirect(add_house_view)
         else:
             messages.warning(request, 'Заполните строку адресс для добавления дома')
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/manager/add_house.html', context)
 
 
@@ -468,6 +513,10 @@ def tenant_confirming_view(request):
         "houses": houses,
         'flag': flag,
     }
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/manager/tenant_confirming.html', context)
 
 
@@ -485,6 +534,10 @@ def pass_view(request):
         'company_name': request.user.manager.company.inn,
         'house_list': House.objects.filter(company=request.user.manager.company),
     }
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/manager/manager_pass.html', context)
 
 
@@ -514,6 +567,10 @@ def pass_list_view(request, house_id):
         'car_passes': car_passes,
         'house': house,
     }
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/manager/pass_list.html', context)
 
 
@@ -545,4 +602,8 @@ def registration_manager(request):
         context = {
             'form': form,
         }
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/manager/registrationmanager.html', context)

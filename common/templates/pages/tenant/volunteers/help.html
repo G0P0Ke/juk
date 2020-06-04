@@ -66,9 +66,9 @@ margin:10px auto 0;
 <a href="{% url 'cr_task' %}"><button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:30%; margin:0 auto 10px 35%; margin-up:10%"><span class="mdc-button__ripple"></span>Создать задание</button></a>
 <br>
 {% if is_tenant %}
-<a href="{% url 'tenant_main'%}"><button class="mdc-button" style="width:30%; margin-left:35%;"><span class="mdc-button__ripple"></span>Вернуться на главную</button></a>
+<a href="{% url 'tenant_main'%}"><button class="mdc-button" style="width: 100%;"><span class="mdc-button__ripple"></span>Вернуться на главную</button></a>
 {% elif is_manager %}
-<a href="{% url 'manager_main'%}"><button class="mdc-button" style="width:30%; margin-left:35%;"><span class="mdc-button__ripple"></span>Вернуться на главную</button></a>
+<a href="{% url 'manager_main'%}"><button class="mdc-button" style="width: 100%;"><span class="mdc-button__ripple"></span>Вернуться на главную</button></a>
 {% endif %}
 
 <br>

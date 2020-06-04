@@ -9,35 +9,62 @@
 <style>
        #map {
            margin: 10px auto;
-           width: 800px;
+           width: 90%;
            height: 500px;
        }
+        a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-error: #b00020;
+    }
+    .forminput {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 90%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+}
+
 </style>
-<h1 style="margin: 50px auto;">Добавление дома</h1>
-<hr>
+<p style="margin: 30px auto 0; text-align: center; font-size: 22pt;">Добавление дома</p>
 
-<a href="{% url 'manager_main' %}">Вернуться на главную страницу</a>
-
+<a href="{% url 'manager_main' %}"><button class="mdc-button" style="width: 100%;"><span class="mdc-button__ripple"></span>Вернуться на главную страницу</button></a>
+<br><br>
 {% for house in all_houses %}
-<input class="all_houses" type="hidden" value="{{house.address}}" name="{{house.company.name}}"> <!-- Для передачи данных в view() -->
+<input class="all_houses " type="hidden" value="{{house.address}}"> <!-- Для передачи данных в view() -->
 {% endfor %}
 
-<form method="POST">
+<form method="POST" style="text-align: center;">
     {% csrf_token %}
 
-    <label for="address-id">Ваш адрес:</label>
-    <input style="width:600px" type="text" name="address" id="address-id" value=""><br>
+    <label style="font-size: 15pt;" for="address-id">Адрес:</label><br>
+    <input class="forminput" style="width:600px" type="text" name="address" id="address-id" value=""><br>
 
     <input type="hidden" id="is_house-id" value=0 name="is_house"> <!-- Для передачи данных в view() -->
 
-    <input onclick="is_house_check();" value="Добавить дом" type="submit">
+    <input onclick="is_house_check();" class="mdc-button mdc-button--raised" value="Добавить дом" type="submit">
 </form>
-
-<button onclick="from_form_to_map()">Проверить адрес на карте</button>
-<button onclick="from_map_to_form()">Взять адрес с карты</button>
+<br><br>
+ <button class="mdc-button" style="float:left; margin:auto auto auto 5%;width:30%;" onclick="from_form_to_map()">
+       <span class="mdc-button__ripple"></span>Проверить адрес на карте</button>
+             <button class="mdc-button" style="margin:auto 5% auto 30%;width:30%;" onclick="from_map_to_form()">
+                 <span class="mdc-button__ripple"></span>взять адрес с карты</button>
 
 
 <div id="map"></div>
-
+<br><br>
 
 {% endblock %}

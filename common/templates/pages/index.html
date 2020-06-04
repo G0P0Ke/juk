@@ -2,24 +2,98 @@
 
 {% block content %}
 
-{% load static %}
 
-<!--- КАРТА С ДОМАМИ
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=9d32ec24-ae67-45da-9cb2-a1d51686e32b" type="text/javascript"></script>
-<script src="{% static 'index_map.js' %}"></script>
 
 <style>
-       #map {
-           margin: 10px auto;
-           width: 1000px;
-           height: 800px;
-       }
+    a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+
+    .themes{
+    width:100%;
+    border: 1px solid #FFFFF;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 40px;
+    min-height: 200px;
+    margin-top: 100px;
+    background-color:#EEEEEE;
+    }
+
+
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-error: #b00020;
+    }
+
+    .category {
+    width: 70%;
+    height: 60px;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    border: 0;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 20pt;
+    margin: 10px 15%;
+}
+.main p{
+font-size: 15pt;
+text-indent: 10%;
+}
+hr{
+border-top: 1px solid #F8BBD0;
+width: 80%;
+}
+
+body {
+    background-image: url(https://static.tildacdn.com/tild6335-3366-4162-a262-346132386539/noroot.png);
+}
 </style>
 
-{% for house in all_houses %}
-<input class="all_houses" type="hidden" value="{{house.address}}" name="{{house.company.name}}">
-{% endfor %}
+<div class="themes">
 
-<div id="map"></div> --->
+    <p style="text-align: center; font-size: 20pt;">Сообщество жильцов и УК</p>
+    <div class="main">
+        <p>А тут должен быть текст о нас</p>
+    </div>
+    <hr>
+    <div style="text-align:center;">
+        <p style="margin-bottom: 0px;">Уже подключены к нам? <a href="{% url 'login' %}" style="font-size:10pt;" class="mdc-button">Войти</a></p>
+        <p>Еще не зарегистрированы? <a href="{% url 'signup' %}"  class="mdc-button" style="font-size:10pt;">Присоединяйтесь</a></p>
+    </div>
+    <hr>
+    <div style="width: 95%; margin-left: 5%;">
+        <div style="width: 30%; float:left;">
+            <p style="font-size: 13pt;">Наши друзья:</p>
+            <a style="margin-bottom: 0px; font-size: 10pt;" href="https://informatics.ru/" class="mdc-button">
+                Московская школа программистов
+            </a>
+        </div>
+        <div style="width: 30%; margin-left: 5%; float: left;">
+            <p style=" font-size: 13pt;">Контакты для связи:</p>
+            <a style="margin-bottom: 0px; font-size: 10pt;" href="" class="mdc-button">
+                juk_feedback_mail@mail.ru
+            </a><br>
+            <a style="margin-top: 0px; font-size: 10pt;" href="https://vk.com/juk_project" class="mdc-button">
+                мы в вк
+            </a>
+        </div>
+         <div style="width: 30%; margin-left: 70%;">
+            <p style=" font-size: 13pt;">Наша команда:</p>
+            <a style="margin-top: 0px; font-size: 10pt;" href="https://gitlab.informatics.ru/2019-2020/yndx/s104" class="mdc-button">
+                Мшп группа s104, 2020 г.
+            </a>
+        </div>
+</div>
+</div>
 
 {% endblock %}

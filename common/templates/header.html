@@ -1,11 +1,23 @@
 <header>
+    {% load static %}
     <div class="container">
         {% block header %}
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-secondary">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top " style="height:7%; background-color: #F48DBD;">
             <div class="container">
-                <a clas/home/s104s="navbar-brand" href="{% url 'index' %}">
-                    JUK
-                </a>
+                {% if is_manager %}
+                    <a clas/home/s104s="navbar-brand" href="{% url 'manager_main' %}" style="transform: translateX(-50%);left: 50%;position: absolute;">
+                    <img src="{% static 'img/logo.svg' %}" style="height: 90%;">
+                    </a>
+                    {% elif is_tenant %}
+                    <a clas/home/s104s="navbar-brand" href="{% url 'tenant_main' %}" style="transform: translateX(-50%);left: 50%;position: absolute;">
+                    <img src="{% static 'img/logo.svg' %}" style="height: 90%;">
+                    </a>
+                    {% else %}
+                    <a clas/home/s104s="navbar-brand" href="{% url 'tenant_main' %}" style="transform: translateX(-50%);left: 50%;position: absolute;">
+                    <img src="{% static 'img/logo.svg' %}" style="height: 90%;">
+                    </a>
+                {% endif %}
+                
                 {% if if_sign_but %}
                 {% if request.user.is_authenticated %}
                 <ul class="navbar-nav mr-right">
@@ -20,10 +32,6 @@
                     {% elif is_manager %}
                     <li class="nav-item active"><a class="nav-link" href="{% url 'manager_main' %}">Главная страница</a></li>
                     {% endif %}
-                </ul>
-                {% else %}
-                <ul class="navbar-nav mr-right">
-                    <li class="nav-item active"><a class="nav-link" href="{% url 'login' %}">Войти</a></li>
                 </ul>
                 {% endif %}
                 {% endif %}

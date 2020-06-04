@@ -1,14 +1,50 @@
 {% extends 'base.html' %}
+
 {% block content %}
+<style>
+        a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-error: #b00020;
+    }
+     .category {
+        width: 70%;
+        min-height: 60px;
+        font-family: "Roboto", sans-serif;
+        outline: 0;
+        background: #f2f2f2;
+        border: 0;
+        padding: 10px 15px;
+        box-sizing: border-box;
+        border-radius: 4px;
+        font-size: 18pt;
+        margin: 10px 15%;
+        word-wrap: break-word;
+        }
+</style>
 
-
-<h1>Форумы всех домов вашей компании:</h1>
-<hr>
-<a href="{% url 'manager_main' %}">Вернуться на главную страницу</a>
-<hr>
+<p style="margin: 30px auto 0; text-align: center; font-size: 22pt;">Форумы всех домов вашей компании:</p>
+<a href="{% url 'manager_main' %}">
+    <button class="mdc-button" style="width: 100%;">
+        <span class="mdc-button__ripple"></span>
+        Вернуться на главную страницу
+    </button>
+</a>
 {% for house in houses %}
-<a href="{% url 'forum' forum_id=house.forum.id %}"><button>Форум дома с адресом {{ house.address }}</button></a>
-<hr>
+<a href="{% url 'forum' forum_id=house.forum.id %}">
+    <button class="category">
+        Форум дома с адресом
+        <p style="font-size: 15pt;">{{ house.address }}</p>
+    </button>
+</a>
 {% endfor %}
 
 
