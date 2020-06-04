@@ -64,9 +64,9 @@ margin:10px auto 0;
 <br>
 
 {% if is_tenant %}
-    <a href="{% url 'tenant_main'%}"><button class="mdc-button mdc-button--outlined" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться на главную</button></a>
+    <a href="{% url 'tenant_main'%}"><button class="mdc-button" style="width: 100%;"><span class="mdc-button__ripple"></span>Вернуться на главную</button></a>
     {% elif is_manager %}
-    <a href="{% url 'manager_main'%}"><button class="mdc-button mdc-button--outlined" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться на главную</button></a>
+    <a href="{% url 'manager_main'%}"><button class="mdc-button" style="width: 100%;"><span class="mdc-button__ripple"></span>Вернуться на главную</button></a>
     {% endif %}
 <br><br>
 <div class="grid">
