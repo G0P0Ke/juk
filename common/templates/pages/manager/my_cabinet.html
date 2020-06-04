@@ -50,7 +50,7 @@
   max-width: 100%;
   max-height: 700px;
   min-height: 400px;
-  margin: 50px auto;
+  margin: 10px auto;
   box-sizing: border-box;
   padding: 30px 0 30px 0;
   text-align: center;
@@ -67,6 +67,8 @@ margin:10px auto 0;
   grid-area: bottom;
 }
 .grid {
+  width: 90%;
+  margin-left: 5%;
   display: grid;
   grid-template: "left right" auto
                  "left right" auto
@@ -74,15 +76,20 @@ margin:10px auto 0;
  grid-gap: 5px;
 }
 </style>
-        <p style="margin: 50px auto;font-size: 22pt; text-align: center;">Личный кабинет менеджера</p>
+        <p style="margin: 50px auto 0;font-size: 22pt; text-align: center;">Личный кабинет менеджера</p>
+                    <a href="{% url 'manager_main' %}"><button class="mdc-button" style="width:100%;"><span class="mdc-button__ripple"></span>Вернуться на главную страницу</button></a>
+
         <div class="form">
             <div class="grid">
                 <div class="left">
 
-                    <p style="font-size: 20pt; text-align: center; color:var(--mdc-theme-secondary);">{{ user.username }}</p>
+                    <p style="font-size: 20pt; text-align: center;">{{ user.username }}</p>
                     <img src="{{ user.manager.photo.url }}" width="260" height="250">
                 </div>
                 <div class="right">
+                    <div class="category">
+                        <p style="font-size: 18pt; text-align: left;">{{ user.first_name }} {{ user.last_name }}</p>
+                    </div>
 
                     {% if companyless %}
                     <div class="category">
@@ -91,18 +98,24 @@ margin:10px auto 0;
                     {% else %}
 
                     <div class="category">
-                        <p style="font-size: 18pt; text-align: center;">Инн вашей компании: {{ user.manager.company.inn }}</p>
+                        <p style="font-size: 18pt; text-align: left;">Инн вашей компании: {{ user.manager.company.inn }}</p>
                     </div>
 
                     {% endif %}
                 </div>
+
+
                 <div class="bottom">
-                    <a href="{% url 'redact_profile'%}"><button class="mdc-button mdc-button--raised">
+                    <a href="{% url 'manager_edit_profile'%}">
+                        <button class="mdc-button mdc-button--raised">
                         <span class="mdc-button__ripple"></span>Редактирование профиля</button></a>
-                    <a href="{% url 'manager_main' %}"><button class="mdc-button" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться на главную страницу</button></a>
                 </div>
             </div>
         </div>
-
-
+<!--
+<form action="" method="post">
+    {% csrf_token %}
+    <button type="submit">Стать админом</button>
+</form>
+-->
 {% endblock %}

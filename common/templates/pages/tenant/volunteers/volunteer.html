@@ -64,17 +64,18 @@ margin:10px auto 0;
 <br>
 
 {% if is_tenant %}
-    <a href="{% url 'tenant_main'%}"><button class="mdc-button mdc-button--outlined" style="float:right"><span class="mdc-button__ripple"></span>Вернуться на главную</button></a>
+    <a href="{% url 'tenant_main'%}"><button class="mdc-button mdc-button--outlined" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться на главную</button></a>
     {% elif is_manager %}
-    <a href="{% url 'manager_main'%}"><button class="mdc-button mdc-button--outlined" style="float:right"><span class="mdc-button__ripple"></span>Вернуться на главную</button></a>
+    <a href="{% url 'manager_main'%}"><button class="mdc-button mdc-button--outlined" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться на главную</button></a>
     {% endif %}
+<br><br>
 <div class="grid">
 
     <div class="left">
         <div class="category">
             <p style="font-size: 22pt; text-align: center;">Открытые задания для выполнения</p>
             {% for task in opened_tasks %}
-            <a style="color: var(--mdc-theme-primary)" href="{% url 'task' id=task.id %}">{{ task.description }}</a><br><br>
+            <a style="color: var(--mdc-theme-primary)" href="{% url 'task' task_id=task.id %}">{{ task.description }}</a><br><br>
             {% endfor %}
         </div>
     </div>
@@ -82,13 +83,13 @@ margin:10px auto 0;
         <div class="category">
             <p style="font-size: 22pt; text-align: center;">Задания за которые вы взялись</p>
             {% for task in taken_tasks %}
-            <a style="color: var(--mdc-theme-primary)" href="{% url 'task' id=task.id %}"> {{ task.description }}</a><br><br>
+            <a style="color: var(--mdc-theme-primary)" href="{% url 'task' task_id=task.id %}"> {{ task.description }}</a><br><br>
             {% endfor %}
         </div>
         <div class="category">
             <p style="font-size: 22pt; text-align: center;">Задания, которые вы выполнили</p>
             {% for task in closed_tasks %}
-            <a style="color: var(--mdc-theme-primary)" href="{% url 'task' id=task.id %}"> {{ task.description }}</a><br><br>
+            <a style="color: var(--mdc-theme-primary)" href="{% url 'task' task_id=task.id %}"> {{ task.description }}</a><br><br>
             {% endfor %}
         </div>
     </div>

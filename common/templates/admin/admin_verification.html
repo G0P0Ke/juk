@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="bx-pull-right"> <a href="{% url 'admin' %}" class="link"><h5>Запросы менеджеров</h5></a>  </div>
+    <div class="bx-pull-right"> <a href="{% url 'create_a_company' %}" class="link"><h5>Добавить УК</h5></a>  </div>
+    <div class="row">
+        <div class="col">
+            {% for request in admins %}
+            <div class="card ml-4 mt-2 mr-auto" >
+                <div class="card-body">
+                    <h5 class="card-title"> Запрос админа</h5>
+                     <h6 class="card-subtitle mb-2 text-muted"> Имя: {{ request.name }}</h6>
+                     <h6 class="card-subtitle mb-2 text-muted"> Фамилия: {{ request.surname }}</h6>
+                    <div class="row">
+                    <form action="" method="post" class="ml-3 mr-2">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-outline-success" value="Одобрить подключение" name="agree{{ request.id }}">
+                    </form>
+                    <form action="" method="post">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-outline-danger" value="Отклонить запрос" name="refused{{ request.id }}">
+                    </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+         </div>
+    </div>
+
+{% endblock %}

@@ -1,31 +1,75 @@
 {% extends 'base.html' %}
 {% block content %}
+<style>
+    a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
 
-<a href="{% url 'cr_pass' %}">
-<button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:25%; margin-left:15%; margin-up:10%"><span class="mdc-button__ripple"></span>Заказать пропуск</button>
-</a>
+    .themes{
+    width:100%;
+    border: 1px solid #FFFFF;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 40px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+    }
+
+
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-error: #b00020;
+    }
+
+    .category {
+    width: 70%;
+    min-height: 60px;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    border: 0;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 20pt;
+    margin: 10px 15%;
+}
+</style>
+
+<p style="font-size: 25pt; text-align: center;">Мои пропуска</p>
 <a href="{% url 'tenant_main' %}">
-<button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:25%; margin-left:15%; margin-up:10%"><span class="mdc-button__ripple"></span>Вернуться</button>
+<button class="mdc-button" style="width:100%; margin-right:5%;"><span class="mdc-button__ripple"></span>Вернуться на главную</button>
+</a><br>
+<a href="{% url 'cr_pass' %}">
+<button class="mdc-button mdc-button--raised" style="width:30%; margin-left:35%;"><span class="mdc-button__ripple"></span>Заказать пропуск</button>
 </a>
-<h1>Мои пропуска</h1>
+
+<br>
+<br>
+<div class="themes">
 {% for pass in my_pass %}
     {% if pass.target == 'person' %}
     <a href="{% url 'pass' pass_id=pass.id %}">
-        <button class="category">
+        <button class="category ms-motion-slideUpIn $ms-motion-duration-4">
             <p>ФИО: {{ pass.surname }} {{ pass.name }} {{ pass.patronymic }}</p>
-            <p>Цель визита: {{ pass.aim }}</p>
+            <p style="font-size: 15pt;">Цель визита: {{ pass.aim }}</p>
         </button>
     </a>
-    <hr>
     {% endif %}
     {% if pass.target == 'car' %}
     <a href="{% url 'pass' pass_id=pass.id%}">
-        <button class="category">
+        <button class="category ms-motion-slideUpIn $ms-motion-duration-4">
             <p>Машина: {{ pass.color }} {{ pass.model }} {{ pass.number }}</p>
-            <p>Цель визита: {{ pass.aim }}</p>
+            <p style="font-size: 15pt;">Цель визита: {{ pass.aim }}</p>
         </button>
     </a>
-    <hr>
-    {% endif %}
+        {% endif %}
 {% endfor %}
+</div>
+
 {% endblock %}

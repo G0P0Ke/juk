@@ -9,9 +9,12 @@
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Содержание:
 
    code.rst
+   user.rst
+   markdown.rst
+   patterns.rst
 
 
 Таблицы и поиск

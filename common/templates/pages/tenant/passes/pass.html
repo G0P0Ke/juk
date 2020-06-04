@@ -1,46 +1,70 @@
 {% extends 'base.html' %}
 {% block content %}
+<style>
+  img.cnt {
+    display: block;
+    margin-left: auto;
+    margin-right: auto }
+
+        a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+       body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-surface: #0B9ED9;
+    --mdc-theme-error: #b00020;
+    }
+</style>
 
 {% if is_tenant %}
 <a href="{% url 'my_passes' %}">
-<button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:25%; margin-left:75%; margin-up:10%"><span class="mdc-button__ripple"></span>Вернуться</button>
+<button class="mdc-button" style="width:100%;"><span class="mdc-button__ripple"></span>Вернуться</button>
 </a>
 {% endif %}
 {% if is_manager %}
 <a href="{% url 'houses_passes' %}">
-<button class="mdc-button mdc-button--raised" style="font-size:15pt; height: 40px; width:25%; margin-left:75%; margin-up:10%"><span class="mdc-button__ripple"></span>Вернуться</button>
+<button class="mdc-button" style="width: 100%;"><span class="mdc-button__ripple"></span>Вернуться</button>
 </a>
 {% endif %}
 
 {% if pass.status == 'active' %}
 
 {% if pass.target == 'person' %}
-<h1>Пропуск на человека</h1>
-<p>ФИО: {{ pass.surname }} {{ pass.name }} {{ pass.patronymic }}</p>
-<p>Цель визита: {{ pass.aim }}</p>
-<p>Осталось: {{ days }} {% if days == 1 %}день{% else %}дня{% endif %}, {{ hours }}, {{ minutes }}</p>
+<h1 style="text-align:center;">Пропуск на человека</h1>
+<p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">ФИО: {{ pass.surname }} {{ pass.name }} {{ pass.patronymic }}</p>
+<p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Цель визита: {{ pass.aim }}</p>
+<p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Осталось: {{ days }} {% if days == 1 %}день,{% elif days == 2 %}дня,{% endif %} {{ hours }}, {{ minutes }}</p>
 {% endif %}
 
 {% if pass.target == 'car' %}
-<h1>Пропуск на машину</h1>
-<p>Машина: {{ pass.color }} {{ pass.model }} {{ pass.number }}</p>
-<p>Цель визита: {{ pass.aim }}</p>
-<p>Осталось: {{ days }} {% if days == 1 %}день{% else %}дня{% endif %}, {{ hours }}, {{ minutes }}</p>
+<h1 style="text-align:center;">Пропуск на машину</h1>
+<p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Машина: {{ pass.color }} {{ pass.model }} {{ pass.number }}</p>
+<p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Цель визита: {{ pass.aim }}</p>
+<p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Осталось: {{ days }} {% if days == 1 %}день,{% elif days == 2 %}дня,{% endif %} {{ hours }}, {{ minutes }}</p>
 {% endif %}
 
 {% if tenant %}
-<p>Передайте данный QR-код посетителю и попросите предъявить этот QR-код на посту охраны</p>
-<img src={{link}} alt="Что-то полшло не так...">
+<p style="margin: 10px auto 0;font-size: 12pt; text-align: center;" >Передайте данный QR-код посетителю и попросите предъявить этот QR-код на посту охраны</p>
+<br>
+<img class="cnt" src={{link}} alt="Что-то пошло не так...">
 {% else %}
-<p>Пропуск заказан из квартиры №{{ author.tenant.flat }}</p>
+<p style="margin: 10px auto 0;font-size: 15pt; text-align: center;">Пропуск заказан из квартиры № {{ author.tenant.flat }}</p>
+<br>
 <form method="POST">
   {% csrf_token %}
-    <button type="submit">Завершить пропуск</button>
+    <button type="submit" class="mdc-button mdc-button--raised" style="width: 30%; margin-left: 35%;">Завершить пропуск</button>
 </form>
 {% endif %}
 
 {% else %}
 
-<p>Этот пропуск был использован. Спасибо, что используете JUK!</p>
+<p>Этот пропуск больше не действителен. Спасибо, что используете JUK!</p>
 {% endif %}
+
 {% endblock %}

@@ -3,15 +3,19 @@
 """
 from django.db import models
 from django.contrib.auth.models import User
+from martor.models import MartorField
 
 
 class Company(models.Model):
     """
     Модель управляющей компании
 
+    :param name: название УК
     :param inn: инн УК
     """
     inn = models.IntegerField()
+    name = models.TextField()
+    ya_num = models.IntegerField(default=-1)
 
 
 class House(models.Model):
@@ -38,8 +42,8 @@ class Tenant(models.Model):
         :param photo: фото жителя
         :param house: дом проживания пользователя
         :param is_vol: является ли житель волонтёром
-        :param test_date: Время последнего прохождения (None eсли попыток не было)
-        """
+        :param test_date: Время последнего прохождения (None, eсли попыток не было)
+    """
 
     user = models.OneToOneField(
         User,
@@ -67,9 +71,20 @@ class Tenant(models.Model):
     house_confirmed = models.BooleanField(
         default=False,
     )
+    is_admin = models.BooleanField(
+        default=False,
+    )
 
 
 class Manager(models.Model):
+    """
+    Модель менеджера
+
+    :param user: Пользователь
+    :param company: УК менеджера
+    :param photo: фото менеджера
+    :param is_admin: является ли менеджер админом
+    """
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
@@ -84,6 +99,9 @@ class Manager(models.Model):
         upload_to='photo',
         blank=True,
         default='static/default.jpg',
+    )
+    is_admin = models.BooleanField(
+        default=False,
     )
 
 
@@ -150,22 +168,23 @@ class Comment(models.Model):
         :param author: Автор комментария
         :param cr_date: Дата создания комментария
         """
-    text = models.TextField()
+    text = MartorField()
     discussion = models.ForeignKey(
         to=Discussion,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True,
     )
     author = models.ForeignKey(
         to=User,
         on_delete=models.CASCADE
     )
     cr_date = models.DateTimeField()
-    #thread = models.ForeignKey(
-    #    to='Comment',
-    #    on_delete=models.CASCADE,
-    #    default=None,
-    #    null=True,
-    #)
+    thread = models.ForeignKey(
+        to='Comment',
+        on_delete=models.CASCADE,
+        default=None,
+        null=True,
+    )
     anon = models.BooleanField(
         default=False
     )
@@ -205,7 +224,7 @@ class AppealMessage(models.Model):
         :param creator: Создатель
         :param cr_date: Дата создания сообщения
         """
-    text = models.TextField()
+    text = MartorField()
     appeal = models.ForeignKey(
         to=Appeal,
         on_delete=models.CASCADE,
@@ -291,3 +310,28 @@ class Pass(models.Model):
     )  # Номер машины
     aim = models.TextField()  # Цель визита
 
+
+class ManagerRequest(models.Model):
+    """
+    Модель запроса менеджера на подкдлючение к компании
+    """
+    statuses_requset = (
+        (1, 'Accepted'),
+        (2, 'Refused'),
+        (3, 'Not considered')
+    )  # статусы запроса на подключения
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )  # author
+    name = models.TextField(
+        default='Antosha'
+    )  # имя менеджера
+    surname = models.TextField(
+        default='Andreev'
+    )  # фамилия менеджера
+    status = models.IntegerField(
+        choices=statuses_requset,
+        default=3
+    )  # статус запроса на подключение
+    inn_company = models.IntegerField()  # ИНН УК

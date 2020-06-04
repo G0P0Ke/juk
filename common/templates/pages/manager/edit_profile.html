@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+<style>
+         a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+
+    .themes{
+    width:100%;
+    border: 1px solid #FFFFF;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 40px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+    }
+
+
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-error: #b00020;
+    }
+
+    .category {
+    width: 90%;
+    min-height: 60px;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #fafafa;
+    border: 0;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 20pt;
+    margin: 15px 5%;
+}
+
+    .form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 100%;
+  max-height: 800px;
+  min-height: 400px;
+  margin: 10px auto;
+  box-sizing: border-box;
+  padding: 30px 0 10px 0;
+  text-align: center;
+  border-radius: 4px;
+}
+.left{
+  grid-area: left;
+}
+.right{
+  grid-area: right;
+  text-align: left;
+}
+.bottom{
+margin:10px auto 0;
+  grid-area: bottom;
+}
+.grid {
+  display: grid;
+  grid-template: "left right" auto
+                 "left right" auto;
+ grid-gap: 10px;
+}
+.forminput {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 90%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+}
+
+.f input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 30%;
+  border: 0;
+  margin: 0 0 15px 10px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+
+ .select{
+    position: relative;
+}
+
+.select select{
+    background: #f2f2f2;
+    padding: 10px 35px 10px 35px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14pt;
+    color: #000;
+    outline: none;
+}
+.select: before{
+    position: absolute;
+    color: #000000;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: #007ce0;
+
+}
+
+</style>
+
+
+
+<p style="margin: 20px auto 0;font-size: 22pt; text-align: center;">Редактирование профиля менеджера</p>
+       <a class="mdc-button" style="width:100%" href="{% url 'manager_my_cabinet' %}"><span class="mdc-button__ripple"></span>Вернуться в профиль</a>
+<div class="form">
+    <div class="grid">
+        <hr>
+        <div class="left">
+
+                <div>
+                    <label style="font-size: 15pt; text-align: center;"> Моя фотография:</label><br>
+                    <img src="{{ user.manager.photo.url }}" width="260" height="250">
+                </div>
+                <form action="" method="post" class="form1" enctype="multipart/form-data">
+                    <div class="form-group ">
+                        {% csrf_token %}
+                        {{ form.photo.errors }}
+                        <br>
+                        {{ form.photo }}
+                    </div>
+                    <input class="mdc-button mdc-button--raised" type="submit" value="Обновить фото" class="button">
+                </form>
+        </div>
+
+        <div class="right">
+            <form method="POST">
+                {% csrf_token %}
+                <label style="font-size: 15pt; text-align: left;" for="username-id">Ваш логин:</label>
+                <input class="forminput" type="text" name="username" id="username-id" value="{{user.username}}"
+                       required><br>
+
+                <label style="font-size: 15pt; text-align: left;" for="first_name-id">Ваше имя:</label>
+                <input class="forminput" type="text" name="first_name" id="first_name-id" value="{{user.first_name}}"
+                       disabled><br>
+
+                <label style="font-size: 15pt; text-align: left;" for="last_name-id">Ваша фамилия:</label>
+                    <input class="forminput" type="text" name="last_name" id="last_name-id" value="{{user.last_name}}" disabled><br>
+
+                <input class="mdc-button mdc-button--raised" style="margin:auto auto auto 25%;width:40%;" type="submit" value="Сохранить изменения">
+            </form>
+            <br><br>
+
+<div class="f" style="text-align: center; margin-left: -10%;">
+            {% if flag == 1 %}
+            <p style="font-size: 15pt"> Ваш запрос на подключение к УК одобрен. <br> ИНН вашей компании: {{ user.manager.company.inn }}</p>
+            {% elif flag == 0 %}
+            <p style="font-size: 15pt"> Вы можете подать запрос на подключение к УК</p>
+            <form method="POST" action="">
+                    <div style="font-size: 14pt;">
+                    {% csrf_token %}
+                    {{ request_form }}
+                    </div>
+                    <input class="mdc-button mdc-button--raised" style="width:40%;" type="submit" name="submit"
+                           value="Запросить подключение">
+            </form>
+            {% elif flag == 2 %}
+                <p style="font-size: 15pt"> Ваш запрос на подключение к УК отклонен. <br> Вы можете попробовать снова</p>
+                <form method="POST" action="">
+                     <div style="font-size: 14pt;">
+                        {% csrf_token %}
+                        {{ request_form }}
+                    </div>
+                    <input class="mdc-button mdc-button--raised" type="submit" style="width:40%;" name="submit" value="Запросить подключение">
+                </form>
+            {% elif flag == 3 %}
+                <p style="font-size: 15pt"> Ваш запрос на подключение к УК находится в рассмотрении</p>
+            {% endif %}
+</div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+

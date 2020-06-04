@@ -2,6 +2,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{% load martortags %}
+
 <style>
 
     a {
@@ -148,71 +150,117 @@ border: 1px solid #FFFFF;
 
 
 
-<a href="/forum/discussion/{{ discussion.id }}"><p style="font-size: 25pt; text-align:center; color:var(--mdc-theme-primary)">{{discussion.theme}}</p></a>
+<a href="{% url 'discussion' discussion_id=discussion.id %}"><p style="font-size: 25pt; text-align:center; color:var(--mdc-theme-primary)">{{discussion.theme}}</p></a>
 <br><br>
  <form action='' id="comment" method="post">
-            {% csrf_token %}
-                <div class="form-group row">
-    <div class="col-1"></div>
-    <div class="col-1.5">
-        <div class="alert shadow" style="background-color: #FFFFFF; color:#F25CA2;" role="alert">
-            <div align = "center"> {{thread.author}} </div>
-            <div class="media">
-                <img src="{{ user.manager.photo.url }}"  width="140" height="140"  align = "left" alt="...">
-            </div>
-            <div align = "center"> Роль </div>
+     {% csrf_token %}
+     <div class="form-group row">
+        <div class="col-1"></div>
+        <div class="col-1.5">
+
+            {% if thread.anon %}
+
+                <div align="center" style="color:00008B"> Аноним</div>
+                <div class="media">
+                    <img src="/media/static/default.jpg"  width="140" height="140"  align = "left" alt="...">
+                </div>
+
+            {% elif thread.author.tenant %}
+
+                <div align="center" style="color:00008B">{{thread.author.first_name}} {{thread.author.last_name}}</div>
+                <div class="media">
+                    <img src="{{ thread.author.tenant.photo.url }}"  width="140" height="140"  align = "left" alt="...">
+                </div>
+
+            {% elif thread.author.manager %}
+
+                <div align="center" style="color:00008B">{{thread.author.first_name}} {{thread.author.last_name}}</div>
+                <div class="media">
+                    <img src="{{ thread.author.manager.photo.url }}"  width="140" height="140"  align = "left" alt="...">
+                </div>
+
+            {% endif %}
+
         </div>
-    </div>
-                <div class="col">
+         <div class="col">
+             <div class="col 7">
+                 <div class="alert comment shadow" role="alert">
+                     {{thread.text|safe_markdown}}
+                 </div>
+             </div>
+         </div>
+     </div>
+     <br>
 
+     {% for comment in comments %}
 
-                <div class="col 7">
-                            <div class="alert comment shadow" role="alert">
-            {{thread.text}}
-        </div>
-                </div>
-                </div>
-                </div>
-                <br>
-
-{% for item in comments %}
 
      <div class="form-group row">
-    <div class="col-1"></div>
-    <div class="col-1.5">
-        <div class="alert shadow" style="background-color: #FFFFFF; color:#F25CA2;" role="alert">
-            <div align = "center"> {{item.author}} </div>
-            <div class="media">
-                <img src="{{ user.manager.photo.url }}"  width="140" height="140"  align = "left" alt="...">
-            </div>
-            <div align = "center"> Роль </div>
-        </div>
-    </div>
-    <div class="col-9">
-        <div class="alert comment shadow" role="alert">
-            {{item.text}}
-        </div>
-        <div style="float: right; color: #808080;"> {{ item.cr_date }} </div>
-    </div>
-    <div class="col-1"></div>
-</div>
-{% endfor %}
+         <div class="col-1"></div>
+         <div class="col-1.5">
 
-            <div class="form-group row">
-                <div class="col-1">
+                {% if comment.author.manager %}
+                <div class="alert shadow" style="background-color: #66CDAA; color:#F25CA2; width:190px" role="alert">
+                {% else %}
+                <div class="alert shadow" style="background-color: #FFFFFF; color:#F25CA2; width:190px" role="alert">
+                {% endif %}
+
+
+                    {% if comment.anon %}
+
+                        <div align="center" style="color:00008B"> Аноним</div>
+                        <div class="media">
+                        <img src="/media/static/default.jpg"  width="140" height="140"  align = "left" alt="...">
+                    </div>
+
+                    {% elif comment.author.tenant %}
+
+                        <div align="center" style="color:00008B">{{comment.author.first_name}} {{comment.author.last_name}}
+                        </div>
+                    <div class="media">
+                        <img src="{{ comment.author.tenant.photo.url }}"  width="140" height="140"  align = "left" alt="...">
+                    </div>
+
+                    {% elif comment.author.manager %}
+
+                        <div align="center" style="color:00008B">{{comment.author.first_name}} {{comment.author.last_name}}
+                        </div>
+                    <div class="media">
+                        <img src="{{ comment.author.manager.photo.url }}"  width="140" height="140"  align = "left" alt="...">
+                    </div>
+
+                    {% endif %}
                 </div>
-            <div class="col-11">
-                  <textarea name = "text" class="formtextarea" maxlength="200" id="text" placeholder="Напишите комментарий..."></textarea>
             </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-1">
-                </div>
-                <div class="col-2">
-                   <input type="submit" class="mdc-button mdc-button--raised" type="submit" value="Отправить">
+         <div class="col-9">
+             <div class="alert comment shadow" role="alert">
+                 {{comment.text|safe_markdown}}
+             </div>
+             <div style="float: right; color: #808080;"> {{ comment.cr_date }} </div>
          </div>
-         <a href="/forum/discussion/{{ discussion.id }}"><input class="mdc-button mdc-button--outlined" value="Вернуться к обсуждению" type="button" style="float:right;"></a>
+         <div class="col-1"></div>
      </div>
-            </div>
-        </form>
+
+
+    {% endfor %}
+
+     <div class="form-group row">
+         <div class="col-1"></div>
+         <div class="col-11">
+             <textarea name = "text" class="formtextarea" maxlength="200" id="text" placeholder="Напишите комментарий..."></textarea>
+         </div>
+     </div>
+     <div class="form-group row">
+         <div class="col-1"></div>
+         <div class="col-2">
+             <input type="submit" class="mdc-button mdc-button--raised" type="submit" value="Отправить">
+         </div>
+         <a href="{% url 'discussion' discussion_id=discussion.id %}"><input class="mdc-button mdc-button--outlined" value="Вернуться к обсуждению" type="button" style="float:right;"></a>
+     </div>
+     </div>
+ </form>
+
+
+
 {% endblock %}
+
