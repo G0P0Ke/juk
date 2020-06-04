@@ -12,6 +12,10 @@
                     <a clas/home/s104s="navbar-brand" href="{% url 'tenant_main' %}" style="transform: translateX(-50%);left: 50%;position: absolute;">
                     <img src="{% static 'img/logo.svg' %}" style="height: 90%;">
                     </a>
+                    {% else %}
+                    <a clas/home/s104s="navbar-brand" href="{% url 'tenant_main' %}" style="transform: translateX(-50%);left: 50%;position: absolute;">
+                    <img src="{% static 'img/logo.svg' %}" style="height: 90%;">
+                    </a>
                 {% endif %}
                 
                 {% if if_sign_but %}
@@ -28,10 +32,6 @@
                     {% elif is_manager %}
                     <li class="nav-item active"><a class="nav-link" href="{% url 'manager_main' %}">Главная страница</a></li>
                     {% endif %}
-                </ul>
-                {% else %}
-                <ul class="navbar-nav mr-right">
-                    <li class="nav-item active"><a class="nav-link" href="{% url 'login' %}">Войти</a></li>
                 </ul>
                 {% endif %}
                 {% endif %}
