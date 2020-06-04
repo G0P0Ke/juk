@@ -49,7 +49,7 @@
 {% for house in house_list %}
     <a href="{% url 'pass_list' house_id=house.id %}">
         <button class="category ms-motion-slideUpIn $ms-motion-duration-4" >
-            <p>Пропуска дома с адресом {{ house.address }}</p>
+            <p>Пропуска дома {{ house.address }}</p>
         </button></a>
     <br><br>
 {% endfor %}

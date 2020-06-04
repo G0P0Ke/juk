@@ -96,5 +96,3 @@ class Test(TestCase):
         response = self.client.get('/tenant/pass/cr_pass')
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, '/')
-
-

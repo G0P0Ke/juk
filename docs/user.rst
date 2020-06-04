@@ -224,51 +224,58 @@
 8. Вы можете подтверждать принадлежность жителя к дому на странице
 /*manager/tenant_confirming/*
 
-9. Добавление дома в вашу УК доступно на странице */manager/add_house/:*
-
 |image13|
 
 рис. 14
 
-.. |image0| image:: media/image0.png
-   :width: 4.64063in
-   :height: 2.52083in
-.. |image1| image:: media/image1.png
-   :width: 2.27083in
-   :height: 3.03929in
-.. |image2| image:: media/image2.png
-   :width: 5.72396in
-   :height: 2.90001in
-.. |image3| image:: media/image3.png
-   :width: 4.81771in
-   :height: 2.56891in
-.. |image4| image:: media/image4.png
-   :width: 6.27083in
-   :height: 0.98611in
-.. |image5| image:: media/image5.png
-   :width: 5.07292in
-   :height: 1.01846in
-.. |image6| image:: media/image6.png
-   :width: 3.75521in
-   :height: 1.98688in
-.. |image7| image:: media/image7.png
-   :width: 5.35417in
-   :height: 0.9204in
-.. |image8| image:: media/image8.png
-   :width: 3.76563in
-   :height: 2.16868in
-.. |image9| image:: media/image9.png
-   :width: 4.68229in
-   :height: 2.43448in
-.. |image10| image:: media/image10.png
-   :width: 4.72396in
-   :height: 3.24086in
-.. |image11| image:: media/image11.png
-   :width: 6.27083in
-   :height: 2.56944in
-.. |image12| image:: media/image12.png
-   :width: 6.27083in
-   :height: 0.65278in
-.. |image13| image:: media/image13.png
-   :width: 6.27083in
-   :height: 3.41667in
+9. Добавление дома в вашу УК доступно на странице */manager/add_house/:*
+
+|image14|
+
+рис. 15
+
+.. |image0| image:: media/img0.png
+   :width: 6.49236in
+   :height: 4.05764in
+.. |image1| image:: media/img1.png
+   :width: 6.49236in
+   :height: 4.05764in
+.. |image2| image:: media/img2.png
+   :width: 6.49236in
+   :height: 4.05764in
+.. |image3| image:: media/img3.png
+   :width: 6.49236in
+   :height: 4.05764in
+.. |image4| image:: media/img4.png
+   :width: 6.49236in
+   :height: 4.05764in
+.. |image5| image:: media/img5.png
+   :width: 6.49236in
+   :height: 4.05764in
+.. |image6| image:: media/img6.png
+   :width: 6.49236in
+   :height: 4.05764in
+.. |image7| image:: media/img7.png
+   :width: 6.49236in
+   :height: 4.05764in
+.. |image8| image:: media/img8.png
+   :width: 6.49236in
+   :height: 4.05764in
+.. |image9| image:: media/img9.png
+   :width: 6.49236in
+   :height: 4.05764in
+.. |image10| image:: media/img10.png
+   :width: 6.49236in
+   :height: 4.05764in
+.. |image11| image:: media/img11.png
+   :width: 6.49236in
+   :height: 4.05764in
+.. |image12| image:: media/img12.png
+   :width: 6.49236in
+   :height: 4.05764in
+.. |image13| image:: media/img13.png
+   :width: 6.49236in
+   :height: 4.0576in
+.. |image14| image:: media/img14.png
+   :width: 6.49236in
+   :height: 4.05764in

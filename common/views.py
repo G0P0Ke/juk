@@ -3,17 +3,14 @@
 """
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm, SignUpForm
 from django.core.mail import send_mail
 from .forms import FeedbackForm
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from tenant.models import Tenant, Company, Forum
 
 from tenant.models import Tenant, Company, Forum, House
 from tenant.models import Manager, ManagerRequest
-from tenant.forms import ManagerRequestForm, AppendCompany
 from .models import Admin
 from tenant.forms import AppendCompany, ManagerRequestForm
 
@@ -134,7 +131,6 @@ def signup_view(request):
                 manager = Manager.objects.create(user=user)
                 manager.save()
                 return redirect('/manager')
-            
         else:
             context.update({
                 'form': SignUpForm(request),
@@ -259,10 +255,10 @@ def admin(request):
     user = request.user
     if hasattr(request.user, 'tenant'):
         if not user.tenant.is_admin:
-            return HttpResponse("Nice try, bro", status=401)
+            return redirect('/')
     elif hasattr(request.user, 'manager'):
         if not user.manager.is_admin:
-            return HttpResponse("Nice try, bro", status=401)
+            return redirect('/')
     manager_requests = ManagerRequest.objects.filter(status=3)
     context = {
         'requests': manager_requests,
@@ -302,10 +298,10 @@ def admin_create(request):
     user = request.user
     if hasattr(request.user, 'tenant'):
         if not user.tenant.is_admin:
-            return HttpResponse("You are not an administrator", status=401)
+            return redirect('/')
     elif hasattr(request.user, 'manager'):
         if not user.manager.is_admin:
-            return HttpResponse("You are not an administrator", status=401)
+            return redirect('/')
     company = Company.objects.filter()
     context = {
         'company': company
@@ -348,7 +344,7 @@ def admin_create(request):
 def admin_verification(request):
     user = request.user
     if not user.is_superuser:
-        return HttpResponse("У вас нет разрешения на подтверждение администраторов", status=401)
+        return redirect('/')
     admins = Admin.objects.filter(is_admin=0)
     context = {
         'admins': admins,
@@ -369,4 +365,3 @@ def admin_verification(request):
         "is_manager": hasattr(request.user, 'manager'),
     })
     return render(request, 'admin/admin_verification.html', context)
-

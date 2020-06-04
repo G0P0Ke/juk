@@ -10,6 +10,70 @@ class Test(TestCase):
     """
     fixtures = ['test_database.json']
 
+    def test_manager(self):
+        """
+        Тест страницы
+        """
+        self.client.login(username='tenant-test', password='promprog')
+        response = self.client.get('/manager')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
+
+        self.client.login(username='manager-test', password='promprog')
+        response = self.client.get('/manager')
+        self.assertEqual(response.status_code, 200)
+
+    def test_manager_my_cabinet(self):
+        """
+        Тест страницы
+        """
+        self.client.login(username='tenant-test', password='promprog')
+        response = self.client.get('/manager/my_cabinet')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
+
+        self.client.login(username='manager-test', password='promprog')
+        response = self.client.get('/manager/my_cabinet')
+        self.assertEqual(response.status_code, 200)
+
+    def test_manager_edit_profile(self):
+        """
+        Тест страницы
+        """
+        self.client.login(username='tenant-test', password='promprog')
+        response = self.client.get('/manager/edit_profile')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
+
+        self.client.login(username='manager-test', password='promprog')
+        response = self.client.get('/manager/edit_profile')
+        self.assertEqual(response.status_code, 200)
+
+    def test_manager_news(self):
+        """
+        Тест страницы
+        """
+        self.client.login(username='tenant-test', password='promprog')
+        response = self.client.get('/manager/news/')
+        self.assertEqual(response.status_code, 200)
+
+        self.client.login(username='manager-test', password='promprog')
+        response = self.client.get('/manager/news/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_manager_news_create(self):
+        """
+        Тест страницы
+        """
+        self.client.login(username='tenant-test', password='promprog')
+        response = self.client.get('/manager/news/create/')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
+
+        self.client.login(username='manager-test', password='promprog')
+        response = self.client.get('/manager/news/create/')
+        self.assertEqual(response.status_code, 200)
+
     def test_manager_company_forums(self):
         """
         Тест страницы
