@@ -259,13 +259,15 @@ border: 1px solid #FFFFF;
      <div class="form-group row">
          <div class="col-1"></div>
 
-         <div class="col-4">
+         <div class="col-2">
              <input type="submit" class="mdc-button mdc-button--raised" value="Отправить">
          </div>
 
          {% if discussion.anon_allowed %}
-        <label for="anonymous" style="float:left; font-size:14pt; margin: 5px -30% 0 0;">Анонимность</label>
-         <div class="col-4">
+         <div class="col-1.3">
+            <label for="anonymous" style="float:left; font-size:14pt; margin: 5px -30% 0 0;">Анонимность</label>
+         </div>
+         <div class="col-1">
              <input type="checkbox" name="anonymous" id="anonymous">
          </div>
          {% endif %}
