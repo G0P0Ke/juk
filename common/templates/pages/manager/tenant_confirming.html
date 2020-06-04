@@ -2,28 +2,77 @@
 {% block content %}
 
 {% load static %}
+<style>
+        a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+    body{
+    --mdc-theme-primary: #F25CA2;
+    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-background: #021859;
+    --mdc-theme-error: #b00020;
+    }
+    .forminput {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 90%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 14pt;
+  border-radius: 4px;
+}
+    .category {
+    width: 90%;
+    min-height: 60px;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    border: 0;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 15pt;
+    margin: 10px 5%;;
+}
+.tenant{
+border: 1px solid #F8BBD0;
+border-radius: 10px;
+padding: 20px;
+margin: 0 5% 10px;
+width: 90%;
+}
+</style>
 <script src="{% static 'tenant_confirm.js' %}"></script>
 
-<h1>Неподтвержденные жители:</h1>
-<hr>
-<a href="{% url 'manager_main' %}">Вернуться на главную страницу</a>
-<hr>
+<p style="margin: 30px auto 0; text-align: center; font-size: 22pt;">Неподтвержденные жители:</p>
+<a href="{% url 'manager_main' %}"><button class="mdc-button" style="width: 100%;"><span class="mdc-button__ripple"></span>Вернуться на главную страницу</button></a>
+<br><br>
 <form method="post">
+
     <input type="hidden" id="confirm-id" value=0 name="confirmed">
     <input type="hidden" id="notconfirm-id" value=0 name="unconfirmed">
     {% csrf_token %}
     {% for house in houses %}
-    <h3>{{ house.house.address }}</h3>
-    <hr>
+     <div class="category">
+    <p style="font-size: 22pt;">{{ house.house.address }}</p>
 
     {% for tenant in house.unconfirmed_tenants %}
-    <p>Имя: {{tenant.user.first_name}}</p>
-    <p>Фамилия: {{tenant.user.last_name}}</p>
-    <p>Квартира: {{tenant.flat}}</p>
-        <input type="submit" onclick="confirm({{tenant.id}});" value="Подтвердить жителя">
-        <input type="submit" onclick="notconfirm({{tenant.id}});" value="Отклонить запрос жителя">
-    <hr>
+         <div class="tenant">
+    <p>Имя: {{tenant.user.first_name}}<br>
+        Фамилия: {{tenant.user.last_name}}<br>
+    Квартира: {{tenant.flat}}</p>
+        <input class="btn btn-outline-success" type="submit" onclick="confirm({{tenant.id}});" value="Подтвердить жителя">
+        <input class="btn btn-outline-danger" type="submit" onclick="notconfirm({{tenant.id}});" value="Отклонить запрос жителя">
+         </div>
     {% endfor %}
+     </div>
     {% endfor %}
 </form>
 
