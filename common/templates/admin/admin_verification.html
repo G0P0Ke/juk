@@ -1,8 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="bx-pull-right"> <a href="{% url 'admin' %}" class="link"><h5>Запросы менеджеров</h5></a>  </div>
-    <div class="bx-pull-right"> <a href="{% url 'create_a_company' %}" class="link"><h5>Добавить УК</h5></a>  </div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mr-3 ml-3">
+            <li class="breadcrumb-item active" aria-current="page">
+                <a href="{% url 'create_a_company' %}" class="link">Добавить УК</a>
+            </li>
+            {% if user.is_superuser %}
+            <li class="breadcrumb-item active" aria-current="page">
+                <a href="{% url 'admin' %}" class="link">Запросы менеджеров</a>
+            </li>
+            {% endif %}
+        </ol>
+    </nav>
     <div class="row">
         <div class="col">
             {% for request in admins %}

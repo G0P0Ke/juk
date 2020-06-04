@@ -28,7 +28,9 @@ class Feedback(models.Model):
 
 
 class Admin(models.Model):
-
+    """
+    Модель админа
+    """
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
