@@ -24,3 +24,7 @@ celery==4.4.2
 
 # Database
 mysqlclient==1.4.6
+
+# Background tasks
+celery==4.4.2
+redis==3.5.2

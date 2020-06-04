@@ -19,6 +19,7 @@ from .models import News
 
 from .forms import RegManagerForm
 # from .models import RegManager
+from .tasks import send_email
 
 
 @login_required
@@ -107,9 +108,6 @@ def my_cabinet_view(request):
         "user": request.user,
         "companyless": request.user.manager.company is None,
     }
-    if request.method == 'POST':
-        request.user.manager.is_admin = 1
-        request.user.manager.save()
     # c = Company.objects.create(inn=666) #tmp
     # f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
     # c.save()
@@ -533,7 +531,14 @@ def registration_manager(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.finished = 0
+            post.date = datetime.datetime.now()
+
             post.save()
+            send_email(RegManager.objects.last())
+
+            post.finished = 1
+            post.save()
+
             return redirect('/', context)
     else:
         form = RegManagerForm(request.POST)

@@ -26,7 +26,7 @@ class CreateNewsForm(forms.ModelForm):
     """
     class Meta:
         model = News
-        #manager/forms.py
+        # manager/forms.py
         fields = ['publicationTitle', 'publicationText', 'donation_on']
 
 
@@ -36,5 +36,5 @@ class RegManagerForm(forms.ModelForm):
     """
     class Meta:
         model = RegManager
-        fields = ('fullName', 'userEmail', 'ukEmail', 'appointment', 'date', 'phoneNumber')
-        #manager/forms.py
+        fields = ('fullName', 'userEmail', 'ukEmail', 'appointment', 'phoneNumber')
+        # manager/forms.py
