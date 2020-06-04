@@ -4,6 +4,11 @@
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb mr-3 ml-3">
+        {% if user.is_superuser %}
+            <li class="breadcrumb-item active" aria-current="page">
+                <a href="{% url 'new_admin' %}" class="link">Добавить админов</a>
+            </li>
+        {% endif %}
         <li class="breadcrumb-item active" aria-current="page">
             <a href="{% url 'admin' %}" class="link">Запросы менеджеров</a>
         </li>
