@@ -98,6 +98,10 @@ def login_view(request):
     else:
         form = LoginForm()
     context.update({'form': form})
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'accounts/login/login_page.html', context)
 
 
@@ -140,6 +144,10 @@ def signup_view(request):
         context.update({
             'form': SignUpForm(),
         })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'accounts/signup/signup_page.html', context)
 
 
@@ -169,6 +177,10 @@ def admin_signup(request):
         context.update({
             'form': SignUpForm(),
         })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'admin/admin_signup.html', context)
 
 
@@ -182,6 +194,10 @@ def logout_view(request):
     :return: Переход на главную страницу
     """
     logout(request)
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return redirect('/')
 
 
@@ -224,6 +240,10 @@ def feedback(request):
         context.update({
             'form': form,
         })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/feedback.html', context)
 
 
@@ -264,6 +284,10 @@ def admin(request):
                 request_man.status = 2
                 request_man.save()
         return redirect(admin)
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'admin/manager_requests.html', context)
 
 
@@ -313,6 +337,10 @@ def admin_create(request):
     context.update({
         'form': form
     })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'admin/create_company.html', context)
 
 
@@ -335,5 +363,9 @@ def admin_verification(request):
                 request_admin.save()
                 messages.info(request, "Запрос на подключение нового администратора отклонен")
         return redirect(admin_verification)
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'admin/admin_verification.html', context)
 

@@ -76,6 +76,10 @@ def my_cabinet_view(request):
         "homeless": request.user.tenant.house is None,
         "house_confirmed": request.user.tenant.house_confirmed,
     }
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/tenant/my_cabinet.html', context)
 
 
@@ -104,6 +108,10 @@ def edit_profile_view(request):
                 "user": user,
                 "form": form,
             })
+            context.update({
+                "is_tenant": hasattr(request.user, 'tenant'),
+                "is_manager": hasattr(request.user, 'manager'),
+            })
             return render(request, 'pages/tenant/edit_profile.html', context)
     else:
         form = PhotoUpload()
@@ -124,6 +132,10 @@ def edit_profile_view(request):
                     'form': form,
                     "user": user,
                 })
+                context.update({
+                    "is_tenant": hasattr(request.user, 'tenant'),
+                    "is_manager": hasattr(request.user, 'manager'),
+                })
                 return render(request, 'pages/tenant/edit_profile.html', context)
         user.tenant.flat = request.POST.get('flat')
         user.tenant.save()
@@ -132,6 +144,10 @@ def edit_profile_view(request):
     context.update({
         "user": user,
         'form': form,
+    })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
     })
     return render(request, 'pages/tenant/edit_profile.html', context)
 
@@ -199,6 +215,10 @@ def forum_view(request, forum_id):
             "is_tenant": hasattr(request.user, 'tenant'),
             "is_manager": hasattr(request.user, 'manager'),
         })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/tenant/forums/forum.html', context)
 
 
@@ -220,6 +240,10 @@ def category_view(request, forum_id, category_name):
         "user": request.user,
         "forum": forum,
         "discussions": discussions,
+    })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
     })
     return render(request, 'pages/tenant/forums/category.html', context)
 
@@ -290,6 +314,10 @@ def discussion_view(request, discussion_id):
         "discussion": discussion,
         "comments": comments,
     })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/tenant/forums/discussion.html', context)
 
 
@@ -328,6 +356,10 @@ def cr_discussion_view(request, forum_id):
         "categories": categories,
         "forum": forum,
     })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/tenant/forums/cr_discussion.html', context)
 
 
@@ -362,6 +394,10 @@ def thread_view(request, discussion_id, thread_id):
         )
         r_com.save()
         return redirect('thread', discussion.id, current_thread.id)
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/tenant/forums/thread.html', context)
 
 
@@ -390,6 +426,10 @@ def my_appeals_view(request):
         flag = 1
     context.update({
         "my_appeals": my_appeals,
+    })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
     })
     return render(request, 'pages/tenant/appeals/my_appeals.html', context)
 
@@ -460,6 +500,10 @@ def appeal_view(request, appeal_id):
         "is_manager": hasattr(request.user, 'manager'),
         "is_taken": appeal.manager is not None,
         "user": request.user,
+    })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
     })
     return render(request, 'pages/tenant/appeals/appeal.html', context)
 
@@ -550,6 +594,10 @@ def cr_task_view(request):
     context.update({
         "user": request.user,
     })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/tenant/volunteers/cr_task.html', context)
 
 
@@ -586,6 +634,10 @@ def volunteer_view(request):
         "is_tenant": hasattr(request.user, 'tenant'),
         "is_manager": hasattr(request.user, 'manager'),
     }
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/tenant/volunteers/volunteer.html', context)
 
 
@@ -627,6 +679,10 @@ def help_view(request):
         "is_manager": hasattr(request.user, 'manager'),
         'flag': flag,
     }
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/tenant/volunteers/help.html', context)
 
 
@@ -663,6 +719,10 @@ def task_view(request, task_id):
         "is_taken": task.status == "taken",
         "is_closed": task.status == "closed",
     }
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/tenant/volunteers/task.html', context)
 
 
@@ -726,6 +786,10 @@ def test_view(request):
             "hours": hours,
             "minutes": minutes,
         })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/tenant/volunteers/test.html', context)
 
 
@@ -745,6 +809,10 @@ def tenant_main_page(request):
             "user": request.user,
             "house_confirmed": request.user.tenant.house_confirmed,
         }
+        context.update({
+            "is_tenant": hasattr(request.user, 'tenant'),
+            "is_manager": hasattr(request.user, 'manager'),
+        })
         return render(request, 'pages/tenant/tenant.html', context)
 
     # погода ---------------------------------------------------------------------
@@ -855,6 +923,10 @@ def tenant_main_page(request):
         context.update({
             "last_appeal": "У Вас еще нет обращений",
         })
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/tenant/tenant.html', context)
 
 
@@ -910,6 +982,10 @@ def cr_pass_view(request):
             )
             pas.save()
             return redirect('/pass/' + str(pas.id))
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/tenant/passes/cr_pass.html', context)
 
 
@@ -965,4 +1041,8 @@ def pass_view(request, pass_id):
             return redirect('/tenant')
         elif hasattr(request.user, 'manager'):
             return redirect('/manager')
+    context.update({
+        "is_tenant": hasattr(request.user, 'tenant'),
+        "is_manager": hasattr(request.user, 'manager'),
+    })
     return render(request, 'pages/tenant/passes/pass.html', context)
