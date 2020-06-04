@@ -614,6 +614,8 @@ def volunteer_view(request):
     closed_tasks = []
     if not hasattr(request.user, 'tenant'):
         return redirect('/')
+    if not request.user.tenant.is_vol:
+        return redirect('/')
     company = request.user.tenant.house.company
     for task in Task.objects.all():
         if (hasattr(task.author, 'manager') and
@@ -937,6 +939,8 @@ def my_pass_view(request):
     :param request: объект с деталями запроса.
     :return: объект ответа сервера с HTML-кодом внутри
     """
+    if not hasattr(request.user, 'tenant'):
+        return redirect('/')
     context = {
         'user': request.user,
         'my_pass': Pass.objects.filter(author=request.user, status='active'),
@@ -952,6 +956,8 @@ def cr_pass_view(request):
     :param request: объект с деталями запроса.
     :return: объект ответа сервера с HTML-кодом внутри
     """
+    if not hasattr(request.user, 'tenant'):
+        return redirect('/')
     context = {
         "user": request.user,
     }

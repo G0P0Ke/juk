@@ -30,7 +30,7 @@ def manager_main_page(request):
     :param request: объект с деталями запроса.
     :return: объект ответа сервера с HTML-кодом внутри
     """
-    context={}
+    context = {}
     if not hasattr(request.user, 'manager'):
         return redirect('/')
     if request.user.manager.company is None:
@@ -44,7 +44,6 @@ def manager_main_page(request):
         "is_tenant": hasattr(request.user, 'tenant'),
         "is_manager": hasattr(request.user, 'manager'),
     })
-    return render(request, 'pages/manager/manager.html', context)
 
     amount_of_my_opened_tasks = 0
     for task in Task.objects.all():
