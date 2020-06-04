@@ -24,12 +24,12 @@
 
 {% if is_tenant %}
 <a href="{% url 'my_passes' %}">
-<button class="mdc-button" style="font-size:15pt; height: 40px; width:30%; margin-left:35%; margin-up:10%"><span class="mdc-button__ripple"></span>Вернуться</button>
+<button class="mdc-button" style="width:100%;"><span class="mdc-button__ripple"></span>Вернуться</button>
 </a>
 {% endif %}
 {% if is_manager %}
 <a href="{% url 'houses_passes' %}">
-<button class="mdc-button" style="font-size:15pt; height: 40px; width:30%; margin-left:35%; margin-up:10%"><span class="mdc-button__ripple"></span>Вернуться</button>
+<button class="mdc-button" style="width: 100%;"><span class="mdc-button__ripple"></span>Вернуться</button>
 </a>
 {% endif %}
 
@@ -39,16 +39,14 @@
 <h1 style="text-align:center;">Пропуск на человека</h1>
 <p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">ФИО: {{ pass.surname }} {{ pass.name }} {{ pass.patronymic }}</p>
 <p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Цель визита: {{ pass.aim }}</p>
-<p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Осталось: {{ days }} {% if days == 1 %}день,{% elif
-  days == 2 %}дня,{% endif %} {{ hours }}, {{ minutes }}</p>
+<p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Осталось: {{ days }} {% if days == 1 %}день,{% elif days == 2 %}дня,{% endif %} {{ hours }}, {{ minutes }}</p>
 {% endif %}
 
 {% if pass.target == 'car' %}
 <h1 style="text-align:center;">Пропуск на машину</h1>
 <p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Машина: {{ pass.color }} {{ pass.model }} {{ pass.number }}</p>
 <p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Цель визита: {{ pass.aim }}</p>
-<p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Осталось: {{ days }} {% if days == 1 %}день,{% elif
-  days == 2 %}дня,{% endif %} {{ hours }}, {{ minutes }}</p>
+<p style="margin: 10px auto 0;font-size: 16pt; text-align: center;">Осталось: {{ days }} {% if days == 1 %}день,{% elif days == 2 %}дня,{% endif %} {{ hours }}, {{ minutes }}</p>
 {% endif %}
 
 {% if tenant %}
@@ -56,10 +54,11 @@
 <br>
 <img class="cnt" src={{link}} alt="Что-то пошло не так...">
 {% else %}
-<p style="margin: 10px auto 0;font-size: 15pt; text-align: center;">Пропуск заказан из квартиры №{{ author.tenant.flat }}</p>
+<p style="margin: 10px auto 0;font-size: 15pt; text-align: center;">Пропуск заказан из квартиры № {{ author.tenant.flat }}</p>
+<br>
 <form method="POST">
   {% csrf_token %}
-    <button type="submit">Завершить пропуск</button>
+    <button type="submit" class="mdc-button mdc-button--raised" style="width: 30%; margin-left: 35%;">Завершить пропуск</button>
 </form>
 {% endif %}
 

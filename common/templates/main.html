@@ -1,107 +1,81 @@
-<html>
+<!DOCTYPE html>
+<html lang="ru">
+
 <head>
+<meta charset="utf-8">
 
-  <title>Tenant - Main Page</title>
+<title>ЖУК</title>
+<meta content="" name="descriptison">
+<meta content="" name="keywords">
 
-  {% load static %}
+<!— Favicons —>
+<link href="assets/img/favicon.png" rel="icon">
+<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<!— Google Fonts —>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,40..|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+<!— Vendor CSS Files —>
+<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+<link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+<link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
+<link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+<!— Template Main CSS File —>
+<link href="assets/css/style.css" rel="stylesheet">
 
 </head>
+
 <body>
-  <div class="roof">
-    <img class="logo" src="{% static 'img/logo.svg' %}">
-    <img src="{% static 'img/roof.svg' %}">
-  </div>
-  {% if homeless %}
-  <!---ЛИЧНЫЙ КАБИНЕТ --->
-  <h2>Вы не подключены к дому, для дальнеешего пользование сервисом, пожалуйста, выберите свой дом в редактировании
-      профиля</h2>
-  <div class="wrapper">
-      <div class="rectangle-big" onclick="window.location.href='/tenant/my_cabinet'">
-          <div style="color:green" class="title">Личный кабинет, {{user.username}}</div>
-          <img src="{{ user.tenant.photo.url }}" width="40" height="40">
-      </div>
-  </div>
-  {% elif not house_confirmed %}
-  <!---ЛИЧНЫЙ КАБИНЕТ --->
-  <h2>Введенные Вами данные проходят проверку</h2>
-  <div class="wrapper">
-      <div class="rectangle-big" onclick="window.location.href='/tenant/my_cabinet'">
-          <div style="color:green" class="title">Личный кабинет, {{user.username}}</div>
-          <img src="{{ user.tenant.photo.url }}" width="40" height="40">
-      </div>
-  </div>
-  {% else %}
-  <div class="wrapper">
 
-    <div class="rectangle-big" onclick="window.location.href='/manager/news'">
-        <div class="title">Новости</div>
+<!— ======= Header ======= —>
+<header id="header" class="fixed-top header-transparent">
+<div class="container">
 
+<div class="logo float-left">
+<h1 class="text-light"><a href="index.html"><span>ЖУК</span></a></h1>
+<!— Uncomment below if you prefer to use an image logo —>
+<!— <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+</div>
 
-    </div>
+<nav class="nav-menu float-right d-none d-lg-block">
+<ul>
+<li class="active"><a href="index.html">Домашняя страница</a></li>
+<li><a href="about.html">О нас</a></li>
+<li><a href="news.html">Новости</a></li>
+<li><a href="base.html">Обращения</a></li>
+<li><a href="chat.html">Чят</a></li>
+<li><a href="login.html">Вход</a></li>
+</ul>
+</nav><!— .nav-menu —>
 
-    <div class="rectangle-horizontal" onclick="window.location.href='forum'">
-        <div class="title">Форум</div>
+</div>
+</header><!— End Header —>
 
+<!— ======= Hero Section ======= —>
+<section id="hero" class="d-flex justify-cntent-center align-items-center">
+<div id="heroCarousel" class="container carousel carousel-fade" data-ride="carousel">
 
-    </div>
-
-    <div class="rectangle-vertical" onclick="window.location.href='https://yandex.ru/pogoda/moscow'">
-        <div class="title">Погода у вас дома</div>
-        <div class="weather">
-            <p>
-            Ночью: {{night}}°C
-            <img src="https://yastatic.net/weather/i/icons/blueye/color/svg/{{night_icon}}.svg"></img>
-             </p>
-        </div>
-         <div class="weather">
-            <p>
-            Утром: {{morning}}°C
-            <img src="https://yastatic.net/weather/i/icons/blueye/color/svg/{{morning_icon}}.svg"></img>
-             </p>
-        </div>
-        <div class="weather">
-            <p>
-            Днём: {{day}}°C
-            <img src="https://yastatic.net/weather/i/icons/blueye/color/svg/{{day_icon}}.svg"></img>
-             </p>
-        </div>
-         <div class="weather">
-            <p>
-            Вечером: {{evening}}°C
-            <img src="https://yastatic.net/weather/i/icons/blueye/color/svg/{{evening_icon}}.svg"></img>
-             </p>
-        </div>
+<!— Slide 1 —>
+<div class="carousel-item active">
+<div class="carousel-container">
+<h2 class="animated fadeInDown">Добро пожаловать на <span>ЖУК</span></h2>
+<p class="animated fadeInUp">ЖУК это платформа, созданная учащимися МШП для усовершенствования взаимодействия между жильцами (Ж) и управляющими компаниями (УК). </p>
+</div>
+</div>
 
 
-    </div>
 
-    <div class="square" onclick="window.location.href='/tenant/my_cabinet'">
-        <div class="title">Личный кабинет</div>
-        <img src={{user.tenant.photo.url}} width="40" height="40">
-    </div>
+</div>
+</section><!— End Hero —>
 
-     <div class="square" onclick="window.location.href='vol/help'">
-        <div class="title">Мои задания</div>
 
-    </div>
+<p align="left"> <img src = assets/img/logo.jpg align = "left" height = 7% width = 7%></p>
 
-    <div class="square" onclick="window.location.href='vol/test'">
-        <div class="title">Волонтерство</div>
-
-    </div>
-
-    <div class="rectangle-horizontal" onclick="window.location.href='my_appeals'">
-        <div class="title">Обращения</div>
-
-    </div>
-
-    <div class="rectangle-horizontal" onclick="window.location.href='tenant/pass'">
-        <div class="title">Пропуска</div>
-        
-    </div>
-
-  </div>
 </body>
+
 </html>
+

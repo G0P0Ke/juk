@@ -12,6 +12,9 @@
     <input type="hidden" id="confirm-id" value=0 name="confirmed">
     <input type="hidden" id="notconfirm-id" value=0 name="unconfirmed">
     {% csrf_token %}
+    {% if flag %}
+        <h5>Новых запросов от жителей пока не поступало. Заходите позже</h5>
+    {% endif %}
     {% for house in houses %}
     <h3>{{ house.house.address }}</h3>
     <hr>
@@ -20,8 +23,8 @@
     <p>Имя: {{tenant.user.first_name}}</p>
     <p>Фамилия: {{tenant.user.last_name}}</p>
     <p>Квартира: {{tenant.flat}}</p>
-        <input type="submit" onclick="confirm({{tenant.id}});" value="Подтвердить жителя">
-        <input type="submit" onclick="notconfirm({{tenant.id}});" value="Отклонить запрос жителя">
+        <input type="submit" class="btn btn-outline-success" onclick="confirm({{tenant.id}});" value="Подтвердить жителя">
+        <input type="submit" class="btn btn-outline-danger" onclick="notconfirm({{tenant.id}});" value="Отклонить запрос жителя">
     <hr>
     {% endfor %}
     {% endfor %}

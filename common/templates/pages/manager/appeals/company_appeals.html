@@ -9,6 +9,9 @@
 <hr>
 <a href="{% url 'manager_main' %}">Вернуться на главную</a>
 <hr>
+    {% if flag %}
+        <h5>Обращений к Вашей компании пока нет. Возможно, скоро они появятся, следите за этим.</h5>
+    {% endif %}
 {% for appeal in opened_appeals %}
 <a href="{% url 'appeal' appeal_id=appeal.id %}"><button>Обращение ползователя {{ appeal.tenant.user.username }}</button></a>
 <hr>

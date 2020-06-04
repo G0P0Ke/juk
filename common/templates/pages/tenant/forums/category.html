@@ -3,6 +3,16 @@
 {% block content %}
 
 <style>
+
+    a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    outline: none;
+   }
+   a:hover {
+    text-decoration: none;
+   }
+
+
     .themes{
     width:100%;
     border: 1px solid #FFFFF;
@@ -42,7 +52,7 @@
 </style>
 
 <div>
-    <a href="{% url 'forum' forum_id=forum.id%}"><input class="mdc-button" value="Вернуться" type="button" style="margin: 0 30%; width: 40%;"></a>
+    <a href="{% url 'forum' forum_id=forum.id%}"><button class="mdc-button" style="width: 100%;"><span class="mdc-button__ripple"></span>Вернуться</button></a>
 
     {% for discussion in discussions %}
     <a href="{% url 'discussion' discussion_id=discussion.id %}"><button class="category ms-motion-slideUpIn $ms-motion-duration-4"><span style="float:left">{{ discussion.theme }}</span><br>

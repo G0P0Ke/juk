@@ -10,6 +10,7 @@ class Company(models.Model):
     """
     Модель управляющей компании
 
+    :param name: название УК
     :param inn: инн УК
     """
     inn = models.IntegerField()
@@ -41,8 +42,8 @@ class Tenant(models.Model):
         :param photo: фото жителя
         :param house: дом проживания пользователя
         :param is_vol: является ли житель волонтёром
-        :param test_date: Время последнего прохождения (None eсли попыток не было)
-        """
+        :param test_date: Время последнего прохождения (None, eсли попыток не было)
+    """
 
     user = models.OneToOneField(
         User,
@@ -76,6 +77,14 @@ class Tenant(models.Model):
 
 
 class Manager(models.Model):
+    """
+    Модель менеджера
+
+    :param user: Пользователь
+    :param company: УК менеджера
+    :param photo: фото менеджера
+    :param is_admin: является ли менеджер админом
+    """
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
@@ -310,7 +319,7 @@ class ManagerRequest(models.Model):
         (1, 'Accepted'),
         (2, 'Refused'),
         (3, 'Not considered')
-    ) # статусы запроса на подключения
+    )  # статусы запроса на подключения
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE

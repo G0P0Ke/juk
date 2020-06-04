@@ -6,7 +6,7 @@
 
     body{
     --mdc-theme-primary: #F25CA2;
-    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-secondary: #00C853;
     --mdc-theme-background: #021859;
     --mdc-theme-surface: #0B9ED9;
     --mdc-theme-error: #b00020;
@@ -53,33 +53,7 @@
   resize: none;
   overflow: auto;
 }
-.form button {
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
-  outline: 0;
-  background: #4CAF50;
-  width: 100%;
-  border: 0;
-  padding: 15px;
-  color: #FFFFFF;
-  font-size: 14pt;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
-  margin: 20% 0 0 0;
-}
-.form button:hover,.form button:active,.form button:focus {
-  background: #43A047;
-}
-.form .message {
-  margin: 15px 0 0;
-  color: #b3b3b3;
-  font-size: 12px;
-}
-.form .message a {
-  color: #4CAF50;
-  text-decoration: none;
-}
+
 .demo-width-class {
   width: 400px;
 }
@@ -133,8 +107,8 @@ border: none;
 <div class="form ms-motion-slideUpIn $ms-motion-duration-4">
     <form method="POST">
     {% csrf_token %}
-            <input class="forminput" type="text" name="theme" maxlength="20" placeholder="Заголовок" required><br><br>
-        <textarea name="description" maxlength="100" placeholder="Описание" required></textarea><br><br>
+            <input class="forminput" type="text" name="theme" maxlength="40" placeholder="Заголовок" required><br><br>
+        <textarea name="description" placeholder="Описание" required></textarea><br><br>
 
 
         <label for="category" style="float:left; margin: 5px 0 0 10%; font-size:14pt">Тема</label>

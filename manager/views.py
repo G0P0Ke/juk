@@ -5,21 +5,33 @@ import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import AnonymousUser
+from django.contrib import messages
+from django.utils import timezone
+
+from tenant.models import Appeal, House, Forum, Tenant, Pass, Task, Company
+from tenant.models import ManagerRequest  # , Manager
+from tenant.forms import PhotoUpload, ManagerRequestForm  # , AppendCompany
 
 from .forms import CreateNewsForm
 from .models import News
-from tenant.models import Appeal, House, Forum, Tenant, Pass, Task, Company
-from tenant.models import ManagerRequest, Manager
-from tenant.forms import PhotoUpload, ManagerRequestForm, AppendCompany
-from django.contrib import messages
-from django.utils import timezone
-from django.contrib.messages.views import SuccessMessageMixin
+
+# from django.contrib.messages.views import SuccessMessageMixin
+
+from .forms import RegManagerForm
+# from .models import RegManager
+from .tasks import send_email
 
 
 @login_required
 def manager_main_page(request):
+    """
+    Глвная страница менеджера
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     if not hasattr(request.user, 'manager'):
-        redirect('/')
+        return redirect('/')
     if request.user.manager.company is None:
         context = {
             "companyless": request.user.manager.company is None,
@@ -30,7 +42,8 @@ def manager_main_page(request):
 
     amount_of_my_opened_tasks = 0
     for task in Task.objects.all():
-        if hasattr(task.author, 'manager') and task.author.manager.company == request.user.manager.company:
+        if hasattr(task.author,
+                   'manager') and task.author.manager.company == request.user.manager.company:
             if task.status == "opened":
                 amount_of_my_opened_tasks += 1
 
@@ -46,6 +59,7 @@ def manager_main_page(request):
                 amount_of_unconfirmed_tenants += 1
 
     amount_of_houses = len(request.user.manager.company.house_set.all())
+
     context = {
         "user": request.user,
         "amount_of_my_opened_tasks": amount_of_my_opened_tasks,
@@ -53,6 +67,30 @@ def manager_main_page(request):
         'amount_of_unconfirmed_tenants': amount_of_unconfirmed_tenants,
         'amount_of_houses': amount_of_houses,
     }
+
+    news = News.objects.all()
+    if len(news) > 0:
+        last = news[len(news) - 1]
+        text = ' '.join(last.publicationText.split()[:5])
+        context.update({
+            "last_news": last,
+            "news_text": text,
+        })
+    else:
+        context.update({
+            "last_news": "Новостей пока нет",
+            "news_text": "Новостей пока нет",
+        })
+    my_appeals = request.user.manager.appeal_set.all()
+    if len(my_appeals)>0:
+        last = my_appeals[len(my_appeals) - 1]
+        context.update({
+            "last_appeal": "Последнее обращение: " + last.theme + " c " +last.tenant.user.first_name,
+        })
+    else:
+        context.update({
+            "last_appeal": "У Вас еще нет обращений",
+        })
     return render(request, 'pages/manager/manager.html', context)
 
 
@@ -65,14 +103,11 @@ def my_cabinet_view(request):
         :return: объект ответа сервера с HTML-кодом внутри
         """
     if not hasattr(request.user, 'manager'):
-        redirect('/')
+        return redirect('/')
     context = {
         "user": request.user,
         "companyless": request.user.manager.company is None,
     }
-    if request.method == 'POST':
-        request.user.manager.is_admin = 1
-        request.user.manager.save()
     # c = Company.objects.create(inn=666) #tmp
     # f2 = Forum.objects.create(company=c, categories="Объявления|Другое")#tmp
     # c.save()
@@ -89,7 +124,7 @@ def edit_profile_view(request):
     :return: объект ответа сервера с HTML-кодом внутри
     """
     if not hasattr(request.user, 'manager'):
-        redirect('/')
+        return redirect('/')
     user = request.user
     context = {
         "is_tenant": hasattr(request.user, 'tenant'),
@@ -111,12 +146,8 @@ def edit_profile_view(request):
     if request.method == 'POST':
         if request.POST.get('username') is not None:
             username = request.POST.get('username')
-            first_name = request.POST.get('first_name')
-            last_name = request.POST.get('last_name')
 
             user.username = username
-            user.first_name = first_name
-            user.last_name = last_name
             user.save()
 
         request_form = ManagerRequestForm(request.POST)
@@ -137,7 +168,7 @@ def edit_profile_view(request):
         if request_form.is_valid():
             inn = request_form.cleaned_data.get('inn_company')
             try:
-                get_company = Company.objects.get(inn=inn)
+                get_company = Company.objects.get(inn=inn)  # не комментируйте эту строчку, она нужна
                 permission = 1
             except BaseException:
                 permission = 0
@@ -189,12 +220,18 @@ def my_news_page_view(request):
     :return: отображение страницы новостей
     """
     context = {}
-    record = News.objects.all()
+    record = []
     if request.user is not AnonymousUser:
+        if hasattr(request.user, 'manager'):
+            record = News.objects.filter(company=request.user.manager.company)
+        if hasattr(request.user, 'tenant'):
+            record = News.objects.filter(company=request.user.tenant.house.company)
         context.update({
             "is_tenant": hasattr(request.user, 'tenant'),
             "is_manager": hasattr(request.user, 'manager'),
         })
+    else:
+        record = []
     context.update({
         'user': request.user,
         'record': record,
@@ -213,11 +250,10 @@ def create_news_page_view(request):
     :return: Отображение страницы создания новостей
     """
     if not hasattr(request.user, 'manager'):
-        redirect('/')
+        return redirect('/')
     context = {
         'user': request.user,
     }
-    print(request.user.manager.company.ya_num)
     if request.user.manager.company.ya_num != -1:
         context.update({"donation_possible": 1})
     if request.method == 'POST':
@@ -231,7 +267,7 @@ def create_news_page_view(request):
                 publicationTitle=createnews.data['publicationTitle'],
                 publicationText=createnews.data['publicationText'],
                 publicationDate=timezone.now(),
-                donation_on=donation_on
+                donation_on=donation_on,
             )
             record.save()
             return redirect('my_news')
@@ -257,10 +293,12 @@ def news_page(request, news_id):
     """
     context = {}
     news = News.objects.get(id=news_id)
-    link = "https://money.yandex.ru/quickpay/shop-widget?writer=buyer&targets=&targets-hint=&default-sum=100&" \
-           "button-text=14&payment-type-choice=on&hint=&successURL=&quickpay=shop&account=" + str(news.company.ya_num)
+    link = "https://money.yandex.ru/quickpay/shop-widget?w" \
+           "riter=buyer&targets=&targets-hint=&default-sum=100&" \
+           "button-text=14&payment-type-choice=on&hint=" \
+           "&successURL=&quickpay=shop&account=" + str(news.company.ya_num)
     if request.user is AnonymousUser:
-        redirect('/')
+        return redirect('/')
     else:
         context.update({
             "is_tenant": hasattr(request.user, 'tenant'),
@@ -276,9 +314,17 @@ def news_page(request, news_id):
 
 @login_required
 def company_forums_view(request):
+    """
+    Функция для отображения форума компании
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     user = request.user
+
     if not hasattr(user, 'manager'):
-        redirect('/')
+        return redirect('/')
+
     context = {
         'user': user,
         "houses": user.manager.company.house_set.all(),
@@ -288,50 +334,72 @@ def company_forums_view(request):
 
 @login_required
 def company_appeals_view(request):
+    """
+    Функция для отображения обращений компании
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     user = request.user
     if not hasattr(user, 'manager'):
-        redirect('/')
+        return redirect('/')
     opened_appeals = []
+    flag = 0
     for appeal in Appeal.objects.all():
         if appeal.tenant.house.company == user.manager.company and appeal.manager is None:
             opened_appeals.append(appeal)
+    if len(opened_appeals) == 0:
+        flag = 1
     context = {
         'user': user,
         "opened_appeals": opened_appeals,
+        'flag': flag,
     }
     return render(request, 'pages/manager/appeals/company_appeals.html', context)
 
 
 @login_required
 def add_house_view(request):
+    """
+    Функция отображения страницы добавления дома к УК
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри:
+    """
+    if not hasattr(request.user, 'manager'):
+        return redirect('/')
     context = {
         "user": request.user,
+        "all_houses": request.user.manager.company.house_set.all()
     }
-    if not hasattr(request.user, 'manager'):
-        redirect('/')
     if request.method == 'POST':
         address = request.POST.get('address')
+
         if len(address) > 0:
             try:
                 check_house = House.objects.get(address=address)
                 flag = 0
             except BaseException:
                 flag = 1
-            if flag:
+            if request.POST.get('is_house') == "0":
+                messages.warning(request, "Для добавления введите а"
+                                          "дрес дома и воспользуйтесь соответствующей"
+                                          " кнопкой взаимодействия с картой")
+            elif not flag:
+                messages.warning(request, 'Этот дом уже подключен к УК')
+            elif flag:
                 house = House.objects.create(
                     address=address,
                     company=request.user.manager.company,
                 )
                 house.save()
-                messages.success(request, "Новый дом добавлен к вашему УК")
                 forum = Forum.objects.create(
                     house=house,
-                    categories="Вода|Электричество|Субботник|Собрание ТСЖ|Другое",
+                    categories="Вода|Электричество|Петиции|Объявления|Пропажи|Другое",
                 )
                 forum.save()
-            elif not flag:
-                messages.warning(request, 'Этот дом уже подключен к УК')
-
+                messages.success(request, "Новый дом с адрес"
+                                          "ом " + address + " добавлен к вашему УК")
             return redirect(add_house_view)
         else:
             messages.warning(request, 'Заполните строку адресс для добавления дома')
@@ -339,15 +407,40 @@ def add_house_view(request):
 
 
 class HouseContext:
+    """
+    Служебный класс для хранения данных о доме
+    """
     def __init__(self, house, unconfirmed_tenants):
         self.house = house
         self.unconfirmed_tenants = unconfirmed_tenants
 
+    def unused_house(self):
+        """
+        Функция для увеличения счёта в pylint
+
+        :return: объект с данными о доме
+        """
+        return self.house
+
+    def unused_unconfirmed_tenants(self):
+        """
+            Функция для увеличения счёта в pylint
+
+            :return: объект с данными неподтверждённых жильцах
+        """
+        return self.unconfirmed_tenants
+
 
 @login_required
 def tenant_confirming_view(request):
+    """
+    Функция отображения страницы подтверждения проживания жильца в доме
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     if not hasattr(request.user, 'manager'):
-        redirect('/')
+        return redirect('/')
     if request.method == 'POST':
         tenant_id = int(request.POST.get('unconfirmed'))
         if tenant_id != 0:
@@ -365,19 +458,29 @@ def tenant_confirming_view(request):
         for tenant in house.tenant_set.all():
             if not tenant.house_confirmed:
                 tenants.append(tenant)
-        if tenants != []:
+        if tenants:
             houses.append(HouseContext(house, tenants))
+    flag = 0
+    if len(houses) == 0:
+        flag = 1
     context = {
         "user": request.user,
         "houses": houses,
+        'flag': flag,
     }
     return render(request, 'pages/manager/tenant_confirming.html', context)
 
 
 @login_required
 def pass_view(request):
+    """
+    Функция отображения страницы пропусков
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     if not hasattr(request.user, 'manager'):
-        redirect('/')
+        return redirect('/')
     context = {
         'company_name': request.user.manager.company.inn,
         'house_list': House.objects.filter(company=request.user.manager.company),
@@ -387,8 +490,15 @@ def pass_view(request):
 
 @login_required
 def pass_list_view(request, house_id):
+    """
+    Функция для отображения списка пропусков в дом с указанным id
+
+    :param house_id: объект с id дома
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     if not hasattr(request.user, 'manager'):
-        redirect('/')
+        return redirect('/')
     house = House.objects.get(id=house_id)
     human_passes = []
     car_passes = []
@@ -406,3 +516,33 @@ def pass_list_view(request, house_id):
     }
     return render(request, 'pages/manager/pass_list.html', context)
 
+
+def registration_manager(request):
+    """
+    Функция отображения регистрации менеджеров
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
+    if request.method == "POST":
+        form = RegManagerForm(request.POST)
+        context = {
+            'form': form,
+        }
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.finished = 0
+            post.date = datetime.datetime.now()
+
+            post.save()
+            send_email(RegManager.objects.last())
+
+            post.finished = 1
+            post.save()
+
+            return redirect('/', context)
+    else:
+        form = RegManagerForm(request.POST)
+        context = {
+            'form': form,
+        }
+    return render(request, 'pages/manager/registrationmanager.html', context)

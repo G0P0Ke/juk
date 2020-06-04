@@ -50,7 +50,7 @@
   max-width: 100%;
   max-height: 800px;
   min-height: 400px;
-  margin: 50px auto;
+  margin: 10px auto;
   box-sizing: border-box;
   padding: 30px 0 10px 0;
   text-align: center;
@@ -61,6 +61,7 @@
 }
 .right{
   grid-area: right;
+  text-align: left;
 }
 .bottom{
 margin:10px auto 0;
@@ -68,15 +69,15 @@ margin:10px auto 0;
 }
 .grid {
   display: grid;
-  grid-template: "left right right" auto
-                 "left right right" auto;
- grid-gap: 5px;
+  grid-template: "left right" auto
+                 "left right" auto;
+ grid-gap: 10px;
 }
 .forminput {
   font-family: "Roboto", sans-serif;
   outline: 0;
   background: #f2f2f2;
-  width: 80%;
+  width: 90%;
   border: 0;
   margin: 0 0 15px;
   padding: 10px 15px;
@@ -84,14 +85,19 @@ margin:10px auto 0;
   font-size: 14pt;
   border-radius: 4px;
 }
-.form1 input{
-background-color: var(--mdc-theme-primary);
-color: #ffffff;
+
+.f input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 30%;
+  border: 0;
+  margin: 0 0 15px 10px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  border-radius: 4px;
 }
-button{
-background-color: var(--mdc-theme-primary);
-color: #ffffff;
-}
+
 
  .select{
     position: relative;
@@ -121,8 +127,8 @@ color: #ffffff;
 
 
 
-<p style="margin: 20px auto;font-size: 22pt; text-align: center;">Редактирование профиля менеджера</p>
-       <a class="mdc-button" style="float:right" href="{% url 'manager_my_cabinet' %}">Вернуться в профиль</a>
+<p style="margin: 20px auto 0;font-size: 22pt; text-align: center;">Редактирование профиля менеджера</p>
+       <a class="mdc-button" style="width:100%" href="{% url 'manager_my_cabinet' %}"><span class="mdc-button__ripple"></span>Вернуться в профиль</a>
 <div class="form">
     <div class="grid">
         <hr>
@@ -136,9 +142,10 @@ color: #ffffff;
                     <div class="form-group ">
                         {% csrf_token %}
                         {{ form.photo.errors }}
+                        <br>
                         {{ form.photo }}
                     </div>
-                    <input class="mdc-button mdc-button--outlined" type="submit" value="Обновить фото" class="button">
+                    <input class="mdc-button mdc-button--raised" type="submit" value="Обновить фото" class="button">
                 </form>
         </div>
 
@@ -151,39 +158,41 @@ color: #ffffff;
 
                 <label style="font-size: 15pt; text-align: left;" for="first_name-id">Ваше имя:</label>
                 <input class="forminput" type="text" name="first_name" id="first_name-id" value="{{user.first_name}}"
-                       required><br>
+                       disabled><br>
 
                 <label style="font-size: 15pt; text-align: left;" for="last_name-id">Ваша фамилия:</label>
-                    <input class="forminput" type="text" name="last_name" id="last_name-id" value="{{user.last_name}}" required><br>
+                    <input class="forminput" type="text" name="last_name" id="last_name-id" value="{{user.last_name}}" disabled><br>
 
-                <input class="mdc-button mdc-button--raised" type="submit" value="Сохранить изменения">
+                <input class="mdc-button mdc-button--raised" style="margin:auto auto auto 25%;width:40%;" type="submit" value="Сохранить изменения">
             </form>
             <br><br>
+
+<div class="f" style="text-align: center; margin-left: -10%;">
             {% if flag == 1 %}
-            <h5 class="text-muted"> Ваш запрос на подключение к УК одобрен. ИНН вашей компании: {{
-                user.manager.company.inn }}</h5>
+            <p style="font-size: 15pt"> Ваш запрос на подключение к УК одобрен. <br> ИНН вашей компании: {{ user.manager.company.inn }}</p>
             {% elif flag == 0 %}
-            <h5 class="text-muted"> Вы можете подать запрос на подключение к УК</h5>
+            <p style="font-size: 15pt"> Вы можете подать запрос на подключение к УК</p>
             <form method="POST" action="">
-                <div>
+                    <div style="font-size: 14pt;">
                     {% csrf_token %}
                     {{ request_form }}
-                    <input class="mdc-button mdc-button--raised" type="submit" name="submit"
+                    </div>
+                    <input class="mdc-button mdc-button--raised" style="width:40%;" type="submit" name="submit"
                            value="Запросить подключение">
-                </div>
             </form>
             {% elif flag == 2 %}
-                <h5 class="text-muted"> Ваш запрос на подключение к УК отклонен. Вы можете попробовать снова</h5>
+                <p style="font-size: 15pt"> Ваш запрос на подключение к УК отклонен. <br> Вы можете попробовать снова</p>
                 <form method="POST" action="">
-                    <div>
+                     <div style="font-size: 14pt;">
                         {% csrf_token %}
                         {{ request_form }}
                     </div>
-                    <input class="mdc-button mdc-button--raised" type="submit" name="submit" value="Запросить подключение">
+                    <input class="mdc-button mdc-button--raised" type="submit" style="width:40%;" name="submit" value="Запросить подключение">
                 </form>
             {% elif flag == 3 %}
-                <h5 class="text-muted"> Ваш запрос на подключение к УК находится в рассмотрении</h5>
+                <p style="font-size: 15pt"> Ваш запрос на подключение к УК находится в рассмотрении</p>
             {% endif %}
+</div>
         </div>
     </div>
 </div>

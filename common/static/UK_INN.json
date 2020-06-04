@@ -1,0 +1,3610 @@
+[
+{
+    "model": "tenant.Company",
+    "pk": 1,
+    "fields": {
+        "name": "ГБУ «Жилищник района Фили-Давыдково»",
+        "inn": "7731288482"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 2,
+    "fields": {
+        "name": "ГБУ «Жилищник района Кузьминки»",
+        "inn": "7721026689"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 3,
+    "fields": {
+        "name": "ГБУ «Жилищник района Южное Бутово»",
+        "inn": "7727846180"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 4,
+    "fields": {
+        "name": "ГБУ «Жилищник Пресненского района»",
+        "inn": "7703820360"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 5,
+    "fields": {
+        "name": "ГБУ «Жилищник Таганского района»",
+        "inn": "7709966213"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 6,
+    "fields": {
+        "name": "ГБУ «Жилищник района Якиманка»",
+        "inn": "7706816114"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 7,
+    "fields": {
+        "name": "ГБУ «Жилищник Жулебино района Выхино-Жулебино»",
+        "inn": "7721818170"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 8,
+    "fields": {
+        "name": "ГБУ «Жилищник Выхино района Выхино-Жулебино»",
+        "inn": "7721818162"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 9,
+    "fields": {
+        "name": "ТСЖ «Фестивальная 24/2»",
+        "inn": "7743087220"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 10,
+    "fields": {
+        "name": "ГБУ «Жилищник района Ломоносовский»",
+        "inn": "7736669273"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 11,
+    "fields": {
+        "name": "ЖСК «Краснодар»",
+        "inn": "7734036155"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 12,
+    "fields": {
+        "name": "ЖК «Солнцевский»",
+        "inn": "7732084322"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 13,
+    "fields": {
+        "name": "ЖСК «Сетунька»",
+        "inn": "7731091006"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 14,
+    "fields": {
+        "name": "ЖСК «Болдино»",
+        "inn": "7729305892"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 15,
+    "fields": {
+        "name": "ЖСК «Хризолит»",
+        "inn": "7728123890"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 16,
+    "fields": {
+        "name": "ЖСК «Пегас»",
+        "inn": "7728091422"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 17,
+    "fields": {
+        "name": "ЖСК «Рязань»",
+        "inn": "7728042841"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 18,
+    "fields": {
+        "name": "ЖСК «Разведка недр»",
+        "inn": "7727071470"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 19,
+    "fields": {
+        "name": "ЖСК «Бутово-15»",
+        "inn": "7727021662"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 20,
+    "fields": {
+        "name": "ЖСК «Фрязино»",
+        "inn": "7724180720"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 21,
+    "fields": {
+        "name": "ЖСК «Ковров»",
+        "inn": "7724180230"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 22,
+    "fields": {
+        "name": "ЖСК «Ждановский»",
+        "inn": "7721061891"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 23,
+    "fields": {
+        "name": "ЖСК «Компас»",
+        "inn": "7720059970"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 24,
+    "fields": {
+        "name": "ЖСК «Целиноград»",
+        "inn": "7719062739"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 25,
+    "fields": {
+        "name": "ЖСК «Фильм»",
+        "inn": "7716109587"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 26,
+    "fields": {
+        "name": "ЖСК «Пирит»",
+        "inn": "7716063685"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 27,
+    "fields": {
+        "name": "ЖСК «Зимний»",
+        "inn": "7715069444"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 28,
+    "fields": {
+        "name": "ТСЖ «НА БОЛЬШОМ КОПТЕВСКОМ»",
+        "inn": "7714580504"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 29,
+    "fields": {
+        "name": "ООО «УК ДЕЗ района Дмитровский»",
+        "inn": "7713644226"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 30,
+    "fields": {
+        "name": "ТСЖ «Тверская 19»",
+        "inn": "7710722780"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 31,
+    "fields": {
+        "name": "ООО «УК «Красное село»",
+        "inn": "7708600833"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 32,
+    "fields": {
+        "name": "ООО «Компания САГиК»",
+        "inn": "7705853265"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 33,
+    "fields": {
+        "name": "ТСЖ «Ретро-35»",
+        "inn": "7704238242"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 34,
+    "fields": {
+        "name": "ЖСК «Гимет»",
+        "inn": "7703052848"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 35,
+    "fields": {
+        "name": "ТСЖ «Ленинградское шоссе, 52Б»",
+        "inn": "7743063035"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 36,
+    "fields": {
+        "name": "ЖСК «Тигрис»",
+        "inn": "7736160944"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 37,
+    "fields": {
+        "name": "ООО «ИВА-XXI»",
+        "inn": "7734003880"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 38,
+    "fields": {
+        "name": "ЖСК «Солнцево-16»",
+        "inn": "7732084210"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 39,
+    "fields": {
+        "name": "ЖСК «Даугава»",
+        "inn": "7731062862"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 40,
+    "fields": {
+        "name": "ЖСК «Нейтрон»",
+        "inn": "7729301104"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 41,
+    "fields": {
+        "name": "ЖСК «Стройпластик»",
+        "inn": "7728120592"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 42,
+    "fields": {
+        "name": "ЖСК «Шайба»",
+        "inn": "7728090860"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 43,
+    "fields": {
+        "name": "ЖСК «Криптон»",
+        "inn": "7728035837"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 44,
+    "fields": {
+        "name": "ЖСК «МИРГЭМ»",
+        "inn": "7727071261"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 45,
+    "fields": {
+        "name": "ЖК «Союз-23»",
+        "inn": "7727021020"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 46,
+    "fields": {
+        "name": "ЖСК «Ровно»",
+        "inn": "7724180632"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 47,
+    "fields": {
+        "name": "ЖСК «БАКУ»",
+        "inn": "7724176139"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 48,
+    "fields": {
+        "name": "ЖСК «Львов»",
+        "inn": "7721029866"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 49,
+    "fields": {
+        "name": "ЖСК «Встреча»",
+        "inn": "7720059850"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 50,
+    "fields": {
+        "name": "ЖСК «НИИПРОЕКТ»",
+        "inn": "7719048702"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 51,
+    "fields": {
+        "name": "ЖК «Советская медицина»",
+        "inn": "7719078055"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 52,
+    "fields": {
+        "name": "ЖСК «Химнефтемаш»",
+        "inn": "7717011898"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 53,
+    "fields": {
+        "name": "ЖСК «Галиотис»",
+        "inn": "7716086650"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 54,
+    "fields": {
+        "name": "ЖСК «Багульник»",
+        "inn": "7715115965"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 55,
+    "fields": {
+        "name": "ООО «Альтернативные Системы Оптимум»",
+        "inn": "7714711940"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 56,
+    "fields": {
+        "name": "ТСЖ «Клязьминское»",
+        "inn": "7713659600"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 57,
+    "fields": {
+        "name": "ЖСК «Ветеран труда-угольщик»",
+        "inn": "7712036659"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 58,
+    "fields": {
+        "name": "ЗАО» Жилищно-эксплуатационное предприятие «Импульс-Жилстрой»",
+        "inn": "7709093960"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 59,
+    "fields": {
+        "name": "ЖСК «МИИТ»",
+        "inn": "7707013825"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 60,
+    "fields": {
+        "name": "ТСЖ «Старопетровский»",
+        "inn": "7704511149"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 61,
+    "fields": {
+        "name": "ЖСК «Молодой кинематографист»",
+        "inn": "7703116876"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 62,
+    "fields": {
+        "name": "ТСЖ «Мясницкая 24»",
+        "inn": "7701327053"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 63,
+    "fields": {
+        "name": "ТСЖ «Фестивальная 24А»",
+        "inn": "7743571818"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 64,
+    "fields": {
+        "name": "ЖСК «Бухара»",
+        "inn": "7737023027"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 65,
+    "fields": {
+        "name": "ЖСК «Адлер»",
+        "inn": "7734060077"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 66,
+    "fields": {
+        "name": "ЖК «Союз-52К»",
+        "inn": "7733006655"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 67,
+    "fields": {
+        "name": "ЖСК «Диалюкс»",
+        "inn": "7731111534"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 68,
+    "fields": {
+        "name": "ЗАО «СУ-ЖКХ»",
+        "inn": "7729582409"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 69,
+    "fields": {
+        "name": "ЖСК «Дружба-18»",
+        "inn": "7728125640"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 70,
+    "fields": {
+        "name": "ЖСК «Союз-Аполлон»",
+        "inn": "7728091937"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 71,
+    "fields": {
+        "name": "ЖК «Союз-49К»",
+        "inn": "7728048096"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 72,
+    "fields": {
+        "name": "ЖСК «Бутово-21»",
+        "inn": "7727093515"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 73,
+    "fields": {
+        "name": "ЖК «Союз-29 «",
+        "inn": "7727023966"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 74,
+    "fields": {
+        "name": "ЖСК «Коломенское»",
+        "inn": "7725003788"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 75,
+    "fields": {
+        "name": "ЖСК «Абакан»",
+        "inn": "7724180270"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 76,
+    "fields": {
+        "name": "ООО «ПТО ПЕКА»",
+        "inn": "7723147537"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 77,
+    "fields": {
+        "name": "ЖСК «Привет»",
+        "inn": "7720060038"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 78,
+    "fields": {
+        "name": "ЖСК «Работник энциклопедии»",
+        "inn": "7719077975"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 79,
+    "fields": {
+        "name": "ЖСК «Загорск»",
+        "inn": "7716112780"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 80,
+    "fields": {
+        "name": "ЖСК «Дудинка»",
+        "inn": "7716078113"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 81,
+    "fields": {
+        "name": "ЖСК «Тбилиси»",
+        "inn": "7715101850"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 82,
+    "fields": {
+        "name": "ООО Управляющая компания Дирекция Эксплуатации зданий «Беговая»",
+        "inn": "7714664031"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 83,
+    "fields": {
+        "name": "ТСЖ «Дубнинская 71»",
+        "inn": "7713650325"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 84,
+    "fields": {
+        "name": "ЗАО «Алнита»",
+        "inn": "7711051277"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 85,
+    "fields": {
+        "name": "ЖСК «Художников-графиков»",
+        "inn": "7709032982"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 86,
+    "fields": {
+        "name": "ЗАО «Служба Сервиса Вашего Дома»",
+        "inn": "7706205186"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 87,
+    "fields": {
+        "name": "ТСЖ «Арбат 23»",
+        "inn": "7704508379"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 88,
+    "fields": {
+        "name": "ЖСК «Малый театр»",
+        "inn": "7703116844"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 89,
+    "fields": {
+        "name": "ТСЖ «Харитонье»",
+        "inn": "7701261892"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 90,
+    "fields": {
+        "name": "ТСЖ «Дегунино»",
+        "inn": "7743087318"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 91,
+    "fields": {
+        "name": "ЖСК «Лайнер»",
+        "inn": "7737019510"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 92,
+    "fields": {
+        "name": "ЖСК «Водопад»",
+        "inn": "7734060020"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 93,
+    "fields": {
+        "name": "ЖСК «Митино-17»",
+        "inn": "7733002812"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 94,
+    "fields": {
+        "name": "ЖСК «Нара»",
+        "inn": "7731109990"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 95,
+    "fields": {
+        "name": "ООО «Юнисервис»",
+        "inn": "7729524407"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 96,
+    "fields": {
+        "name": "ЖСК «Умеренный»",
+        "inn": "7728124460"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 97,
+    "fields": {
+        "name": "ЖСК «Широта»",
+        "inn": "7728091711"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 98,
+    "fields": {
+        "name": "ЖСК «Гурьев»",
+        "inn": "7728043098"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 99,
+    "fields": {
+        "name": "ЖСК «Бутово-25»",
+        "inn": "7727086758"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 100,
+    "fields": {
+        "name": "ЖК «Союз-36К»",
+        "inn": "7727021983"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 101,
+    "fields": {
+        "name": "ОАО «РЭУ 56 района Восточный»",
+        "inn": "7719597396"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 102,
+    "fields": {
+        "name": "ЖСК «Зеленый луч»",
+        "inn": "7718019152"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 103,
+    "fields": {
+        "name": "ЖСК «Бутово-26»",
+        "inn": "7716090248"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 104,
+    "fields": {
+        "name": "НО ТСЖ «ШАНС»",
+        "inn": "7715158630"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 105,
+    "fields": {
+        "name": "ЖСК «Россиянка»",
+        "inn": "7715040854"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 106,
+    "fields": {
+        "name": "ООО «Соко МПХ»",
+        "inn": "7714038563"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 107,
+    "fields": {
+        "name": "ЖСК «Русалка»",
+        "inn": "7712097683"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 108,
+    "fields": {
+        "name": "ЗАО УК «Капитал-Инвест Юг»",
+        "inn": "7709859290"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 109,
+    "fields": {
+        "name": "ДОСР МЖК «Икар»",
+        "inn": "7707107696"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 110,
+    "fields": {
+        "name": "ГУП «ДЕЗ района Замоскворечье»",
+        "inn": "7705012696"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 111,
+    "fields": {
+        "name": "ТСЖ «Скатертный 15»",
+        "inn": "7703546734"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 112,
+    "fields": {
+        "name": "ЖСК «Гидросталь»",
+        "inn": "7703001201"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 113,
+    "fields": {
+        "name": "ЖСК «Яхонт»",
+        "inn": "7737056625"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 114,
+    "fields": {
+        "name": "ООО «УК РЕСУРСЭНЕРГОПРОМ»",
+        "inn": "7734637974"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 115,
+    "fields": {
+        "name": "ЖСК «Митино-16»",
+        "inn": "7733052080"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 116,
+    "fields": {
+        "name": "ЖСК «Днестр»",
+        "inn": "7731147234"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 117,
+    "fields": {
+        "name": "ГБУ «Жилищник района Дорогомилово»",
+        "inn": "7730688625"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 118,
+    "fields": {
+        "name": "ЖСК «Теплостанец»",
+        "inn": "7728130960"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 119,
+    "fields": {
+        "name": "ЖСК «Зарайск»",
+        "inn": "7728105160"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 120,
+    "fields": {
+        "name": "ЖСК «Термез»",
+        "inn": "7728080967"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 121,
+    "fields": {
+        "name": "ЖСК «Фосфор»",
+        "inn": "7728007244"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 122,
+    "fields": {
+        "name": "ЖК «Союз-24»",
+        "inn": "7727038000"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 123,
+    "fields": {
+        "name": "ЖСК «Линза»",
+        "inn": "7726200700"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 124,
+    "fields": {
+        "name": "ЖСК «МОСКВОРЕЧЬЕ-12»",
+        "inn": "7724180488"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 125,
+    "fields": {
+        "name": "ЖСК «Елецкий»",
+        "inn": "7724156990"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 126,
+    "fields": {
+        "name": "ЖСК «Сталь»",
+        "inn": "7720079208"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 127,
+    "fields": {
+        "name": "ОАО «РЭУ 18 района Восточное Измайлово»",
+        "inn": "7719585390"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 128,
+    "fields": {
+        "name": "ЖСК «Хроматрон»",
+        "inn": "7718019106"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 129,
+    "fields": {
+        "name": "ЖСК «Дозорный»",
+        "inn": "7716086717"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 130,
+    "fields": {
+        "name": "ЖСК «Пион»",
+        "inn": "7715139050"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 131,
+    "fields": {
+        "name": "ЖСК «Витебск»",
+        "inn": "7715040646"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 132,
+    "fields": {
+        "name": "ЖСК «Московский писатель»",
+        "inn": "7714032201"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 133,
+    "fields": {
+        "name": "ЖСК «Обертон»",
+        "inn": "7712090536"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 134,
+    "fields": {
+        "name": "ТСЖ «Воронцовский»",
+        "inn": "7709677476"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 135,
+    "fields": {
+        "name": "ЖСК «Паллада»",
+        "inn": "7707094567"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 136,
+    "fields": {
+        "name": "ООО «Дирекция единого заказчика района Арбат»",
+        "inn": "7704738943"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 137,
+    "fields": {
+        "name": "ТСЖ «Предтеченка»",
+        "inn": "7703538701"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 138,
+    "fields": {
+        "name": "ТСЖ «Печатников-16»",
+        "inn": "7702504643"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 139,
+    "fields": {
+        "name": "ЖСК «Платина»",
+        "inn": "7737055484"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 140,
+    "fields": {
+        "name": "ЖСК «Ядро»",
+        "inn": "7734120311"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 141,
+    "fields": {
+        "name": "ЖСК «Митино-12»",
+        "inn": "7733048077"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 142,
+    "fields": {
+        "name": "ЖСК «Рублево»",
+        "inn": "7731147202"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 143,
+    "fields": {
+        "name": "ООО «3см»",
+        "inn": "7730124869"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 144,
+    "fields": {
+        "name": "ЖСК «Карбон»",
+        "inn": "7728129362"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 145,
+    "fields": {
+        "name": "ЖСК «Плёс»",
+        "inn": "7728099090"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 146,
+    "fields": {
+        "name": "ЖСК «Бородино»",
+        "inn": "7728074963"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 147,
+    "fields": {
+        "name": "ЖСК «Митино-18»",
+        "inn": "7728000344"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 148,
+    "fields": {
+        "name": "ЖК «Союз-14»",
+        "inn": "7727036122"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 149,
+    "fields": {
+        "name": "ЖСК «Крейсер»",
+        "inn": "7726191990"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 150,
+    "fields": {
+        "name": "ЖСК «Москворечье-10»",
+        "inn": "7724180424"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 151,
+    "fields": {
+        "name": "ЖСК «Крейсер»",
+        "inn": "7726191990"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 152,
+    "fields": {
+        "name": "ЖСК «Москворечье-10»",
+        "inn": "7724180424"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 153,
+    "fields": {
+        "name": "ЖСК «Согдиана»",
+        "inn": "7724156982"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 154,
+    "fields": {
+        "name": "ЖСК «Братск»",
+        "inn": "7720079110"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 155,
+    "fields": {
+        "name": "ОАО «РЭУ 21 района Измайлово»",
+        "inn": "7719577329"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 156,
+    "fields": {
+        "name": "ЖСК «Лесное эхо»",
+        "inn": "7718019096"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 157,
+    "fields": {
+        "name": "ЖК «Стартер»",
+        "inn": "7716086700"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 158,
+    "fields": {
+        "name": "ЖСК «Шереметьево»",
+        "inn": "7715137091"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 159,
+    "fields": {
+        "name": "ЖСК «Бескудниково»",
+        "inn": "7715010095"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 160,
+    "fields": {
+        "name": "ЖСК «Советский писатель»",
+        "inn": "7714031663"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 161,
+    "fields": {
+        "name": "ЖСК «Информатика»",
+        "inn": "7712083899"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 162,
+    "fields": {
+        "name": "НП «ССЖ Факел»",
+        "inn": "7709645918"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 163,
+    "fields": {
+        "name": "ЖСК «Артист эстрады»",
+        "inn": "7707093612"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 164,
+    "fields": {
+        "name": "ТСЖ «Дом на Поварской»",
+        "inn": "7704609200"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 165,
+    "fields": {
+        "name": "ТСЖ «Теремок на Пресне»",
+        "inn": "7703392499"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 166,
+    "fields": {
+        "name": "ЖСК «Береза»",
+        "inn": "7702125638"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 167,
+    "fields": {
+        "name": "ЖСК «Поиск»",
+        "inn": "7737054882"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 168,
+    "fields": {
+        "name": "ЖСК «Новогорск»",
+        "inn": "7734098592"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 169,
+    "fields": {
+        "name": "ЖСК «Ракурс»",
+        "inn": "7733031549"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 170,
+    "fields": {
+        "name": "ЖСК «Тында»",
+        "inn": "7731147178"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 171,
+    "fields": {
+        "name": "ЖСК «Дома Ученых»",
+        "inn": "7730047565"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 172,
+    "fields": {
+        "name": "ЖСК «Элион»",
+        "inn": "7728127911"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 173,
+    "fields": {
+        "name": "ЖСК «Геостром»",
+        "inn": "7728098192"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 174,
+    "fields": {
+        "name": "ЖСК «Медцветмет»",
+        "inn": "7728073198"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 175,
+    "fields": {
+        "name": "ЗАО УК «ИнтеллектСервис»",
+        "inn": "7727651270"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 176,
+    "fields": {
+        "name": "ЖСК «Бутово-22»",
+        "inn": "7727029622"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 177,
+    "fields": {
+        "name": "ЖСК «Кировоградский»",
+        "inn": "7726086280"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 178,
+    "fields": {
+        "name": "ЖСК «Линкор»",
+        "inn": "7724180382"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 179,
+    "fields": {
+        "name": "ЖСК «Журавушка»",
+        "inn": "7724156975"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 180,
+    "fields": {
+        "name": "ЖСК «Юность Эстрады»",
+        "inn": "7720060126"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 181,
+    "fields": {
+        "name": "ОАО «МРСУ ВАО»",
+        "inn": "7719568652"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 182,
+    "fields": {
+        "name": "ЖСК «Москонцерт»",
+        "inn": "7717080059"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 183,
+    "fields": {
+        "name": "ЖСК «Ярославна»",
+        "inn": "7716086690"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 184,
+    "fields": {
+        "name": "ЖСК «Ижевск»",
+        "inn": "7715136475"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 185,
+    "fields": {
+        "name": "ООО ДЭЗ «Савеловский»",
+        "inn": "7714816100"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 186,
+    "fields": {
+        "name": "ЖСК «Коллективный строитель»",
+        "inn": "7714031430"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 187,
+    "fields": {
+        "name": "ЖСК «Промстройматериалы»",
+        "inn": "7712074686"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 188,
+    "fields": {
+        "name": "ЖСК военнослужащих «Ветеран»",
+        "inn": "7709275600"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 189,
+    "fields": {
+        "name": "ЖСК АРТИСТОВ БАЛЕТА БОЛЬШОГО ТЕАТРА СОЮЗА ССР",
+        "inn": "7707084400"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 190,
+    "fields": {
+        "name": "ТСЖ «Кропоткинское»",
+        "inn": "7704550596"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 191,
+    "fields": {
+        "name": "Жилтоварищество «Эйдетика»",
+        "inn": "7703127155"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 192,
+    "fields": {
+        "name": "ЖСК «Хроника»",
+        "inn": "7702125500"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 193,
+    "fields": {
+        "name": "ТСЖ «ВАСП 13»",
+        "inn": "7743682331"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 194,
+    "fields": {
+        "name": "ЖСК «Юго-Восток»",
+        "inn": "7737054868"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 195,
+    "fields": {
+        "name": "ЖСК «Калининград»",
+        "inn": "7734097422"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 196,
+    "fields": {
+        "name": "ЖСК «Митино-15»",
+        "inn": "7733023570"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 197,
+    "fields": {
+        "name": "ЖСК «Филевский»",
+        "inn": "7731126266"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 198,
+    "fields": {
+        "name": "ЖСК «Вереск»",
+        "inn": "7730010170"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 199,
+    "fields": {
+        "name": "ЖСК «Орфей»",
+        "inn": "7728126932"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 200,
+    "fields": {
+        "name": "ЖСК «Тамань»",
+        "inn": "7728097576"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 201,
+    "fields": {
+        "name": "ЖСК «Турбобур»",
+        "inn": "7728073141"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 202,
+    "fields": {
+        "name": "ЖК «Союз-21»",
+        "inn": "7727121339"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 203,
+    "fields": {
+        "name": "ЖК «Союз-44К»",
+        "inn": "7727029573"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 204,
+    "fields": {
+        "name": "ЖСК «Казахстан»",
+        "inn": "7726079388"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 205,
+    "fields": {
+        "name": "ЖСК «Задонский»",
+        "inn": "7724180350"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 206,
+    "fields": {
+        "name": "ГБУ «Жилищник района Печатники»",
+        "inn": "7723895250"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 207,
+    "fields": {
+        "name": "ЖСК «Фреон»",
+        "inn": "7720060084"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 208,
+    "fields": {
+        "name": "ЖСК «УФА»",
+        "inn": "7719114850"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 209,
+    "fields": {
+        "name": "ЖСК «Здоровье-74»",
+        "inn": "7717043586"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 210,
+    "fields": {
+        "name": "ЖСК «ВЗПИ»",
+        "inn": "7716086682"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 211,
+    "fields": {
+        "name": "ЖСК «Гладиолус»",
+        "inn": "7715135288"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 212,
+    "fields": {
+        "name": "ООО «Свет Жилсервис»",
+        "inn": "7714776970"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 213,
+    "fields": {
+        "name": "ЖСК «Московский художник»",
+        "inn": "7714009234"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 214,
+    "fields": {
+        "name": "ЖСК «Кронштадт»",
+        "inn": "7712074012"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 215,
+    "fields": {
+        "name": "ТСЖ «Звездопад»",
+        "inn": "7709270458"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 216,
+    "fields": {
+        "name": "ЖСК «Газетчик»",
+        "inn": "7707071288"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 217,
+    "fields": {
+        "name": "ТСЖ «Сивцев Вражек 20»",
+        "inn": "7704543895"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 218,
+    "fields": {
+        "name": "ЖСК «ВТО-ВТОРОЙ»",
+        "inn": "7703118305"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 219,
+    "fields": {
+        "name": "ЗАО ремонтно-строительная фирма «Ремстройсервис»",
+        "inn": "7702019661"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 220,
+    "fields": {
+        "name": "ООО «УК ДЕЗ Головинский»",
+        "inn": "7743615208"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 221,
+    "fields": {
+        "name": "ЖСК «Сухуми»",
+        "inn": "7737054603"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 222,
+    "fields": {
+        "name": "ЖСК «Плутон»",
+        "inn": "7734095714"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 223,
+    "fields": {
+        "name": "ЖСК «Аргунь»",
+        "inn": "7733020321"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 224,
+    "fields": {
+        "name": "ЖСК «Бобруйск»",
+        "inn": "7731116885"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 225,
+    "fields": {
+        "name": "ЖСК «Киев»",
+        "inn": "7730010075"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 226,
+    "fields": {
+        "name": "ЖСК «Дружба-17»",
+        "inn": "7728126749"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 227,
+    "fields": {
+        "name": "ЖСК «Телетайп»",
+        "inn": "7728096942"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 228,
+    "fields": {
+        "name": "ЖСК «Первопечатник Федоров»",
+        "inn": "7728069378"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 229,
+    "fields": {
+        "name": "ЖСК «Бутово-27»",
+        "inn": "7727101815"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 230,
+    "fields": {
+        "name": "ЖСК «Бутово-10»",
+        "inn": "7727027833"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 231,
+    "fields": {
+        "name": "ГБУ «Жилищник Донского района»",
+        "inn": "7725815123"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 232,
+    "fields": {
+        "name": "ЖСК «Борисовский»",
+        "inn": "7724180304"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 233,
+    "fields": {
+        "name": "ЖСК «Лужки»",
+        "inn": "7723304814"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 234,
+    "fields": {
+        "name": "ЖСК «Тамбов»",
+        "inn": "7720060077"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 235,
+    "fields": {
+        "name": "ЖСК «Пермь»",
+        "inn": "7719078337"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 236,
+    "fields": {
+        "name": "ЖСК «Геолог-экономист»",
+        "inn": "7717033997"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 237,
+    "fields": {
+        "name": "ЖСК «Большевичка»",
+        "inn": "7716086668"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 238,
+    "fields": {
+        "name": "ЖСК «Знамя Победы»",
+        "inn": "7715131607"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 239,
+    "fields": {
+        "name": "ТСЖ «Хорошевка 82»",
+        "inn": "7714761902"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 240,
+    "fields": {
+        "name": "ЖСК «Оркестр ГАБТ»",
+        "inn": "7714002302"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 241,
+    "fields": {
+        "name": "ЖСК «Донор»",
+        "inn": "7712073756"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 242,
+    "fields": {
+        "name": "ГУП «ДЕЗ Таганского района»",
+        "inn": "7709124383"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 243,
+    "fields": {
+        "name": "ЖСК «Химик-19»",
+        "inn": "7707060857"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 244,
+    "fields": {
+        "name": "ТСЖ «Трубниковский 24»",
+        "inn": "7704535421"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 245,
+    "fields": {
+        "name": "ЖСК «Молодой кинематографист»",
+        "inn": "7703116876"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 246,
+    "fields": {
+        "name": "ТСЖ «Мясницкая 24»",
+        "inn": "7701327053"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 247,
+    "fields": {
+        "name": "ТСЖ «Солнечногорская 10»",
+        "inn": "7743588106"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 248,
+    "fields": {
+        "name": "ЖСК «Живописный»",
+        "inn": "7737053688"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 249,
+    "fields": {
+        "name": "ЖСК «Черновцы»",
+        "inn": "7734060091"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 250,
+    "fields": {
+        "name": "ЖСК «Митино-10»",
+        "inn": "7733012610"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 251,
+    "fields": {
+        "name": "ЖСК «Лиепая»",
+        "inn": "7731036735"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 252,
+    "fields": {
+        "name": "ГБУ «Жилищник района Академический»",
+        "inn": "7728848617"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 253,
+    "fields": {
+        "name": "ЖСК «Параллель»",
+        "inn": "7728112577"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 254,
+    "fields": {
+        "name": "ЖСК «Интеграция»",
+        "inn": "7728085644"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 255,
+    "fields": {
+        "name": "ЖСК «Звук»",
+        "inn": "7728026328"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 256,
+    "fields": {
+        "name": "ЖСК «Вакуумщик»",
+        "inn": "7727066455"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 257,
+    "fields": {
+        "name": "ЖСК «Бутово-14»",
+        "inn": "7727019818"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 258,
+    "fields": {
+        "name": "ЖСК «Москворечье-16»",
+        "inn": "7724180544"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 259,
+    "fields": {
+        "name": "ЖСК «Подольск»",
+        "inn": "7724157104"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 260,
+    "fields": {
+        "name": "ЖСК «Соната»",
+        "inn": "7720093700"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 261,
+    "fields": {
+        "name": "ЖСК «Мартен»",
+        "inn": "7720058416"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 262,
+    "fields": {
+        "name": "ЖСК «Экстра»",
+        "inn": "7718116903"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 263,
+    "fields": {
+        "name": "ЖСК «Белозерский»",
+        "inn": "7716104003"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 264,
+    "fields": {
+        "name": "ЖСК «Лось»",
+        "inn": "7716038590"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 265,
+    "fields": {
+        "name": "ЖСК «Рейс»",
+        "inn": "7715045690"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 266,
+    "fields": {
+        "name": "ЖСК «Каштаны»",
+        "inn": "7714061072"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 267,
+    "fields": {
+        "name": "ЖСК «Вологда»",
+        "inn": "7713045247"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 268,
+    "fields": {
+        "name": "ЖСК «Молодежь театров»",
+        "inn": "7710058752"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 269,
+    "fields": {
+        "name": "ТСЖ «Ламираль»",
+        "inn": "7707523657"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 270,
+    "fields": {
+        "name": "ТСЖ «Ордынка 31»",
+        "inn": "7705519207"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 271,
+    "fields": {
+        "name": "ЖСК «ГАБТ ЛИРА»",
+        "inn": "7704047103"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 272,
+    "fields": {
+        "name": "ТСЖ «МЖК «Красная Пресня»",
+        "inn": "7703011584"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 273,
+    "fields": {
+        "name": "ЖСК «Барнаул»",
+        "inn": "7737058301"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 274,
+    "fields": {
+        "name": "ЖСК «Воронцово»",
+        "inn": "7736034403"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 275,
+    "fields": {
+        "name": "ЗАО «Эстейт Сервис дирекция Куркино СЗАО»",
+        "inn": "7733126977"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 276,
+    "fields": {
+        "name": "ЖСК «ЭМБА»",
+        "inn": "7731155193"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 277,
+    "fields": {
+        "name": "ЖСК «Клайпеда»",
+        "inn": "7731031247"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 278,
+    "fields": {
+        "name": "ЗАО «ЖК Аркада Хаус»",
+        "inn": "7728617240"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 279,
+    "fields": {
+        "name": "ЖСК «Конгресс»",
+        "inn": "7728112295"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 280,
+    "fields": {
+        "name": "ЖСК «Дальневосточник»",
+        "inn": "7728085154"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 281,
+    "fields": {
+        "name": "ЖСК «Митино-23»",
+        "inn": "7728025469"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 282,
+    "fields": {
+        "name": "ЖСК «Висмут»",
+        "inn": "7727066423"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 283,
+    "fields": {
+        "name": "ЖСК «Бутово-11»",
+        "inn": "7727011791"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 284,
+    "fields": {
+        "name": "ЖСК «Москворечье-14 «",
+        "inn": "7724180520"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 285,
+    "fields": {
+        "name": "ЖСК «Ереван»",
+        "inn": "7724157070"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 286,
+    "fields": {
+        "name": "ЖСК «Гюйс»",
+        "inn": "7720093266"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 287,
+    "fields": {
+        "name": "ЖСК «Жаворонок»",
+        "inn": "7720017064"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 288,
+    "fields": {
+        "name": "ЖСК «Гренада»",
+        "inn": "7718055400"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 289,
+    "fields": {
+        "name": "ЖСК «Флора»",
+        "inn": "7716098624"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 290,
+    "fields": {
+        "name": "ЖСК «Дзержинец-17»",
+        "inn": "7716033747"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 291,
+    "fields": {
+        "name": "ЖСК «Выстрел»",
+        "inn": "7715044672"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 292,
+    "fields": {
+        "name": "ЖСК «Метро»",
+        "inn": "7714041894"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 293,
+    "fields": {
+        "name": "ЖСК «Электромагнит»",
+        "inn": "7713035009"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 294,
+    "fields": {
+        "name": "ЖСК «Мастера Эстрады»",
+        "inn": "7710030563"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 295,
+    "fields": {
+        "name": "ЖСК «Химик-18»",
+        "inn": "7707121884"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 296,
+    "fields": {
+        "name": "ЗАО «Декра-Стройэксплуатация»",
+        "inn": "7705502267"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 297,
+    "fields": {
+        "name": "ООО «УК -10 Пресненского района»",
+        "inn": "7703660437"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 298,
+    "fields": {
+        "name": "ОАО «Московский машиностроительный завод «Рассвет»",
+        "inn": "7703010005"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 299,
+    "fields": {
+        "name": "ЖСК «Пятигорск»",
+        "inn": "7737058220"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 300,
+    "fields": {
+        "name": "ГБУ «Жилищник района Крюково»",
+        "inn": "7735020711"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 301,
+    "fields": {
+        "name": "ЖСК «Краснодар»",
+        "inn": "7734036155"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 302,
+    "fields": {
+        "name": "ЖК «Солнцевский»",
+        "inn": "7732084322"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 303,
+    "fields": {
+        "name": "ЖСК «Сетунька»",
+        "inn": "7731091006"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 304,
+    "fields": {
+        "name": "ЖСК «Болдино»",
+        "inn": "7729305892"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 305,
+    "fields": {
+        "name": "ЖСК «Хризолит»",
+        "inn": "7728123890"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 306,
+    "fields": {
+        "name": "ЖСК «Пегас»",
+        "inn": "7728091422"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 307,
+    "fields": {
+        "name": "ЖСК «Рязань»",
+        "inn": "7728042841"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 308,
+    "fields": {
+        "name": "ЖСК «Разведка недр»",
+        "inn": "7727071470"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 309,
+    "fields": {
+        "name": "ЖСК «Бутово-15»",
+        "inn": "7727021662"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 310,
+    "fields": {
+        "name": "ЖСК «Фрязино»",
+        "inn": "7724180720"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 311,
+    "fields": {
+        "name": "ЖСК «Ковров»",
+        "inn": "7724180230"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 312,
+    "fields": {
+        "name": "ЖСК «Ждановский»",
+        "inn": "7721061891"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 313,
+    "fields": {
+        "name": "ЖСК «Компас»",
+        "inn": "7720059970"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 314,
+    "fields": {
+        "name": "ЖСК «Целиноград»",
+        "inn": "7719062739"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 315,
+    "fields": {
+        "name": "ЖСК «Фильм»",
+        "inn": "7716109587"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 316,
+    "fields": {
+        "name": "ЖСК «Пирит»",
+        "inn": "7716063685"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 317,
+    "fields": {
+        "name": "ЖСК «Зимний»",
+        "inn": "7715069444"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 318,
+    "fields": {
+        "name": "ТСЖ «НА БОЛЬШОМ КОПТЕВСКОМ»",
+        "inn": "7714580504"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 319,
+    "fields": {
+        "name": "ООО «УК ДЕЗ района Дмитровский»",
+        "inn": "7713644226"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 320,
+    "fields": {
+        "name": "ТСЖ «Тверская 19»",
+        "inn": "7710722780"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 321,
+    "fields": {
+        "name": "ООО «УК «Красное село»",
+        "inn": "7708600833"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 322,
+    "fields": {
+        "name": "ООО «Компания САГиК»",
+        "inn": "7705853265"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 323,
+    "fields": {
+        "name": "ТСЖ «Ретро-35»",
+        "inn": "7704238242"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 324,
+    "fields": {
+        "name": "ЖСК «Гимет»",
+        "inn": "7703052848"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 325,
+    "fields": {
+        "name": "ТСЖ «Ленинградское шоссе, 52Б»",
+        "inn": "7743063035"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 326,
+    "fields": {
+        "name": "ЖСК «Тигрис»",
+        "inn": "7736160944"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 327,
+    "fields": {
+        "name": "ООО «ИВА-XXI»",
+        "inn": "7734003880"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 328,
+    "fields": {
+        "name": "ЖСК «Солнцево-16»",
+        "inn": "7732084210"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 329,
+    "fields": {
+        "name": "ЖСК «Даугава»",
+        "inn": "7731062862"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 330,
+    "fields": {
+        "name": "ЖСК «Нейтрон»",
+        "inn": "7729301104"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 331,
+    "fields": {
+        "name": "ЖСК «Стройпластик»",
+        "inn": "7728120592"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 332,
+    "fields": {
+        "name": "ЖСК «Шайба»",
+        "inn": "7728090860"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 333,
+    "fields": {
+        "name": "ЖСК «Криптон»",
+        "inn": "7728035837"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 334,
+    "fields": {
+        "name": "ЖСК «МИРГЭМ»",
+        "inn": "7727071261"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 335,
+    "fields": {
+        "name": "ЖК «Союз-23»",
+        "inn": "7727021020"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 336,
+    "fields": {
+        "name": "ЖСК «Ровно»",
+        "inn": "7724180632"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 337,
+    "fields": {
+        "name": "ЖСК «БАКУ»",
+        "inn": "7724176139"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 338,
+    "fields": {
+        "name": "ЖСК «Львов»",
+        "inn": "7721029866"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 339,
+    "fields": {
+        "name": "ЖСК «Встреча»",
+        "inn": "7720059850"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 340,
+    "fields": {
+        "name": "ЖСК «НИИПРОЕКТ»",
+        "inn": "7719048702"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 341,
+    "fields": {
+        "name": "ЖСК «Голубой Экран»",
+        "inn": "7716105991"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 342,
+    "fields": {
+        "name": "ЖСК «Тобол»",
+        "inn": "7716059368"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 343,
+    "fields": {
+        "name": "ЖСК «Художник книги»",
+        "inn": "7715049060"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 344,
+    "fields": {
+        "name": "ТСЖ «Малахит-26»",
+        "inn": "7714522189"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 345,
+    "fields": {
+        "name": "ООО «УК Бескудниковский»",
+        "inn": "7713593860"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 346,
+    "fields": {
+        "name": "ТСЖ «Дом на Гашека»",
+        "inn": "7710631814"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 347,
+    "fields": {
+        "name": "ТСЖ «На Грохольском»",
+        "inn": "7708178065"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 348,
+    "fields": {
+        "name": "ТСЖ «Пятницкая 37»",
+        "inn": "7705741032"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 349,
+    "fields": {
+        "name": "ТСЖ «Арбат 43»",
+        "inn": "7704232843"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 350,
+    "fields": {
+        "name": "ЖСК «Химик-проектировщик»",
+        "inn": "7703041356"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 351,
+    "fields": {
+        "name": "ТСЖ «Лавочкина 40 49»",
+        "inn": "7743058910"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 352,
+    "fields": {
+        "name": "ЖСК «Полоцк»",
+        "inn": "7736134221"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 353,
+    "fields": {
+        "name": "ООО «ИНЭК-ЖИЛЬЕ»",
+        "inn": "7733729943"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 354,
+    "fields": {
+        "name": "ЖСК «Солнцево-12»",
+        "inn": "7732084185"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 355,
+    "fields": {
+        "name": "ЖСК «Купавна»",
+        "inn": "7731055030"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 356,
+    "fields": {
+        "name": "ЖСК «РАН СССР»",
+        "inn": "7729154594"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 357,
+    "fields": {
+        "name": "ЖСК «Армавир»",
+        "inn": "7728118402"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 358,
+    "fields": {
+        "name": "ЖСК «Лань»",
+        "inn": "7728090612"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 359,
+    "fields": {
+        "name": "ЖСК «Художник-модельер»",
+        "inn": "7728029086"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 360,
+    "fields": {
+        "name": "ЖСК «Бутово-18»",
+        "inn": "7727067730"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 361,
+    "fields": {
+        "name": "ЖСК «Бутово-16»",
+        "inn": "7727020482"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 362,
+    "fields": {
+        "name": "ЖСК «Рица»",
+        "inn": "7724180625"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 363,
+    "fields": {
+        "name": "ЖСК «Лазурь»",
+        "inn": "7724176097"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 364,
+    "fields": {
+        "name": "ЖСК «Ангарский»",
+        "inn": "7720099469"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 365,
+    "fields": {
+        "name": "ЖСК «Радий»",
+        "inn": "7720058462"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 366,
+    "fields": {
+        "name": "ЖСК «Эллада»",
+        "inn": "7719005579"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 367,
+    "fields": {
+        "name": "ЖСК «Перекоп»",
+        "inn": "7716104780"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 368,
+    "fields": {
+        "name": "ЖСК «Вязь»",
+        "inn": "7716057025"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 369,
+    "fields": {
+        "name": "ЖСК «Псков»",
+        "inn": "7715048797"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 370,
+    "fields": {
+        "name": "ЗАО «Жилищно-коммунальная компания «Реформа»",
+        "inn": "7714259058"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 371,
+    "fields": {
+        "name": "ТСЖ «На Базовской»",
+        "inn": "7713569233"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 372,
+    "fields": {
+        "name": "ЖСК «Советский работник»",
+        "inn": "7710171109"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 373,
+    "fields": {
+        "name": "ЖСК «Спасский»",
+        "inn": "7708053161"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 374,
+    "fields": {
+        "name": "ТСЖ «Голиковский 15»",
+        "inn": "7705707419"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 375,
+    "fields": {
+        "name": "ЖСК «Лидар»",
+        "inn": "7704136593"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 376,
+    "fields": {
+        "name": "ЖСК «Гидрометцентр»",
+        "inn": "7703041148"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 377,
+    "fields": {
+        "name": "ТСЖ «СОКОЛИНОЕ ГНЕЗДО»",
+        "inn": "7743036835"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 378,
+    "fields": {
+        "name": "ЖСК «Главмосстроевец»",
+        "inn": "7736131936"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 379,
+    "fields": {
+        "name": "ООО «Фьючедей Сервис»",
+        "inn": "7733642682"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 380,
+    "fields": {
+        "name": "ЖСК «Переделкино»",
+        "inn": "7732072694"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 381,
+    "fields": {
+        "name": "ЖСК «Старт-Беловежский»",
+        "inn": "7731040844"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 382,
+    "fields": {
+        "name": "ЖСК «Ленинские горы»",
+        "inn": "7729109305"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 383,
+    "fields": {
+        "name": "ЖСК «Руза»",
+        "inn": "7728117871"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 384,
+    "fields": {
+        "name": "ЖСК «Челябинск»",
+        "inn": "7728088042"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 385,
+    "fields": {
+        "name": "ЖСК «Павловск»",
+        "inn": "7728027378"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 386,
+    "fields": {
+        "name": "ЖСК «Молодой экономист»",
+        "inn": "7727066494"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 387,
+    "fields": {
+        "name": "ЖСК «Бутово-13»",
+        "inn": "7727020450"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 388,
+    "fields": {
+        "name": "ЖСК «Одер»",
+        "inn": "7724180600"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 389,
+    "fields": {
+        "name": "ЖСК «Ореховый»",
+        "inn": "7724165480"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 390,
+    "fields": {
+        "name": "ЖСК «Мономер»",
+        "inn": "7720093756"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 391,
+    "fields": {
+        "name": "ЖСК «Рений»",
+        "inn": "7720058430"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 392,
+    "fields": {
+        "name": "ГБУ «Жилищник района Гольяново»",
+        "inn": "7718938741"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 393,
+    "fields": {
+        "name": "ЖСК «Радон»",
+        "inn": "7716104243"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 394,
+    "fields": {
+        "name": "ЖСК «Углемаш»",
+        "inn": "7716053207"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 395,
+    "fields": {
+        "name": "ЖСК «Монитор»",
+        "inn": "7715048532"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 396,
+    "fields": {
+        "name": "ЖСК «Драматург»",
+        "inn": "7714097382"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 397,
+    "fields": {
+        "name": "ЖСК «Бутово-24»",
+        "inn": "7713059465"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 398,
+    "fields": {
+        "name": "ТСЖ «Тверская застава»",
+        "inn": "7710077138"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 399,
+    "fields": {
+        "name": "ЖСК «Митино-22»",
+        "inn": "7708000522"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 400,
+    "fields": {
+        "name": "ТСЖ «Дом на Климентовском»",
+        "inn": "7705639409"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 401,
+    "fields": {
+        "name": "ЖСК «Малый театр»",
+        "inn": "7703116844"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 402,
+    "fields": {
+        "name": "ТСЖ «Харитонье»",
+        "inn": "7701261892"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 403,
+    "fields": {
+        "name": "ТСЖ «Дегунино»",
+        "inn": "7743087318"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 404,
+    "fields": {
+        "name": "ЖСК «Лайнер»",
+        "inn": "7737019510"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 405,
+    "fields": {
+        "name": "ЖСК «Водопад»",
+        "inn": "7734060020"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 406,
+    "fields": {
+        "name": "ЖСК «Митино-17»",
+        "inn": "7733002812"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 407,
+    "fields": {
+        "name": "ЖСК «Нара»",
+        "inn": "7731109990"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 408,
+    "fields": {
+        "name": "ООО «Юнисервис»",
+        "inn": "7729524407"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 409,
+    "fields": {
+        "name": "ЖСК «Умеренный»",
+        "inn": "7728124460"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 410,
+    "fields": {
+        "name": "ЖСК «Широта»",
+        "inn": "7728091711"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 411,
+    "fields": {
+        "name": "ЖСК «Гурьев»",
+        "inn": "7728043098"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 412,
+    "fields": {
+        "name": "ЖСК «Бутово-25»",
+        "inn": "7727086758"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 413,
+    "fields": {
+        "name": "ЖК «Союз-36К»",
+        "inn": "7727021983"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 414,
+    "fields": {
+        "name": "ЖСК «Юрмала»",
+        "inn": "7724180745"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 415,
+    "fields": {
+        "name": "ЖСК «Агава»",
+        "inn": "7724180248"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 416,
+    "fields": {
+        "name": "ЖСК «Кактус»",
+        "inn": "7723093835"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 417,
+    "fields": {
+        "name": "ЖСК «Машпроект»",
+        "inn": "7720059995"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 418,
+    "fields": {
+        "name": "ЖСК «Автоматика»",
+        "inn": "7719077750"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 419,
+    "fields": {
+        "name": "ЖСК «Олень»",
+        "inn": "7716110134"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 420,
+    "fields": {
+        "name": "ЖСК «Балхаш»",
+        "inn": "7716067351"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 421,
+    "fields": {
+        "name": "ЖСК «Митино-24»",
+        "inn": "7715082710"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 422,
+    "fields": {
+        "name": "ООО Управляющая компания «Хорошевка-42»",
+        "inn": "7714663366"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 423,
+    "fields": {
+        "name": "ТСЖ «Ангарская — 47»",
+        "inn": "7713644804"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 424,
+    "fields": {
+        "name": "ЖК «Союз-22»",
+        "inn": "7711026633"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 425,
+    "fields": {
+        "name": "ЗАО «УК ДЕЗ Красносельского района»",
+        "inn": "7708648585"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 426,
+    "fields": {
+        "name": "ТСЖ «Б.Серпуховская 31/2»",
+        "inn": "7705915874"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 427,
+    "fields": {
+        "name": "ТСЖ «Карманицкий 10»",
+        "inn": "7704251740"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 428,
+    "fields": {
+        "name": "ТСЖ «На улице Неждановой»",
+        "inn": "7703103884"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 429,
+    "fields": {
+        "name": "Некоммерческое Партнерство «Содружество собственников жилья «ФАКЕЛ»",
+        "inn": "7709645918"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 430,
+    "fields": {
+        "name": "ЖСК Государственного Академического Большого театра «ЛИРА»",
+        "inn": "7704047103"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 431,
+    "fields": {
+        "name": "ООО «Управляющая компания ДЕЗ района Дмитровский»",
+        "inn": "7713644226"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 432,
+    "fields": {
+        "name": "ООО «Управляющая компания РЕСУРСЭНЕРГОПРОМ»",
+        "inn": "7734637974"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 433,
+    "fields": {
+        "name": "ООО «Управляющая компания района «Бескудниковский»",
+        "inn": "7713593860"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 434,
+    "fields": {
+        "name": "ООО «Управляющая Компания Дирекция Эксплуатации Зданий Головинский»",
+        "inn": "7743615208"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 435,
+    "fields": {
+        "name": "ГУП «ДЕЗ района Бирюлево-Восточное»",
+        "inn": "7737028240"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 436,
+    "fields": {
+        "name": "ГУП «ДЕЗ Мещанского района»",
+        "inn": "7702018080"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 437,
+    "fields": {
+        "name": "ГУП «ДЕЗ района Красносельский»",
+        "inn": "7708005016"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 438,
+    "fields": {
+        "name": "ГУП ЭВАЖД Филиал №14",
+        "inn": "7704010270"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 439,
+    "fields": {
+        "name": "ГУП ЭВАЖД Филиал №13",
+        "inn": "7704010270"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 440,
+    "fields": {
+        "name": "ГУП ЭВАЖД Филиал №11",
+        "inn": "7704010270"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 441,
+    "fields": {
+        "name": "ГУП ЭВАЖД Филиал №10",
+        "inn": "7704010270"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 442,
+    "fields": {
+        "name": "ГУП ЭВАЖД Филиал №9",
+        "inn": "7704010270"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 443,
+    "fields": {
+        "name": "ГУП ЭВАЖД Филиал №8",
+        "inn": "7704010270"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 444,
+    "fields": {
+        "name": "ГУП ЭВАЖД Филиал №5",
+        "inn": "7704010270"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 445,
+    "fields": {
+        "name": "ГУП ЭВАЖД Филиал №4",
+        "inn": "7704010270"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 446,
+    "fields": {
+        "name": "ГУП ЭВАЖД Филиал №2",
+        "inn": "7704010270"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 447,
+    "fields": {
+        "name": "ГУП ЭВАЖД",
+        "inn": "7704010270"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 448,
+    "fields": {
+        "name": "ГУП «ДЕЗ Басманного района»",
+        "inn": "7701023471"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 449,
+    "fields": {
+        "name": "ГУП «Жилищник-1»",
+        "inn": "7709121103"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 450,
+    "fields": {
+        "name": "ОАО ДЕЗ «Южное Бутово»",
+        "inn": "7727025755"
+    }
+},
+{
+    "model": "tenant.Company",
+    "pk": 451,
+    "fields": {
+        "name": "ООО «Термоинжсервис»",
+        "inn": "7726746592"
+    }
+}
+]

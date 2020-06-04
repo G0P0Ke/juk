@@ -9,10 +9,17 @@ from .forms import FeedbackForm
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
 from tenant.models import Tenant, Company, Forum
+
+from tenant.models import Tenant, Company, Forum, House
 from tenant.models import Manager, ManagerRequest
 from tenant.forms import ManagerRequestForm, AppendCompany
+from .models import Admin
+from tenant.forms import AppendCompany, ManagerRequestForm
+
+from .forms import LoginForm, SignUpForm, FeedbackForm
+from .models import Feedback
+from .tasks import send_email
 
 
 def _get_base_context(title, sign_in_button=True):
@@ -26,7 +33,6 @@ def _get_base_context(title, sign_in_button=True):
     context = {
         'title': title,
         'if_sign_but': sign_in_button,
-
     }
     return context
 
@@ -44,6 +50,7 @@ def index_view(request):
         context.update({
             "is_tenant": hasattr(request.user, 'tenant'),
             "is_manager": hasattr(request.user, 'manager'),
+            "all_houses": House.objects.all(),
         })
     return render(request, 'pages/index.html', context)
 
@@ -61,15 +68,25 @@ def login_view(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            cd = form.cleaned_data
-            user = authenticate(username=cd['login'], password=cd['password'])
+            cleaned_data = form.cleaned_data
+            user = authenticate(username=cleaned_data['login'],
+                                password=cleaned_data['password'])
             if user is not None:
                 if user.is_active:
                     login(request, user)
                     if hasattr(user, 'tenant'):
+                        if user.tenant.is_admin:
+                            return redirect('/admin')
                         return redirect('/tenant')
                     if hasattr(user, 'manager'):
+                        if user.manager.is_admin:
+                            return redirect('/admin')
                         return redirect('/manager')
+                    elif hasattr(user, 'admin'):
+                        if user.admin.is_admin:
+                            return redirect('/admin')
+                        else:
+                            messages.info(request, "Подождите подтверждения вашей регистрации")
                 else:
                     context.update({
                         'error': 'Аккаунт отключён',
@@ -126,6 +143,35 @@ def signup_view(request):
     return render(request, 'accounts/signup/signup_page.html', context)
 
 
+def admin_signup(request):
+    context = _get_base_context('sign up', False)
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print('save form')
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            first_name = form.cleaned_data.get("first_name")
+            second_name = form.cleaned_data.get("last_name")
+            admin = Admin.objects.create(user=user, name=first_name, surname=second_name)
+            admin.save()
+            messages.success(request, "Ваша заявка отправлена")
+            return redirect(login_view)
+        else:
+            context.update({
+                'form': SignUpForm(request),
+                'error': 'Форма не валидна',
+            })
+    else:
+        context.update({
+            'form': SignUpForm(),
+        })
+    return render(request, 'admin/admin_signup.html', context)
+
+
 @login_required
 def logout_view(request):
     """
@@ -147,46 +193,48 @@ def feedback(request):
     :type request: :class:`django.http.HttpRequest`
     :return: Отображене страницы
     """
+    feedbacks = Feedback.objects.all()[::-1]
+
+    context = {
+        'feedbacks': feedbacks,
+    }
+
     if request.method == "POST":
         form = FeedbackForm(request.POST)
-
+        context.update({
+            'form': form,
+        })
         if form.is_valid():
-            subject = str(form.data['subject'])
-            message = str(form.data['message'])
-            user_mail = str(form.data['user_mail'])
-            mail = 'juk_feedback_mail@mail.ru'
-            subject_back = 'Отзывы о JUK'
-            message_back = 'Ваш отзыв успешно отправлен'
+            post = form.save(commit=False)
+            post.mail = 'juk_feedback_mail@mail.ru'
+            post.title_back = 'Отзывы о JUK'
+            post.text_back = 'Ваш отзыв успешно отправлен'
+            post.finished = 0
+            post.text = post.text
 
-            context = {
-                'subject': subject,
-                'message': message,
-                'user_mail': user_mail,
-            }
+            post.save()
+            send_email(Feedback.objects.last())
 
-            message = 'Отправитель: ' + user_mail + '\n'\
-                      + '\n' + message
+            post.finished = 1
+            post.save()
 
-            # TODO: оформление при помощи django forms
-            # TODO: валидация входных параметров
-
-            message = 'Отправитель: ' + user_mail + '\n' + '\n' + message
-
-            # TODO: вынести отправку письма в отдельный субпроцесс (при помощи celery)
-            send_mail(subject, message, mail,
-                      [mail], fail_silently=False)
-
-            send_mail(subject_back, message_back, mail,
-                      [user_mail], fail_silently=False)
-
-        else:
-            pass
-
-    return render(request, 'pages/feedback.html')
+            return redirect('/common/feedback', context)
+    else:
+        form = FeedbackForm()
+        context.update({
+            'form': form,
+        })
+    return render(request, 'pages/feedback.html', context)
 
 
 @login_required(login_url="/login")
 def admin(request):
+    """
+    Функция отображения страницы админа
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     user = request.user
     if hasattr(request.user, 'tenant'):
         if not user.tenant.is_admin:
@@ -220,6 +268,12 @@ def admin(request):
 
 
 def admin_create(request):
+    """
+    Функция создания админа
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     user = request.user
     if hasattr(request.user, 'tenant'):
         if not user.tenant.is_admin:
@@ -261,4 +315,25 @@ def admin_create(request):
     })
     return render(request, 'admin/create_company.html', context)
 
+
+def admin_verification(request):
+    user = request.user
+    if not user.is_superuser:
+        return HttpResponse("У вас нет разрешения на подтверждение администраторов", status=401)
+    admins = Admin.objects.filter(is_admin=0)
+    context = {
+        'admins': admins,
+    }
+    if request.method == "POST":
+        for request_admin in admins:
+            if request.POST.get("agree" + str(request_admin.id)):
+                request_admin.is_admin = 1
+                request_admin.save()
+                messages.success(request, "Новый администратор одобрен")
+            elif request.POST.get("refused"+ str(request_admin.id)):
+                request_admin.is_admin = 0
+                request_admin.save()
+                messages.info(request, "Запрос на подключение нового администратора отклонен")
+        return redirect(admin_verification)
+    return render(request, 'admin/admin_verification.html', context)
 

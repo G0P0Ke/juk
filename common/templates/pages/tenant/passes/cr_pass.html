@@ -102,24 +102,49 @@ body {font-family: Arial;}
 
 }
 .op{
-background: #f2f2f2;
-outline: none;
-font-size: 13pt;
-border: none;
+  background: #f2f2f2;
+  outline: none;
+  font-size: 13pt;
+  border: none;
 }
 
-    a {
-    text-decoration: none; /* Убирает подчеркивание для ссылок */
-    outline: none;
-   }
-   a:hover {
-    text-decoration: none;
-   }
+a {
+  text-decoration: none; /* Убирает подчеркивание для ссылок */
+  outline: none;
+}
 
+a:hover {
+  text-decoration: none;
+}
+
+input:focus:invalid{
+  background-color: #FFFFCC;
+}
+
+input:focus:valid{
+  background-color: #CCFFCC;
+}
+
+/* Это стиль для сообщений об ошибке */
+.error {
+  width: 100%;
+  padding: 0;
+  font-size: 80%;
+  color: white;
+  background-color: #FF0033;
+  border-radius: 5px;
+
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.error.active {
+  padding: 0.3em;
+}
 </style>
 <body>
 <a href="{% url 'my_passes' %}">
-<button class="mdc-button" style="height: 40px; width:30%; margin-left:35%; margin-up:10%"><span class="mdc-button__ripple"></span>Вернуться</button>
+<button class="mdc-button" style="width: 100%;"><span class="mdc-button__ripple"></span>Вернуться</button>
 </a>
 <p style="margin: 10px auto 0;font-size: 22pt; text-align: center;">Пропуск</p>
 <p style="margin: 0 auto 0;font-size: 15pt; text-align: center;">Выберите какой пропуск вы будете заказывать</p>
@@ -133,9 +158,12 @@ border: none;
 <form method="POST">
   {% csrf_token %}
   <div id="person" class="tabcontent">
-      <input class="forminput" type="text" placeholder="Фамилия" pattern="[А-ЯЁ][а-яё]{1,}" name="surname" required><br>
-      <input class="forminput" type="text" placeholder="Имя" pattern="[А-ЯЁ][а-яё]{1,}" name="name" required><br>
-      <input class="forminput" type="text" placeholder="Отчество" pattern="[А-ЯЁ][а-яё]{1,}" name="patronymic" required><br>
+    <input class="forminput" type="text" placeholder="Фамилия" pattern="[А-ЯЁ][а-яё]{1,}" id="surname" name="surname" required><br>
+    <span class="error" aria-live="polite" id="error_surname"></span>
+    <input class="forminput" type="text" placeholder="Имя" pattern="[А-ЯЁ][а-яё]{1,}" id="name" name="name" required><br>
+    <span class="error" aria-live="polite" id="error_name"></span>
+    <input class="forminput" type="text" placeholder="Отчество" pattern="[А-ЯЁ][а-яё]{1,}" id="patronymic" name="patronymic" required><br>
+   <span class="error" aria-live="polite" id="error_patronymic"></span><br>
     <label style="float:left; margin: 5px 0 0 20%; font-size:14pt" for="aim1">Цель визита:</label>
     <div class="select">
     <select class="category" id="aim1" name="aim">
@@ -144,18 +172,21 @@ border: none;
     </select></div>
     <br>
     <input type="hidden" name="target" value="person">
-    <button class="mdc-button mdc-button--raised" style="font-size:15pt; width:30%" type="submit">Заказать</button>
+    <button class="mdc-button mdc-button--raised" style="font-size:15pt; width:30%" id="person_form_input" type="submit">Заказать</button>
   </div>
 </form>
 
 <form method="POST">
   {% csrf_token %}
   <div id="car" class="tabcontent">
-      <input class="forminput" type="text" placeholder="Модель машины" pattern="^[A-Za-zА-Яа-яЁё\s]+$" name="model"
+      <input class="forminput" type="text" placeholder="Модель машины" pattern="^[A-Za-zА-Яа-яЁё0-9-\s]+$" id="model" name="model"
              required><br>
-      <input class="forminput" type="text" placeholder="Цвет машины" pattern="^[а-яА-ЯёЁ]+$" name="color" required><br>
+      <span class="error" aria-live="polite" id="error_model"></span>
+      <input class="forminput" type="text" placeholder="Цвет машины" pattern="^[а-яА-ЯёЁ]+$" id="color" name="color" required><br>
+      <span class="error" aria-live="polite" id="error_color"></span>
       <input class="forminput" type="text" placeholder="Номер машины в формате М 000 ММ 55"
-             pattern="[а-яА-Я] [0-9]{3} [а-яА-Я]{2} [0-9]{2}" name="number" required><br>
+             pattern="[а-яА-Я] [0-9]{3} [а-яА-Я]{2} [0-9]{2}" id="number" name="number" required><br>
+      <span class="error" aria-live="polite" id="error_number"></span><br>
     <label style="float:left; margin: 5px 0 0 20%; font-size:14pt" for="aim2">Цель визита:</label>
     <div class="select">
     <select class="category" id="aim2" name="aim">
@@ -164,7 +195,7 @@ border: none;
     </select></div>
     <br>
     <input type="hidden" name="target" value="car">
-    <button class="mdc-button mdc-button--raised" style="font-size:15pt; width:30%" type="submit">Заказать</button>
+    <button class="mdc-button mdc-button--raised" style="font-size:15pt; width:30%" id="car_form_input" type="submit">Заказать</button>
   </div>
 </form>
 </div>
@@ -183,6 +214,103 @@ function openTarget(evt, targetName) {
   document.getElementById(targetName).style.display = "block";
   evt.currentTarget.className += " active";
 }
+
+var person_form_input = document.getElementById('person_form_input');
+var car_form_input = document.getElementById('car_form_input');
+var surname = document.getElementById('surname');
+var namer = document.getElementById('name');
+var patronymic = document.getElementById('patronymic');
+var model = document.getElementById('model');
+var color = document.getElementById('color');
+var number = document.getElementById('number');
+var error_surname = document.getElementById('error_surname');
+var error_name = document.getElementById('error_name');
+var error_patronymic = document.getElementById('error_patronymic');
+var error_model = document.getElementById('error_model');
+var error_color = document.getElementById('error_color');
+var error_number = document.getElementById('error_number');
+
+
+surname.addEventListener("input", function (event) {
+  if (!surname.validity.patternMismatch) {
+    error_surname.innerHTML = ""; // Сбросить содержимое сообщения
+    error_surname.className = "error"; // Сбросить визуальное состояние сообщения
+  }
+}, false);
+
+
+namer.addEventListener("input", function (event) {
+  if (!namer.validity.patternMismatch) {
+    error_name.innerHTML = ""; // Сбросить содержимое сообщения
+    error_name.className = "error"; // Сбросить визуальное состояние сообщения
+  }
+}, false);
+
+patronymic.addEventListener("input", function (event) {
+  if (!patronymic.validity.patternMismatch) {
+    error_patronymic.innerHTML = ""; // Сбросить содержимое сообщения
+    error_patronymic.className = "error"; // Сбросить визуальное состояние сообщения
+  }
+}, false);
+
+person_form_input.addEventListener("click", function (event) {
+  if (surname.validity.patternMismatch) {
+    error_surname.innerHTML = "Введите фамилию на русском языке, начиная с заглавной буквы";
+    error_surname.className = "error active";
+    event.preventDefault();
+  }
+  if (namer.validity.patternMismatch) {
+    error_name.innerHTML = "Введите имя на русском языке, начиная с заглавной буквы";
+    error_name.className = "error active";
+    event.preventDefault();
+  }
+  if (patronymic.validity.patternMismatch) {
+    error_patronymic.innerHTML = "Введите отчество на русском языке, начиная с заглавной буквы";
+    error_patronymic.className = "error active";
+    event.preventDefault();
+  }
+});
+
+model.addEventListener("input", function (event) {
+  if (!model.validity.patternMismatch) {
+    error_model.innerHTML = ""; // Сбросить содержимое сообщения
+    error_model.className = "error"; // Сбросить визуальное состояние сообщения
+  }
+}, false);
+
+
+color.addEventListener("input", function (event) {
+  if (!color.validity.patternMismatch) {
+    error_color.innerHTML = ""; // Сбросить содержимое сообщения
+    error_color.className = "error"; // Сбросить визуальное состояние сообщения
+  }
+}, false);
+
+number.addEventListener("input", function (event) {
+  if (!number.validity.patternMismatch) {
+    error_number.innerHTML = ""; // Сбросить содержимое сообщения
+    error_number.className = "error"; // Сбросить визуальное состояние сообщения
+  }
+}, false);
+
+car_form_input.addEventListener("click", function (event) {
+  if (model.validity.patternMismatch) {
+    error_model.innerHTML = "Введите модель машины на русском или английском языке";
+    error_model.className = "error active";
+    event.preventDefault();
+  }
+  if (color.validity.patternMismatch) {
+    error_color.innerHTML = "Введите цвет машины на русском языке, начиная с заглавной буквы";
+    error_color.className = "error active";
+    event.preventDefault();
+  }
+  if (number.validity.patternMismatch) {
+    error_number.innerHTML = "Введите номер машины в формате М 000 ММ 55";
+    error_number.className = "error active";
+    event.preventDefault();
+  }
+});
+
 </script>
 
 </body>

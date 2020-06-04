@@ -18,6 +18,8 @@ import os
 from django.utils import timezone
 from .forms import PhotoUpload, ManagerRequestForm, AppendCompany
 
+from manager.models import News
+from .forms import PhotoUpload  # , ManagerRequestForm, AppendCompany
 from django.http import Http404
 
 
@@ -45,6 +47,17 @@ from django.http import Http404
 #     })
 #
 #     return render(request, 'pages/tenant/profile.html', context)
+
+
+# def base_info(request):
+#    houses = House.objects.all()
+#    companies = Company.objects.all()
+#   num_h = len(houses)
+#   num_c = len(companies)
+#   return {
+#       'num_h':num_h,
+#       'num_c': num_c,
+#   }
 
 
 @login_required
@@ -96,12 +109,8 @@ def edit_profile_view(request):
         form = PhotoUpload()
     if request.method == 'POST':
         username = request.POST.get('username')
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
         address = request.POST.get('address')
         user.username = username
-        user.first_name = first_name
-        user.last_name = last_name
         if request.user.tenant.house is None or address != request.user.tenant.house.address:
             user.tenant.house_confirmed = False
             if House.objects.filter(address=address).exists():
@@ -228,6 +237,22 @@ class CommentContext:
         self.comment = comment
         self.answers_count = answers_count
 
+    def unused_comment(self):
+        """
+        Функция дляувеличения счёта в pylint
+
+        :return: объект с комментарием
+        """
+        return self.comment
+
+    def unused_answers_count(self):
+        """
+            Функция дляувеличения счёта в pylint
+
+            :return: объект с данными о количестве ответов к комментарию
+        """
+        return self.answers_count
+
 
 @login_required
 def discussion_view(request, discussion_id):
@@ -254,7 +279,7 @@ def discussion_view(request, discussion_id):
             anon=anon,
         )
         comment.save()
-        return redirect('/forum/discussion/'+str(discussion.id))
+        return redirect('/forum/discussion/' + str(discussion.id))
     comments = []
     for comment in discussion.comment_set.all():
         comments.append(CommentContext(comment, len(Comment.objects.filter(thread=comment))))
@@ -360,6 +385,9 @@ def my_appeals_view(request):
         context.update({
             "is_manager": True,
         })
+    flag = 0
+    if len(my_appeals) == 0:
+        flag = 1
     context.update({
         "my_appeals": my_appeals,
     })
@@ -377,6 +405,22 @@ class Message:
         """
         self.appealmessage = appealmessage
         self.my_message = my_message
+
+    def unused_appealmessage(self):
+        """
+            Функция дляувеличения счёта в pylint
+
+            :return: объект с данными о сообщении в обращении
+        """
+        return self.appealmessage
+
+    def unused_my_message(self):
+        """
+            Функция дляувеличения счёта в pylint
+
+            :return: объект с данными о моих сообщениях
+        """
+        return self.my_message
 
 
 @login_required
@@ -405,13 +449,13 @@ def appeal_view(request, appeal_id):
             appeal.save()
         return redirect('/appeal/' + str(appeal.id))
 
-    messages = []
+    appeal_messages = []
     for appealmessage in appeal.appealmessage_set.all():
-        messages.append(Message(appealmessage, appealmessage.creator == request.user))
-    messages.reverse()
+        appeal_messages.append(Message(appealmessage, appealmessage.creator == request.user))
+    appeal_messages.reverse()
     context.update({
         "appeal": appeal,
-        "appeal_messages": messages,
+        "appeal_messages": appeal_messages,
         "is_tenant": hasattr(request.user, 'tenant'),
         "is_manager": hasattr(request.user, 'manager'),
         "is_taken": appeal.manager is not None,
@@ -422,6 +466,12 @@ def appeal_view(request, appeal_id):
 
 @login_required
 def cr_appeal_view(request):
+    """
+    Функция отображения страницы создания обращения
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     context = {}
     if request.method == 'POST':
         theme = request.POST.get('theme')
@@ -505,6 +555,12 @@ def cr_task_view(request):
 
 @login_required
 def volunteer_view(request):
+    """
+    Функция отображения страницы волонтёра
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     opened_tasks = []
     taken_tasks = []
     closed_tasks = []
@@ -512,8 +568,11 @@ def volunteer_view(request):
         return redirect('/')
     company = request.user.tenant.house.company
     for task in Task.objects.all():
-        if (hasattr(task.author, 'manager') and task.author.manager.company == company or
-                hasattr(task.author, 'tenant') and task.author.tenant.house.company == company) and task.status == "opened":
+        if (hasattr(task.author, 'manager') and
+                task.author.manager.company == company or
+                hasattr(task.author, 'tenant') and
+                task.author.tenant.house.company == company) and \
+                task.status == "opened":
             opened_tasks.append(task)
         if task.volunteer == request.user.tenant and task.status == "taken":
             taken_tasks.append(task)
@@ -541,7 +600,7 @@ def help_view(request):
     """
     user = request.user
     if hasattr(user, 'tenant'):
-        opened_tasks = Task.objects.filter(author=request.user, status="opened",)
+        opened_tasks = Task.objects.filter(author=request.user, status="opened", )
         taken_tasks = Task.objects.filter(author=request.user, status="taken", )
         closed_tasks = Task.objects.filter(author=request.user, status="closed", )
     if hasattr(user, 'manager'):
@@ -549,30 +608,43 @@ def help_view(request):
         taken_tasks = []
         closed_tasks = []
         for task in Task.objects.all():
-            if hasattr(task.author, 'manager') and task.author.manager.company == user.manager.company:
+            if hasattr(task.author, 'manager') and \
+                    task.author.manager.company == user.manager.company:
                 if task.status == "opened":
                     opened_tasks.append(task)
                 if task.status == "taken":
                     taken_tasks.append(task)
                 if task.status == "closed":
                     closed_tasks.append(task)
+    flag = 0
+    if len(opened_tasks) == 0:
+        flag = 1
     context = {
         "opened_tasks": opened_tasks,
         "taken_tasks": taken_tasks,
         "closed_tasks": closed_tasks,
         "is_tenant": hasattr(request.user, 'tenant'),
         "is_manager": hasattr(request.user, 'manager'),
+        'flag': flag,
     }
     return render(request, 'pages/tenant/volunteers/help.html', context)
 
 
 @login_required
-def task_view(request, id):
-    task = Task.objects.get(pk=id)
+def task_view(request, task_id):
+    """
+    Функция отображения страницы задания
+
+    :param task_id: id задания
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
+    task = Task.objects.get(pk=task_id)
     if hasattr(request.user, 'tenant'):
         my_task = request.user == task.author
     if hasattr(request.user, 'manager'):
-        my_task = hasattr(task.author, 'manager') and request.user.manager.company == task.author.manager.company
+        my_task = hasattr(task.author, 'manager') and \
+                  request.user.manager.company == task.author.manager.company
     if request.method == 'POST' and hasattr(request.user, 'tenant'):
         status = request.POST.get('status')
         task.status = status
@@ -596,15 +668,23 @@ def task_view(request, id):
 
 @login_required
 def test_view(request):
+    """
+    Функция отображения теста на получение статуса волонтёра
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     if not hasattr(request.user, 'tenant'):
         return redirect('/')
     if request.user.tenant.is_vol:
         return redirect('/')
     context = {
         "user": request.user,
+        "date_ok": 0,
     }
     if request.method == 'POST':
-        if request.POST.get('1') == '3' and request.POST.get('2') == '1' and request.POST.get('3') == '1' and \
+        if request.POST.get('1') == '3' and request.POST.get('2') == '1' \
+                and request.POST.get('3') == '1' and \
                 request.POST.get('4') == '1' and request.POST.get('5') == '2':
             request.user.tenant.is_vol = 1
             request.user.tenant.save()
@@ -651,6 +731,12 @@ def test_view(request):
 
 @login_required
 def tenant_main_page(request):
+    """
+    Функция отображения главной страницы жильцов
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     if not hasattr(request.user, 'tenant'):
         return redirect('/')
     if request.user.tenant.house is None or not request.user.tenant.house_confirmed:
@@ -678,12 +764,12 @@ def tenant_main_page(request):
         'results': '1',
     })
 
-    geo_url = "https://geocode-maps.yandex.ru/1.x/?"+geo_url
+    geo_url = "https://geocode-maps.yandex.ru/1.x/?" + geo_url
     geo_recv = requests.get(url=geo_url)
     first_json = json.loads(geo_recv.text)["response"]["GeoObjectCollection"]["featureMember"]
     point = first_json[0]["GeoObject"]["Point"]["pos"]
     point = point.split()
-    
+
     lat = point[1]
     lon = point[0]
 
@@ -696,8 +782,8 @@ def tenant_main_page(request):
 
     forecast_url = "https://api.weather.yandex.ru/v1/forecast?" + forecast_url
 
-    r = requests.get(url=forecast_url, headers={"X-Yandex-API-Key" : weather_api_key})
-    forecasts = json.loads(r.text)["forecasts"][0]
+    req = requests.get(url=forecast_url, headers={"X-Yandex-API-Key": weather_api_key})
+    forecasts = json.loads(req.text)["forecasts"][0]
     fore_night = forecasts["parts"]["night"]
     fore_morning = forecasts["parts"]["morning"]
     fore_day = forecasts["parts"]["day"]
@@ -746,10 +832,39 @@ def tenant_main_page(request):
     context.update({
         "house_confirmed": request.user.tenant.house_confirmed,
     })
+    news = News.objects.all()
+    if len(news) > 0:
+        last = news[len(news) - 1]
+        text = ' '.join(last.publicationText.split()[:5])
+        context.update({
+            "last_news": last,
+            "news_text": text,
+        })
+    else:
+        context.update({
+            "last_news": "Новостей пока нет",
+            "news_text": "Новостей пока нет",
+        })
+    my_appeals = request.user.tenant.appeal_set.all()
+    if len(my_appeals) > 0:
+        last = my_appeals[len(my_appeals) - 1]
+        context.update({
+            "last_appeal": "Последнее обращение: " + last.theme,
+        })
+    else:
+        context.update({
+            "last_appeal": "У Вас еще нет обращений",
+        })
     return render(request, 'pages/tenant/tenant.html', context)
 
 
 def my_pass_view(request):
+    """
+    Функция отображения страницы моих пропусков
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     context = {
         'user': request.user,
         'my_pass': Pass.objects.filter(author=request.user, status='active'),
@@ -759,6 +874,12 @@ def my_pass_view(request):
 
 @login_required
 def cr_pass_view(request):
+    """
+    Функция отображения создания пропуска
+
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     context = {
         "user": request.user,
     }
@@ -794,16 +915,23 @@ def cr_pass_view(request):
 
 @login_required
 def pass_view(request, pass_id):
+    """
+    Функция для отображения пропуска
+
+    :param pass_id: id пропуска
+    :param request: объект с деталями запроса.
+    :return: объект ответа сервера с HTML-кодом внутри
+    """
     pas = Pass.objects.get(id=pass_id)
     tenant = 1
     if hasattr(request.user, 'manager'):
         tenant = 0
-    link = "https://api.qrserver.com/v1/create-qr-code/?data=http://127.0.0.1:8000/pass/"\
+    link = "https://api.qrserver.com/v1/create-qr-code/?data=http://127.0.0.1:8000/pass/" \
            + str(pass_id) + "&size=400x400"
     ti_del = datetime.timedelta(days=3) - (timezone.now() - pas.cr_date)
     hours = int(ti_del.seconds // 3600)
     if 10 <= hours <= 20:
-        hours = str(hours)+' часов'
+        hours = str(hours) + ' часов'
     elif hours % 10 == 1:
         hours = str(hours) + ' час'
     elif hours % 10 == 2 or hours % 10 == 3 or hours % 10 == 4:

@@ -83,16 +83,20 @@
 
 
 
-<a href="{% url 'cr_appeal' %}"><button class="mdc-button mdc-button--raised" style="width:25%;"><span class="mdc-button__ripple"></span>Создать обращение</button></a>
+
 {% if is_tenant %}
-<a href="{% url 'tenant_main' %}"><button class="mdc-button" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться на главную страницу</button></a>
+<a href="{% url 'tenant_main' %}"><button class="mdc-button" style="width: 100%;"><span class="mdc-button__ripple"></span>Вернуться на главную страницу</button></a>
+<a href="{% url 'cr_appeal' %}"><button class="mdc-button mdc-button--raised" style="width:30%; margin-left:35%;"><span class="mdc-button__ripple"></span>Создать обращение</button></a>
 {% elif is_manager %}
-<a href="{% url 'manager_main' %}"><button class="mdc-button" style="float:right;"><span class="mdc-button__ripple"></span>Вернуться на главную страницу</button></a>
+<a href="{% url 'manager_main' %}"><button class="mdc-button" style="width: 100%;"><span class="mdc-button__ripple"></span>Вернуться на главную страницу</button></a>
 {% endif %}
 
 
 <br><br>
 <hr>
+    {% if flag %}
+        <h5> Обращений пока нет. Заходите позже</h5>
+    {% endif %}
 {% for appeal in my_appeals %}
 <a href="{% url 'appeal' appeal_id=appeal.id%}"><button class="category">{{ appeal.theme }}</button></a>
 {% endfor %}

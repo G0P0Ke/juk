@@ -15,12 +15,13 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
+DEBUG = bool(os.environ.get('JUK_DEBUG', True)) # ????
 
 if DEBUG:
     ALLOWED_HOSTS = []
@@ -28,6 +29,7 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = ['127.0.0.1', 'shp-juk.gq']
     SECRET_KEY = os.environ.get("JUK_SECRET_KEY", 'Dummy secret key')
+
 
 # Application definition
 
@@ -73,12 +75,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'juk.context_processors.base_info', # ????
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'juk.wsgi.application'
+
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -102,6 +106,11 @@ else:
         }
     }
 
+
+FIXTURE_DIRS = [
+    'tenant/fixtures'
+]
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -120,6 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -135,6 +145,16 @@ USE_TZ = True
 
 SITE_ID = 1
 
+
+# REDIS related settings
+REDIS_HOST = 'localhost'
+REDIS_PORT = '6379'
+BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+
+
 # здесь и дальше - настройки markdown
 
 # Static files (CSS, JavaScript, Images)
@@ -148,11 +168,17 @@ STATIC_ROOT = 'staticroot/'
 
 # LOGIN_REDIRECT_URL = '/'
 
+
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 2525
 EMAIL_HOST_USER = 'juk_feedback_mail@mail.ru'
 EMAIL_HOST_PASSWORD = 'feedback_mail_pass'
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_PORT = 587
+#EMAIL_HOST_USER = "juk.adms@gmail.com"
+#EMAIL_HOST_PASSWORD = "juk.adms.password"
 EMAIL_USE_TLS = True
+
 
 # Path for media files
 MEDIA_URL = '/media/'
@@ -161,13 +187,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Global martor settings
 # Input: string boolean, `true/false`
 MARTOR_ENABLE_CONFIGS = {
-    'emoji': 'true',  # to enable/disable emoji icons.
-    'imgur': 'true',  # to enable/disable imgur/custom uploader.
-    'mention': 'false',  # to enable/disable mention
-    'jquery': 'true',  # to include/revoke jquery (require for admin default django)
-    'living': 'false',  # to enable/disable live updates in preview
+    'emoji': 'true',        # to enable/disable emoji icons.
+    'imgur': 'true',        # to enable/disable imgur/custom uploader.
+    'mention': 'false',     # to enable/disable mention
+    'jquery': 'true',       # to include/revoke jquery (require for admin default django)
+    'living': 'false',      # to enable/disable live updates in preview
     'spellcheck': 'false',  # to enable/disable spellcheck in form textareas
-    'hljs': 'true',  # to enable/disable hljs highlighting in preview
+    'hljs': 'true',         # to enable/disable hljs highlighting in preview
 }
 
 # To setup the martor editor with label or not (default is False)
@@ -178,7 +204,7 @@ MARTOR_IMGUR_CLIENT_ID = 'e280f95ce604552'
 MARTOR_IMGUR_API_KEY = 'd49b868054bc6e3bc19e64413b7d3a241e635187'
 
 # Safe Mode
-MARTOR_MARKDOWN_SAFE_MODE = True  # default
+MARTOR_MARKDOWN_SAFE_MODE = True # default
 
 # Markdownify
 MARTOR_MARKDOWNIFY_FUNCTION = 'martor.utils.markdownify'  # default
@@ -193,9 +219,9 @@ MARTOR_MARKDOWN_EXTENSIONS = [
 
     # Custom markdown extensions.
     'martor.extensions.urlize',
-    'martor.extensions.del_ins',  # ~~strikethrough~~ and ++underscores++
-    'martor.extensions.mention',  # to parse markdown mention
-    'martor.extensions.emoji',  # to parse markdown emoji
+    'martor.extensions.del_ins',    # ~~strikethrough~~ and ++underscores++
+    'martor.extensions.mention',    # to parse markdown mention
+    'martor.extensions.emoji',      # to parse markdown emoji
     'martor.extensions.mdx_video',  # to parse embed/iframe video
 ]
 

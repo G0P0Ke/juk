@@ -8,7 +8,7 @@
 
     body{
     --mdc-theme-primary: #F25CA2;
-    --mdc-theme-secondary: #0433BF;
+    --mdc-theme-secondary: #00C853;
     }
 
 .forminput {
@@ -81,18 +81,18 @@
 
 {% if is_tenant %}
     {% if is_taken %}
-<p>С Вами ведет диалог менеджер компании {{ appeal.company.name }}, {{appeal.manager.user.first_name }}
+<p>С Вами ведет диалог менеджер компании {{ appeal.manager.company.name }}, {{appeal.manager.user.first_name }}
     {{appeal.manager.user.last_name}}.</p>
     {% else %}
-<p>Ваше обращение к компании <<{{ appeal.tenant.house.company.name }}>> скоро будет рассмотрено.</p>
+<p>Ваше обращение к компании {{ appeal.tenant.house.company.name }} скоро будет рассмотрено.</p>
     {% endif %}
 {% endif %}
 
 {% if is_manager %}
     {% if is_taken %}
-<p>С Вами ведет диалог житель {{comment.author.first_name}} {{comment.author.last_name}}.</p>
+<p>С Вами ведет диалог житель {{ appeal.tenant.user.first_name}} {{appeal.tenant.user.last_name}}.</p>
     {% else %}
-<p>К вашей компании обращается житель {{comment.author.first_name}} {{comment.author.last_name}}, он очень ждет Вашего
+<p>К вашей компании обращается житель {{appeal.tenant.user.first_name}} {{appeal.tenant.user.last_name}}, он очень ждет Вашего
     ответа.</p>
     {% endif %}
 {% endif %}
