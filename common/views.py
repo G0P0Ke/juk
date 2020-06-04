@@ -194,6 +194,7 @@ def logout_view(request):
     :return: Переход на главную страницу
     """
     logout(request)
+    context = {}
     context.update({
         "is_tenant": hasattr(request.user, 'tenant'),
         "is_manager": hasattr(request.user, 'manager'),
