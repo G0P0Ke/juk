@@ -22,7 +22,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$180000$lQkmGFLcUxQJ$mNBb4569Zg2RW3JWyPN5tiXV/RguCylk40mGuhm8DLY=",
-    "last_login": "2020-06-02T22:58:59.537Z",
+    "last_login": "2020-06-04T15:07:15.557Z",
     "is_superuser": false,
     "username": "tolstoy",
     "first_name": "\u041b\u0435\u0432",
@@ -303,6 +303,14 @@
     "date_joined": "2020-06-04T01:06:40.149Z",
     "groups": [],
     "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "0o7ss80lx4ma5aou9g61th2ux6iqoogj",
+  "fields": {
+    "session_data": "ZjlhNTliYWI1Nzk5YTUzYjcxNzRmN2Q3ZWI1NDA3ZjUxMmJmYWU3NDp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzNGRhMzFkN2E5M2IyNGU2NDM3YWUzZTljNDkyZTRiNjU4ZWJmNzEyIn0=",
+    "expire_date": "2020-06-18T15:07:15.565Z"
   }
 },
 {
@@ -74502,7 +74510,7 @@
   "model": "tenant.comment",
   "pk": 20,
   "fields": {
-    "text": "- \u041a\u0430\u043a\u0438\u0435 \u043f\u043e\u0442\u043e\u043c\u043a\u0438, \u0442\u0443\u0442 \u0432\u0441\u0435 \u0441\u0442\u0430\u0440\u0448\u0435 \u0442\u0435\u0431\u044f\n- \u0444\u044b\u0432",
+    "text": "\u041a\u0430\u043a\u0438\u0435 \u043f\u043e\u0442\u043e\u043c\u043a\u0438, \u0442\u0443\u0442 \u0432\u0441\u0435 \u0441\u0442\u0430\u0440\u0448\u0435 \u0442\u0435\u0431\u044f",
     "discussion": 8,
     "author": 3,
     "cr_date": "2020-06-03T14:58:39.698Z",

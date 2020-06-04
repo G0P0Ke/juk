@@ -37,8 +37,8 @@ def manager_main_page(request):
         context = {
             "companyless": request.user.manager.company is None,
             "user": request.user,
-            # "house_confirmed": request.user.tenant.house_confirmed,
         }
+        return render(request, 'pages/manager/manager.html', context)
 
     context.update({
         "is_tenant": hasattr(request.user, 'tenant'),
