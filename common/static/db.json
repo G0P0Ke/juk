@@ -4,8 +4,8 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$180000$iAwtM6RpaWZ8$btn4ilCeDi272gCj1ddpDaJIuo+JPKpC6RSPJCAnBXc=",
-    "last_login": "2020-06-03T15:19:49.221Z",
-    "is_superuser": false,
+    "last_login": "2020-06-04T01:07:14.960Z",
+    "is_superuser": true,
     "username": "admin",
     "first_name": "\u0410\u0434\u043c\u0438\u043d",
     "last_name": "\u0410\u0434\u043c\u0438\u043d\u043e\u0432",
@@ -58,7 +58,7 @@
   "pk": 4,
   "fields": {
     "password": "pbkdf2_sha256$180000$fQBoYzRa9MKp$eRxdUyjURukzAKU05gCXUM/8N+0Zjc/F2nq56GF9mXA=",
-    "last_login": "2020-06-03T15:47:01.097Z",
+    "last_login": "2020-06-04T00:55:51.614Z",
     "is_superuser": false,
     "username": "bulgakov",
     "first_name": "\u041c\u0438\u0445\u0430\u0438\u043b",
@@ -76,7 +76,7 @@
   "pk": 5,
   "fields": {
     "password": "pbkdf2_sha256$180000$cHbznmhWus1s$VtplhcxbrGhh4diV20CuZ+iY2Tm/47nrD9ht1gmv4YA=",
-    "last_login": "2020-06-03T15:48:14.889Z",
+    "last_login": "2020-06-03T16:00:24.490Z",
     "is_superuser": false,
     "username": "einstein",
     "first_name": "\u0410\u043b\u044c\u0431\u0435\u0440\u0442",
@@ -285,6 +285,42 @@
     "date_joined": "2020-06-02T19:16:08.892Z",
     "groups": [],
     "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 17,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$Fy5DrsRGIBPb$1LMS9A34Ls2kktOc1l7G1Kof9OZoTEPWCy2vkzQ1FHY=",
+    "last_login": "2020-06-04T01:06:40.520Z",
+    "is_superuser": false,
+    "username": "admin1",
+    "first_name": "\u0410\u0434\u043c\u0438\u043d",
+    "last_name": "\u0410\u0434\u043c\u0438\u043d\u043e\u0432",
+    "email": "admin1@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-06-04T01:06:40.149Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "294o6zzk6xr362hkwbd7ts0ct673gc4a",
+  "fields": {
+    "session_data": "ZjZlYmFkMDcxYThkODRhNTliN2I4M2IyYmRmMTdkMWUyYjc3Y2JlZDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhM2ZkNWVhNGY2Nzc1MWVlNTU4MTMyNzRjNDZiNDk4Mjk3NTU0MTcxIn0=",
+    "expire_date": "2020-06-18T01:07:14.972Z"
+  }
+},
+{
+  "model": "common.admin",
+  "pk": 1,
+  "fields": {
+    "user": 17,
+    "is_admin": false,
+    "name": "\u0410\u0434\u043c\u0438\u043d",
+    "surname": "\u0410\u0434\u043c\u0438\u043d\u043e\u0432"
   }
 },
 {
