@@ -93,7 +93,6 @@
 
 
 <br><br>
-<hr>
 {% for appeal in my_appeals %}
 <a href="{% url 'appeal' appeal_id=appeal.id%}"><button class="category">{{ appeal.theme }}</button></a>
 {% endfor %}
