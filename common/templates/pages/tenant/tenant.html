@@ -79,7 +79,7 @@
     <!---НОВОСТИ --->
     <div class="rectangle-big" onclick="window.location.href='manager/news'">
         <div class="title">Новости</div>
-        <div class="news">
+        <div class="news" style="background-color: inherit;">
           <h2>{{last_news.publicationTitle}}</h2>
           <h5>{{last_news.publicationDate | date:"d.m.Y в H:i"}}</h5>
           <div class="fakeimg"></div>
@@ -181,7 +181,7 @@
         <img class="pass" src="{% static 'img/pass.png' %}">
     </div>
 
-    <div class="timer rectangle-horizontal" onclick="window.location.href=''">
+    <div class="timer rectangle-horizontal" onclick="window.location.href='https://yandex.ru/time/'">
         <div class="title">Время</div>
         <div id="clock1" class="clock1">
             <div class="clock" id="clock">

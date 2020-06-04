@@ -206,7 +206,7 @@ body{
 
 .clock1{
     padding: 20px;
-    background-color: #eee;
+    background-color: inherit;
     max-width: 600px;
     margin-top: 15%;
     height: 57%;
@@ -214,18 +214,15 @@ body{
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    box-shadow: 0 0 11px rgba(33,33,33,.2);
 }
 .clock1:hover{
-    box-shadow: 0 0 11px #3498DB;
-    background-color: #ddd;
 }
 .clock{
     width: 100%;
     height: 80%;
     border: 1px solid #eee;
     border-radius: 20px;
-    background-color: #3498DB;
+    background-color: #0099FF;
     font-size: 400%;
     text-align: center;
     color: rgb(50,50,50);
@@ -235,9 +232,6 @@ body{
     text-align: center;
 }
 
-.timer.rectangle-horizontal:hover{
-  background-color: #eee;
-}
 
 
 @media only screen and (max-width: 1450px) {
